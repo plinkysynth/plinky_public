@@ -1,0 +1,96 @@
+# - midi meaning	plinky param (75ish?)
+0 - bank		!!!
+1 - modwheel		!!!
+2 - breath		P_NOISE
+3 - 			P_SENS
+4 - foot		P_DRIVE
+5 - glide		P_GLIDE
+6 - !DATA		!!!
+7 - vol			P_MIXSYNTH 
+
+8 - balance		P_MIXWETDRY,
+9 -			P_PITCH
+10 - pan
+11 - expr		P_GATE_LENGTH
+12 - fx1-2		P_DLTIME,
+13 - fx1-2		P_PWM
+14			P_INTERVAL
+15			P_SMP_POS
+
+16			P_SMP_GRAINSIZE
+17			P_SMP_RATE
+18			P_SMP_TIME
+19			P_ENVLVL2
+20			P_A2
+21			P_D2
+22			P_S2
+23			P_R2
+
+24			P_AOFFSET
+25			P_ADEPTH
+26			P_AFREQ
+27			P_BOFFSET
+28			P_BDEPTH
+29			P_BFREQ
+30			
+31			P_MIXHPF
+------------------------------------------ end of high resolution params
+32-63 LSB		!!!
+
+64 sustain pedal	!!!
+65 !portaswitch		!!!
+66 sostenswitch		!!!
+67 softpedal		!!!
+68 !legatoswitch	!!!
+69 hold2		!!!
+70 soundvari		
+71 harm int		P_MIXRESO
+
+72 release		P_R
+73 attack		P_A
+74 bright		P_S
+75 decay		P_D
+76 vibrate		P_XFREQ
+77 vibdepth		P_XDEPTH
+78 vibdelay		P_XOFFSET
+79 sound		P_YFREQ
+
+80			P_YDEPTH
+81			P_YOFFSET
+82			P_SAMPLE
+83			P_SEQPAT
+84 !port control	!!!
+85			P_SEQSTEP
+86			
+87
+
+88 !HD vel		!!!
+89			P_MIXINPUT
+90			P_MIXINWETDRY
+91 reverb level		P_RVSEND
+92 fx depth		P_RVTIME
+93 chorus level		P_RVSHIM
+94 fx depth		P_DLSEND
+95 fx depth		P_DLFB
+
+96-101 !!		!!!
+102			P_ARPONOFF
+103			P_ARPMODE
+
+104			P_ARPDIV
+105			P_ARPPROB
+106			P_ARPLEN
+107			P_ARPOCT
+108			P_SEQMODE,
+109			P_SEQDIV,
+110			P_SEQPROB,
+111			P_SEQLEN,
+
+112			P_DLRATIO
+113			P_DLWOB
+114			P_RVWOB
+115
+116			P_JIT_POS,
+117			P_JIT_GRAINSIZE,
+118			P_JIT_RATE,
+119			P_JIT_PULSE // TODO

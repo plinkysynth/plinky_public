@@ -1,0 +1,190 @@
+<html>
+
+<head>
+    <style>
+        body {
+            background-color: #123;
+            font-size: 12px;
+            font-family: sans-serif;
+            color: #ccc;
+        }
+        canvas {
+            width: 256px;
+            height: 64px;
+            image-rendering:pixelated;
+        }
+        .grid {
+            font-size: 29px;
+        } 
+    </style>
+</head>
+
+<body>
+    Press play to start the engines:
+    <br/>
+    <button id="playbtn">play</button>
+    <button id="stopbtn">stop</button>
+    <br/>
+    <input type="range" min="0" max="2048" value="0" class="slider" id="pressure0">
+    - Pressure
+    <br/>
+    <input type="range" min="0" max="2048" value="0" class="slider" id="pos0">
+    - Pos
+    <br/>
+    <canvas height="32" id="c" width="128">plinky screen</canvas>
+    <br />
+    <div class="grid">
+    <div><span id="led00">&#x2B24; </span><span id="led10">&#x2B24; </span><span id="led20">&#x2B24; </span><span
+            id="led30">&#x2B24; </span><span id="led40">&#x2B24; </span><span id="led50">&#x2B24; </span><span id="led60">&#x2B24;
+        </span><span id="led70">&#x2B24; </span></div>
+    <div><span id="led01">&#x2B24; </span><span id="led11">&#x2B24; </span><span id="led21">&#x2B24; </span><span
+            id="led31">&#x2B24; </span><span id="led41">&#x2B24; </span><span id="led51">&#x2B24; </span><span id="led61">&#x2B24;
+        </span><span id="led71">&#x2B24; </span></div>
+    <div><span id="led02">&#x2B24; </span><span id="led12">&#x2B24; </span><span id="led22">&#x2B24; </span><span
+            id="led32">&#x2B24; </span><span id="led42">&#x2B24; </span><span id="led52">&#x2B24; </span><span id="led62">&#x2B24;
+        </span><span id="led72">&#x2B24; </span></div>
+    <div><span id="led03">&#x2B24; </span><span id="led13">&#x2B24; </span><span id="led23">&#x2B24; </span><span
+            id="led33">&#x2B24; </span><span id="led43">&#x2B24; </span><span id="led53">&#x2B24; </span><span id="led63">&#x2B24;
+        </span><span id="led73">&#x2B24; </span></div>
+    <div><span id="led04">&#x2B24; </span><span id="led14">&#x2B24; </span><span id="led24">&#x2B24; </span><span
+            id="led34">&#x2B24; </span><span id="led44">&#x2B24; </span><span id="led54">&#x2B24; </span><span id="led64">&#x2B24;
+        </span><span id="led74">&#x2B24; </span></div>
+    <div><span id="led05">&#x2B24; </span><span id="led15">&#x2B24; </span><span id="led25">&#x2B24; </span><span
+            id="led35">&#x2B24; </span><span id="led45">&#x2B24; </span><span id="led55">&#x2B24; </span><span id="led65">&#x2B24;
+        </span><span id="led75">&#x2B24; </span></div>
+    <div><span id="led06">&#x2B24; </span><span id="led16">&#x2B24; </span><span id="led26">&#x2B24; </span><span
+            id="led36">&#x2B24; </span><span id="led46">&#x2B24; </span><span id="led56">&#x2B24; </span><span id="led66">&#x2B24;
+        </span><span id="led76">&#x2B24; </span></div>
+    <div><span id="led07">&#x2B24; </span><span id="led17">&#x2B24; </span><span id="led27">&#x2B24; </span><span
+            id="led37">&#x2B24; </span><span id="led47">&#x2B24; </span><span id="led57">&#x2B24; </span><span id="led67">&#x2B24;
+        </span><span id="led77">&#x2B24; </span></div>
+    <div><span id="led80">&#x2B24; </span><span id="led81">&#x2B24; </span><span id="led82">&#x2B24; </span><span
+            id="led83">&#x2B24; </span><span id="led84">&#x2B24; </span><span id="led85">&#x2B24; </span><span id="led86">&#x2B24;
+        </span><span id="led87">&#x2B24; </span></div>
+    </div>
+        <br />
+    <script src="plinky.js"></script>
+    <script>
+        const canvas = document.getElementById('c');
+        const height = 32;// canvas.height;
+        const width = 128;//canvas.width;
+
+        const ctx = canvas.getContext(
+            '2d',
+            {
+                alpha: false,
+                antialias: false,
+                depth: false
+            }
+        );
+        if (!ctx) {
+            throw 'Your browser does not support canvas';
+        }
+
+        var dotelems = [];
+        for (var y = 0; y < 9; ++y) {
+            dotelems[y] = [];
+            for (var x = 0; x < 8; ++x) {
+                dotelems[y][x] = document.getElementById('led' + y + '' + x);
+            }
+        }
+        var inited = 0;
+        var data, img, leddata, audiobuf;
+        var audioCtx, scriptNode;
+        var pos0 = document.getElementById("pos0");
+        var pressure0 = document.getElementById("pressure0");
+        function render() {
+            if (calledRun) {
+                if (!inited) {
+                    console.log("init plinky 123!");
+                    _plinky_init();
+                    inited = true;
+                    console.log("init plinky done!");
+                    const pointer = _getemubitmap();
+                    const leds = _getemuleds();
+                    const audiobuf = _get_wasm_audio_buf();
+                    console.log(pointer, leds);
+                    data = new Uint8ClampedArray(HEAP8.buffer, pointer, 128 * 32 * 4);
+                    leddata = new Uint8ClampedArray(HEAP8.buffer, leds, 9 * 8);
+                    img = new ImageData(data, width, height);
+
+                    const playbutton = document.getElementById('playbtn');
+                    const stopbutton = document.getElementById('stopbtn');
+                    audioCtx = new AudioContext({sampleRate:32000});
+                    scriptNode = audioCtx.createScriptProcessor(1024, 0, 2);
+                    console.log(scriptNode.bufferSize);
+                    scriptNode.onaudioprocess = function (audioProcessingEvent) {
+                        //var inputBuffer = audioProcessingEvent.inputBuffer;
+                        var outputBuffer = audioProcessingEvent.outputBuffer;
+                        var l  = outputBuffer.getChannelData(0);
+                        var r  = outputBuffer.getChannelData(1);
+                        _wasm_settouch(0, pos0.value, pressure0.value);
+//                        console.log(l.length);
+                        for (var smp=0;smp<l.length;smp+=64) {
+                            _wasm_audio();
+                            var ofs=audiobuf/2;
+                            for (var i=0;i<64;++i) {
+                                l[smp+i]=HEAP16[ofs++] * (1.0/32768.0);
+                                r[smp+i]=HEAP16[ofs++] * (1.0/32768.0);
+                            }
+                        }
+                        _plinky_frame_wasm();
+                    }
+                    scriptNode.connect(audioCtx.destination);
+                    playbutton.onclick = function() {
+                            audioCtx.resume();
+                    }
+                    stopbutton.onclick = function() {
+                            audioCtx.suspend();
+                    }
+
+
+                }
+                ctx.putImageData(img, 0, 0);
+                var idx = 0;
+                for (var y = 0; y < 9; ++y) {
+                    for (var x = 0; x < 8; ++x) {
+                        var c = leddata[idx++];
+                        dotelems[y][x].style.color = "rgb(" + c + "," + c + "," + c + ")";
+                    } //x
+                } // y
+            } // calledRun
+            window.requestAnimationFrame(render);
+        }
+        window.requestAnimationFrame(render);
+
+
+        //_plinky_init();
+
+        //const memSize = 1024; // 64 megs
+        //const memory = new WebAssembly.Memory({ initial: memSize, maximum: memSize });
+        //promise = WebAssembly.instantiate(new Uint8Array(decode(plinkycode)), { env: { memory } } );
+        //const instance = new WebAssembly.Instance(
+        //  new WebAssembly.Module(new Uint8Array(decode(plinkycode))),
+        //  { env: { memory } }
+        //);
+        //    promise.then({
+        //    console.log("gogogo");
+
+
+
+        /*
+        instance.exports._plinky_init();
+        const pointer = instance.exports._getemubitmap();
+        const data = new Uint8ClampedArray(memory.buffer, pointer, width * height * 4);
+        const img = new ImageData(data, width, height);
+        console.log(plinkycode.length);
+        const render = (timestamp) => {
+        //  instance.exports._render(timestamp);
+        ctx.putImageData(img, 0, 0);
+        window.requestAnimationFrame(render);
+        };
+        window.requestAnimationFrame(render);
+        });
+        */
+
+    </script>
+
+</body>
+
+</html>

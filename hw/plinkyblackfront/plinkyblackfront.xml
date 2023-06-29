@@ -1,0 +1,991 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export version="D">
+  <design>
+    <source>C:\Users\blues\Documents\GitHub\plinky\hw\plinkyblackfront\plinkyblackfront.sch</source>
+    <date>9/24/2020 12:11:21 PM</date>
+    <tool>Eeschema (5.1.6)-1</tool>
+    <sheet number="1" name="/" tstamps="/">
+      <title_block>
+        <title/>
+        <company/>
+        <rev/>
+        <date/>
+        <source>plinkyblackfront.sch</source>
+        <comment number="1" value=""/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+      </title_block>
+    </sheet>
+  </design>
+  <components>
+    <comp ref="D1">
+      <value>LED</value>
+      <footprint>cap:led_reverse</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5FC7B49D</tstamp>
+    </comp>
+    <comp ref="D9">
+      <value>LED</value>
+      <footprint>cap:led_reverse</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5FC7BF02</tstamp>
+    </comp>
+    <comp ref="D17">
+      <value>LED</value>
+      <footprint>cap:led_reverse</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5FC7D3B1</tstamp>
+    </comp>
+    <comp ref="D25">
+      <value>LED</value>
+      <footprint>cap:led_reverse</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5FC7D3B7</tstamp>
+    </comp>
+    <comp ref="D33">
+      <value>LED</value>
+      <footprint>cap:led_reverse</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5FC7E0FE</tstamp>
+    </comp>
+    <comp ref="D41">
+      <value>LED</value>
+      <footprint>cap:led_reverse</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5FC7E104</tstamp>
+    </comp>
+    <comp ref="D49">
+      <value>LED</value>
+      <footprint>cap:led_reverse</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5FC7F0ED</tstamp>
+    </comp>
+    <comp ref="D57">
+      <value>LED</value>
+      <footprint>cap:led_reverse</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5FC7F0F3</tstamp>
+    </comp>
+    <comp ref="D2">
+      <value>LED</value>
+      <footprint>cap:led_reverse</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5FC83688</tstamp>
+    </comp>
+    <comp ref="D10">
+      <value>LED</value>
+      <footprint>cap:led_reverse</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5FC8368E</tstamp>
+    </comp>
+    <comp ref="D18">
+      <value>LED</value>
+      <footprint>cap:led_reverse</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5FC8369D</tstamp>
+    </comp>
+    <comp ref="D26">
+      <value>LED</value>
+      <footprint>cap:led_reverse</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5FC836A3</tstamp>
+    </comp>
+    <comp ref="D34">
+      <value>LED</value>
+      <footprint>cap:led_reverse</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5FC836B2</tstamp>
+    </comp>
+    <comp ref="D42">
+      <value>LED</value>
+      <footprint>cap:led_reverse</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5FC836B8</tstamp>
+    </comp>
+    <comp ref="D50">
+      <value>LED</value>
+      <footprint>cap:led_reverse</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5FC836C7</tstamp>
+    </comp>
+    <comp ref="D58">
+      <value>LED</value>
+      <footprint>cap:led_reverse</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5FC836CD</tstamp>
+    </comp>
+    <comp ref="D3">
+      <value>LED</value>
+      <footprint>cap:led_reverse</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5FC85D3F</tstamp>
+    </comp>
+    <comp ref="D11">
+      <value>LED</value>
+      <footprint>cap:led_reverse</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5FC85D45</tstamp>
+    </comp>
+    <comp ref="D19">
+      <value>LED</value>
+      <footprint>cap:led_reverse</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5FC85D54</tstamp>
+    </comp>
+    <comp ref="D27">
+      <value>LED</value>
+      <footprint>cap:led_reverse</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5FC85D5A</tstamp>
+    </comp>
+    <comp ref="D35">
+      <value>LED</value>
+      <footprint>cap:led_reverse</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5FC85D69</tstamp>
+    </comp>
+    <comp ref="D43">
+      <value>LED</value>
+      <footprint>cap:led_reverse</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5FC85D6F</tstamp>
+    </comp>
+    <comp ref="D51">
+      <value>LED</value>
+      <footprint>cap:led_reverse</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5FC85D7E</tstamp>
+    </comp>
+    <comp ref="D59">
+      <value>LED</value>
+      <footprint>cap:led_reverse</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5FC85D84</tstamp>
+    </comp>
+    <comp ref="D4">
+      <value>LED</value>
+      <footprint>cap:led_reverse</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5FC89166</tstamp>
+    </comp>
+    <comp ref="D12">
+      <value>LED</value>
+      <footprint>cap:led_reverse</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5FC8916C</tstamp>
+    </comp>
+    <comp ref="D20">
+      <value>LED</value>
+      <footprint>cap:led_reverse</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5FC8917B</tstamp>
+    </comp>
+    <comp ref="D28">
+      <value>LED</value>
+      <footprint>cap:led_reverse</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5FC89181</tstamp>
+    </comp>
+    <comp ref="D36">
+      <value>LED</value>
+      <footprint>cap:led_reverse</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5FC89190</tstamp>
+    </comp>
+    <comp ref="D44">
+      <value>LED</value>
+      <footprint>cap:led_reverse</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5FC89196</tstamp>
+    </comp>
+    <comp ref="D52">
+      <value>LED</value>
+      <footprint>cap:led_reverse</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5FC891A5</tstamp>
+    </comp>
+    <comp ref="D60">
+      <value>LED</value>
+      <footprint>cap:led_reverse</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5FC891AB</tstamp>
+    </comp>
+    <comp ref="D5">
+      <value>LED</value>
+      <footprint>cap:led_reverse</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5FC8E842</tstamp>
+    </comp>
+    <comp ref="D13">
+      <value>LED</value>
+      <footprint>cap:led_reverse</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5FC8E848</tstamp>
+    </comp>
+    <comp ref="D21">
+      <value>LED</value>
+      <footprint>cap:led_reverse</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5FC8E857</tstamp>
+    </comp>
+    <comp ref="D29">
+      <value>LED</value>
+      <footprint>cap:led_reverse</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5FC8E85D</tstamp>
+    </comp>
+    <comp ref="D37">
+      <value>LED</value>
+      <footprint>cap:led_reverse</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5FC8E86C</tstamp>
+    </comp>
+    <comp ref="D45">
+      <value>LED</value>
+      <footprint>cap:led_reverse</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5FC8E872</tstamp>
+    </comp>
+    <comp ref="D53">
+      <value>LED</value>
+      <footprint>cap:led_reverse</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5FC8E881</tstamp>
+    </comp>
+    <comp ref="D61">
+      <value>LED</value>
+      <footprint>cap:led_reverse</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5FC8E887</tstamp>
+    </comp>
+    <comp ref="D6">
+      <value>LED</value>
+      <footprint>cap:led_reverse</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5FC9432A</tstamp>
+    </comp>
+    <comp ref="D14">
+      <value>LED</value>
+      <footprint>cap:led_reverse</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5FC94330</tstamp>
+    </comp>
+    <comp ref="D22">
+      <value>LED</value>
+      <footprint>cap:led_reverse</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5FC9433F</tstamp>
+    </comp>
+    <comp ref="D30">
+      <value>LED</value>
+      <footprint>cap:led_reverse</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5FC94345</tstamp>
+    </comp>
+    <comp ref="D38">
+      <value>LED</value>
+      <footprint>cap:led_reverse</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5FC94354</tstamp>
+    </comp>
+    <comp ref="D46">
+      <value>LED</value>
+      <footprint>cap:led_reverse</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5FC9435A</tstamp>
+    </comp>
+    <comp ref="D54">
+      <value>LED</value>
+      <footprint>cap:led_reverse</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5FC94369</tstamp>
+    </comp>
+    <comp ref="D62">
+      <value>LED</value>
+      <footprint>cap:led_reverse</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5FC9436F</tstamp>
+    </comp>
+    <comp ref="D7">
+      <value>LED</value>
+      <footprint>cap:led_reverse</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5FC9C8B9</tstamp>
+    </comp>
+    <comp ref="D15">
+      <value>LED</value>
+      <footprint>cap:led_reverse</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5FC9C8BF</tstamp>
+    </comp>
+    <comp ref="D23">
+      <value>LED</value>
+      <footprint>cap:led_reverse</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5FC9C8CE</tstamp>
+    </comp>
+    <comp ref="D31">
+      <value>LED</value>
+      <footprint>cap:led_reverse</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5FC9C8D4</tstamp>
+    </comp>
+    <comp ref="D39">
+      <value>LED</value>
+      <footprint>cap:led_reverse</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5FC9C8E3</tstamp>
+    </comp>
+    <comp ref="D47">
+      <value>LED</value>
+      <footprint>cap:led_reverse</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5FC9C8E9</tstamp>
+    </comp>
+    <comp ref="D55">
+      <value>LED</value>
+      <footprint>cap:led_reverse</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5FC9C8F8</tstamp>
+    </comp>
+    <comp ref="D63">
+      <value>LED</value>
+      <footprint>cap:led_reverse</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5FC9C8FE</tstamp>
+    </comp>
+    <comp ref="D8">
+      <value>LED</value>
+      <footprint>cap:led_reverse</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5FCA70E3</tstamp>
+    </comp>
+    <comp ref="D16">
+      <value>LED</value>
+      <footprint>cap:led_reverse</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5FCA70E9</tstamp>
+    </comp>
+    <comp ref="D24">
+      <value>LED</value>
+      <footprint>cap:led_reverse</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5FCA70F8</tstamp>
+    </comp>
+    <comp ref="D32">
+      <value>LED</value>
+      <footprint>cap:led_reverse</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5FCA70FE</tstamp>
+    </comp>
+    <comp ref="D40">
+      <value>LED</value>
+      <footprint>cap:led_reverse</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5FCA710D</tstamp>
+    </comp>
+    <comp ref="D48">
+      <value>LED</value>
+      <footprint>cap:led_reverse</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5FCA7113</tstamp>
+    </comp>
+    <comp ref="D56">
+      <value>LED</value>
+      <footprint>cap:led_reverse</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5FCA7122</tstamp>
+    </comp>
+    <comp ref="D64">
+      <value>LED</value>
+      <footprint>cap:led_reverse</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5FCA7128</tstamp>
+    </comp>
+    <comp ref="J3">
+      <value>Conn_02x08_Top_Bottom</value>
+      <footprint>cap:touchy7</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Connector_Generic" part="Conn_02x08_Top_Bottom" description="Generic connector, double row, 02x08, top/bottom pin numbering scheme (row 1: 1...pins_per_row, row2: pins_per_row+1 ... num_pins), script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5FDAABAE</tstamp>
+    </comp>
+    <comp ref="J1">
+      <value>Conn_02x08_Odd_Even</value>
+      <footprint>Connector_PinHeader_2.54mm:PinHeader_2x08_P2.54mm_Vertical_SMD</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Connector_Generic" part="Conn_02x08_Odd_Even" description="Generic connector, double row, 02x08, odd/even pin numbering scheme (row 1 odd numbers, row 2 even numbers), script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5FDFA592</tstamp>
+    </comp>
+    <comp ref="J2">
+      <value>Conn_02x08_Odd_Even</value>
+      <footprint>Connector_PinHeader_2.54mm:PinHeader_2x08_P2.54mm_Vertical_SMD</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Connector_Generic" part="Conn_02x08_Odd_Even" description="Generic connector, double row, 02x08, odd/even pin numbering scheme (row 1 odd numbers, row 2 even numbers), script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5FDFB474</tstamp>
+    </comp>
+    <comp ref="J4">
+      <value>Conn_01x02</value>
+      <footprint>cap:touchy7horiz</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Connector_Generic" part="Conn_01x02" description="Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>6566D994</tstamp>
+    </comp>
+    <comp ref="D65">
+      <value>BLUE</value>
+      <footprint>cap:led_reverse</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>65692C66</tstamp>
+    </comp>
+    <comp ref="D66">
+      <value>BLUE</value>
+      <footprint>cap:led_reverse</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>65692C74</tstamp>
+    </comp>
+    <comp ref="D67">
+      <value>BLUE</value>
+      <footprint>cap:led_reverse</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>65692C82</tstamp>
+    </comp>
+    <comp ref="D68">
+      <value>BLUE</value>
+      <footprint>cap:led_reverse</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>65692C90</tstamp>
+    </comp>
+    <comp ref="D69">
+      <value>BLUE</value>
+      <footprint>cap:led_reverse</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>65692C9E</tstamp>
+    </comp>
+    <comp ref="D70">
+      <value>BLUE</value>
+      <footprint>cap:led_reverse</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>65692CAC</tstamp>
+    </comp>
+    <comp ref="D71">
+      <value>BLUE</value>
+      <footprint>cap:led_reverse</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>65771979</tstamp>
+    </comp>
+    <comp ref="D72">
+      <value>BLUE</value>
+      <footprint>cap:led_reverse</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>657888D6</tstamp>
+    </comp>
+  </components>
+  <libparts>
+    <libpart lib="Connector_Generic" part="Conn_01x02">
+      <description>Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>Connector*:*_1x??_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">Conn_01x02</field>
+      </fields>
+      <pins>
+        <pin num="1" name="Pin_1" type="passive"/>
+        <pin num="2" name="Pin_2" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Connector_Generic" part="Conn_02x08_Odd_Even">
+      <description>Generic connector, double row, 02x08, odd/even pin numbering scheme (row 1 odd numbers, row 2 even numbers), script generated (kicad-library-utils/schlib/autogen/connector/)</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>Connector*:*_2x??_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">Conn_02x08_Odd_Even</field>
+      </fields>
+      <pins>
+        <pin num="1" name="Pin_1" type="passive"/>
+        <pin num="2" name="Pin_2" type="passive"/>
+        <pin num="3" name="Pin_3" type="passive"/>
+        <pin num="4" name="Pin_4" type="passive"/>
+        <pin num="5" name="Pin_5" type="passive"/>
+        <pin num="6" name="Pin_6" type="passive"/>
+        <pin num="7" name="Pin_7" type="passive"/>
+        <pin num="8" name="Pin_8" type="passive"/>
+        <pin num="9" name="Pin_9" type="passive"/>
+        <pin num="10" name="Pin_10" type="passive"/>
+        <pin num="11" name="Pin_11" type="passive"/>
+        <pin num="12" name="Pin_12" type="passive"/>
+        <pin num="13" name="Pin_13" type="passive"/>
+        <pin num="14" name="Pin_14" type="passive"/>
+        <pin num="15" name="Pin_15" type="passive"/>
+        <pin num="16" name="Pin_16" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Connector_Generic" part="Conn_02x08_Top_Bottom">
+      <description>Generic connector, double row, 02x08, top/bottom pin numbering scheme (row 1: 1...pins_per_row, row2: pins_per_row+1 ... num_pins), script generated (kicad-library-utils/schlib/autogen/connector/)</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>Connector*:*_2x??_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">Conn_02x08_Top_Bottom</field>
+      </fields>
+      <pins>
+        <pin num="1" name="Pin_1" type="passive"/>
+        <pin num="2" name="Pin_2" type="passive"/>
+        <pin num="3" name="Pin_3" type="passive"/>
+        <pin num="4" name="Pin_4" type="passive"/>
+        <pin num="5" name="Pin_5" type="passive"/>
+        <pin num="6" name="Pin_6" type="passive"/>
+        <pin num="7" name="Pin_7" type="passive"/>
+        <pin num="8" name="Pin_8" type="passive"/>
+        <pin num="9" name="Pin_9" type="passive"/>
+        <pin num="10" name="Pin_10" type="passive"/>
+        <pin num="11" name="Pin_11" type="passive"/>
+        <pin num="12" name="Pin_12" type="passive"/>
+        <pin num="13" name="Pin_13" type="passive"/>
+        <pin num="14" name="Pin_14" type="passive"/>
+        <pin num="15" name="Pin_15" type="passive"/>
+        <pin num="16" name="Pin_16" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="LED">
+      <description>Light emitting diode</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>LED*</fp>
+        <fp>LED_SMD:*</fp>
+        <fp>LED_THT:*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">D</field>
+        <field name="Value">LED</field>
+      </fields>
+      <pins>
+        <pin num="1" name="K" type="passive"/>
+        <pin num="2" name="A" type="passive"/>
+      </pins>
+    </libpart>
+  </libparts>
+  <libraries>
+    <library logical="Connector_Generic">
+      <uri>C:\Program Files\KiCad\share\kicad\library/Connector_Generic.lib</uri>
+    </library>
+    <library logical="Device">
+      <uri>C:\Program Files\KiCad\share\kicad\library/Device.lib</uri>
+    </library>
+  </libraries>
+  <nets>
+    <net code="1" name="T12">
+      <node ref="J2" pin="7"/>
+      <node ref="J3" pin="12"/>
+    </net>
+    <net code="2" name="T3">
+      <node ref="J3" pin="3"/>
+      <node ref="J2" pin="6"/>
+    </net>
+    <net code="3" name="T4">
+      <node ref="J2" pin="8"/>
+      <node ref="J3" pin="4"/>
+    </net>
+    <net code="4" name="T5">
+      <node ref="J2" pin="10"/>
+      <node ref="J3" pin="5"/>
+    </net>
+    <net code="5" name="T6">
+      <node ref="J3" pin="6"/>
+      <node ref="J2" pin="12"/>
+    </net>
+    <net code="6" name="T7">
+      <node ref="J3" pin="7"/>
+      <node ref="J2" pin="14"/>
+    </net>
+    <net code="7" name="T8">
+      <node ref="J3" pin="8"/>
+      <node ref="J2" pin="16"/>
+    </net>
+    <net code="8" name="T9">
+      <node ref="J3" pin="9"/>
+      <node ref="J2" pin="1"/>
+    </net>
+    <net code="9" name="T10">
+      <node ref="J3" pin="10"/>
+      <node ref="J2" pin="3"/>
+    </net>
+    <net code="10" name="T11">
+      <node ref="J3" pin="11"/>
+      <node ref="J2" pin="5"/>
+    </net>
+    <net code="11" name="T2">
+      <node ref="J2" pin="4"/>
+      <node ref="J3" pin="2"/>
+    </net>
+    <net code="12" name="T13">
+      <node ref="J2" pin="9"/>
+      <node ref="J3" pin="13"/>
+    </net>
+    <net code="13" name="T14">
+      <node ref="J2" pin="11"/>
+      <node ref="J3" pin="14"/>
+    </net>
+    <net code="14" name="T15">
+      <node ref="J3" pin="15"/>
+      <node ref="J2" pin="13"/>
+    </net>
+    <net code="15" name="T16">
+      <node ref="J3" pin="16"/>
+      <node ref="J2" pin="15"/>
+    </net>
+    <net code="16" name="T1">
+      <node ref="J3" pin="1"/>
+      <node ref="J2" pin="2"/>
+    </net>
+    <net code="17" name="/Y8">
+      <node ref="J1" pin="16"/>
+      <node ref="D40" pin="2"/>
+      <node ref="D48" pin="1"/>
+      <node ref="D56" pin="2"/>
+      <node ref="D64" pin="1"/>
+      <node ref="D16" pin="1"/>
+      <node ref="D8" pin="2"/>
+      <node ref="D72" pin="2"/>
+      <node ref="D32" pin="1"/>
+      <node ref="D24" pin="2"/>
+    </net>
+    <net code="18" name="Net-(J1-Pad15)">
+      <node ref="J1" pin="15"/>
+      <node ref="J4" pin="1"/>
+    </net>
+    <net code="19" name="/X5">
+      <node ref="D67" pin="1"/>
+      <node ref="D66" pin="1"/>
+      <node ref="J1" pin="9"/>
+      <node ref="D65" pin="1"/>
+      <node ref="D68" pin="1"/>
+      <node ref="D71" pin="1"/>
+      <node ref="D72" pin="1"/>
+      <node ref="D70" pin="1"/>
+      <node ref="D69" pin="1"/>
+    </net>
+    <net code="20" name="Net-(J1-Pad13)">
+      <node ref="J4" pin="2"/>
+      <node ref="J1" pin="13"/>
+    </net>
+    <net code="21" name="Net-(J1-Pad11)">
+      <node ref="J1" pin="11"/>
+    </net>
+    <net code="22" name="/Y3">
+      <node ref="D67" pin="2"/>
+      <node ref="D3" pin="2"/>
+      <node ref="D35" pin="2"/>
+      <node ref="D43" pin="1"/>
+      <node ref="D11" pin="1"/>
+      <node ref="D51" pin="2"/>
+      <node ref="D59" pin="1"/>
+      <node ref="D27" pin="1"/>
+      <node ref="D19" pin="2"/>
+      <node ref="J1" pin="6"/>
+    </net>
+    <net code="23" name="/Y1">
+      <node ref="D57" pin="1"/>
+      <node ref="D25" pin="1"/>
+      <node ref="D1" pin="2"/>
+      <node ref="D9" pin="1"/>
+      <node ref="D17" pin="2"/>
+      <node ref="D41" pin="1"/>
+      <node ref="J1" pin="2"/>
+      <node ref="D49" pin="2"/>
+      <node ref="D33" pin="2"/>
+      <node ref="D65" pin="2"/>
+    </net>
+    <net code="24" name="/Y2">
+      <node ref="D10" pin="1"/>
+      <node ref="D34" pin="2"/>
+      <node ref="D42" pin="1"/>
+      <node ref="D2" pin="2"/>
+      <node ref="J1" pin="4"/>
+      <node ref="D58" pin="1"/>
+      <node ref="D18" pin="2"/>
+      <node ref="D26" pin="1"/>
+      <node ref="D50" pin="2"/>
+      <node ref="D66" pin="2"/>
+    </net>
+    <net code="25" name="/Y6">
+      <node ref="D6" pin="2"/>
+      <node ref="D54" pin="2"/>
+      <node ref="D62" pin="1"/>
+      <node ref="J1" pin="12"/>
+      <node ref="D14" pin="1"/>
+      <node ref="D22" pin="2"/>
+      <node ref="D30" pin="1"/>
+      <node ref="D70" pin="2"/>
+      <node ref="D38" pin="2"/>
+      <node ref="D46" pin="1"/>
+    </net>
+    <net code="26" name="/Y7">
+      <node ref="D23" pin="2"/>
+      <node ref="D31" pin="1"/>
+      <node ref="D63" pin="1"/>
+      <node ref="D55" pin="2"/>
+      <node ref="D15" pin="1"/>
+      <node ref="D47" pin="1"/>
+      <node ref="D71" pin="2"/>
+      <node ref="D39" pin="2"/>
+      <node ref="D7" pin="2"/>
+      <node ref="J1" pin="14"/>
+    </net>
+    <net code="27" name="/X1">
+      <node ref="D8" pin="1"/>
+      <node ref="D16" pin="2"/>
+      <node ref="D6" pin="1"/>
+      <node ref="D10" pin="2"/>
+      <node ref="D9" pin="2"/>
+      <node ref="D15" pin="2"/>
+      <node ref="D7" pin="1"/>
+      <node ref="D11" pin="2"/>
+      <node ref="D12" pin="2"/>
+      <node ref="D4" pin="1"/>
+      <node ref="D3" pin="1"/>
+      <node ref="J1" pin="7"/>
+      <node ref="D5" pin="1"/>
+      <node ref="D13" pin="2"/>
+      <node ref="D1" pin="1"/>
+      <node ref="D2" pin="1"/>
+      <node ref="D14" pin="2"/>
+    </net>
+    <net code="28" name="/Y4">
+      <node ref="D60" pin="1"/>
+      <node ref="D52" pin="2"/>
+      <node ref="J1" pin="8"/>
+      <node ref="D28" pin="1"/>
+      <node ref="D20" pin="2"/>
+      <node ref="D36" pin="2"/>
+      <node ref="D44" pin="1"/>
+      <node ref="D12" pin="1"/>
+      <node ref="D4" pin="2"/>
+      <node ref="D68" pin="2"/>
+    </net>
+    <net code="29" name="/X3">
+      <node ref="D37" pin="1"/>
+      <node ref="D45" pin="2"/>
+      <node ref="D44" pin="2"/>
+      <node ref="D47" pin="2"/>
+      <node ref="D39" pin="1"/>
+      <node ref="D36" pin="1"/>
+      <node ref="D46" pin="2"/>
+      <node ref="D38" pin="1"/>
+      <node ref="D41" pin="2"/>
+      <node ref="D33" pin="1"/>
+      <node ref="D40" pin="1"/>
+      <node ref="D48" pin="2"/>
+      <node ref="D43" pin="2"/>
+      <node ref="D35" pin="1"/>
+      <node ref="J1" pin="3"/>
+      <node ref="D42" pin="2"/>
+      <node ref="D34" pin="1"/>
+    </net>
+    <net code="30" name="/X4">
+      <node ref="D64" pin="2"/>
+      <node ref="D60" pin="2"/>
+      <node ref="D53" pin="1"/>
+      <node ref="D61" pin="2"/>
+      <node ref="J1" pin="1"/>
+      <node ref="D56" pin="1"/>
+      <node ref="D63" pin="2"/>
+      <node ref="D52" pin="1"/>
+      <node ref="D55" pin="1"/>
+      <node ref="D58" pin="2"/>
+      <node ref="D59" pin="2"/>
+      <node ref="D62" pin="2"/>
+      <node ref="D51" pin="1"/>
+      <node ref="D50" pin="1"/>
+      <node ref="D54" pin="1"/>
+      <node ref="D57" pin="2"/>
+      <node ref="D49" pin="1"/>
+    </net>
+    <net code="31" name="/Y5">
+      <node ref="D53" pin="2"/>
+      <node ref="D21" pin="2"/>
+      <node ref="D45" pin="1"/>
+      <node ref="D37" pin="2"/>
+      <node ref="D29" pin="1"/>
+      <node ref="D61" pin="1"/>
+      <node ref="D13" pin="1"/>
+      <node ref="J1" pin="10"/>
+      <node ref="D69" pin="2"/>
+      <node ref="D5" pin="2"/>
+    </net>
+    <net code="32" name="/X2">
+      <node ref="D31" pin="2"/>
+      <node ref="D23" pin="1"/>
+      <node ref="D21" pin="1"/>
+      <node ref="D29" pin="2"/>
+      <node ref="D27" pin="2"/>
+      <node ref="D19" pin="1"/>
+      <node ref="J1" pin="5"/>
+      <node ref="D28" pin="2"/>
+      <node ref="D32" pin="2"/>
+      <node ref="D24" pin="1"/>
+      <node ref="D17" pin="1"/>
+      <node ref="D26" pin="2"/>
+      <node ref="D25" pin="2"/>
+      <node ref="D18" pin="1"/>
+      <node ref="D20" pin="1"/>
+      <node ref="D22" pin="1"/>
+      <node ref="D30" pin="2"/>
+    </net>
+  </nets>
+</export>

@@ -1,0 +1,9 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP SN74LVC1G17DBV
+D Single Schmitt-Trigger Inverter, SOT-23
+K Inverter Schmitt Trigger
+F http://www.ti.com/lit/ds/symlink/sn74lvc1g14.pdf
+$ENDCMP
+#
+#End Doc Library
