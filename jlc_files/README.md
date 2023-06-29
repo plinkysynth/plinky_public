@@ -1,0 +1,1 @@
+these are the most recent BOM and POS files I used to manufacture plinky mainboards at JLC. note however that I cant guaruntee that they match the kicad files exactly, so please check carefully before spending real money!
