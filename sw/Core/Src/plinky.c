@@ -1531,11 +1531,12 @@ void midi_panic(void) {
 bool send_midimsg(u8 status, u8 data1, u8 data2);
 void processmidimsg(u8 msg, u8 d1, u8 d2) {
 	u8 chan = msg & 15;
-	if (chan != 0)
-		return; 
 	u8 type = msg >> 4;
+	if ((chan != 0)&&(type != 0xF)) //LPZW KAY Fix for MIDI Sync type == F continue
+		return; 
 	if (type < 8)
 		return;
+
 //	send_midimsg(msg, d1, d2); // midi echo!
 
 	if (type == 9 && d2 == 0)
@@ -2883,7 +2884,7 @@ void serial_midi(const u8*buf, u8 len) {
 		if (state < 3) {
 			msg[state++] = data;
 			if (state == 2 && (msg[0] >= 0xc0 && msg[0] <= 0xdf)) {
-				msg[state++] = 0; // two byte messages. wtf midi.
+				msg[state++] = 0; // two byte messages. wtf midi.//WE NEED TO DEBUG THIS COS IT SEEMS NOT TO WORK
 			}
 			if (state==3) {
 				processmidimsg(msg[0], msg[1], msg[2]);
