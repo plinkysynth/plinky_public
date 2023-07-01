@@ -11,9 +11,9 @@ License stuff
 --
 Please refer to the [license](LICENSE.md) for information including stuff about derived works.
 
-Contributing
+Contributing stuff
 --
-We need to figure out a process for accepting contributions. Beyond the basics of the license, we may need to investigate using a contributor agreement before accepting pull requests. Advice welcome.
+please see [CONTRIBUTING.md](CONTRIBUTING.md) for information on contributing to this project.
 
 Building and stuff
 --
