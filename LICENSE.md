@@ -22,3 +22,6 @@ If you make something with this, I'd love to know! Let me know on [twitter](http
 
 If you sell or distribute something based on plinky, please make it clear that it is distinct from the original plinky design, and abide by the licenses above.
 My main concern is that the small plinky community, who are focused on discussion of creative audio hardware in general, become burdened with support or other work for a product they didn't actively get involved with. We don't want that! So please be respectful.
+
+I would encourage you to follow similar guidelines to those outlined by [Mutable Instruments](https://github.com/pichenettes/eurorack), including the recommendation to not use the plinky name in derived products. Thankyou!
+
