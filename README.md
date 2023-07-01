@@ -1,6 +1,6 @@
 # plinky
 
-an 8 voice touch synth
+an 8 voice touch synth - https://plinkysynth.com
 
 I apologise, its been so long since I looked at this, I am releasing a snapshot of what I had on my harddrive after a couple of years of barely being touched. while I am not actively developing plinky, I hope that by open sourcing it I can stimulate the wonderful community who collaborate on the plinky discord. I also hope to help iterate on some of the more obvious bugs, both hardware and software. 
 
