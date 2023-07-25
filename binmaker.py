@@ -19,7 +19,7 @@ def main():
 
     app = bl_content + app_content
 
-    if app[appsize + 65536 - 6]==b'v' and  app[appsize + 65536 - 4] == b'.':
+    if chr(app[appsize + 65536 - 6])=='v' and chr(app[appsize + 65536 - 4]) == '.':
         ver1 = chr(app[appsize + 65536 - 5])
         ver2 = chr(app[appsize + 65536 - 3])
         ver3 = chr(app[appsize + 65536 - 2])
@@ -28,6 +28,7 @@ def main():
         exit(2)
     print(f"bootloader size {len(bl_content)}, app size {appsize}, version {ver1}{ver2}{ver3}")
     fname = f"plink{ver1}{ver2}{ver3}.bin"
+    print(f'outputting {fname}...')
     try:
         with open(fname, "wb") as fo:
             fo.write(app)
