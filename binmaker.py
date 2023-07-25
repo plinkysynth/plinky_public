@@ -4,7 +4,7 @@ def main():
     ver2 = '0'
     ver3 = '0'
     try:
-        with open("sw/Release/plinkybl.bin", "rb") as f1:
+        with open("bootloader/Release/plinkybl.bin", "rb") as f1:
             bl_content = f1.read()
         with open("sw/Release/plinkyblack.bin", "rb") as f2:
             app_content = f2.read()
