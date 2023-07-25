@@ -8,7 +8,8 @@ TODO more info
 ## software
 
 ### flashing a blank plinky
-It's possible to flash a freshly manufactured plinky without building the software. you can get the latest firmware as a .bin file from (somewhere TODO link probably a github release). 
+It's possible to flash a freshly manufactured plinky without building the software. you can get the latest firmware as a .bin file, for example from https://github.com/plinkysynth/plinky_public/raw/main/plink09z.bin
+You can also build it from source, more information further down this document.
 
 The bin file is typically named `plink09z.bin` or similar, where the last 3 digits represent the version number. Note that the .uf2 version of this file is just the main firmware, and can be installed via plinky's bootloader (as detailed in the manual). However, that only works once the bootloader is put onto plinky in the first place! a freshly manufactured plinky has no such bootloader, and that's why you need the .bin file. 
 
