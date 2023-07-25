@@ -50,10 +50,29 @@ Right click on each of the projects on the left panel, and in the context menu s
 
 Now go to the app's 'Project' menu and select 'Build All'.
 
+If all goes well, that should succeed and write files into the `bootloader/Release` and `sw/Release` folders.
+
+the last step is to run the `binmaker.py` script.
+open a terminal window (cmd on windows), in the root of the github repo. run `python binmaker.py` which should output something like:
+
+```
+# python binmaker.py
+456950 app, 30968 bootloader
+bootloader size 65536, app size 456950, version 09z
+outputting plink09z.bin...
+outputting plink09z.uf2...
+Converting to uf2, output size: 873472, start address: 0x8010000
+Wrote 873472 bytes to plink09z.uf2
+```
+
+CONGRATULATIONS! this generates two files - `plink09z.bin` and `plink09z.uf2` (or whatever version).
+the .bin file can be flashed onto a raw plinky using the BOOT0 method outlined at the top of this document.
+once a plinky has the bootloader flashed onto it, the uf2 file can be used to update just the app portion, using the method in the public docs.
 
 
+## troubleshooting
 
-* more steps TODO
+TODO
 
 ## booting a raw plinky for the first time
 
