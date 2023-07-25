@@ -35,6 +35,19 @@ def main():
     except IOError as e:
         print(f"Failed to write file: {e}")
         exit(2)
+    fname = f"plink{ver1}{ver2}{ver3}.uf2"
+    print(f'outputting {fname}...')
+    # python ../../uf2conv.py -o ${ProjName}.uf2 -c -f STM32L4 ${ProjName}.hex
+    class DotAccessibleObject:
+        def __getattr__(self, key): return False
+    uf2args = DotAccessibleObject()
+    uf2args.output=fname
+    uf2args.convert=True
+    uf2args.family='STM32L4'
+    uf2args.input='sw/Release/plinkyblack.hex'
+    uf2args.base='0x2000'
+    import uf2conv
+    uf2conv.uf2conv(uf2args)
 
 
 if __name__ == "__main__":

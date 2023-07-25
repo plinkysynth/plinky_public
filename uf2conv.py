@@ -235,34 +235,8 @@ def write_file(name, buf):
         f.write(buf)
     print("Wrote %d bytes to %s" % (len(buf), name))
 
-
-def main():
+def uf2conv(args):
     global appstartaddr, familyid
-    def error(msg):
-        print(msg)
-        sys.exit(1)
-    parser = argparse.ArgumentParser(description='Convert to UF2 or flash directly.')
-    parser.add_argument('input', metavar='INPUT', type=str, nargs='?',
-                        help='input file (HEX, BIN or UF2)')
-    parser.add_argument('-b' , '--base', dest='base', type=str,
-                        default="0x2000",
-                        help='set base address of application for BIN format (default: 0x2000)')
-    parser.add_argument('-o' , '--output', metavar="FILE", dest='output', type=str,
-                        help='write output to named file; defaults to "flash.uf2" or "flash.bin" where sensible')
-    parser.add_argument('-d' , '--device', dest="device_path",
-                        help='select a device path to flash')
-    parser.add_argument('-l' , '--list', action='store_true',
-                        help='list connected devices')
-    parser.add_argument('-c' , '--convert', action='store_true',
-                        help='do not flash, just convert')
-    parser.add_argument('-D' , '--deploy', action='store_true',
-                        help='just flash, do not convert')
-    parser.add_argument('-f' , '--family', dest='family', type=str,
-                        default="0x0",
-                        help='specify familyID - number or name (default: 0x0)')
-    parser.add_argument('-C' , '--carray', action='store_true',
-                        help='convert binary file to a C array, not UF2')
-    args = parser.parse_args()
     appstartaddr = int(args.base, 0)
 
     if args.family.upper() in families:
@@ -313,5 +287,35 @@ def main():
             write_file(d + "/NEW.UF2", outbuf)
 
 
+
+def main():
+    global appstartaddr, familyid
+    def error(msg):
+        print(msg)
+        sys.exit(1)
+    parser = argparse.ArgumentParser(description='Convert to UF2 or flash directly.')
+    parser.add_argument('input', metavar='INPUT', type=str, nargs='?',
+                        help='input file (HEX, BIN or UF2)')
+    parser.add_argument('-b' , '--base', dest='base', type=str,
+                        default="0x2000",
+                        help='set base address of application for BIN format (default: 0x2000)')
+    parser.add_argument('-o' , '--output', metavar="FILE", dest='output', type=str,
+                        help='write output to named file; defaults to "flash.uf2" or "flash.bin" where sensible')
+    parser.add_argument('-d' , '--device', dest="device_path",
+                        help='select a device path to flash')
+    parser.add_argument('-l' , '--list', action='store_true',
+                        help='list connected devices')
+    parser.add_argument('-c' , '--convert', action='store_true',
+                        help='do not flash, just convert')
+    parser.add_argument('-D' , '--deploy', action='store_true',
+                        help='just flash, do not convert')
+    parser.add_argument('-f' , '--family', dest='family', type=str,
+                        default="0x0",
+                        help='specify familyID - number or name (default: 0x0)')
+    parser.add_argument('-C' , '--carray', action='store_true',
+                        help='convert binary file to a C array, not UF2')
+    args = parser.parse_args()
+    uf2conv(args)
+    
 if __name__ == "__main__":
     main()

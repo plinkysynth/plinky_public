@@ -8,3 +8,4 @@ bootloader/Release
 sw/Release
 bootloader/Debug
 sw/Debug
+__pycache__/
