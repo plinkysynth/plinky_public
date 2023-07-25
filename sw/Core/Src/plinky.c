@@ -2908,7 +2908,7 @@ void HAL_UART_ErrorCallback(UART_HandleTypeDef* huart) {
   	HAL_UART_Receive_DMA(&huart3, uartbuf, sizeof(uartbuf));
 }
 
-
+typedef unsigned int uint;
 u8 midisendbuf[16+16];
 uint midisendhead,midisendtail;
 bool usb_midi_write(const uint8_t packet[4]);
