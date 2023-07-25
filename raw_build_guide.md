@@ -22,11 +22,19 @@ Even after allowing it to run in the Settings & Security part of the OSX control
 
 <img src="imgs/macsarecrap2.png" width="350">
 
-it often hangs or fails to open entirely. I do not know why, and nor does the internet. you may need to use a PC, linux, wait for ST to fix it, or fight through various forum posts online, possibly installing outdated JREs and so forth. fun. 
+it often hangs or fails to open entirely. I do not know why.. you may need to use a PC, linux, wait for ST to fix it, or fight through various forum posts online, possibly installing outdated JREs and so forth. The page I found most helpful, that got it running for me, was https://community.st.com/t5/stm32cubeprogrammer-mcu/how-to-download-stm32cubeprogrammer-on-macos-monterey-12-6/m-p/143983 - but follow at your own risk!
 
-Assuming you have got it to run...
+Assuming you have got it to run... when you run the programmer, you see this screen
 
-First, find the 'boot0' and nearby '3v3' pad on the back of plinky. you need to short these together using a piece of metal or pliers or similar, as you plug plinky in to a PC via USB for the first time. Once power is applied over USB, you can remove your piece of metal. Then, when you run STM32CubeProg, you should be able to load your bin file, then on the right side select 'USB' as the connection type and hit the 'refresh' button to show the USB device. you can then click 'DOWNLOAD' button to flash the plinky. That's it!
+<img src="imgs/programmer.png">
+
+Now, connect the plinky - the boot0 way!
+
+What's that you ask?
+
+First, find the 'boot0' and nearby '3v3' pad on the back of plinky. you need to short these together using a piece of metal or pliers or similar, BEFORE and then as you plug plinky in to the computer via USB for the first time. Once power is applied over USB, you can remove your piece of metal. 
+
+Now inside STM32CubeProg, you should be able to load your bin file (click Open file, see red box in screenshot), then on the right side select 'USB' (red box around USB) as the connection type and hit the 'refresh' (small icon button on the far right) button to show the USB device. If it says 'No DFU' like in the screenshot, it means you didn't succesfully short the BOOT0 and 3V3 pins. Unplug plinky, short those pads, and plug it in again. Hit refresh and keep trying until it works. you can then click 'Connect' green button, and then there should be a 'DOWNLOAD' button (not shown in the screenshot) to flash the plinky. It's not a great UI, but hey, complain to ST! :) Anyway, your plinky is now flashed! Unplug it and replug it and it should go into calibration. See the bottom of this document for more information about that process.
 
 ### building the firmware from source
 
