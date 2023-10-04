@@ -17,3 +17,5 @@ with the exception of [WIP_inputfix](/hw/WIP_inputfix/), these files were create
 [v2](/hw/v2/) is the hardware design used most recently for plinky kits. it was manufactured by both pcbway and jlcpcb. there are BOM and POS files in here for JLCPCB to do the SMT assembly, and this was recently (jan-2023) tested in a small run.
 
 [WIP_inputfix](/hw/WIP_inputfix/) has been updated to kicad 7 and has yet to be manufactured (as of june-2023); we are revising it to reduce input noise and improve the physical dimensions of some ports and the expander port hole.
+
+[plinkyblack_hwmidi](/hw/plinkyblack_hwmidi/) Kicad 7 version modified by @okyeron which adds hardware MIDI in/out on the front of the device. Includes modifications from WIP_inputfix
