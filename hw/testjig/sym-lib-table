@@ -1,0 +1,4 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "testjig-rescue")(type "KiCad")(uri "${KIPRJMOD}/testjig-rescue.kicad_sym")(options "")(descr ""))
+)
