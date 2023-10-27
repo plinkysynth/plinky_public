@@ -9936,7 +9936,7 @@
     (pin "8" (uuid da31eebe-ab60-409e-b631-fe9a8c6fff23))
     (pin "9" (uuid e7514700-d2cb-4239-bece-7a60231d2263))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "JP1") (unit 1)
         )
@@ -9977,7 +9977,7 @@
     (pin "8" (uuid 41713398-5a96-4813-9b62-17e0d60ead68))
     (pin "9" (uuid b5e4483b-aa3e-4085-a5ef-5acd5e49e0b8))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "J5") (unit 1)
         )
@@ -10007,7 +10007,7 @@
     (pin "2" (uuid 925f0592-c256-45fe-8891-018d1c0cd27b))
     (pin "3" (uuid fbc7214d-0685-47bc-91f0-5049394d297f))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "RV1") (unit 1)
         )
@@ -10037,7 +10037,7 @@
     (pin "2" (uuid 69b9df29-dc6a-45fd-94c3-1b20c9e88ac3))
     (pin "3" (uuid c4b177b0-b897-434e-80bb-181060a880bd))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "RV2") (unit 1)
         )
@@ -10062,7 +10062,7 @@
     )
     (pin "1" (uuid 6e8aa194-9504-464e-9646-867a62fa1233))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR019") (unit 1)
         )
@@ -10095,7 +10095,7 @@
     (pin "2" (uuid 541cd744-202d-4384-b471-ccae2797925c))
     (pin "3" (uuid 5ea862c7-58cd-40a5-bf2f-c4be5a88bbc8))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "U2") (unit 1)
         )
@@ -10129,7 +10129,7 @@
     (pin "3" (uuid 4f04384b-1504-4820-81c2-941a00096d9f))
     (pin "4" (uuid 0d768914-ca21-44c8-828f-5da1e4c5e2f6))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "Y1") (unit 1)
         )
@@ -10154,7 +10154,7 @@
     )
     (pin "1" (uuid 5048cd3b-6bde-4b5c-81ec-bc0b924d6c46))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR010") (unit 1)
         )
@@ -10186,7 +10186,7 @@
     (pin "1" (uuid 79d8ac15-66ae-4179-9dae-2204b9dfea9e))
     (pin "2" (uuid 679240f2-06a0-4b48-88be-49c0f7663ec5))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "C9") (unit 1)
         )
@@ -10211,7 +10211,7 @@
     )
     (pin "1" (uuid 9d53d71c-1a53-4aa0-a619-98a84de364fb))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR013") (unit 1)
         )
@@ -10236,7 +10236,7 @@
     )
     (pin "1" (uuid 1fc41507-f9ae-4690-8cf9-dbfa9e071677))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR014") (unit 1)
         )
@@ -10268,7 +10268,7 @@
     (pin "1" (uuid b2f41090-02fb-4810-b6ee-a2d19a53ccff))
     (pin "2" (uuid bc166bd7-4f41-4a1d-bb48-d4642a4ae912))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R13") (unit 1)
         )
@@ -10297,7 +10297,7 @@
     (pin "1" (uuid b3868279-326a-4d6f-9709-7de5bcd8391f))
     (pin "2" (uuid 53924dc6-8634-4a8f-8358-8c74b1b79928))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "JP2") (unit 1)
         )
@@ -10322,7 +10322,7 @@
     )
     (pin "1" (uuid 491a0305-929d-43d0-a690-ae4205b734ac))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR021") (unit 1)
         )
@@ -10347,7 +10347,7 @@
     )
     (pin "1" (uuid 05bde32a-2702-45b4-b5e0-d696e0404fe1))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR020") (unit 1)
         )
@@ -10370,7 +10370,7 @@
     (property "Datasheet" "~" (at 193.04 172.72 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "LCSC" "C1523" (at 195.961 169.0116 0)
+    (property "LCSC" "C307331" (at 195.961 169.0116 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Checked" "x" (at 193.04 172.72 0)
@@ -10379,7 +10379,7 @@
     (pin "1" (uuid 5abaaa96-0ac8-4997-979b-9f032b04fcd4))
     (pin "2" (uuid 19e348f3-50ba-4e56-a1fd-9f89a1c8816c))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "C11") (unit 1)
         )
@@ -10404,7 +10404,7 @@
     )
     (pin "1" (uuid 54cb9d2f-77b0-4205-b603-4ee38e623f24))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR026") (unit 1)
         )
@@ -10429,7 +10429,7 @@
     )
     (pin "1" (uuid a2e598ef-226e-4f76-b29b-6f85a38a432d))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR027") (unit 1)
         )
@@ -10454,7 +10454,7 @@
     )
     (pin "1" (uuid c924df43-22be-4763-89c0-0d654de5d34f))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR025") (unit 1)
         )
@@ -10479,7 +10479,7 @@
     )
     (pin "1" (uuid 90033690-3242-4882-a803-c93bea6a2b45))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR024") (unit 1)
         )
@@ -10511,7 +10511,7 @@
     (pin "1" (uuid 15f1e3dd-cecf-4f44-8ea1-fef4452110d5))
     (pin "2" (uuid 3dd77c38-2966-4f8b-b1d0-6717a4fd8c51))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "C2") (unit 1)
         )
@@ -10536,7 +10536,7 @@
     )
     (pin "1" (uuid a192f0d2-4f39-4eaf-b601-ba0be56027d5))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR039") (unit 1)
         )
@@ -10561,7 +10561,7 @@
     )
     (pin "1" (uuid cc911f2b-7939-4775-9660-79da5e57e4fc))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR018") (unit 1)
         )
@@ -10593,7 +10593,7 @@
     (pin "1" (uuid 7d8d9a2b-5f64-41b5-b6df-040a0cada0b5))
     (pin "2" (uuid a20ba037-2dac-4b52-a1b5-c4ba86e9c6e0))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "C12") (unit 1)
         )
@@ -10625,7 +10625,7 @@
     (pin "1" (uuid a0c8cef3-5c66-4fb4-ae72-f83f45beef09))
     (pin "2" (uuid d18b91c7-c382-466b-b744-75edf2bf5268))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "C14") (unit 1)
         )
@@ -10650,7 +10650,7 @@
     )
     (pin "1" (uuid 75b8fa32-a303-4503-abc8-3e14ff6e6022))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR022") (unit 1)
         )
@@ -10713,7 +10713,7 @@
     (pin "8" (uuid 136df083-b1e7-4443-a222-c72f9e43ec1f))
     (pin "9" (uuid 3da05da3-0f6e-46d1-92f1-52c49d2594f3))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "U6") (unit 1)
         )
@@ -10745,7 +10745,7 @@
     (pin "1" (uuid dab6bec3-e8dd-410c-b34a-5d7bbe77fb29))
     (pin "2" (uuid 3f6d58e3-59d5-4558-82dd-3b41fa28ad07))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "C29") (unit 1)
         )
@@ -10770,7 +10770,7 @@
     )
     (pin "1" (uuid ce698212-4158-4912-ba0b-aa1ebc183696))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR041") (unit 1)
         )
@@ -10800,7 +10800,7 @@
     (pin "T" (uuid ea8ed50d-7c14-4119-83d9-2cb14a13cb42))
     (pin "TN" (uuid 811582e8-54b6-4f14-898d-ae024b07c782))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "J1") (unit 1)
         )
@@ -10832,7 +10832,7 @@
     (pin "1" (uuid 0b04f36d-e61c-4a19-902e-2d1a77da00b9))
     (pin "2" (uuid 9bf2d704-af60-4542-813f-c08e25454b0d))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R1") (unit 1)
         )
@@ -10864,7 +10864,7 @@
     (pin "1" (uuid 4921d6e3-500d-4d5f-9b64-12a830413b1e))
     (pin "2" (uuid 6e82a81a-6333-43ee-bf2a-d3f9593af537))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R9") (unit 1)
         )
@@ -10896,7 +10896,7 @@
     (pin "1" (uuid fe33cdb9-379f-45ba-9518-93b2073dde6a))
     (pin "2" (uuid 9ad2ed4e-7ca9-44dc-8343-fad20e881777))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "C5") (unit 1)
         )
@@ -10926,7 +10926,7 @@
     (pin "T" (uuid 0e4f8922-b16f-4349-9a46-2630fc877c9f))
     (pin "TN" (uuid 9da81d5c-d682-447e-a166-b4cd701ac6b3))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "J2") (unit 1)
         )
@@ -10958,7 +10958,7 @@
     (pin "1" (uuid df06cb41-cb8a-499f-885c-415672318646))
     (pin "2" (uuid 146dc56e-b308-47c6-b3d9-749ebad25781))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R3") (unit 1)
         )
@@ -10990,7 +10990,7 @@
     (pin "1" (uuid b3d93a4c-a923-4fbd-907b-1ef36d1c562e))
     (pin "2" (uuid 3d20d83f-8dd1-4203-88c4-986d5754e95e))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R10") (unit 1)
         )
@@ -11022,7 +11022,7 @@
     (pin "1" (uuid d61d8e0f-c643-4e0b-94c1-35a5e1dd2bf1))
     (pin "2" (uuid d3bf9992-180a-46e1-8ec9-c9889f12e65c))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "C6") (unit 1)
         )
@@ -11052,7 +11052,7 @@
     (pin "T" (uuid 25af9033-3366-48e4-b5b8-0e1570ad587a))
     (pin "TN" (uuid ac5da216-8548-45d4-81e5-56536beace7b))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "J3") (unit 1)
         )
@@ -11084,7 +11084,7 @@
     (pin "1" (uuid fff85719-dca6-42be-9f14-1a268485a2db))
     (pin "2" (uuid b2ee4a6e-56f5-4347-9d44-0a3390575569))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R4") (unit 1)
         )
@@ -11116,7 +11116,7 @@
     (pin "1" (uuid 5be330aa-e073-4959-a058-ff1ae5ccf3f9))
     (pin "2" (uuid bc98a594-70b2-40d9-98d1-de15dce72277))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R11") (unit 1)
         )
@@ -11148,7 +11148,7 @@
     (pin "1" (uuid 1bcfe6ca-8624-43a9-a763-b0da614d5c74))
     (pin "2" (uuid 585cc9d7-2c07-4f2b-be4a-956c27727ffa))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "C7") (unit 1)
         )
@@ -11178,7 +11178,7 @@
     (pin "T" (uuid 8c42cc91-44e7-4ee2-a0b7-1547d654449f))
     (pin "TN" (uuid 56fc321e-cc1a-4e37-a719-5e51558a92b9))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "J4") (unit 1)
         )
@@ -11210,7 +11210,7 @@
     (pin "1" (uuid eef42dcd-5a7b-4659-b944-25958334af41))
     (pin "2" (uuid 2103a154-e730-402b-a3e3-28e4a3defadf))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R5") (unit 1)
         )
@@ -11242,7 +11242,7 @@
     (pin "1" (uuid 1448bbc6-b27c-4ad4-a836-8b3e72c78f95))
     (pin "2" (uuid 17462973-b680-4d82-af45-cf3a616b0bf8))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R12") (unit 1)
         )
@@ -11274,7 +11274,7 @@
     (pin "1" (uuid d78a4949-88fd-45ff-bc35-2120b6e5627f))
     (pin "2" (uuid f703e2f8-beeb-4304-a124-afa37a25fd48))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "C8") (unit 1)
         )
@@ -11297,7 +11297,7 @@
     (property "Datasheet" "~" (at 81.28 259.08 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "LCSC" "C1523" (at 78.359 260.4516 0)
+    (property "LCSC" "C307331" (at 78.359 260.4516 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Checked" "x" (at 81.28 259.08 0)
@@ -11306,7 +11306,7 @@
     (pin "1" (uuid 35e1cc3e-809c-4117-b322-d03e062e0995))
     (pin "2" (uuid 8eee98b6-e28e-48d0-be39-2e49db83c555))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "C1") (unit 1)
         )
@@ -11331,7 +11331,7 @@
     )
     (pin "1" (uuid f2a0565d-eedb-40cc-8dc3-3d0f121570f0))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR04") (unit 1)
         )
@@ -11356,7 +11356,7 @@
     )
     (pin "1" (uuid 1597cc89-8a45-459e-8144-0f4265c24f0f))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR03") (unit 1)
         )
@@ -11386,7 +11386,7 @@
     (pin "T" (uuid 14647b8c-b99c-4d0c-9b7d-86324dbcf832))
     (pin "TN" (uuid b302369b-f0ea-4a22-972e-8815f00f61de))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "J6") (unit 1)
         )
@@ -11418,7 +11418,7 @@
     (pin "1" (uuid 67e7e888-59f2-4da5-94cc-1456399d8291))
     (pin "2" (uuid e724b66e-f0d6-4fd3-acfe-a10d541beab4))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R16") (unit 1)
         )
@@ -11450,7 +11450,7 @@
     (pin "1" (uuid 40a57863-0249-490b-a812-6a63a738936b))
     (pin "2" (uuid 7ac29fe5-5965-4151-ba47-f10c8cc1a158))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R18") (unit 1)
         )
@@ -11482,7 +11482,7 @@
     (pin "1" (uuid 9ac7e13a-6ee8-47db-b5f7-8aa0ece9088f))
     (pin "2" (uuid 1cb699c8-287b-4abf-8eee-41b7186f4c60))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "C20") (unit 1)
         )
@@ -11514,7 +11514,7 @@
     (pin "1" (uuid b88e17c0-86a1-4b94-8d4c-4d4a82100b27))
     (pin "2" (uuid 0b4fb16f-dcb9-47ad-be86-7a88ed42cf14))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R20") (unit 1)
         )
@@ -11537,7 +11537,7 @@
     (property "Datasheet" "~" (at 214.63 128.27 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "LCSC" "C1523" (at 217.551 124.5616 0)
+    (property "LCSC" "C307331" (at 217.551 124.5616 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Checked" "x" (at 214.63 128.27 0)
@@ -11546,7 +11546,7 @@
     (pin "1" (uuid 0a5cdc62-6a62-4356-8122-2e8b55b6e5d0))
     (pin "2" (uuid 9b45949b-898f-4adb-83db-880939a8b153))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "C18") (unit 1)
         )
@@ -11569,7 +11569,7 @@
     (property "Datasheet" "~" (at 222.25 128.27 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "LCSC" "C1523" (at 225.171 124.5616 0)
+    (property "LCSC" "C307331" (at 225.171 124.5616 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Checked" "x" (at 222.25 128.27 0)
@@ -11578,7 +11578,7 @@
     (pin "1" (uuid 3f92d77b-c667-4b8a-aa2c-e28bff4dcf22))
     (pin "2" (uuid 9cdbf053-6826-4ee8-898a-7b83ff09f29f))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "C19") (unit 1)
         )
@@ -11616,7 +11616,7 @@
     (pin "4" (uuid d75e5cfe-f50a-4cbf-ae3d-911453b2c60c))
     (pin "8" (uuid 6a480bec-c531-489b-9619-43f3ae9c7608))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "U5") (unit 1)
         )
@@ -11639,7 +11639,7 @@
     (property "Datasheet" "~" (at 229.87 128.27 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "LCSC" "C1523" (at 232.791 124.5616 0)
+    (property "LCSC" "C307331" (at 232.791 124.5616 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Checked" "x" (at 229.87 128.27 0)
@@ -11648,7 +11648,7 @@
     (pin "1" (uuid 88d484d2-6001-429f-a449-0051a0b5d86a))
     (pin "2" (uuid e6bd6819-581f-40d1-bb0d-baaebc969429))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "C22") (unit 1)
         )
@@ -11671,7 +11671,7 @@
     (property "Datasheet" "~" (at 237.49 128.27 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "LCSC" "C1523" (at 240.411 124.5616 0)
+    (property "LCSC" "C307331" (at 240.411 124.5616 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Checked" "x" (at 237.49 128.27 0)
@@ -11680,7 +11680,7 @@
     (pin "1" (uuid f511f0fe-03c0-479e-a1bd-e1ceb3b54811))
     (pin "2" (uuid 45ee3703-6619-481b-91d1-7e147605cb95))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "C23") (unit 1)
         )
@@ -11712,7 +11712,7 @@
     (pin "1" (uuid f853846b-0af4-4f90-8dfb-e7ceb18aad80))
     (pin "2" (uuid e85f6dba-f18c-4ed0-b91d-0989eb6be656))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "C24") (unit 1)
         )
@@ -11750,7 +11750,7 @@
     (pin "4" (uuid 8a71c621-c0e3-44fd-a1f1-402840e309b8))
     (pin "8" (uuid 4658343a-727f-4f4e-9f32-072ad094b99c))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "U5") (unit 2)
         )
@@ -11788,7 +11788,7 @@
     (pin "4" (uuid 09bc4df0-b1ac-4d59-beb2-560becd5906a))
     (pin "8" (uuid e75888cd-ab16-4534-a902-d2c04fb5f8bc))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "U5") (unit 3)
         )
@@ -11813,7 +11813,7 @@
     )
     (pin "1" (uuid a0121375-8c06-42e5-af8b-448093c864ec))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR032") (unit 1)
         )
@@ -11845,7 +11845,7 @@
     (pin "1" (uuid 12e3e5ae-9bcb-40bf-bc4f-b6213292f127))
     (pin "2" (uuid d1d1ee16-ad7e-4eed-a924-60e37eb80130))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R14") (unit 1)
         )
@@ -11877,7 +11877,7 @@
     (pin "1" (uuid 82397038-ab73-4858-933b-af984f356728))
     (pin "2" (uuid b09f07eb-5ebd-4169-8fd2-5b1a539635e6))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "C27") (unit 1)
         )
@@ -11909,7 +11909,7 @@
     (pin "1" (uuid 7bab3db6-a3bb-4310-be5d-adbe47ebc54e))
     (pin "2" (uuid 399e6eb2-df13-4807-b14a-cc0b319cab11))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "C31") (unit 1)
         )
@@ -11939,7 +11939,7 @@
     (pin "T" (uuid e073faef-9844-4ed7-a2d1-850f0f724a53))
     (pin "TN" (uuid cee74472-b5d0-42f0-a91d-15f33e929296))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "J7") (unit 1)
         )
@@ -11971,7 +11971,7 @@
     (pin "1" (uuid d73c8187-c84c-49f7-a292-4220b2e961cb))
     (pin "2" (uuid 4a5fad23-3de3-4ac1-aebd-4e9dd0731b95))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R17") (unit 1)
         )
@@ -12003,7 +12003,7 @@
     (pin "1" (uuid 0c9ad5b6-6dff-4425-9e2e-20486ae64dcf))
     (pin "2" (uuid 2a1ac339-808b-4924-81ef-b7c22e3d6592))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R19") (unit 1)
         )
@@ -12035,7 +12035,7 @@
     (pin "1" (uuid e281650d-6f8d-4640-bd5f-0d9ccdae76f7))
     (pin "2" (uuid d45b13d4-8d94-43ed-b8ae-add435b76f15))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "C21") (unit 1)
         )
@@ -12067,7 +12067,7 @@
     (pin "1" (uuid 84c12750-40b7-4e88-853e-a5b2db31449c))
     (pin "2" (uuid f9106e2b-c200-4783-94a8-7ed7fdefcd80))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R21") (unit 1)
         )
@@ -12092,7 +12092,7 @@
     )
     (pin "1" (uuid 4524ed95-66de-4db6-9dad-070cf2ca21bd))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR033") (unit 1)
         )
@@ -12124,7 +12124,7 @@
     (pin "1" (uuid 4835938f-b9c8-4a03-83a5-cdc2129bcd4c))
     (pin "2" (uuid 9c0ebe55-0ad6-47ed-9b4c-8d6e667bf081))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R15") (unit 1)
         )
@@ -12147,7 +12147,7 @@
     (property "Datasheet" "~" (at 539.75 148.59 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "LCSC" "C1523" (at 536.829 149.9616 0)
+    (property "LCSC" "C307331" (at 536.829 149.9616 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Checked" "x" (at 539.75 148.59 0)
@@ -12156,7 +12156,7 @@
     (pin "1" (uuid 05d4e81d-9bc3-430e-a77f-8b5f61bc54a8))
     (pin "2" (uuid 2e19ee98-75b1-404e-a522-bfba3525949f))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "C25") (unit 1)
         )
@@ -12181,7 +12181,7 @@
     )
     (pin "1" (uuid de85542e-cd34-4242-a4c4-3d3125d82584))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR036") (unit 1)
         )
@@ -12206,7 +12206,7 @@
     )
     (pin "1" (uuid a076f95c-b972-49f4-a647-527608ae0465))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR037") (unit 1)
         )
@@ -12231,7 +12231,7 @@
     )
     (pin "1" (uuid 019205cb-cd80-4d32-b7a6-94ee8eccd902))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR030") (unit 1)
         )
@@ -12256,7 +12256,7 @@
     )
     (pin "1" (uuid 59acf85d-0b31-4f9c-b064-b38460deb54b))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR034") (unit 1)
         )
@@ -12289,7 +12289,7 @@
     (pin "2" (uuid 40c1c784-f81b-433e-a332-302d91ebc5fa))
     (pin "3" (uuid 3e131dd0-93fa-4ac4-8612-b96a88548a9c))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "U3") (unit 1)
         )
@@ -12321,7 +12321,7 @@
     (pin "1" (uuid 90e57e5c-db5c-440e-adfe-2281aab5b765))
     (pin "2" (uuid 880f9ff4-5ae3-49fc-a2ab-dd0f746eb3ff))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "C10") (unit 1)
         )
@@ -12346,7 +12346,7 @@
     )
     (pin "1" (uuid a9607d28-87f7-48da-bd40-8dde08bd1c13))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR015") (unit 1)
         )
@@ -12378,7 +12378,7 @@
     (pin "1" (uuid dbf85747-c47e-4c81-a747-1d6f80eba3e0))
     (pin "2" (uuid fe84876b-f61b-427c-acca-4e5dbeb24b08))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "C32") (unit 1)
         )
@@ -12410,7 +12410,7 @@
     (pin "1" (uuid 8059e529-bc10-4feb-bd2b-b10bc7eb2f40))
     (pin "2" (uuid 94d84f0b-b2e2-48ab-beb6-0dfc31f788eb))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "C33") (unit 1)
         )
@@ -12435,7 +12435,7 @@
     )
     (pin "1" (uuid df9be00a-36cb-413e-bc88-67c17462f691))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR016") (unit 1)
         )
@@ -12460,7 +12460,7 @@
     )
     (pin "1" (uuid f2dc15b6-86b8-4817-b809-53a9c46d452c))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR0102") (unit 1)
         )
@@ -12485,7 +12485,7 @@
     )
     (pin "1" (uuid 75624106-c301-46bb-838a-55968a1a3307))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR0103") (unit 1)
         )
@@ -12510,7 +12510,7 @@
     )
     (pin "1" (uuid 3fb1391f-e44e-4cf1-b319-a7da912c90ca))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR043") (unit 1)
         )
@@ -12535,7 +12535,7 @@
     )
     (pin "1" (uuid a5b7ae17-13b5-48d7-8f66-603ce7bd909a))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR038") (unit 1)
         )
@@ -12558,7 +12558,7 @@
     (property "Datasheet" "~" (at 73.66 187.96 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "LCSC" "C1523" (at 70.739 189.3316 0)
+    (property "LCSC" "C307331" (at 70.739 189.3316 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Checked" "x" (at 73.66 187.96 0)
@@ -12567,7 +12567,7 @@
     (pin "1" (uuid d83af552-1608-4468-b198-20b2a239a73a))
     (pin "2" (uuid e666ac0b-fbe6-4cae-8056-14d01e744fd7))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "C40") (unit 1)
         )
@@ -12592,7 +12592,7 @@
     )
     (pin "1" (uuid e3c9760d-5f44-403a-819e-4022eabc6dbc))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR044") (unit 1)
         )
@@ -12617,7 +12617,7 @@
     )
     (pin "1" (uuid a36b0561-8ed2-48ec-8f7e-8483cd40c3ff))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR035") (unit 1)
         )
@@ -12640,7 +12640,7 @@
     (property "Datasheet" "~" (at 341.63 242.57 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "LCSC" "C1523" (at 339.09 248.9708 0)
+    (property "LCSC" "C307331" (at 339.09 248.9708 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Checked" "x" (at 341.63 242.57 0)
@@ -12649,7 +12649,7 @@
     (pin "1" (uuid a3ff11ba-4de0-43ba-916f-10e89a04fa49))
     (pin "2" (uuid edd1d962-259e-4471-a2a9-30ff32e9efb0))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "C28") (unit 1)
         )
@@ -12672,7 +12672,7 @@
     (property "Datasheet" "~" (at 72.39 116.84 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "LCSC" "C1523" (at 69.469 118.2116 0)
+    (property "LCSC" "C307331" (at 69.469 118.2116 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Checked" "x" (at 72.39 116.84 0)
@@ -12681,7 +12681,7 @@
     (pin "1" (uuid 1862c669-2d7f-41d1-8878-e3f2e3b11629))
     (pin "2" (uuid bf3922ec-f92c-498e-8b17-5f8f19e6cabf))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "C41") (unit 1)
         )
@@ -12706,7 +12706,7 @@
     )
     (pin "1" (uuid 385f8a86-b0df-41c7-a294-925fb907e106))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR046") (unit 1)
         )
@@ -12731,7 +12731,7 @@
     )
     (pin "1" (uuid 8982a235-7beb-40a7-804b-bc82aefc5457))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR045") (unit 1)
         )
@@ -12769,7 +12769,7 @@
     (pin "4" (uuid ba99fe5e-5ace-4de3-a81f-2da56e0bb728))
     (pin "8" (uuid d566f038-a1cc-43cc-8d69-05053d0eb12a))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "U8") (unit 1)
         )
@@ -12807,7 +12807,7 @@
     (pin "4" (uuid d04f0176-c1e1-4ba8-b6ec-8f03d7d01a91))
     (pin "8" (uuid 30e56210-8f5c-42dc-9f4d-6695b23563e0))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "U8") (unit 2)
         )
@@ -12845,7 +12845,7 @@
     (pin "4" (uuid b7fe453b-c6b4-4b1a-b033-0d3c7921b934))
     (pin "8" (uuid 43ac21d4-12c5-48f5-97c5-f10df16af00f))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "U1") (unit 3)
         )
@@ -12883,7 +12883,7 @@
     (pin "4" (uuid e380b7fc-bce7-4518-9916-ea00391a3f2a))
     (pin "8" (uuid 96787643-7224-42b0-b1fa-26aa741352a4))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "U9") (unit 1)
         )
@@ -12921,7 +12921,7 @@
     (pin "4" (uuid c685e840-a379-4085-acaf-150c8e0045b7))
     (pin "8" (uuid ecf625b9-0641-40ef-8b09-38b1852eeb51))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "U9") (unit 2)
         )
@@ -12959,7 +12959,7 @@
     (pin "4" (uuid 48309002-99c9-41eb-bc61-9cb578a6e1fa))
     (pin "8" (uuid 332f8c86-6af7-43d3-8c11-a91c1ad7e6ca))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "U8") (unit 3)
         )
@@ -12997,7 +12997,7 @@
     (pin "4" (uuid 53a86f59-3549-42ed-acd0-0491d1ffc4f5))
     (pin "8" (uuid f6ab7abe-ebb3-4e88-afb2-4b99b6c2dc1d))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "U9") (unit 3)
         )
@@ -13027,7 +13027,7 @@
     (pin "T" (uuid 17839f9c-efae-46a7-be4c-2aa4b04705be))
     (pin "TN" (uuid 1095d92b-2b27-4b33-b68c-9b021febe7d9))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "J8") (unit 1)
         )
@@ -13059,7 +13059,7 @@
     (pin "1" (uuid a8c90c66-471d-4628-a5a1-2da4e5c228a8))
     (pin "2" (uuid 49e9593b-f469-4044-b145-31c10fdf4eeb))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R26") (unit 1)
         )
@@ -13091,7 +13091,7 @@
     (pin "1" (uuid 704ab9cc-e59e-4fcf-988a-bb3de8dda397))
     (pin "2" (uuid b70d37d6-7575-4114-be90-60a25a1cb752))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R30") (unit 1)
         )
@@ -13123,7 +13123,7 @@
     (pin "1" (uuid e56630ac-f68d-41d7-8db7-eae573a5a17b))
     (pin "2" (uuid f137ac21-26b2-4f14-8955-5b365bc433de))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "C38") (unit 1)
         )
@@ -13153,7 +13153,7 @@
     (pin "T" (uuid eeb2d824-67e5-45af-b40f-50e2968a124e))
     (pin "TN" (uuid 13ac2da6-7768-45f4-b78d-743944f3b09e))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "J9") (unit 1)
         )
@@ -13185,7 +13185,7 @@
     (pin "1" (uuid 2e9f30bf-f797-4255-9011-8104e9272c9f))
     (pin "2" (uuid a63c9c2b-aa7e-408a-ae55-c718f8ca7a6f))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R27") (unit 1)
         )
@@ -13217,7 +13217,7 @@
     (pin "1" (uuid 7c76bc41-47cd-409f-a16a-9e98af17e185))
     (pin "2" (uuid 1ebe61b8-1f64-4a7a-b80f-cd38066c275d))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R31") (unit 1)
         )
@@ -13249,7 +13249,7 @@
     (pin "1" (uuid 2e30c296-20d1-46d1-83a0-c18a63db2241))
     (pin "2" (uuid 775db10e-bd7e-4015-97f5-91a4a7181198))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "C39") (unit 1)
         )
@@ -13287,7 +13287,7 @@
     (pin "4" (uuid 882802dd-bd13-4e03-a881-5407848a0d6a))
     (pin "8" (uuid 320777f0-05ff-4393-abc3-5ec5079b857b))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "U1") (unit 1)
         )
@@ -13325,7 +13325,7 @@
     (pin "4" (uuid 1ed7770e-59a2-45c6-84ca-3163d39d075c))
     (pin "8" (uuid c0409ec4-d188-4bd0-803e-6007a30ea87c))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "U1") (unit 2)
         )
@@ -13350,7 +13350,7 @@
     )
     (pin "1" (uuid a15ce8e4-dd3c-47c1-866a-b1eea61a7b8b))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR042") (unit 1)
         )
@@ -13375,7 +13375,7 @@
     )
     (pin "1" (uuid 38081087-d501-4450-bc4a-3b207ffb083d))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR047") (unit 1)
         )
@@ -13407,7 +13407,7 @@
     (pin "1" (uuid c0d0a673-a5c9-48bb-ab06-97cfc1cece46))
     (pin "2" (uuid 0af064b9-c2d7-48fe-854f-2cd7947e85fc))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R34") (unit 1)
         )
@@ -13439,7 +13439,7 @@
     (pin "1" (uuid cbfa74a8-f7f6-403d-870d-f16bf87a0df0))
     (pin "2" (uuid 45d088d6-18c4-4b55-b73d-f840de9bdb67))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "C42") (unit 1)
         )
@@ -13471,7 +13471,7 @@
     (pin "1" (uuid 83fa433f-f4ef-411c-8c3b-cb79a3f85c03))
     (pin "2" (uuid bdc9ad72-febd-4219-b21e-a14748e0fd98))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "C43") (unit 1)
         )
@@ -13494,7 +13494,7 @@
     (property "Datasheet" "~" (at 189.23 209.55 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "LCSC" "C1523" (at 191.5668 210.9216 0)
+    (property "LCSC" "C307331" (at 191.5668 210.9216 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Checked" "x" (at 189.23 209.55 0)
@@ -13503,7 +13503,7 @@
     (pin "1" (uuid 777a1671-953c-4615-9fbb-479f050d0939))
     (pin "2" (uuid febd14bb-25f3-4753-8343-681e31571efc))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "C17") (unit 1)
         )
@@ -13528,7 +13528,7 @@
     )
     (pin "1" (uuid b025518e-3797-4cf2-a63f-addcbb3f2b12))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR040") (unit 1)
         )
@@ -13558,7 +13558,7 @@
     (pin "T" (uuid ffdb2c39-e822-4aa0-91cc-d10013ce1378))
     (pin "TN" (uuid 6898dcd6-176d-4745-b7ec-fd19f3ae7434))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "J22") (unit 1)
         )
@@ -13590,7 +13590,7 @@
     (pin "1" (uuid 09272adf-05b8-4170-a772-35653849bf1a))
     (pin "2" (uuid d15ea93d-bbe5-49ca-aece-22c607f4be19))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R90") (unit 1)
         )
@@ -13622,7 +13622,7 @@
     (pin "1" (uuid 507c03fe-202b-4cf6-a0bf-47ac6336d667))
     (pin "2" (uuid 16320210-ab48-4efb-aa10-fc0d72a98ba9))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R91") (unit 1)
         )
@@ -13660,7 +13660,7 @@
     (pin "4" (uuid 7ea92731-a43e-4673-b92f-17414646602d))
     (pin "8" (uuid 1d1c11c6-2ee0-4885-a9aa-5316c243cb3d))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "U7") (unit 2)
         )
@@ -13685,7 +13685,7 @@
     )
     (pin "1" (uuid c9c1d10d-7bfb-40ae-8395-4ed3a21ba156))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR0104") (unit 1)
         )
@@ -13715,7 +13715,7 @@
     (pin "T" (uuid 2860311c-23a1-4de9-9ff5-3d1d96752202))
     (pin "TN" (uuid 719a6858-4471-4b8b-900c-7c034514c4c9))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "J23") (unit 1)
         )
@@ -13747,7 +13747,7 @@
     (pin "1" (uuid 56c50e85-75a1-47b9-b69c-83e140f5a0b7))
     (pin "2" (uuid ccbb2b90-bb11-48fa-a986-38115cc77a08))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R89") (unit 1)
         )
@@ -13779,7 +13779,7 @@
     (pin "1" (uuid 09721722-3da3-42a9-8727-c143199675d5))
     (pin "2" (uuid 0676b771-fcdf-4369-adf4-6d92e64c52c6))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R92") (unit 1)
         )
@@ -13804,7 +13804,7 @@
     )
     (pin "1" (uuid ffbbc622-c8de-4c4f-a450-3ac85317d0d3))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR0105") (unit 1)
         )
@@ -13829,7 +13829,7 @@
     )
     (pin "1" (uuid e7f6bcbe-8e7c-4692-908e-5cbdcfa91dc3))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR0106") (unit 1)
         )
@@ -13861,7 +13861,7 @@
     (pin "1" (uuid 421c6ad6-6375-4d9b-afdb-5fa4986b2b87))
     (pin "2" (uuid 7da4f1f1-31a6-45bc-b4d8-9b75054418ac))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R83") (unit 1)
         )
@@ -13893,7 +13893,7 @@
     (pin "1" (uuid 161d71ca-e448-4ffa-ac56-be477e92bc49))
     (pin "2" (uuid d6ac8647-afa5-48b0-a81d-fadcf079876f))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "C62") (unit 1)
         )
@@ -13925,7 +13925,7 @@
     (pin "1" (uuid ac59e4e1-9c3f-4e73-a7fc-32996f11ef05))
     (pin "2" (uuid ddc16a9a-d99e-46f8-b512-81ebb0eeaf04))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R85") (unit 1)
         )
@@ -13957,7 +13957,7 @@
     (pin "1" (uuid 9389b763-5594-4d04-8980-b6c5b0bebbc7))
     (pin "2" (uuid 0f801f46-481f-4819-b1c3-634fa5dacdc6))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "C60") (unit 1)
         )
@@ -13989,7 +13989,7 @@
     (pin "1" (uuid a74f3407-ddc0-4b58-a55b-f7dd5d128654))
     (pin "2" (uuid a6ca1336-b69b-4146-ad4b-857651d87e11))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "C61") (unit 1)
         )
@@ -14021,7 +14021,7 @@
     (pin "1" (uuid 02610182-f6f1-4cf7-8d04-59153df1c474))
     (pin "2" (uuid 04b6e40f-c6e9-4398-a7f9-06bd0c9b6b82))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R84") (unit 1)
         )
@@ -14053,7 +14053,7 @@
     (pin "1" (uuid 64cae5c4-8f11-4ce0-ac37-6ec25b3f65d3))
     (pin "2" (uuid d9c4bd85-3c08-42f7-b902-41695bed4f85))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R86") (unit 1)
         )
@@ -14085,7 +14085,7 @@
     (pin "1" (uuid 83b85ab0-8d61-4e39-8133-6bb0cf00e522))
     (pin "2" (uuid e8d625a3-d546-4fea-93d5-bb4edf4f5f95))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "C63") (unit 1)
         )
@@ -14123,7 +14123,7 @@
     (pin "4" (uuid 1baec537-3afa-493c-bf99-855ff2c433c7))
     (pin "8" (uuid d16a0ee5-418e-49e1-b23b-b28f75619bea))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "U7") (unit 3)
         )
@@ -14146,7 +14146,7 @@
     (property "Datasheet" "~" (at 552.45 325.12 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "LCSC" "C1523" (at 549.529 326.4916 0)
+    (property "LCSC" "C307331" (at 549.529 326.4916 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Checked" "x" (at 552.45 325.12 0)
@@ -14155,7 +14155,7 @@
     (pin "1" (uuid e1c65919-a738-4fd0-994f-e74245ac6025))
     (pin "2" (uuid ce225c29-fe64-4e3b-804e-391bc74c8f00))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "C64") (unit 1)
         )
@@ -14180,7 +14180,7 @@
     )
     (pin "1" (uuid 068ff5ea-b2a8-46a4-9be7-836fe451cdba))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR0107") (unit 1)
         )
@@ -14205,7 +14205,7 @@
     )
     (pin "1" (uuid f9728ff8-bd98-481e-9ea6-6653540115a7))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR0109") (unit 1)
         )
@@ -14237,7 +14237,7 @@
     (pin "1" (uuid 3ffa4c68-2563-469f-889a-4f7c8b865502))
     (pin "2" (uuid bb49efa7-60f7-41bd-ac99-668ace07533e))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R88") (unit 1)
         )
@@ -14269,7 +14269,7 @@
     (pin "1" (uuid 3c0a4c0c-d61d-4fa7-ba8e-32616ff669a6))
     (pin "2" (uuid 1995627a-8aaf-4eeb-b5c3-9335dac6415a))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R87") (unit 1)
         )
@@ -14294,7 +14294,7 @@
     )
     (pin "1" (uuid c2cc4728-a5e5-4913-b7f8-a3a6da621455))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR0117") (unit 1)
         )
@@ -14326,7 +14326,7 @@
     (pin "1" (uuid c07c5903-1791-4030-b067-5686374e2058))
     (pin "2" (uuid 9243e1a8-745d-4825-9a34-9988fb48e1b1))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R38") (unit 1)
         )
@@ -14358,7 +14358,7 @@
     (pin "1" (uuid 807bb532-0b0c-4ecd-ae03-3a338a8d9005))
     (pin "2" (uuid a5106187-c727-4986-86fc-37b4f0b244cc))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R39") (unit 1)
         )
@@ -14396,7 +14396,7 @@
     (pin "4" (uuid 7c982a8d-3eb0-4089-8f75-ba9def2aba84))
     (pin "8" (uuid 6bb30bc4-1324-4b1d-bac4-4249d048567b))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "U7") (unit 1)
         )
@@ -14421,7 +14421,7 @@
     )
     (pin "1" (uuid c6541381-8477-4bf7-8c3a-3a0bfce9e0b0))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR049") (unit 1)
         )
@@ -14453,7 +14453,7 @@
     (pin "1" (uuid e2fba463-a54e-40c8-837d-b08de56cdace))
     (pin "2" (uuid 455c8dec-6f8d-41f8-bb1a-042667304bcb))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R33") (unit 1)
         )
@@ -14485,7 +14485,7 @@
     (pin "1" (uuid 8d3fcc8c-2d86-4645-b312-921f3cde85ca))
     (pin "2" (uuid 960bce15-6da5-4113-9fb8-5bd9394e2fcb))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R32") (unit 1)
         )
@@ -14615,7 +14615,7 @@
     (pin "98" (uuid ba57f959-a3d5-4f1d-933b-bb2c249b4ece))
     (pin "99" (uuid 48db2e82-2309-4d0f-8e6e-c429ac59efeb))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "U4") (unit 1)
         )
@@ -14642,7 +14642,7 @@
       (effects (font (size 1.27 1.27)) hide)
     )
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "H1") (unit 1)
         )
@@ -14667,7 +14667,7 @@
     )
     (pin "1" (uuid 0959e861-e2be-46bd-b72a-7461e3a73b5b))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR09") (unit 1)
         )
@@ -14699,7 +14699,7 @@
     (pin "1" (uuid b65434a3-be99-4902-ab72-34b984492f34))
     (pin "2" (uuid 5cb533f7-0638-4ebc-ba2a-1c4c2530603d))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "C71") (unit 1)
         )
@@ -14722,7 +14722,7 @@
     (property "Datasheet" "~" (at 186.69 195.58 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "LCSC" "C1523" (at 189.0268 196.9516 0)
+    (property "LCSC" "C307331" (at 189.0268 196.9516 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Checked" "x" (at 186.69 195.58 0)
@@ -14731,7 +14731,7 @@
     (pin "1" (uuid 2d28538f-f182-4878-84a2-f7e6ee133a64))
     (pin "2" (uuid d1710d84-dfb8-4647-952c-cceffde9d533))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "C35") (unit 1)
         )
@@ -14763,7 +14763,7 @@
     (pin "1" (uuid 2e7ede1c-2d85-4650-9c45-9627555248b8))
     (pin "2" (uuid 9dd16d6c-ed49-4c61-af74-4ecd42677003))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "C34") (unit 1)
         )
@@ -14788,7 +14788,7 @@
     )
     (pin "1" (uuid 1f406691-1884-4171-8acd-cf38c54ff583))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR0118") (unit 1)
         )
@@ -14816,7 +14816,7 @@
     )
     (pin "1" (uuid 2ee1167d-a3b0-4b9c-af5c-8dbb72282287))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "TPDEBUG1") (unit 1)
         )
@@ -14841,7 +14841,7 @@
     )
     (pin "1" (uuid 6977b404-d487-4339-bf7d-74e8e03bc21f))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR08") (unit 1)
         )
@@ -14873,7 +14873,7 @@
     (pin "1" (uuid ffff1de4-ebf6-4bb2-b379-2985c5f0e25e))
     (pin "2" (uuid 0babfe91-2d97-4ba3-a87c-51d87b9ab59c))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "C72") (unit 1)
         )
@@ -14903,7 +14903,7 @@
     (pin "T" (uuid 1bfffdfe-a67f-4c78-bd4c-f50cf82b2df3))
     (pin "TN" (uuid 37ade6a8-bea5-4cf8-81ae-1ca9e8e9a986))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "J16") (unit 1)
         )
@@ -14935,7 +14935,7 @@
     (pin "1" (uuid 92339647-dbf4-42f4-aa58-b57dfe77f118))
     (pin "2" (uuid 843c6551-be17-4040-90be-c5a95f263ad9))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R48") (unit 1)
         )
@@ -14967,7 +14967,7 @@
     (pin "1" (uuid 6978430d-9f0b-468a-a1ce-ade742ef4b5f))
     (pin "2" (uuid 287a6011-25f6-4354-a0de-ea613087ce38))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R50") (unit 1)
         )
@@ -14999,7 +14999,7 @@
     (pin "1" (uuid 3f4eafdd-dd63-4ebc-873e-68a444e4d87a))
     (pin "2" (uuid b32ed378-900e-410c-8b12-58a048e48640))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "C48") (unit 1)
         )
@@ -15031,7 +15031,7 @@
     (pin "1" (uuid 939ef32c-5d37-4cfc-ab79-1bb2f3070e83))
     (pin "2" (uuid a9762c13-d0d6-4e0c-b6ed-6006a35519f6))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R54") (unit 1)
         )
@@ -15069,7 +15069,7 @@
     (pin "4" (uuid 96546ee3-360e-4602-9551-abc80b33af85))
     (pin "8" (uuid a9f98f06-1d92-421c-9fd0-c3505964f178))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "U11") (unit 1)
         )
@@ -15107,7 +15107,7 @@
     (pin "4" (uuid e97ff531-08da-416b-9b95-0fb61023ff54))
     (pin "8" (uuid 63a148d6-66c0-43d7-b4e3-402509fcbeaf))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "U11") (unit 2)
         )
@@ -15132,7 +15132,7 @@
     )
     (pin "1" (uuid 3a7ffb8f-9d49-48ea-864e-983c402a82c3))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR056") (unit 1)
         )
@@ -15162,7 +15162,7 @@
     (pin "T" (uuid a3600f4c-fd6a-4e16-becd-745bd57151e4))
     (pin "TN" (uuid 5e9658da-3327-452e-a721-5d75c8989b6c))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "J17") (unit 1)
         )
@@ -15194,7 +15194,7 @@
     (pin "1" (uuid 9cce238f-1b5f-4150-9149-8ef73a1b5c9a))
     (pin "2" (uuid e8e43332-fd33-4bc5-9f3b-d07266b1f704))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R49") (unit 1)
         )
@@ -15226,7 +15226,7 @@
     (pin "1" (uuid bcdf5914-1aae-4802-83a6-7c372bdc2d94))
     (pin "2" (uuid d443d778-c666-43a8-a7a3-77fe1dfa3fca))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R51") (unit 1)
         )
@@ -15258,7 +15258,7 @@
     (pin "1" (uuid 79c75680-fcff-4ac1-a32d-068fa0f841b5))
     (pin "2" (uuid 9fc8e08b-097c-43f8-9b1b-7f97fe82a7f6))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "C49") (unit 1)
         )
@@ -15290,7 +15290,7 @@
     (pin "1" (uuid 5ba0e170-9f70-40c7-9d43-d5d7bec4d60b))
     (pin "2" (uuid 3a9e85ba-7e62-4dce-b183-2d2f2c84ae7c))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R55") (unit 1)
         )
@@ -15315,7 +15315,7 @@
     )
     (pin "1" (uuid 79a1fa4a-6602-4f0b-9af5-4a2270473d78))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR057") (unit 1)
         )
@@ -15347,7 +15347,7 @@
     (pin "1" (uuid 6c4899fd-aed5-427e-abef-23484d7de77e))
     (pin "2" (uuid 562788b7-d421-4c22-9a51-524917c21348))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R36") (unit 1)
         )
@@ -15370,7 +15370,7 @@
     (property "Datasheet" "~" (at 227.33 54.61 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "LCSC" "C1523" (at 224.9932 53.2384 0)
+    (property "LCSC" "C307331" (at 224.9932 53.2384 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Checked" "x" (at 227.33 54.61 0)
@@ -15379,7 +15379,7 @@
     (pin "1" (uuid 8d03f315-10ce-4442-be8e-c99a5534af10))
     (pin "2" (uuid 71b46c2f-497f-403d-a39d-0f4163ec481e))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "C68") (unit 1)
         )
@@ -15402,7 +15402,7 @@
     (property "Datasheet" "~" (at 227.33 62.23 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "LCSC" "C1523" (at 224.9932 60.8584 0)
+    (property "LCSC" "C307331" (at 224.9932 60.8584 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Checked" "x" (at 227.33 62.23 0)
@@ -15411,7 +15411,7 @@
     (pin "1" (uuid f6f6da23-a984-40a1-ac38-284cc2069cc1))
     (pin "2" (uuid af833d80-d344-4f5f-a905-855867726136))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "C70") (unit 1)
         )
@@ -15436,7 +15436,7 @@
     )
     (pin "1" (uuid 0c25dafd-6d8a-46f4-8df5-a80be85e2886))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR07") (unit 1)
         )
@@ -15474,7 +15474,7 @@
     (pin "7" (uuid 58bcd34d-4439-4aad-a6bd-90cb40676658))
     (pin "8" (uuid 652f63d5-a9f9-4ae5-bb4c-6a9ba1a815d8))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "U14") (unit 1)
         )
@@ -15499,7 +15499,7 @@
     )
     (pin "1" (uuid 8791a78c-2379-428b-9d0b-a797aef0c1ad))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR0134") (unit 1)
         )
@@ -15524,7 +15524,7 @@
     )
     (pin "1" (uuid 3c80702c-ae1f-4915-a73f-3fe73814b306))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR0135") (unit 1)
         )
@@ -15549,7 +15549,7 @@
     )
     (pin "1" (uuid 2301c7d7-9fa9-411f-b2e4-c9ffa44d8e59))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR0144") (unit 1)
         )
@@ -15572,7 +15572,7 @@
     (property "Datasheet" "~" (at 243.84 95.25 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "LCSC" "C1523" (at 246.38 88.8492 0)
+    (property "LCSC" "C307331" (at 246.38 88.8492 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Checked" "x" (at 243.84 95.25 0)
@@ -15581,7 +15581,7 @@
     (pin "1" (uuid 9fa049d7-7d9c-4fa6-a9ab-4ddd53b7014c))
     (pin "2" (uuid 9adf4b19-e1c6-476f-aa90-b4d3a06feb05))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "C73") (unit 1)
         )
@@ -15624,7 +15624,7 @@
     (pin "8" (uuid 6b11a795-eb6a-4c11-a999-e07a9be2be0c))
     (pin "9" (uuid 35b9c7d0-c833-4620-9cf5-f2cf40b7eb03))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "J25") (unit 1)
         )
@@ -15649,7 +15649,7 @@
     )
     (pin "1" (uuid e4697997-e259-4324-a53e-64ef9b310d4d))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR023") (unit 1)
         )
@@ -15679,7 +15679,7 @@
     (pin "T" (uuid 51ac3669-7602-43cb-8eaa-2eac22fda0f7))
     (pin "TN" (uuid b2c67ebc-5332-478e-8c81-53723254f3b7))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "J14") (unit 1)
         )
@@ -15711,7 +15711,7 @@
     (pin "1" (uuid 1e30a5b9-23e8-45d4-ac9b-47bba6321af8))
     (pin "2" (uuid 2c3c00db-d310-40fb-8939-d6e3abf488e0))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R45") (unit 1)
         )
@@ -15743,7 +15743,7 @@
     (pin "1" (uuid ae590c32-65c9-4e46-bad3-b2dc1892845b))
     (pin "2" (uuid 511e7807-a38a-479d-a0a3-d1d13f0956db))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R52") (unit 1)
         )
@@ -15781,7 +15781,7 @@
     (pin "4" (uuid c913c872-d45f-447d-a16e-b0c6aac4b9ff))
     (pin "8" (uuid 540e7bbf-9630-4126-adfa-3b2b4dc7e4c7))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "U10") (unit 1)
         )
@@ -15819,7 +15819,7 @@
     (pin "4" (uuid 206ee2e7-36ab-42b8-9173-a1feb91d646b))
     (pin "8" (uuid bcc4f6fb-8a13-43c0-8126-82673981de78))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "U10") (unit 2)
         )
@@ -15844,7 +15844,7 @@
     )
     (pin "1" (uuid 30c0e950-cd07-4da5-96b2-8a49eda4e2f6))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR054") (unit 1)
         )
@@ -15874,7 +15874,7 @@
     (pin "T" (uuid 2bfe505d-b78d-40a9-bf93-048bfe71434c))
     (pin "TN" (uuid de1e5279-0d72-4941-911d-27c28bc8bb24))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "J15") (unit 1)
         )
@@ -15906,7 +15906,7 @@
     (pin "1" (uuid c14de1d4-5312-4350-9977-c1f46d6e121e))
     (pin "2" (uuid 5cd2da24-607c-4053-ba03-669f2b5906d6))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R47") (unit 1)
         )
@@ -15938,7 +15938,7 @@
     (pin "1" (uuid 644700e1-38c5-4b3f-b9ec-85b8c5821998))
     (pin "2" (uuid 7e090847-5d99-4875-9852-61d937e6b70b))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R53") (unit 1)
         )
@@ -15963,7 +15963,7 @@
     )
     (pin "1" (uuid 7fd11f54-4282-4296-818c-887b13ebd7bb))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR055") (unit 1)
         )
@@ -15995,7 +15995,7 @@
     (pin "1" (uuid b42752c8-8751-4ac7-9a8a-23b32daea999))
     (pin "2" (uuid e0fe529a-3755-416b-9f03-311d81188ef4))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "C55") (unit 1)
         )
@@ -16020,7 +16020,7 @@
     )
     (pin "1" (uuid 10c04759-6f46-4bcb-aca8-5736ea8bbc4d))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR052") (unit 1)
         )
@@ -16052,7 +16052,7 @@
     (pin "1" (uuid 76bfbac0-c6f7-48d2-9ac7-e67275022219))
     (pin "2" (uuid 9dd97cd6-0579-43a2-a240-9a78d551faae))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R44") (unit 1)
         )
@@ -16084,7 +16084,7 @@
     (pin "1" (uuid 91c99730-4d69-4134-8b0f-269397cfd14c))
     (pin "2" (uuid 2527e67e-169b-4da6-a8e7-e6bdcbb8a94d))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "C46") (unit 1)
         )
@@ -16116,7 +16116,7 @@
     (pin "1" (uuid 5916c5b3-6ee1-46b1-a55c-b1f704db506d))
     (pin "2" (uuid e7001ad0-c222-44d6-9d74-b58560dd9ade))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R42") (unit 1)
         )
@@ -16148,7 +16148,7 @@
     (pin "1" (uuid dc1b3d38-247e-447e-a893-5786a92c86a8))
     (pin "2" (uuid b7f2ebb2-1250-4445-891c-479d2ed8d7ee))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "C44") (unit 1)
         )
@@ -16176,7 +16176,7 @@
     )
     (pin "1" (uuid 80f3fe7f-e93c-4bca-9f4b-5fd10039e0f1))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "T_JTMS1") (unit 1)
         )
@@ -16204,7 +16204,7 @@
     )
     (pin "1" (uuid 3bc64e8a-f09e-49aa-bab2-d679e76d8525))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "T_JTCK1") (unit 1)
         )
@@ -16232,7 +16232,7 @@
     )
     (pin "1" (uuid 4630c0ed-5c38-44f7-b1eb-bf399947e326))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "T_NRST1") (unit 1)
         )
@@ -16267,7 +16267,7 @@
     (pin "4" (uuid 860b2c45-2ab1-4cf9-bddc-56c5ce35917e))
     (pin "5" (uuid c6837d44-6912-48bc-adc6-fea916e9b2b0))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "U13") (unit 1)
         )
@@ -16299,7 +16299,7 @@
     (pin "1" (uuid a44a2a83-9c71-4f25-ab97-b5b1358d0588))
     (pin "2" (uuid f9f8a924-cecc-44f6-a15b-b5c29b0129c5))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R37") (unit 1)
         )
@@ -16331,7 +16331,7 @@
     (pin "1" (uuid eaea39ca-4a70-4cce-a8a6-18b684af39a6))
     (pin "2" (uuid f299839b-bf49-4fd4-83dc-36c7a8134e41))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R56") (unit 1)
         )
@@ -16363,7 +16363,7 @@
     (pin "1" (uuid 690dd212-f082-466e-88e6-ea3050a26d1b))
     (pin "2" (uuid e4ec414e-6e5e-4c7d-b005-399d8361c44e))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R57") (unit 1)
         )
@@ -16395,7 +16395,7 @@
     (pin "1" (uuid a5a045b7-3bc9-4fa6-b868-814fb63e67fc))
     (pin "2" (uuid c3d6dbc0-57ba-4115-ad59-33b130aa66a2))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "L1") (unit 1)
         )
@@ -16427,7 +16427,7 @@
     (pin "1" (uuid b8b0f31d-50be-4c00-81a4-0ca5a337fe7d))
     (pin "2" (uuid b82eed9d-cafc-4b13-96e3-9b93059b36a6))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R94") (unit 1)
         )
@@ -16459,7 +16459,7 @@
     (pin "1" (uuid 894f95c4-6df8-45fd-b18b-12fd3551f45a))
     (pin "2" (uuid ea6a63c8-3f02-4d37-a877-0286e8a795f1))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R95") (unit 1)
         )
@@ -16482,7 +16482,7 @@
     (property "Datasheet" "~" (at 246.38 128.27 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "LCSC" "C1523" (at 249.301 124.5616 0)
+    (property "LCSC" "C307331" (at 249.301 124.5616 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Checked" "x" (at 246.38 128.27 0)
@@ -16491,7 +16491,7 @@
     (pin "1" (uuid d368ed9b-0dcd-4463-bc3e-27ffa2b10de0))
     (pin "2" (uuid 8dd3db35-42d3-4750-837a-3ad125551f5b))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "C53") (unit 1)
         )
@@ -16523,7 +16523,7 @@
     (pin "1" (uuid 914709e8-3483-4d30-8fbd-36d87b29461a))
     (pin "2" (uuid bd361441-f36d-4985-ab82-779b0ae5127e))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "C54") (unit 1)
         )
@@ -16555,7 +16555,7 @@
     (pin "1" (uuid 39ab426c-456c-4101-b7da-50916695b932))
     (pin "2" (uuid 337b7487-f435-4d0a-8177-143a7e579f70))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "C3") (unit 1)
         )
@@ -16587,7 +16587,7 @@
     (pin "1" (uuid 45a3114c-2685-4e17-92d1-8809d8b33ad4))
     (pin "2" (uuid 2faca88e-654a-47bc-82e3-d7f7e2596109))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R93") (unit 1)
         )
@@ -16616,7 +16616,7 @@
     (pin "1" (uuid 8b9eeaf3-748b-4e46-8d64-7b651318aa58))
     (pin "2" (uuid fc65cb13-54b3-48a7-b451-08ec659467a4))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "JP3") (unit 1)
         )
@@ -16645,7 +16645,7 @@
     (pin "1" (uuid f01c7644-78bd-4915-9f83-4bad6f5f3e42))
     (pin "2" (uuid 4b0c94d9-3f5d-4597-aad9-469a2b9020c6))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "JP4") (unit 1)
         )
@@ -16677,7 +16677,7 @@
     (pin "1" (uuid c085542a-f932-4bb3-b5d5-50bf750338f0))
     (pin "2" (uuid 2b9dc581-e1c4-4fc0-890c-02dd39ce2685))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "C45") (unit 1)
         )
@@ -16709,7 +16709,7 @@
     (pin "1" (uuid 1b4f75c7-f73f-469d-8785-5f18fca9c758))
     (pin "2" (uuid d93727c5-2417-47cc-8241-2ac272340a49))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R43") (unit 1)
         )
@@ -16734,7 +16734,7 @@
     )
     (pin "1" (uuid ebeccba3-b60b-4e35-b951-c8acbc66bcf6))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR0126") (unit 1)
         )
@@ -16766,7 +16766,7 @@
     (pin "1" (uuid b3d5cfe3-eed9-495c-bcb4-526908095ef8))
     (pin "2" (uuid e815ffc8-60b5-45f6-967a-e68ef10b4a09))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R96") (unit 1)
         )
@@ -16791,7 +16791,7 @@
     )
     (pin "1" (uuid 0a618c87-48ed-4d86-a520-28e7a68959fb))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR0146") (unit 1)
         )
@@ -16816,7 +16816,7 @@
     )
     (pin "1" (uuid 43d73353-c908-4219-a432-ddd8f1359b87))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR02") (unit 1)
         )
@@ -16848,7 +16848,7 @@
     (pin "1" (uuid 40a7dcb5-33e3-4da6-b90c-9b7df4fc1341))
     (pin "2" (uuid a6b93280-809d-4875-9aa7-a036820c692f))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "C4") (unit 1)
         )
@@ -16880,7 +16880,7 @@
     (pin "1" (uuid 6c88a289-a2de-4cc9-8a0e-cbd65bb86f47))
     (pin "2" (uuid 545e33e8-2aff-4c5e-9545-79a4f9f84c31))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R46") (unit 1)
         )
@@ -16912,7 +16912,7 @@
     (pin "1" (uuid 2a640925-3e36-4644-8f3e-a93a725d9c80))
     (pin "2" (uuid eac927cb-73f3-4864-bb72-a5d454fbdfde))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "C47") (unit 1)
         )
@@ -16935,7 +16935,7 @@
     (property "Datasheet" "~" (at 269.24 247.65 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "LCSC" "C1523" (at 271.78 241.8334 0)
+    (property "LCSC" "C307331" (at 271.78 241.8334 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Checked" "x" (at 269.24 247.65 0)
@@ -16944,7 +16944,7 @@
     (pin "1" (uuid 62834359-4401-454f-92b0-be90f45c665a))
     (pin "2" (uuid 7c8fc200-864e-4ab6-ac6f-0e917c91149a))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "C57") (unit 1)
         )
@@ -16967,7 +16967,7 @@
     (property "Datasheet" "~" (at 269.24 227.33 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "LCSC" "C1523" (at 271.78 221.5134 0)
+    (property "LCSC" "C307331" (at 271.78 221.5134 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Checked" "x" (at 269.24 227.33 0)
@@ -16976,7 +16976,7 @@
     (pin "1" (uuid b39cae30-594d-4f20-b8c5-68be6be608ab))
     (pin "2" (uuid ccbecaa0-2e37-46a0-9418-dc6702b0e622))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "C56") (unit 1)
         )
@@ -16999,7 +16999,7 @@
     (property "Datasheet" "~" (at 269.24 285.75 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "LCSC" "C1523" (at 271.78 279.9334 0)
+    (property "LCSC" "C307331" (at 271.78 279.9334 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Checked" "x" (at 269.24 285.75 0)
@@ -17008,7 +17008,7 @@
     (pin "1" (uuid a21338b3-a3fa-4c09-85ce-4c5a31669e6a))
     (pin "2" (uuid acc48e33-efca-4dfb-b69e-af84dfde62ea))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "C59") (unit 1)
         )
@@ -17040,7 +17040,7 @@
     (pin "1" (uuid f723a917-5288-48dc-96d8-6505c3e48e14))
     (pin "2" (uuid 2924fd17-8aeb-40cb-a48b-94d878d1befe))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "D2") (unit 1)
         )
@@ -17072,7 +17072,7 @@
     (pin "1" (uuid cdea94fe-9980-45a0-924e-f7864b047e3e))
     (pin "2" (uuid aaabe426-7945-4188-af33-b790bcd62aa6))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "D3") (unit 1)
         )
@@ -17104,7 +17104,7 @@
     (pin "1" (uuid 9a97ab8d-12b0-4f2f-912d-3040c3933d64))
     (pin "2" (uuid 66aa6f93-48b9-413e-8e7c-be9b1ebe531a))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "C67") (unit 1)
         )
@@ -17129,7 +17129,7 @@
     )
     (pin "1" (uuid 3ac55aa9-54b8-4109-a9d0-b0541e104be9))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR011") (unit 1)
         )
@@ -17161,7 +17161,7 @@
     (pin "1" (uuid e9002db7-225b-4aee-b114-9f7ea979ae52))
     (pin "2" (uuid c41d7f0b-e27e-4839-8cea-dc07ee927ac9))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "D5") (unit 1)
         )
@@ -17193,7 +17193,7 @@
     (pin "1" (uuid 25294b35-a2c5-4349-b30a-6d803ff3a7be))
     (pin "2" (uuid 16f1a375-9fb3-48eb-878e-82902d0843fc))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "D6") (unit 1)
         )
@@ -17218,7 +17218,7 @@
     )
     (pin "1" (uuid 75fc6255-3d62-454b-8541-a1293d10ad39))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR0147") (unit 1)
         )
@@ -17241,7 +17241,7 @@
     (property "Datasheet" "~" (at 269.24 275.59 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "LCSC" "C1523" (at 271.78 269.7734 0)
+    (property "LCSC" "C307331" (at 271.78 269.7734 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Checked" "x" (at 269.24 275.59 0)
@@ -17250,7 +17250,7 @@
     (pin "1" (uuid 27f213ac-d233-45b4-9d4b-872ce73875d0))
     (pin "2" (uuid 123dbf01-3d71-4c75-9f59-a10b60fb052a))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "C58") (unit 1)
         )
@@ -17273,7 +17273,7 @@
     (property "Datasheet" "~" (at 208.28 242.57 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "LCSC" "C1523" (at 205.74 236.7534 0)
+    (property "LCSC" "C307331" (at 205.74 236.7534 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Checked" "x" (at 208.28 242.57 0)
@@ -17282,7 +17282,7 @@
     (pin "1" (uuid 69088c88-48e1-42b1-987b-365e23d82442))
     (pin "2" (uuid 4bdd8044-3a3c-414c-88a2-c7940922b377))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "C37") (unit 1)
         )
@@ -17318,7 +17318,7 @@
     (pin "5" (uuid 65a791b8-8c11-4d3d-bfa2-d09809f8007d))
     (pin "6" (uuid 3df3d3d9-93cb-4539-8efa-c7ec557543bd))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "U15") (unit 1)
         )
@@ -17343,7 +17343,7 @@
     )
     (pin "1" (uuid 4d6895a0-32b3-406f-9033-76565aaad1bb))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR031") (unit 1)
         )
@@ -17368,7 +17368,7 @@
     )
     (pin "1" (uuid fae7b4ab-1518-4fbd-a71c-7c63a84ba13f))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR0151") (unit 1)
         )
@@ -17391,7 +17391,7 @@
     (property "Datasheet" "~" (at 72.39 90.17 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "LCSC" "C1523" (at 69.469 91.5416 0)
+    (property "LCSC" "C307331" (at 69.469 91.5416 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Checked" "x" (at 72.39 90.17 0)
@@ -17400,7 +17400,7 @@
     (pin "1" (uuid 6830e910-d7a9-4dd1-b2e1-2370facd321e))
     (pin "2" (uuid 1dd4431c-6de6-4adf-9759-2fbb84df3d83))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "C74") (unit 1)
         )
@@ -17438,7 +17438,7 @@
     (pin "4" (uuid b9d3dbf9-6365-49de-98c9-ec1da1d3088f))
     (pin "8" (uuid 68efcd12-ec30-4437-adf8-4ab5f3aefbc0))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "U11") (unit 3)
         )
@@ -17461,7 +17461,7 @@
     (property "Datasheet" "~" (at 549.91 259.08 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "LCSC" "C1523" (at 546.989 260.4516 0)
+    (property "LCSC" "C307331" (at 546.989 260.4516 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Checked" "x" (at 549.91 259.08 0)
@@ -17470,7 +17470,7 @@
     (pin "1" (uuid 36b6cb6f-f22b-4d69-a094-844c66d3a187))
     (pin "2" (uuid 126fe3b3-1ace-4786-91ed-2dbd99fd9608))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "C51") (unit 1)
         )
@@ -17495,7 +17495,7 @@
     )
     (pin "1" (uuid 23c82910-8433-4374-b55c-83da19fefe0f))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR060") (unit 1)
         )
@@ -17520,7 +17520,7 @@
     )
     (pin "1" (uuid daa4f324-d768-453c-b1a9-81f0246888e2))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR061") (unit 1)
         )
@@ -17558,7 +17558,7 @@
     (pin "4" (uuid a95eb3a8-ac29-4a00-aeb9-fac47b59f11b))
     (pin "8" (uuid a1d788e5-16ef-40d3-b7b4-052f60ee5da4))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "U10") (unit 3)
         )
@@ -17581,7 +17581,7 @@
     (property "Datasheet" "~" (at 551.18 196.85 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "LCSC" "C1523" (at 548.259 198.2216 0)
+    (property "LCSC" "C307331" (at 548.259 198.2216 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Checked" "x" (at 551.18 196.85 0)
@@ -17590,7 +17590,7 @@
     (pin "1" (uuid bc2469fb-2bc4-4788-a147-2d1dec1c5101))
     (pin "2" (uuid 076eac1d-f54c-4257-92e0-212497f00406))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "C50") (unit 1)
         )
@@ -17615,7 +17615,7 @@
     )
     (pin "1" (uuid d1eeb3f4-5c59-4e27-83a8-fb2cb7696848))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR058") (unit 1)
         )
@@ -17640,7 +17640,7 @@
     )
     (pin "1" (uuid 5848f57e-2f45-4466-a983-62aab8ef5a5c))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR059") (unit 1)
         )
@@ -17665,7 +17665,7 @@
     )
     (pin "1" (uuid 223de50b-f7d7-476f-8054-2798e4c69b11))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR05") (unit 1)
         )
@@ -17697,7 +17697,7 @@
     (pin "1" (uuid b6028b8d-b520-44d7-b4ae-006473787fdc))
     (pin "2" (uuid 07bd4023-7d65-4743-a7f6-23a8dd7eed48))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "D1") (unit 1)
         )
@@ -17729,7 +17729,7 @@
     (pin "1" (uuid 40471ecd-1779-4e99-94db-f8c348fccc43))
     (pin "2" (uuid a61d36f8-bf2d-4d6b-a019-47da9f93cd18))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "C65") (unit 1)
         )
@@ -17761,7 +17761,7 @@
     (pin "1" (uuid 4f639379-575d-48ee-8bb3-2c05df491dfb))
     (pin "2" (uuid 3e484aed-72ae-428d-88b0-ee8d82fd216f))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R2") (unit 1)
         )
@@ -17793,7 +17793,7 @@
     (pin "1" (uuid 6939e15a-41ac-43cf-ae68-11dfa0d52cb6))
     (pin "2" (uuid d1ba5f9a-adf5-46ed-8780-875616811185))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R7") (unit 1)
         )
@@ -17825,7 +17825,7 @@
     (pin "1" (uuid 878bb0bf-afcd-46cf-8ed1-dc69e9e57276))
     (pin "2" (uuid aa8a73d6-6790-4aaa-9f9e-c8345368e276))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "C66") (unit 1)
         )
@@ -17848,7 +17848,7 @@
     (property "Datasheet" "~" (at 208.28 285.75 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "LCSC" "C1523" (at 205.74 279.9334 0)
+    (property "LCSC" "C307331" (at 205.74 279.9334 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Checked" "x" (at 208.28 285.75 0)
@@ -17857,7 +17857,7 @@
     (pin "1" (uuid 86c17a4c-3a59-4728-9785-d6e05b0bf87e))
     (pin "2" (uuid 68600a51-fa86-445e-a1ea-83c3298926bb))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "C52") (unit 1)
         )
@@ -17880,7 +17880,7 @@
     (property "Datasheet" "~" (at 208.28 222.25 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "LCSC" "C1523" (at 205.74 216.4334 0)
+    (property "LCSC" "C307331" (at 205.74 216.4334 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Checked" "x" (at 208.28 222.25 0)
@@ -17889,7 +17889,7 @@
     (pin "1" (uuid addd57fa-070c-4da6-b1ce-7545d708f556))
     (pin "2" (uuid 99e4672e-278e-4f75-a510-67ab92a7aec2))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "C36") (unit 1)
         )
@@ -17914,7 +17914,7 @@
     )
     (pin "1" (uuid 6d238e22-f1c2-4245-862f-27e80aba9702))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR0148") (unit 1)
         )
@@ -17946,7 +17946,7 @@
     (pin "1" (uuid ef85cd20-fdd7-4015-8ba5-0eba7bdb7481))
     (pin "2" (uuid 58846178-bd27-4f31-b3f4-bbcb5262c6e5))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "D7") (unit 1)
         )
@@ -17978,7 +17978,7 @@
     (pin "1" (uuid 2e175795-112f-44c3-ad26-3206cb6f72b6))
     (pin "2" (uuid 45033dbc-2484-446b-a2c8-cb08d5a10dd6))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "D8") (unit 1)
         )
@@ -18003,7 +18003,7 @@
     )
     (pin "1" (uuid 1e00fa65-245b-425c-b03f-226f5decdb1e))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR0149") (unit 1)
         )
@@ -18028,7 +18028,7 @@
     )
     (pin "1" (uuid a14ca5d1-3207-4dc1-a6d7-e02576d9c2fa))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR0150") (unit 1)
         )
@@ -18060,7 +18060,7 @@
     (pin "1" (uuid a64603f6-c491-45e3-b22a-eee5bc37c7de))
     (pin "2" (uuid 5faaa96c-96c4-49f5-8861-c15ceec24662))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R41") (unit 1)
         )
@@ -18092,7 +18092,7 @@
     (pin "1" (uuid 85dce08d-15cd-425d-a6d3-ec95d130361d))
     (pin "2" (uuid cf93be0d-e30d-457b-bcae-362c060d8e2e))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R68") (unit 1)
         )
@@ -18124,7 +18124,7 @@
     (pin "1" (uuid 709b13d9-5a40-4b89-b8e7-8ebcf5382169))
     (pin "2" (uuid a0415b35-c7bd-49b3-97df-1df87a717d3d))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R69") (unit 1)
         )
@@ -18156,7 +18156,7 @@
     (pin "1" (uuid 1a397744-24e9-457c-b571-bd28192149ee))
     (pin "2" (uuid 127138e6-c9bd-4388-a9d9-1c3b8a569458))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R70") (unit 1)
         )
@@ -18188,7 +18188,7 @@
     (pin "1" (uuid 1560b5d3-632c-4abd-b60b-dab32da18557))
     (pin "2" (uuid e2790a4e-3d15-405c-b85f-0f286ae92b20))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R71") (unit 1)
         )
@@ -18220,7 +18220,7 @@
     (pin "1" (uuid 72c44508-aeaa-4f08-8532-95dcd47cee8f))
     (pin "2" (uuid f9c724f7-a4ed-4c3f-80b8-3d4b5423bc62))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R72") (unit 1)
         )
@@ -18252,7 +18252,7 @@
     (pin "1" (uuid 3c6327e7-249f-4ca8-8b49-ee5b9926ea34))
     (pin "2" (uuid 95a42a38-92b8-4b89-b254-7b0bf0f53c26))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R73") (unit 1)
         )
@@ -18284,7 +18284,7 @@
     (pin "1" (uuid e9e9a8c6-e1ea-4f99-8a78-85e614c8e769))
     (pin "2" (uuid faa15321-2ef3-4564-8828-ddcad9daec31))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R74") (unit 1)
         )
@@ -18316,7 +18316,7 @@
     (pin "1" (uuid f5964ed7-164d-4c28-af4c-5ecb3f0f1493))
     (pin "2" (uuid 6d360093-21af-4397-b386-b46e9109f0dd))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R97") (unit 1)
         )
@@ -18348,7 +18348,7 @@
     (pin "1" (uuid 848b5e89-50ea-4ce4-8a5c-62beac7fad79))
     (pin "2" (uuid 2ced19d8-4a8a-4f70-b16f-2a11036b72eb))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R100") (unit 1)
         )
@@ -18373,7 +18373,7 @@
     )
     (pin "1" (uuid 95e7d314-1daf-47f0-a704-0c3fa45f7b31))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR012") (unit 1)
         )
@@ -18401,7 +18401,7 @@
     )
     (pin "1" (uuid e34b4760-74a4-4b70-935c-509107e1d5af))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "T_VBUS1") (unit 1)
         )
@@ -18433,7 +18433,7 @@
     (pin "1" (uuid 2562bf26-f92f-4b4b-9842-161a848e6301))
     (pin "2" (uuid 79bc16ec-71c7-46a6-b3d1-0e41785f5256))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R75") (unit 1)
         )
@@ -18465,7 +18465,7 @@
     (pin "1" (uuid 9c341762-aae7-47a0-b22a-8de93cd5daaf))
     (pin "2" (uuid 7ab53f79-a4fb-4583-b3e0-be3e6bf2ba89))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R76") (unit 1)
         )
@@ -18497,7 +18497,7 @@
     (pin "1" (uuid 458ffc6d-77b8-4c9c-9ec9-e4b906f01112))
     (pin "2" (uuid e9c3de5c-23ac-4f9e-bd61-8d8f99e8a333))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R77") (unit 1)
         )
@@ -18529,7 +18529,7 @@
     (pin "1" (uuid 6172a90a-5587-4ee8-8bac-c11e55a65bb2))
     (pin "2" (uuid 255fe9c6-d7d2-4287-9b36-604728b5bd63))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R78") (unit 1)
         )
@@ -18561,7 +18561,7 @@
     (pin "1" (uuid 84f4ed3e-336d-409d-9b76-11f8b8e71404))
     (pin "2" (uuid 406c14ef-32fb-4f4d-86dc-031c5304a89f))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R79") (unit 1)
         )
@@ -18593,7 +18593,7 @@
     (pin "1" (uuid 7d27bcc4-c299-46d9-87cb-e87578ae5556))
     (pin "2" (uuid 44d58058-e049-466d-997c-bad234b80ad2))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R80") (unit 1)
         )
@@ -18625,7 +18625,7 @@
     (pin "1" (uuid b9a01cad-4ba0-4910-83ee-374eecb2a00b))
     (pin "2" (uuid 9af1fe59-8226-4185-bf6f-fe64fb98d8a8))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R81") (unit 1)
         )
@@ -18657,7 +18657,7 @@
     (pin "1" (uuid 2cc0065b-0690-4d16-9c92-4894ff9cb799))
     (pin "2" (uuid f88e0bd5-19ae-4e10-b610-93329e1e9c01))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R82") (unit 1)
         )
@@ -18695,7 +18695,7 @@
     (pin "4" (uuid c32a4714-585d-4a71-9329-be6f38cdce4c))
     (pin "8" (uuid 795e09cc-d069-4093-b492-de6937cfebb1))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "U16") (unit 1)
         )
@@ -18733,7 +18733,7 @@
     (pin "4" (uuid 8d8fa48a-408a-4471-9e27-db869790c531))
     (pin "8" (uuid ecade70c-2b1b-4fd6-ac08-e883ad6bf044))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "U16") (unit 2)
         )
@@ -18765,7 +18765,7 @@
     (pin "1" (uuid 9b465588-dbba-4f98-8071-4787f7dd4f68))
     (pin "2" (uuid c392604d-7177-494b-b6e9-c7f2cedb10ee))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R98") (unit 1)
         )
@@ -18797,7 +18797,7 @@
     (pin "1" (uuid e9cafd94-0437-4f2c-951f-73553807e125))
     (pin "2" (uuid 0492e529-2844-4642-869f-e1a6c69b1492))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R99") (unit 1)
         )
@@ -18822,7 +18822,7 @@
     )
     (pin "1" (uuid 2f807ad8-1815-4a14-a6ae-3708ef619703))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR06") (unit 1)
         )
@@ -18847,7 +18847,7 @@
     )
     (pin "1" (uuid 184221da-9b5b-4895-b73a-f8a58bd358e7))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR0110") (unit 1)
         )
@@ -18879,7 +18879,7 @@
     (pin "1" (uuid 0a4b4d91-b44a-4023-8efa-5e44a7eafb11))
     (pin "2" (uuid 98595016-1a5d-4685-b63a-f6b1bee5d457))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "D9") (unit 1)
         )
@@ -18911,7 +18911,7 @@
     (pin "1" (uuid b23e174f-86b9-4b02-b2b6-fd9289d8d9b7))
     (pin "2" (uuid 97eb902b-cdd8-4ec9-aad3-018cc47f00bd))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R35") (unit 1)
         )
@@ -18943,7 +18943,7 @@
     (pin "1" (uuid 49b4f0d5-4fe9-444e-bdd8-beca9f25f40a))
     (pin "2" (uuid 242ce4a9-0a0c-43cc-b57c-e7e0b1891285))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R40") (unit 1)
         )
@@ -18985,7 +18985,7 @@
     (pin "8" (uuid 2f26773a-c0e8-445e-9352-7b9e4aa8aec2))
     (pin "9" (uuid 0ae54686-a32e-4939-84d1-2ce0cdf13b3c))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "U17") (unit 1)
         )
@@ -19010,7 +19010,7 @@
     )
     (pin "1" (uuid 8c76c162-f36a-4ca8-bea5-4088c68557f9))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR0162") (unit 1)
         )
@@ -19033,7 +19033,7 @@
     (property "Datasheet" "~" (at 431.8 209.55 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "LCSC" "C1523" (at 434.1368 210.9216 0)
+    (property "LCSC" "C307331" (at 434.1368 210.9216 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Checked" "x" (at 431.8 209.55 0)
@@ -19042,7 +19042,7 @@
     (pin "1" (uuid abf6d27b-82e7-4bc3-96c7-40ec060d36ea))
     (pin "2" (uuid 0750fb92-f491-4000-9409-fd9da1d4a614))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "C69") (unit 1)
         )
@@ -19067,7 +19067,7 @@
     )
     (pin "1" (uuid 87b5007e-4ab7-4473-bdbc-ee7bc4743b05))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR0145") (unit 1)
         )
@@ -19099,7 +19099,7 @@
     (pin "1" (uuid f4ed3edb-04dd-4a6d-8c9a-2ae3469a7cfd))
     (pin "2" (uuid 91c5c527-c087-4b26-a63f-72da77c367e2))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R106") (unit 1)
         )
@@ -19131,7 +19131,7 @@
     (pin "1" (uuid 1b1c0ae5-fd51-43e9-8bc5-8d544ba85180))
     (pin "2" (uuid e21cf5cf-b0e8-4c97-8b18-d1373092f79d))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R101") (unit 1)
         )
@@ -19163,7 +19163,7 @@
     (pin "1" (uuid ef28a433-6bde-42dc-b249-c230c9827130))
     (pin "2" (uuid 0380714f-f8cf-40f9-a1a2-2e2c9eb25a97))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "C75") (unit 1)
         )
@@ -19188,7 +19188,7 @@
     )
     (pin "1" (uuid bc03429e-62f8-4b39-91b2-e8c1cd81e101))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR0163") (unit 1)
         )
@@ -19213,7 +19213,7 @@
     )
     (pin "1" (uuid c72824c5-de23-4c7f-9500-8efcc9ddd51a))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR0164") (unit 1)
         )
@@ -19245,7 +19245,7 @@
     (pin "1" (uuid 3c95f586-895a-4ddb-8fa5-fe7100ba98b1))
     (pin "2" (uuid 3bc1daa5-8d13-4aa1-869b-f16a08380719))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "C79") (unit 1)
         )
@@ -19270,7 +19270,7 @@
     )
     (pin "1" (uuid e12d400b-5aaf-4c5a-84ed-63297f9ec0fe))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR0119") (unit 1)
         )
@@ -19295,7 +19295,7 @@
     )
     (pin "1" (uuid f4b00bbb-bc69-4cc7-a54f-7248bca5687b))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR0120") (unit 1)
         )
@@ -19341,7 +19341,7 @@
     (pin "8" (uuid 2ed6a9bb-026f-4e5e-b167-00b84ef7201a))
     (pin "9" (uuid 6e63a572-d2ae-48f0-abcd-2d6d81694d59))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "J13") (unit 1)
         )
@@ -19373,7 +19373,7 @@
     (pin "1" (uuid ea9d5f6f-077c-4226-8597-cb4606d6acf4))
     (pin "2" (uuid 209be220-eab8-4452-81dd-fe992838f3a2))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "D19") (unit 1)
         )
@@ -19405,7 +19405,7 @@
     (pin "1" (uuid dde56700-7f91-43eb-8c79-91dfe774d36e))
     (pin "2" (uuid a967b0df-4178-4925-a4d1-786afd54fc3b))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "D15") (unit 1)
         )
@@ -19430,7 +19430,7 @@
     )
     (pin "1" (uuid ccec990f-7d14-476c-a1e9-be6f5736ed72))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR0121") (unit 1)
         )
@@ -19455,7 +19455,7 @@
     )
     (pin "1" (uuid 9460ee8b-9dc6-4b3c-b284-b494633d0cc5))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR0155") (unit 1)
         )
@@ -19480,7 +19480,7 @@
     )
     (pin "1" (uuid 9dc624cb-afc9-46ed-afc8-6c5c1e00b5df))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR0157") (unit 1)
         )
@@ -19505,7 +19505,7 @@
     )
     (pin "1" (uuid 7b260044-6f5f-468d-84de-b286568a59a1))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR0122") (unit 1)
         )
@@ -19530,7 +19530,7 @@
     )
     (pin "1" (uuid 668ac1d5-f837-48cc-b51d-ed1597d02b49))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR0123") (unit 1)
         )
@@ -19555,7 +19555,7 @@
     )
     (pin "1" (uuid 2d17060c-6532-4939-b27e-0edb7eee0793))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR0124") (unit 1)
         )
@@ -19587,7 +19587,7 @@
     (pin "1" (uuid d18836f4-30a6-4ec1-b9cb-6828b18c7bab))
     (pin "2" (uuid 23a24ff7-4826-41d9-91d2-c107482823f5))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "D14") (unit 1)
         )
@@ -19619,7 +19619,7 @@
     (pin "1" (uuid a0072eac-9c9d-4afc-a4e6-3c072772a2db))
     (pin "2" (uuid 340706cc-58c4-4bcc-a361-2180f8ae1ee2))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "D18") (unit 1)
         )
@@ -19651,7 +19651,7 @@
     (pin "1" (uuid 5b211948-fb35-4098-a3da-2826af9a2efb))
     (pin "2" (uuid 59aad19d-312e-49c3-8ed3-efffce035f62))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R102") (unit 1)
         )
@@ -19683,7 +19683,7 @@
     (pin "1" (uuid 28e1fd05-df87-4d22-a673-2e4465f73c55))
     (pin "2" (uuid 2169fbe1-8fc8-4ce8-8e2e-9c0be746ed8f))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "C76") (unit 1)
         )
@@ -19715,7 +19715,7 @@
     (pin "1" (uuid 59a6493e-055f-4f78-9685-39c0d4d2df7e))
     (pin "2" (uuid d29133cd-1b61-46f2-93b5-61ec1e68a89d))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R28") (unit 1)
         )
@@ -19747,7 +19747,7 @@
     (pin "1" (uuid ae301d0a-1d4d-43f6-9ae2-63a7746341ff))
     (pin "2" (uuid a777ef9e-07e3-45c1-bbab-cff9e44437f8))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R29") (unit 1)
         )
@@ -19772,7 +19772,7 @@
     )
     (pin "1" (uuid 819b8bef-1092-4ddc-8088-b09aab03cb7e))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR0125") (unit 1)
         )
@@ -19818,7 +19818,7 @@
     (pin "8" (uuid d40c774b-ae52-49fb-a91b-158f24cc85a3))
     (pin "9" (uuid cc5a017f-b7e2-4997-93c0-6ea5bb0ca2ba))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "J12") (unit 1)
         )
@@ -19843,7 +19843,7 @@
     )
     (pin "1" (uuid 7a72a2e5-6ffb-4fd2-83fa-fd5eb38b5f7f))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR01") (unit 1)
         )
@@ -19875,7 +19875,7 @@
     (pin "1" (uuid 2a803d02-9251-499a-a953-7df98d5e6e5f))
     (pin "2" (uuid de97d9e2-55c0-430b-a1ac-9c538d03a711))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "D21") (unit 1)
         )
@@ -19907,7 +19907,7 @@
     (pin "1" (uuid 94fc3469-10ad-4939-8cbe-b7475122b338))
     (pin "2" (uuid 19242eb3-fb58-4f84-b88a-f25288d7eb30))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "D17") (unit 1)
         )
@@ -19939,7 +19939,7 @@
     (pin "1" (uuid 360796d4-e73d-44fe-8cbe-b4c344af519e))
     (pin "2" (uuid 4c536947-cc32-4420-9527-ed97393d61ac))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "D16") (unit 1)
         )
@@ -19971,7 +19971,7 @@
     (pin "1" (uuid 48df625c-4ec3-4f88-936e-ff1749fd8278))
     (pin "2" (uuid 21807e4b-bf03-4477-861c-10aa80fa4ba6))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "D20") (unit 1)
         )
@@ -19996,7 +19996,7 @@
     )
     (pin "1" (uuid c2ab8f5d-2370-49f0-8419-72738b34616b))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR0152") (unit 1)
         )
@@ -20021,7 +20021,7 @@
     )
     (pin "1" (uuid 799a1b34-ecb2-4bd9-8432-c2318abb2239))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR0153") (unit 1)
         )
@@ -20046,7 +20046,7 @@
     )
     (pin "1" (uuid 070ca6df-4357-43db-aaf0-abcf7248a689))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR0158") (unit 1)
         )
@@ -20071,7 +20071,7 @@
     )
     (pin "1" (uuid 94e16a29-a96c-47ba-8ad6-e7886941ab12))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR0159") (unit 1)
         )
@@ -20109,7 +20109,7 @@
     (pin "4" (uuid 01182f46-4c77-4963-8d24-bd77e356467c))
     (pin "8" (uuid 80a3237c-2474-4ab2-8cdb-bcdf4f56b771))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "U16") (unit 3)
         )
@@ -20132,7 +20132,7 @@
     (property "Datasheet" "~" (at 175.26 361.95 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "LCSC" "C1523" (at 172.339 363.3216 0)
+    (property "LCSC" "C307331" (at 172.339 363.3216 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Checked" "x" (at 175.26 361.95 0)
@@ -20141,7 +20141,7 @@
     (pin "1" (uuid 65dc5c51-2458-46d4-9dcf-abcd68c13a7c))
     (pin "2" (uuid dff5604c-bd78-4eeb-828b-5ee0daffcaa6))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "C77") (unit 1)
         )
@@ -20166,7 +20166,7 @@
     )
     (pin "1" (uuid 68608330-aaea-41a2-883c-55e69c83606d))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR0160") (unit 1)
         )
@@ -20191,7 +20191,7 @@
     )
     (pin "1" (uuid b0dd0370-84b0-46b6-ab82-6e3aa30324b3))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR0161") (unit 1)
         )
@@ -20216,7 +20216,7 @@
     )
     (pin "1" (uuid 07795ec8-3bc3-4879-9754-a63411383240))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR0101") (unit 1)
         )
@@ -20241,7 +20241,7 @@
     )
     (pin "1" (uuid 67152ab3-70d8-4d9d-8fcd-2f8477b6d953))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR0108") (unit 1)
         )
@@ -20273,7 +20273,7 @@
     (pin "1" (uuid f6732492-d936-4ee4-b847-2b859607e9b6))
     (pin "2" (uuid 0a665f24-fc0e-464d-b027-591467275ec9))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "C26") (unit 1)
         )
@@ -20305,7 +20305,7 @@
     (pin "1" (uuid 5a95454f-9835-4d41-a5ad-6ae7d320652f))
     (pin "2" (uuid 62650728-60a5-40fc-b8de-8037ccb31f86))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "C30") (unit 1)
         )
@@ -20337,7 +20337,7 @@
     (pin "1" (uuid c598442d-2673-4d0f-8db7-d5bc29755c9f))
     (pin "2" (uuid 0c65485d-ce1c-4015-87c1-4cc43f6ff813))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "D4") (unit 1)
         )
@@ -20369,7 +20369,7 @@
     (pin "1" (uuid 012772f7-7200-4d9b-8f19-df546056ca90))
     (pin "2" (uuid 20ccabfb-fe82-4240-b5bc-7882887ae018))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R25") (unit 1)
         )
@@ -20402,7 +20402,7 @@
     (pin "2" (uuid 3d82e751-7a56-484b-914f-b9a8e626dcf5))
     (pin "3" (uuid c2d52ec3-47fa-433f-8897-27a9dacfbff2))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "Q1") (unit 1)
         )
@@ -20434,7 +20434,7 @@
     (pin "1" (uuid bb9f606b-9a84-4ea1-b943-3ddc187f6c46))
     (pin "2" (uuid 63b23531-d674-4563-b57d-187d5de3322e))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R8") (unit 1)
         )
@@ -20459,7 +20459,7 @@
     )
     (pin "1" (uuid b438eade-6f6e-4f26-a049-0f9013f998d3))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR0156") (unit 1)
         )
@@ -20484,7 +20484,7 @@
     )
     (pin "1" (uuid 390a962c-9ece-43cd-bd63-cdad78060430))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR0112") (unit 1)
         )
@@ -20511,7 +20511,7 @@
       (effects (font (size 1.27 1.27)) hide)
     )
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "H4") (unit 1)
         )
@@ -20554,7 +20554,7 @@
     (pin "S1" (uuid c9f7abfc-6a4d-4a31-a6e1-bd0dbfc4e35f))
     (pin "S2" (uuid 37425ede-deff-4e9d-8181-0f6efa74a144))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "MT1") (unit 1)
         )
@@ -20579,7 +20579,7 @@
     )
     (pin "1" (uuid 52d61664-bc36-49ac-9ad4-d421d671dc91))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR0129") (unit 1)
         )
@@ -20604,7 +20604,7 @@
     )
     (pin "1" (uuid 758f1510-1c1e-4009-b063-8f2e7b0f0cda))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR0130") (unit 1)
         )
@@ -20629,7 +20629,7 @@
     )
     (pin "1" (uuid 0bd167ee-5612-490b-be7a-8b9bce116f6e))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR017") (unit 1)
         )
@@ -20654,7 +20654,7 @@
     )
     (pin "1" (uuid 958df0ba-1e9d-45d5-a243-7aac2f437df8))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR0131") (unit 1)
         )
@@ -20679,7 +20679,7 @@
     )
     (pin "1" (uuid be063c82-3005-4007-a45e-908966860d5a))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR0132") (unit 1)
         )
@@ -20704,7 +20704,7 @@
     )
     (pin "1" (uuid ada796de-15eb-47b4-97c7-161fe525be7a))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR0133") (unit 1)
         )
@@ -20736,7 +20736,7 @@
     (pin "1" (uuid b4823857-89d3-4b11-a140-030e8633d4b8))
     (pin "2" (uuid 25df8f5a-0c80-4b5e-9348-70ab23929daa))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "FB1") (unit 1)
         )
@@ -20768,7 +20768,7 @@
     (pin "1" (uuid 328e5ddc-60fc-40c5-9900-8dcfebcc3fa1))
     (pin "2" (uuid 97fff92e-a483-4541-a36d-4a50e9c06b11))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R58") (unit 1)
         )
@@ -20800,7 +20800,7 @@
     (pin "1" (uuid 5e47e3a5-4aa0-4d0d-8c62-a7af1c48eb72))
     (pin "2" (uuid df14850b-c11a-4014-b341-77810034e652))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R59") (unit 1)
         )
@@ -20832,7 +20832,7 @@
     (pin "1" (uuid b10f4080-70ed-4a73-b5fb-bcda499d8a78))
     (pin "2" (uuid c2e9c5fd-f9d6-4002-a708-8cc7ca9f8acb))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R60") (unit 1)
         )
@@ -20864,7 +20864,7 @@
     (pin "1" (uuid 6995c4fc-8221-4ad0-a3ea-9a690b868fec))
     (pin "2" (uuid 0e8761ef-f222-49e2-b73c-3a1f45ed2eae))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R61") (unit 1)
         )
@@ -20896,7 +20896,7 @@
     (pin "1" (uuid 6c279469-28da-4769-915e-79004ec46b7f))
     (pin "2" (uuid 654d7f5c-5abc-4f7b-b0ba-e4f4ec1d49c5))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R62") (unit 1)
         )
@@ -20928,7 +20928,7 @@
     (pin "1" (uuid 83226ee5-ce2c-4605-be1a-753b22e409c6))
     (pin "2" (uuid 498e7619-e23e-49d1-b7d5-5f853f603c5a))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R63") (unit 1)
         )
@@ -20960,7 +20960,7 @@
     (pin "1" (uuid e150a574-27df-4b1f-8908-9a67acc785d2))
     (pin "2" (uuid 925a582e-fade-43e0-ab11-c84b461c25f4))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R64") (unit 1)
         )
@@ -20992,7 +20992,7 @@
     (pin "1" (uuid ceaf0275-e94f-433a-8f2d-9b286f9b3020))
     (pin "2" (uuid 67ded700-b77d-41e5-84fe-f3c9a70c5a3a))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R65") (unit 1)
         )
@@ -21024,7 +21024,7 @@
     (pin "1" (uuid e1930649-ec12-444c-8fd8-eeef52ad4fa7))
     (pin "2" (uuid 3c8fee89-9c56-4c29-a7df-a256433f53af))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R22") (unit 1)
         )
@@ -21049,7 +21049,7 @@
     )
     (pin "1" (uuid 4ebaa8ce-c90d-4f88-8ffa-30d1f63321ab))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR0113") (unit 1)
         )
@@ -21079,7 +21079,7 @@
     (pin "T" (uuid f1c439ca-489d-4386-a6da-adfe2281e92d))
     (pin "TN" (uuid e4b64f04-b9fc-4370-9af8-1bf3de418165))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "J10") (unit 1)
         )
@@ -21109,7 +21109,7 @@
     (pin "T" (uuid fddf072f-97bf-41f5-8007-4cb80a6333db))
     (pin "TN" (uuid 2dccb1a3-4ac9-497a-9563-c1b6e29812d9))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "J11") (unit 1)
         )
@@ -21141,7 +21141,7 @@
     (pin "1" (uuid d33003cb-4004-43c4-9bcc-cd6240a654e9))
     (pin "2" (uuid b8bc46bd-182d-44da-bb06-3c28d3b360ea))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R67") (unit 1)
         )
@@ -21173,7 +21173,7 @@
     (pin "1" (uuid 4c950165-f0cb-4772-a949-6b63cde99f7c))
     (pin "2" (uuid 4f095f9c-8b10-4e89-b1bd-3d20702ca975))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R24") (unit 1)
         )
@@ -21205,7 +21205,7 @@
     (pin "1" (uuid 6f7e3c0b-14d6-4d57-b8e8-949fc5e20435))
     (pin "2" (uuid 0a03617c-cb7e-4d27-bf2c-093121916cbc))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R66") (unit 1)
         )
@@ -21237,7 +21237,7 @@
     (pin "1" (uuid 5888fd6a-3291-48cd-a03e-38887e8820a7))
     (pin "2" (uuid 418c655e-1db5-4531-adef-d3afa8af8e7e))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "C15") (unit 1)
         )
@@ -21268,7 +21268,7 @@
     (pin "3" (uuid 30334fc0-e72b-491a-8a9c-d25fbb90ff1c))
     (pin "4" (uuid 4e78d8d4-71d6-4c4a-af4b-f05a27167a62))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "J20") (unit 1)
         )
@@ -21293,7 +21293,7 @@
     )
     (pin "1" (uuid 24d4fede-f593-437f-88e8-a9900433f96b))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR0136") (unit 1)
         )
@@ -21318,7 +21318,7 @@
     )
     (pin "1" (uuid 599c660a-65cd-4261-91d5-8a4fb8610bf5))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR0137") (unit 1)
         )
@@ -21343,7 +21343,7 @@
     )
     (pin "1" (uuid d51c4824-d3d3-40fb-822a-c64420c9e845))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR0114") (unit 1)
         )
@@ -21368,7 +21368,7 @@
     )
     (pin "1" (uuid 425abefe-c853-4a6e-a298-23d9a28487ea))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR0115") (unit 1)
         )
@@ -21393,7 +21393,7 @@
     )
     (pin "1" (uuid 86be60b7-2e0b-4b76-8037-f8b6dcded603))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR0116") (unit 1)
         )
@@ -21431,7 +21431,7 @@
     (pin "7" (uuid db18da8b-abf8-4263-87aa-c5f74825c9a6))
     (pin "8" (uuid d9b71013-dc82-4278-9818-66f8c1d0836f))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "U12") (unit 1)
         )
@@ -21456,7 +21456,7 @@
     )
     (pin "1" (uuid f6682287-10ad-49c0-ab67-035711d13756))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR0138") (unit 1)
         )
@@ -21481,7 +21481,7 @@
     )
     (pin "1" (uuid af5dfaf0-5d9c-4d8a-a02b-765767338acc))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR0139") (unit 1)
         )
@@ -21506,7 +21506,7 @@
     )
     (pin "1" (uuid 460debd1-70b8-4c32-bc4c-9b10d9e3d08e))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR0140") (unit 1)
         )
@@ -21529,7 +21529,7 @@
     (property "Datasheet" "~" (at 194.31 78.74 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "LCSC" "C1523" (at 196.85 72.3392 0)
+    (property "LCSC" "C307331" (at 196.85 72.3392 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Checked" "x" (at 194.31 78.74 0)
@@ -21538,7 +21538,7 @@
     (pin "1" (uuid 488e6851-eeec-4e43-a889-929b6337993c))
     (pin "2" (uuid de9071f3-615c-475c-af83-f47e791ea6cb))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "C16") (unit 1)
         )
@@ -21563,7 +21563,7 @@
     )
     (pin "1" (uuid 470635af-b19b-46af-95c9-42bc80001aae))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#FLG0101") (unit 1)
         )
@@ -21588,7 +21588,7 @@
     )
     (pin "1" (uuid 4fc0fdfa-05f3-4adb-b63a-12b7080c2c12))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#FLG0102") (unit 1)
         )
@@ -21613,7 +21613,7 @@
     )
     (pin "1" (uuid ba4387a3-1b86-4825-a6c9-bcb17ba26229))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR0141") (unit 1)
         )
@@ -21638,7 +21638,7 @@
     )
     (pin "1" (uuid 9e798c94-d771-4746-81f9-90c88cbf955d))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR0142") (unit 1)
         )
@@ -21663,7 +21663,7 @@
     )
     (pin "1" (uuid 53b417bc-e097-4817-8343-f3d933684461))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR0143") (unit 1)
         )
@@ -21688,7 +21688,7 @@
     )
     (pin "1" (uuid fc8d468b-7364-491a-9f62-1dddb0f2a389))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#FLG0104") (unit 1)
         )
@@ -21715,7 +21715,7 @@
       (effects (font (size 1.27 1.27)) hide)
     )
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "H2") (unit 1)
         )
@@ -21753,7 +21753,7 @@
           (reference "J1") (unit 1)
         )
       )
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "J31") (unit 1)
         )
@@ -21796,7 +21796,7 @@
           (reference "U1") (unit 1)
         )
       )
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "U21") (unit 1)
         )
@@ -21821,7 +21821,7 @@
     )
     (pin "1" (uuid a5ffb364-d9a6-44ba-9495-d803863d61ee))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR029") (unit 1)
         )
@@ -21853,7 +21853,7 @@
     (pin "1" (uuid a10659e8-8846-4fc1-9a8d-59b03d1d9ee4))
     (pin "2" (uuid 1fa3ea23-bb9d-4af9-875c-424ea6e685fa))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R103") (unit 1)
         )
@@ -21885,7 +21885,7 @@
     (pin "1" (uuid ebb39dde-f380-4ffb-a111-3ada7e8ad15d))
     (pin "2" (uuid a30b589b-ba9a-48d1-9b83-edd291f747e9))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "D23") (unit 1)
         )
@@ -21923,7 +21923,7 @@
     (pin "4" (uuid 5120ae80-13f5-4f7c-9634-8938772cae00))
     (pin "8" (uuid ac1321a0-19ef-4431-8ec9-592d67715caf))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "U18") (unit 1)
         )
@@ -21960,7 +21960,7 @@
           (reference "R6") (unit 1)
         )
       )
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R111") (unit 1)
         )
@@ -21992,7 +21992,7 @@
     (pin "1" (uuid 32f7723c-5c0a-471a-a6eb-260aa8ff9611))
     (pin "2" (uuid c1beac05-023b-407d-939d-5d24a8788ab9))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R104") (unit 1)
         )
@@ -22029,7 +22029,7 @@
           (reference "R2") (unit 1)
         )
       )
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R113") (unit 1)
         )
@@ -22054,7 +22054,7 @@
     )
     (pin "1" (uuid caefde72-7862-4c56-ad3c-3b7419910da3))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR067") (unit 1)
         )
@@ -22091,7 +22091,7 @@
           (reference "R1") (unit 1)
         )
       )
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R110") (unit 1)
         )
@@ -22129,7 +22129,7 @@
           (reference "J1") (unit 1)
         )
       )
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "J28") (unit 1)
         )
@@ -22161,7 +22161,7 @@
     (pin "1" (uuid 3004942f-dfab-4052-b729-77e3d54f5e10))
     (pin "2" (uuid 1fb989de-9cd2-4e93-840c-edf149ba4d68))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "D10") (unit 1)
         )
@@ -22193,7 +22193,7 @@
     (pin "1" (uuid d67af700-9762-4a60-bb63-be075da470fd))
     (pin "2" (uuid 63c09824-4ef5-4d92-b4a3-e30449f5fc9c))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R114") (unit 1)
         )
@@ -22225,7 +22225,7 @@
     (pin "1" (uuid 0595190a-e7e8-415f-9e98-64ed29d923f0))
     (pin "2" (uuid 2ce459e9-85b0-4077-ac09-12023738806d))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "D12") (unit 1)
         )
@@ -22250,7 +22250,7 @@
     )
     (pin "1" (uuid e0c570cc-9e45-467d-a127-322fa710d9d6))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR051") (unit 1)
         )
@@ -22287,7 +22287,7 @@
           (reference "R3") (unit 1)
         )
       )
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R107") (unit 1)
         )
@@ -22319,7 +22319,7 @@
     (pin "1" (uuid 6fdb8036-f350-45d5-aad5-6ab5d87b1e48))
     (pin "2" (uuid 8dde1567-eafa-4217-9baf-e8aabffa1fa5))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R6") (unit 1)
         )
@@ -22344,7 +22344,7 @@
     )
     (pin "1" (uuid 2330e9c6-e787-4fcf-91bc-f1b7b7fe459f))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR069") (unit 1)
         )
@@ -22382,7 +22382,7 @@
           (reference "J1") (unit 1)
         )
       )
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "J32") (unit 1)
         )
@@ -22405,7 +22405,7 @@
     (property "Datasheet" "" (at 464.82 44.704 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "LCSC" "C1523" (at 464.82 44.704 0)
+    (property "LCSC" "C307331" (at 464.82 44.704 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Checked" "x" (at 464.82 44.704 0)
@@ -22419,7 +22419,7 @@
           (reference "C2") (unit 1)
         )
       )
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "C81") (unit 1)
         )
@@ -22457,7 +22457,7 @@
           (reference "J1") (unit 1)
         )
       )
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "J33") (unit 1)
         )
@@ -22482,7 +22482,7 @@
     )
     (pin "1" (uuid e3bab5aa-e0ce-45fb-a55a-9c4bca668c07))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR063") (unit 1)
         )
@@ -22514,7 +22514,7 @@
     (pin "1" (uuid 3c676fb7-b9ab-4d82-b5fd-123ecb688f86))
     (pin "2" (uuid 56d8fde5-5b58-4b05-9905-feed05b4637a))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "D11") (unit 1)
         )
@@ -22544,7 +22544,7 @@
           (reference "#GND01") (unit 1)
         )
       )
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#GND01") (unit 1)
         )
@@ -22581,7 +22581,7 @@
           (reference "R4") (unit 1)
         )
       )
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R108") (unit 1)
         )
@@ -22606,7 +22606,7 @@
     )
     (pin "1" (uuid a7c0b138-b29f-4970-8698-327ae1e653df))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR062") (unit 1)
         )
@@ -22661,7 +22661,7 @@
     (pin "S3" (uuid 4bc57151-d6bd-4ff6-b291-b40ff958e95c))
     (pin "S4" (uuid ff57a8c0-8c46-4b16-ad49-b0801621a814))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "U19") (unit 1)
         )
@@ -22686,7 +22686,7 @@
     )
     (pin "1" (uuid 07a2bd60-2d4f-4449-9a59-d386361110f8))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR065") (unit 1)
         )
@@ -22718,7 +22718,7 @@
     (pin "1" (uuid 45202d1e-23db-4ddf-9544-209a861fa6ab))
     (pin "2" (uuid 6b8f2263-9133-46ec-b9ef-b4a5ce68ff6a))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R105") (unit 1)
         )
@@ -22756,7 +22756,7 @@
     (pin "4" (uuid 1c238314-20db-42cd-9f45-7716451ef1dc))
     (pin "8" (uuid c92708df-9cb2-4bda-9e17-db26f08c160b))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "U18") (unit 3)
         )
@@ -22781,7 +22781,7 @@
     )
     (pin "1" (uuid ecb992c2-4933-4dbc-b4d2-a353b51f268c))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR068") (unit 1)
         )
@@ -22806,7 +22806,7 @@
     )
     (pin "1" (uuid 764639bb-63a6-4cf5-93a8-27a6f6b8ce86))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR053") (unit 1)
         )
@@ -22843,7 +22843,7 @@
           (reference "R5") (unit 1)
         )
       )
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R109") (unit 1)
         )
@@ -22881,7 +22881,7 @@
           (reference "J2") (unit 1)
         )
       )
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "J30") (unit 1)
         )
@@ -22906,7 +22906,7 @@
     )
     (pin "1" (uuid 0929e56c-3a92-4125-87ad-3597a1c9fdde))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR048") (unit 1)
         )
@@ -22931,7 +22931,7 @@
     )
     (pin "1" (uuid 3c085a54-f68a-4e15-883e-cfb4850b61b7))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR066") (unit 1)
         )
@@ -22956,7 +22956,7 @@
     )
     (pin "1" (uuid a55f0338-663a-4cbc-8d1c-a50922cbc504))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR070") (unit 1)
         )
@@ -22988,7 +22988,7 @@
     (pin "1" (uuid bd00ae15-d017-4317-a717-a3af72e86fe4))
     (pin "2" (uuid 4717a1a3-f080-470d-ab3d-93b351cb3d54))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R115") (unit 1)
         )
@@ -23020,7 +23020,7 @@
     (pin "1" (uuid 06484dbf-2ebb-4364-a836-a76141530770))
     (pin "2" (uuid 4a6e5416-93bc-4dc2-9281-fbd27d15fe99))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R23") (unit 1)
         )
@@ -23045,7 +23045,7 @@
     )
     (pin "1" (uuid 8f5960d6-6826-4429-af49-743b6b0f12e5))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#GND0101") (unit 1)
         )
@@ -23070,7 +23070,7 @@
     )
     (pin "1" (uuid 47709b04-c011-4744-8a6d-336ea8911722))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR050") (unit 1)
         )
@@ -23102,7 +23102,7 @@
     (pin "1" (uuid db1aaaf1-ba08-46d5-8fc1-601c0576fb72))
     (pin "2" (uuid 47367a85-6e29-408b-b12b-dd2e5ff2da89))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R116") (unit 1)
         )
@@ -23157,7 +23157,7 @@
     (pin "S3" (uuid 87beede8-715b-417d-b67f-491615be0548))
     (pin "S4" (uuid 3f5aad19-6561-49d8-9eaa-831687ac1a6f))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "U20") (unit 1)
         )
@@ -23182,7 +23182,7 @@
     )
     (pin "1" (uuid 7af3c7aa-f75a-480a-b473-71fface935b3))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR028") (unit 1)
         )
@@ -23205,7 +23205,7 @@
     (property "Datasheet" "~" (at 21.59 321.31 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "LCSC" "C1523" (at 18.669 322.6816 0)
+    (property "LCSC" "C307331" (at 18.669 322.6816 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Checked" "x" (at 21.59 321.31 0)
@@ -23214,7 +23214,7 @@
     (pin "1" (uuid b8cbcc4a-2697-4e45-b764-4a24e1bee748))
     (pin "2" (uuid 2d6112ef-01a5-4d18-b9b9-dfeeb0eabf87))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "C78") (unit 1)
         )
@@ -23252,7 +23252,7 @@
     (pin "4" (uuid 0a33e102-ea72-4ade-99e1-9dca8e144330))
     (pin "8" (uuid 7f4ae825-6ccd-4d94-8405-a6ae561202c5))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "U18") (unit 2)
         )
@@ -23277,7 +23277,7 @@
     )
     (pin "1" (uuid 19a6dc71-927b-42f6-83d6-d0a02686dcac))
     (instances
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "#PWR064") (unit 1)
         )
@@ -23315,7 +23315,7 @@
           (reference "J1") (unit 1)
         )
       )
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "J29") (unit 1)
         )
@@ -23352,7 +23352,7 @@
           (reference "R7") (unit 1)
         )
       )
-      (project "plinkyblack_hwmidi"
+      (project "plinkyblack_hwmidi_jacks"
         (path "/ef2ce33d-e8d1-4385-ac21-1d64192e0332"
           (reference "R112") (unit 1)
         )
