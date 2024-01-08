@@ -2652,6 +2652,12 @@ void test_jig(void) {
 				oled_flip(vrambuf);
 				for (int ch=0;ch<ADC_CHANS;++ch)
 					tot[ch] /= ADC_SAMPLES * NUMITER;
+
+					DebugLog("-----\nmux = %d lohi = %d\n", mux, lohi);
+					for (int ch=0;ch<ADC_CHANS;++ch) {
+						DebugLog("adc ch reads %d\n",tot[ch]);
+					}
+					DebugLog("-----\n");
 				switch(mux) {
 				case 0:
 					for (int ch=0;ch<ADC_CHANS;++ch) {

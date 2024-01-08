@@ -18,3 +18,74 @@ hw/plinkyblackfront/.DS_Store
 hw/testjig/testjig-Edge_Cuts.svg
 hw/testjig/testjig-F_Cu.svg
 sw/.DS_Store
+hw/.DS_Store
+hw/.DS_Store
+hw/plinkyblack_hwmidi_jacks/plinkyblack_hwmidi_jacks-backups/plinkyblack_hwmidi_jacks-2023-10-27_102829.zip
+hw/plinkyblack_hwmidi_jacks/plinkyblack_hwmidi_jacks-backups/plinkyblack_hwmidi_jacks-2023-10-27_103410.zip
+hw/plinkyblack_hwmidi_jacks/plinkyblack_hwmidi_jacks-backups/plinkyblack_hwmidi_jacks-2023-12-03_145624.zip
+hw/plinkyblack_hwmidi_jacks/plinkyblack_hwmidi_jacks-backups/plinkyblack_hwmidi_jacks-2023-12-05_151958.zip
+hw/plinkyblack_hwmidi_jacks/plinkyblack_hwmidi_jacks-backups/plinkyblack_hwmidi_jacks-2023-12-05_152614.zip
+hw/plinkyblack_hwmidi_jacks/plinkyblack_hwmidi_jacks-backups/plinkyblack_hwmidi_jacks-2023-12-05_153142.zip
+hw/plinkyblack_hwmidi_jacks/plinkyblack_hwmidi_jacks-backups/plinkyblack_hwmidi_jacks-2023-12-05_154815.zip
+hw/plinkyblack_hwmidi_jacks/plinkyblack_hwmidi_jacks-backups/plinkyblack_hwmidi_jacks-2023-12-05_163018.zip
+hw/plinkyblack_hwmidi_jacks/plinkyblack_hwmidi_jacks-backups/plinkyblack_hwmidi_jacks-2023-12-06_125109.zip
+hw/plinkyblack_hwmidi_jacks/plinkyblack_hwmidi_jacks-backups/plinkyblack_hwmidi_jacks-2023-12-21_125128.zip
+hw/plinkyblack_hwmidi_jacks/plinkyblack_hwmidi_jacks-backups/plinkyblack_hwmidi_jacks-2023-12-22_094741.zip
+hw/plinkyblack_hwmidi_jacks/plinkyblack_hwmidi_jacks-backups/plinkyblack_hwmidi_jacks-2023-12-22_095308.zip
+hw/plinkyblack_hwmidi_jacks/plinkyblack_hwmidi_jacks-backups/plinkyblack_hwmidi_jacks-2023-12-22_111537.zip
+hw/plinkyblack_hwmidi_jacks/plinkyblack_hwmidi_jacks-backups/plinkyblack_hwmidi_jacks-2023-12-22_112553.zip
+hw/plinkyblack_hwmidi_jacks/plinkyblack_hwmidi_jacks-backups/plinkyblack_hwmidi_jacks-2023-12-22_123531.zip
+hw/plinkyblack_hwmidi_jacks/plinkyblack_hwmidi_jacks-backups/plinkyblack_hwmidi_jacks-2023-12-23_155856.zip
+hw/plinkyblack_hwmidi_jacks/plinkyblack_hwmidi_jacks-backups/plinkyblack_hwmidi_jacks-2023-12-23_160441.zip
+hw/plinkyblack_hwmidi_jacks/plinkyblack_hwmidi_jacks-backups/plinkyblack_hwmidi_jacks-2024-01-06_160639.zip
+hw/plinkyblack_hwmidi_jacks/plinkyblack_hwmidi_jacks-backups/plinkyblack_hwmidi_jacks-2024-01-06_174158.zip
+hw/plinkyblack_hwmidi_jacks/plinkyblack_hwmidi_jacks-backups/plinkyblack_hwmidi_jacks-2024-01-06_175222.zip
+hw/plinkyblack_hwmidi_jacks/plinkyblack_hwmidi_jacks-backups/plinkyblack_hwmidi_jacks-2024-01-06_180649.zip
+hw/plinkyblack_hwmidi_jacks/plinkyblack_hwmidi_jacks-backups/plinkyblack_hwmidi_jacks-2024-01-06_191655.zip
+hw/plinkyblack_hwmidi_jacks/plinkyblack_hwmidi_jacks-backups/plinkyblack_hwmidi_jacks-2024-01-06_203945.zip
+sw/.DS_Store
+sw/.settings/com.st.stm32cube.ide.mcu.sfr.prefs
+sw/.settings/com.st.stm32cube.ide.mcu.sfrview.prefs
+sw/.settings/language.settings.xml
+sw/.settings/org.eclipse.cdt.core.prefs
+sw/Core/Src/main.c
+sw/Core/Src/plinky.c
+sw/plinkyblack Debug.cfg
+sw/plinkyblack Debug.launch
+sw/plinkyblack Release (1).launch
+sw/plinkyblack Release.cfg
+sw/plinkyblack Release.launch
+hw/testjig/testjig-backups/testjig-2024-01-06_160318.zip
+hw/testjig/testjig-backups/testjig-2024-01-06_161953.zip
+hw/testjig/testjig-backups/testjig-2024-01-06_162501.zip
+hw/testjig/testjig-backups/testjig-2024-01-06_164153.zip
+hw/testjig/testjig-backups/testjig-2024-01-06_172039.zip
+hw/testjig/testjig-backups/testjig-2024-01-06_173151.zip
+hw/v2/plinkyblack-backups/plinkyblack-2024-01-06_153502.zip
+hw/v2/plinkyblack-backups/plinkyblack-2024-01-06_160323.zip
+hw/v2/plinkyblack-backups/plinkyblack-2024-01-06_174824.zip
+hw/v2/plinkyblack-backups/plinkyblack-2024-01-06_175336.zip
+hw/v2/plinkyblack.kicad_prl
+hw/v2/plinkyblack.kicad_pro
+hw/v2/plinkyblack.kicad_sch
+sw/.DS_Store
+sw/.settings/language.settings.xml
+sw/.settings/org.eclipse.cdt.core.prefs
+sw/Core/Src/main.c
+sw/Core/Src/plinky.c
+sw/plinkyblack Debug.cfg
+sw/plinkyblack Debug.launch
+sw/plinkyblack Release (1).launch
+sw/plinkyblack Release.launch
+hw/.DS_Store
+hw/v2/plinkyblack.kicad_prl
+hw/v2/plinkyblack.kicad_pro
+sw/.DS_Store
+sw/.settings/language.settings.xml
+sw/.settings/org.eclipse.cdt.core.prefs
+sw/Core/Src/main.c
+sw/Core/Src/plinky.c
+sw/plinkyblack Debug.cfg
+sw/plinkyblack Debug.launch
+sw/plinkyblack Release (1).launch
+sw/plinkyblack Release.launch
