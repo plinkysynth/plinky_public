@@ -48,7 +48,13 @@
           "min_clearance": 0.508
         }
       },
-      "diff_pair_dimensions": [],
+      "diff_pair_dimensions": [
+        {
+          "gap": 0.0,
+          "via_gap": 0.0,
+          "width": 0.0
+        }
+      ],
       "drc_exclusions": [
         "starved_thermal|130810000|29210000|00000000-0000-0000-0000-00005fa6416a|c11f24cb-acfc-48e6-b2b7-4408fe0c3c61|B.Cu",
         "starved_thermal|130810000|29210000|00000000-0000-0000-0000-00005fa6416d|c11f24cb-acfc-48e6-b2b7-4408fe0c3c61|F.Cu",
@@ -180,7 +186,12 @@
         0.4572,
         0.6096
       ],
-      "via_dimensions": [],
+      "via_dimensions": [
+        {
+          "diameter": 0.0,
+          "drill": 0.0
+        }
+      ],
       "zones_allow_external_fillets": false
     },
     "layer_presets": [],
