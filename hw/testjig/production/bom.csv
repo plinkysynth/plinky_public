@@ -1,20 +1,12 @@
 Designator,Footprint,Quantity,Value,LCSC Part #
-C1,0603,1,100n,
-"D1, D2, D3, D4, D5, D7",0603,6,LED,
-D6,LED_RGB_1210_reverse,1,LED_RABG,
-"J1, J43",PinSocket_2x08_P2.54mm_Vertical,2,Conn_02x08_Odd_Even,
-"J10, J11, J12, J13, J14, J15, J16, J17, J18, J19, J2, J21, J22, J23, J24, J25, J26, J27, J28, J29, J3, J30, J31, J32, J33, J34, J35, J36, J37, J38, J39, J4, J40, J41, J42, J49, J5, J50, J6, J7, J8, J9",PinHeader_1x01_P2.54mm_Vertical,42,Conn_01x01,
-"J20, J46, J52",PinSocket_1x04_P2.54mm_Vertical,3,Conn_01x04_Female,
-J44,USB_Micro-B_Molex-105017-0001,1,USB_B_Micro,
-J45,PinHeader_2x07_P1.27mm_Vertical_SMD,1,Conn_02x07_Odd_Even,
-J47,PinSocket_1x06_P2.54mm_Vertical,1,Conn_01x06_Female,
-J48,PinSocket_1x02_P2.54mm_Vertical,1,Conn_01x02_Female,
-J51,CUI_SJ1-3523N,1,SJ1-3523N-cap,
-LOGO,plinkylogo,1,LOGO,
-"R1, R11, R13, R2",0603,4,10k,
-"R10, R12, R7, R8, R9",0603,5,100,
-"R14, R5, R6",0603,3,1k,
-"R3, R4",0603,2,220,
-"SW1, SW2",dpdt 7mm,2,SW_Push_DPDT,
-"TP1, TP2, TP3, TP4, TP5, TP6",TestPoint_Pad_2.5x2.5mm,6,TestPoint,
-U1,SOIC-24W_7.5x15.4mm_P1.27mm,1,CD74HC4067M,
+C1,603,1,100n,C14663 
+"D1, D2, D3, D4, D5, D7",603,6,LED,C72038 
+D8,LED_RGB_1210_reverse,1,LED_RABG,C264508
+J44,USB_Micro-B_Molex-105017-0001,1,USB_B_Micro,C136000
+J45,PinHeader_2x07_P1.27mm_Vertical_SMD,1,Conn_02x07_Odd_Even,C5160763 
+J53,CUI_SJ1-3523N,1,SJ1-3523N-cap,C18594
+"R1, R11, R13, R2",603,4,10k,C25804 
+"R10, R12, R7, R8, R9",603,5,100,C22775 
+"R14, R5, R6",603,3,1k,C21190
+"R3, R4",603,2,220,C22962
+U1,SOIC-24W_7.5x15.4mm_P1.27mm,1,CD74HC4067M,C2992617 

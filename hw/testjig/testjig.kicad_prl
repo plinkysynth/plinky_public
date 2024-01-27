@@ -34,14 +34,12 @@
       3,
       4,
       5,
-      6,
-      7,
       8,
       9,
       10,
       11,
+      12,
       13,
-      14,
       15,
       16,
       17,
@@ -66,11 +64,11 @@
       39,
       40
     ],
-    "visible_layers": "ffff7ff_ffffffff",
-    "zone_display_mode": 0
+    "visible_layers": "ffcffff_ffffffff",
+    "zone_display_mode": 1
   },
   "meta": {
-    "filename": "testjig.kicad_prl",
+    "filename": "testjig_002.kicad_prl",
     "version": 3
   },
   "project": {
