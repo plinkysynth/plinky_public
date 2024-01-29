@@ -62,9 +62,9 @@
     (solder_mask_margin 0.1016) (thermal_bridge_angle 45) (tstamp ec298a39-e719-4098-b72f-7594b472d206))
   (pad "4" smd rect (at 0 3.75) (size 1.5 3.5) (layers "F.Cu" "F.Paste" "F.Mask")
     (solder_mask_margin 0.1016) (thermal_bridge_angle 45) (tstamp 5dae15cc-dff2-41ac-af78-3b0aea7df182))
-  (model "/Users/nevetsokyeron/Documents/KiCad/7.0/3dmodels/MyLibrary/PJ-320B.step"
-    (offset (xyz 3 0 0))
+  (model "${KIPRJMOD}/models/PJ-320B.step"
+    (offset (xyz 2 0 0))
     (scale (xyz 1 1 1))
-    (rotate (xyz -90 0 -180))
+    (rotate (xyz 0 0 0))
   )
 )
