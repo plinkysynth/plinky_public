@@ -1,0 +1,57 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "openOCDLaunchCommands": [
+        "adapter speed 50"
+        ],
+        "cwd": "${workspaceFolder}",
+        "executable": "${command:cmake.launchTargetPath}",
+        "name": "JTAG DEBUGGING ",
+        "request": "launch",
+        "type": "cortex-debug",
+        "servertype": "openocd",
+        // "gdbTarget": "localhost:3333",
+        // "armToolchainPath": "",
+        "interface": "swd",
+        "svdFile": "${command:vscode-embedded.st.svd}/STM32L476.svd",
+        "configFiles": [
+            "interface/stlink.cfg",
+            "target/stm32l4x.cfg"
+        ],
+
+        // /opt/homebrew/bin/openocd
+        
+        "debuggerArgs": [
+            // "-d",
+            // "${workspaceRoot}\Desktop\DaisyExamples\pod\MultiEffectBlink\"
+          ],
+        "preRestartCommands": [
+            "load",
+            "enable breakpoint",
+            "monitor reset"
+        ],
+        // "showDevDebugOutput": true,
+
+   }
+]
+
+
+// "configurations": [
+  //   {
+  //       "name": "Launch",
+  //       "cwd": "${workspaceFolder}",
+  //       // "executable": "./build/debug/build/plinkyblack.elf",
+  //       "executable": "${command:cmake.launchTargetPath}",
+  //       "request": "launch",
+  //       "type": "cortex-debug",
+  //       "runToEntryPoint": "main",
+  //       "servertype": "stlink",
+      
+  //           // Connect to an already running OpenOCD instance
+  //           "gdbTarget": "localhost:3333",
+
+	//         "svdPath": "${command:vscode-embedded.st.svd}/STM32L476.svd"
+  //   }
+  // ]
+}
