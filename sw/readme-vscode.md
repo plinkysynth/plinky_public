@@ -23,3 +23,4 @@ Edit `settings.json`:
 
 
 
+May need to have STM32CubeIDE installed. ??

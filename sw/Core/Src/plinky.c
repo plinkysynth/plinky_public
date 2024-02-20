@@ -1615,6 +1615,8 @@ void processmidimsg(u8 msg, u8 d1, u8 d2) {
 					rampreset.flags = rampreset.flags & ~FLAGS_LATCH;
 				}
 				ShowMessage(F_32_BOLD, ((rampreset.flags & FLAGS_LATCH)) ? "latch on" : "latch off", 0);
+				if (!((rampreset.flags & FLAGS_LATCH)))
+					clearlatch();
 			}
 
 		}
