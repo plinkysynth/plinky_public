@@ -72,9 +72,14 @@
   (pad "S" thru_hole rect (at 0 0 180) (size 1.93 1.83) (drill 1.016) (layers "*.Cu" "*.Mask") (tstamp 9aecf29c-5eaf-4aa5-9539-e60f5c9f024a))
   (pad "T" thru_hole circle (at 0 11.4 180) (size 2.13 2.13) (drill 1.016) (layers "*.Cu" "*.Mask") (tstamp 94065107-813a-46c6-9976-f4a7d43882d8))
   (pad "TN" thru_hole circle (at 0 3.1 180) (size 2.13 2.13) (drill 1.016) (layers "*.Cu" "*.Mask") (tstamp bb4d5c33-5b8f-43cd-8426-b46ac06d13b7))
-  (model "${KIPRJMOD}/models/PJ301M-12.step"
+  (model "${KIPRJMOD}/models/PJ301M-12.step" hide
     (offset (xyz 0 -6.5 0))
     (scale (xyz 1 1 1))
     (rotate (xyz 0 0 180))
+  )
+  (model "${KIPRJMOD}/models/PJ398SM_Hex_nut.step"
+    (offset (xyz 0 -6.5 0))
+    (scale (xyz 1 1 1))
+    (rotate (xyz 0 0 -180))
   )
 )

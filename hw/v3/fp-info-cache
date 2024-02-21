@@ -1,4 +1,4 @@
-23142665261639295
+23246825200302763
 AudioJacks
 Jack_3.5mm_Cliff_FCR1281_Horizontal
 
@@ -59724,6 +59724,13 @@ THT
 4
 2
 Jumper
+SolderJumper-2_Open_TrianglePad_0.5x1mm
+SMD Solder Jumper, 1x1.5mm Triangular Pads, 0.3mm gap, open
+solder jumper open
+0
+2
+2
+Jumper
 SolderJumper-2_P1.3mm_Bridged2Bar_Pad1.0x1.5mm
 SMD Solder Jumper, 1x1.5mm Pads, 0.3mm gap, bridged with 2 copper strips
 net tie solder jumper bridged
@@ -64827,6 +64834,13 @@ MyLibrary
 5
 5
 MyLibrary
+128x32OLED
+
+
+0
+0
+0
+MyLibrary
 59453-051110EBHLF
 
 
@@ -64848,6 +64862,13 @@ Switch
 4
 4
 MyLibrary
+BANANA
+
+
+0
+0
+0
+MyLibrary
 BOOMELE_PJ-320B
 
 
@@ -64855,8 +64876,22 @@ BOOMELE_PJ-320B
 3
 3
 MyLibrary
+BTN_KMR2_4.6X2.8
+
+
+0
+4
+4
+MyLibrary
 CHERRY-MX
 Cherry MX Keyswitch footprint
+
+0
+4
+4
+MyLibrary
+CRYSTAL_2.5X2
+
 
 0
 4
@@ -64911,6 +64946,13 @@ JOYSTICK_ANALOG_MINITHM
 6
 6
 MyLibrary
+JSTPH2_BATT
+2-Pin JST PH Series Right-Angle Connector (+/- for batteries)
+
+0
+4
+4
+MyLibrary
 JST_SH4
 
 
@@ -64932,6 +64974,13 @@ KAILH_SOCKET
 2
 2
 MyLibrary
+KEY-SMD_PTS840GMPSMTRLFS
+
+
+0
+4
+4
+MyLibrary
 KMR231GLFS
 
 
@@ -64942,6 +64991,20 @@ MyLibrary
 Kailh_socket_PG1350_window
 Kailh "Choc" PG1350 keyswitch socket mount
 kailh,choc
+0
+2
+2
+MyLibrary
+LED-SMD_4P-L3.2-W1.3-BR-1
+
+
+0
+4
+4
+MyLibrary
+LED-SMD_L3.2-W1.3-R-RD_23-21B-BHC-AP1Q2-2A
+
+
 0
 2
 2
@@ -64960,6 +65023,13 @@ Switch
 7
 7
 MyLibrary
+MountingHole_0.65mm
+Mounting Hole 2.1mm, no annular
+mounting hole 2.1mm no annular
+0
+0
+0
+MyLibrary
 NHD2712864WDW3
 NHD-2.7-12864WDW3-1
 Display
@@ -64973,6 +65043,27 @@ Display
 0
 4
 4
+MyLibrary
+NeoMecha
+
+
+0
+0
+0
+MyLibrary
+NeoMechaJoiner
+
+
+0
+5
+5
+MyLibrary
+OPTO-SMD-5_L3.7-W4.6-P1.27-LS7.0-BR
+
+
+0
+5
+5
 MyLibrary
 PEC11+SWITCH
 
@@ -65016,6 +65107,41 @@ Connector
 3
 3
 MyLibrary
+PJ398SM-Nut-Hex
+
+
+0
+0
+0
+MyLibrary
+PinHeader_1x05_P1.27mm_Castellated
+Through hole straight pin header, 1x05, 1.27mm pitch, single row
+Through hole pin header THT 1x05 1.27mm single row
+0
+5
+5
+MyLibrary
+PinHeader_1x05_P2.25mm_Castellated
+Through hole straight pin header, 1x05, 2.54mm pitch, single row
+Through hole pin header THT 1x05 2.54mm single row
+0
+5
+5
+MyLibrary
+PinHeader_1x05_P2.54mm_Castellated
+Through hole straight pin header, 1x05, 2.54mm pitch, single row
+Through hole pin header THT 1x05 2.54mm single row
+0
+5
+5
+MyLibrary
+QFN-20_L3.0-W3.0-P0.40-BL
+
+
+0
+20
+20
+MyLibrary
 QFN40P600X600X60-49N-D
 48-Pin QFN_2022
 Integrated Circuit
@@ -65052,6 +65178,13 @@ SK6812 MINI-E SMD RGB LED
 4
 MyLibrary
 SK6812-MINI-E-2
+SK6812 MINI-E SMD RGB LED
+
+0
+4
+4
+MyLibrary
+SK6812-MINI-E-FLIP
 SK6812 MINI-E SMD RGB LED
 
 0
@@ -65107,12 +65240,96 @@ SMT_NUT_3MM
 1
 1
 MyLibrary
+SOD-123
+<b>SOD-123</b>{return}<p>Source: http://www.diodes.com/datasheets/ds30139.pdf</p>
+
+0
+2
+2
+MyLibrary
+SOD-323
+<b>SOD323</b> (2.5x1.2mm)
+
+0
+2
+2
+MyLibrary
+SODFL3616X98N
+SOD-123FL CASE498
+Diode
+0
+2
+2
+MyLibrary
+SOIC8_208MIL
+<b>Small Outline IC - 208mil Wide</b>
+
+0
+8
+8
+MyLibrary
+SOIC127P599X350-8N
+<b>Small-Outline SO-8 Package</b><br>{return}
+
+0
+8
+8
+MyLibrary
 SOP65P780X200-24N
 DB (R-PDSO-G)
 Integrated Circuit
 0
 24
 24
+MyLibrary
+SOP250P600X400-6N
+EG1390
+Switch
+0
+6
+6
+MyLibrary
+SOT-23-6_L2.9-W1.6-P0.95-LS2.8-BR
+
+
+0
+6
+6
+MyLibrary
+SOT-223-3_L6.5-W3.4-P2.30-LS7.0-BR
+
+
+0
+4
+4
+MyLibrary
+SOT23-5
+<b>Small Outline Transistor</b> - 5 Pin
+
+0
+5
+5
+MyLibrary
+SOT23-5@2
+<b>Small Outline Transistor</b> - 5 Pin
+
+0
+5
+5
+MyLibrary
+SOT23-R
+<b>SOT23</b> - Reflow soldering
+
+0
+3
+3
+MyLibrary
+SW-SMD_KMS2XXGXXX
+
+
+0
+5
+5
 MyLibrary
 SW_B3F-1000
 
@@ -65156,6 +65373,20 @@ test point SMD pad
 1
 1
 MyLibrary
+TouchRing
+
+
+0
+0
+0
+MyLibrary
+USON-8_L3.0-W2.0-P0.50-BL-EP
+
+
+0
+9
+9
+MyLibrary
 XL-1010
 
 
@@ -65163,7 +65394,63 @@ XL-1010
 4
 4
 MyLibrary
+davies-1900-knob-bk
+
+
+0
+0
+0
+MyLibrary
+fuji
+
+
+0
+0
+0
+MyLibrary
 joycon
+
+
+0
+0
+0
+MyLibrary
+knob-audio
+
+
+0
+0
+0
+MyLibrary
+plinky-main
+
+
+0
+0
+0
+MyLibrary
+plinky_osh
+
+
+0
+0
+0
+MyLibrary
+plinky_osh_gear
+
+
+0
+0
+0
+MyLibrary
+plinky_osh_gear_outline
+
+
+0
+0
+0
+MyLibrary
+plinky_osh_gear_rough
 
 
 0
@@ -81059,6 +81346,139 @@ TO-264-5 Vertical RM 3.81mm
 0
 5
 5
+PlinkyJig
+CUI_SJ1-3523N
+
+
+0
+3
+3
+PlinkyJig
+C_0603_1608Metric_Pad1.05x0.95mm_HandSolder
+Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC_7351 nominal with elongated pad for handsoldering. (Body size source: http://www.tortai-tech.com/upload/download/2011102023233369053.pdf), generated with kicad-footprint-generator
+capacitor handsolder
+0
+2
+2
+PlinkyJig
+LED_0603_1608Metric
+LED SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: http://www.tortai-tech.com/upload/download/2011102023233369053.pdf), generated with kicad-footprint-generator
+diode
+0
+2
+2
+PlinkyJig
+LED_RGB_1210_reverse
+RGB LED 3.2x2.7mm http://www.avagotech.com/docs/AV02-0610EN
+LED 3227
+0
+4
+4
+PlinkyJig
+MountingHole_2.1mm
+Mounting Hole 2.1mm, no annular
+mounting hole 2.1mm no annular
+0
+0
+0
+PlinkyJig
+MountingHole_3.2mm_M3
+Mounting Hole 3.2mm, no annular, M3
+mounting hole 3.2mm no annular m3
+0
+0
+0
+PlinkyJig
+PinHeader_1x01_P2.54mm_Vertical
+Through hole straight pin header, 1x01, 2.54mm pitch, single row
+Through hole pin header THT 1x01 2.54mm single row
+0
+1
+1
+PlinkyJig
+PinHeader_2x07_P1.27mm_Vertical_SMD
+surface-mounted straight pin header, 2x07, 1.27mm pitch, double rows
+Surface mounted pin header SMD 2x07 1.27mm double row
+0
+14
+14
+PlinkyJig
+PinSocket_1x02_P2.54mm_Vertical
+Through hole straight socket strip, 1x02, 2.54mm pitch, single row (from Kicad 4.0.7), script generated
+Through hole socket strip THT 1x02 2.54mm single row
+0
+2
+2
+PlinkyJig
+PinSocket_1x04_P2.54mm_Vertical
+Through hole straight socket strip, 1x04, 2.54mm pitch, single row (from Kicad 4.0.7), script generated
+Through hole socket strip THT 1x04 2.54mm single row
+0
+4
+4
+PlinkyJig
+PinSocket_1x06_P2.54mm_Vertical
+Through hole straight socket strip, 1x06, 2.54mm pitch, single row (from Kicad 4.0.7), script generated
+Through hole socket strip THT 1x06 2.54mm single row
+0
+6
+6
+PlinkyJig
+PinSocket_2x08_P2.54mm_Vertical
+Through hole straight socket strip, 2x08, 2.54mm pitch, double cols (from Kicad 4.0.7), script generated
+Through hole socket strip THT 2x08 2.54mm double row
+0
+16
+16
+PlinkyJig
+R_0603_1608Metric_Pad1.05x0.95mm_HandSolder
+Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC_7351 nominal with elongated pad for handsoldering. (Body size source: http://www.tortai-tech.com/upload/download/2011102023233369053.pdf), generated with kicad-footprint-generator
+resistor handsolder
+0
+2
+2
+PlinkyJig
+SOIC-24W_7.5x15.4mm_P1.27mm
+SOIC, 24 Pin (JEDEC MS-013AD, https://www.analog.com/media/en/package-pcb-resources/package/pkg_pdf/soic_wide-rw/RW_24.pdf), generated with kicad-footprint-generator ipc_gullwing_generator.py
+SOIC SO
+0
+24
+24
+PlinkyJig
+TestPoint_Pad_2.5x2.5mm
+SMD rectangular pad as test Point, square 2.5mm side length
+test point SMD pad rectangle square
+0
+1
+1
+PlinkyJig
+USB_Micro-B_Molex-105017-0001
+http://www.molex.com/pdm_docs/sd/1050170001_sd.pdf
+Micro-USB SMD Typ-B
+0
+13
+6
+PlinkyJig
+dpdt 7mm
+
+
+0
+6
+6
+PlinkyJig
+lastconker
+
+
+0
+0
+0
+PlinkyJig
+plinkylogo
+
+
+0
+0
+0
 Potentiometer_SMD
 Potentiometer_ACP_CA6-VSMD_Vertical
 Potentiometer, vertical, ACP CA6-VSMD, http://www.acptechnologies.com/wp-content/uploads/2017/06/01-ACP-CA6.pdf
@@ -93164,6 +93584,13 @@ test point SMD pad rectangle square
 1
 TestPoint
 TestPoint_Pad_D1.0mm
+SMD pad as test Point, diameter 1.0mm
+test point SMD pad
+0
+1
+1
+TestPoint
+TestPoint_Pad_D1.0mm_nosilk
 SMD pad as test Point, diameter 1.0mm
 test point SMD pad
 0
