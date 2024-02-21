@@ -1,5 +1,0 @@
-{
-  "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
-  "cmake.configureOnOpen": true,
-  "cortex-debug.openocdPath": "/opt/homebrew/bin/openocd",
-}
