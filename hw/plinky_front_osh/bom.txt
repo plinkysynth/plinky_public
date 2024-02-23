@@ -1,0 +1,4 @@
+Front panel BOM
+White LEDS - 64x - D1-D64 - IN-S124ARUW	 - https://www.digikey.co.uk/product-detail/en/inolux/IN-S124ARUW/1830-1119-1-ND/7604662
+Blue LEDS - 8x - D65-D72 - IN-S124ARB - https://www.digikey.co.uk/product-detail/en/inolux/IN-S124ARB/1830-1117-1-ND/7604658
+Connectors - 2x - J1, J2 - 89898-308ALF - https://www.digikey.com/en/products/detail/amphenol-icc-fci/89898-308ALF/1537934
