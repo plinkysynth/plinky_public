@@ -1,0 +1,4 @@
+(fp_lib_table
+  (version 7)
+  (lib (name "plinkyblackfront")(type "KiCad")(uri "${KIPRJMOD}/plinkyblackfront.pretty")(options "")(descr ""))
+)
