@@ -1495,7 +1495,7 @@ const s8 midicctable[128] = {
 	/*  72 */			P_R,		P_A,		P_S,		P_D,		P_XFREQ,	P_XDEPTH,	P_XOFFSET,	P_YFREQ,
 	/*  80 */			P_YDEPTH,	P_YOFFSET,	P_SAMPLE,	P_SEQPAT,	-1,			P_SEQSTEP,	-1,			-1,
 	/*  88 */			-1,			P_MIXINPUT,	P_MIXINWETDRY,P_RVSEND,	P_RVTIME,	P_RVSHIM,	P_DLSEND,	P_DLFB,
-	/*  96 */			-1,			-1,			-1,			-1,			-1,			-1,			P_ARPONOFF,	P_ARPMODE,
+	/*  96 */			-1,			-1,			-1,			-1,			-1,			P_LATCHONOFF,			P_ARPONOFF,	P_ARPMODE,
 	/* 104 */			P_ARPDIV,	P_ARPPROB,	P_ARPLEN,	P_ARPOCT,	P_SEQMODE,	P_SEQDIV,	P_SEQPROB,	P_SEQLEN,
 	/* 112 */			P_DLRATIO,	P_DLWOB,	P_RVWOB,	-1,			P_JIT_POS,	P_JIT_GRAINSIZE, P_JIT_RATE, P_JIT_PULSE,
 	/* 120 */		-1,			-1,			-1,			-1,			-1,			-1,			-1,			-1,
@@ -1599,6 +1599,24 @@ void processmidimsg(u8 msg, u8 d1, u8 d2) {
 			if (param_flags[param] & FLAG_SIGNED)
 				val = val * 2 - FULL;
 			EditParamNoQuant(param, M_BASE, val);
+
+			if (param == P_ARPONOFF){
+				if (val > 64){
+					rampreset.flags = rampreset.flags | FLAGS_ARP;
+				}else{
+					rampreset.flags = rampreset.flags & ~FLAGS_ARP;
+				}
+				ShowMessage(F_32_BOLD, ((rampreset.flags & FLAGS_ARP)) ? "arp on" : "arp off", 0);
+			}
+			if (param == P_LATCHONOFF){
+				if (val > 64){
+					rampreset.flags = rampreset.flags | FLAGS_LATCH;
+				}else{
+					rampreset.flags = rampreset.flags & ~FLAGS_LATCH;
+				}
+				ShowMessage(F_32_BOLD, ((rampreset.flags & FLAGS_LATCH)) ? "latch on" : "latch off", 0);
+			}
+
 		}
 		break;
 	}
