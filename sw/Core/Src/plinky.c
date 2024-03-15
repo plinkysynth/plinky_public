@@ -2907,6 +2907,10 @@ void serial_midi(const u8*buf, u8 len) {
 		else if (state == 3) state = 1; // running status
 		if (state < 3) {
 			msg[state++] = data;
+			if (state == 1 && (msg[0] >= 0xF8 && msg[0] <= 0xFC)) { //BUG FIX NO MIDI CLOCK FROM HW MIDI KAY LPZW				//real time start stop clock 				msg[1]=0;
+				msg[2]=0;
+				state = 3;
+			}
 			if (state == 2 && (msg[0] >= 0xc0 && msg[0] <= 0xdf)) {
 				msg[state++] = 0; // two byte messages. wtf midi.//WE NEED TO DEBUG THIS COS IT SEEMS NOT TO WORK
 			}

@@ -47,4 +47,6 @@
 // 0.9x - added diminished scale
 // 0.9y - fix wavetable off-by-2 - thanks Jan Matthis!
 // 0.9z - fix shimmer click? thanks hippo!
-#define VERSION2			  "v0.9z"
+// 0.A - USB MIDI Sync
+// 0.A1 - HW SERIAL MIDI SYNC & More CCs
+#define VERSION2			  "v0.A1"
