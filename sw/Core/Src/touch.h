@@ -745,20 +745,39 @@ void finger_synth_update(int fi) {
 		if (!want_recording_on)
 			last_rec_step = 255;
 	}
-	if (!any_fingers_down) {
-		
-		// read from pattern
-		FingerRecord *fr = readpattern(fi);
-		if (fr && (isplaying() || seq_rhythm.did_a_retrig)) {
-			read_from_seq = true;
+#define MERGE_PLAYBACK 1
+    if (MERGE_PLAYBACK) {
+        // read from pattern
+        FingerRecord *fr = readpattern(fi);
+        if (fr && (isplaying() || seq_rhythm.did_a_retrig)) {
 
-			int pr = fr->pressure[phase0] * 12;
-			int pos = fr->pos[phase0 / 2];
-			synth_dst_finger->pressure = (pr && !seq_rhythm.supress) ? randrange(pr, pr+12)-512 : -1024;
-			synth_dst_finger->pos = randrange(pos * 8, pos * 8 + 8);
-			synth_dst_finger->written = 1;
-		}
-		// read from latch
+            int pr = fr->pressure[phase0] * 12;
+            int pos = fr->pos[phase0 / 2];
+            pr = (pr && !seq_rhythm.supress) ? randrange(pr, pr+12)-512 : -1024;
+            if (pr > 0) {
+                read_from_seq = true;
+                synth_dst_finger->pressure = pr;
+                synth_dst_finger->pos = randrange(pos * 8, pos * 8 + 8);
+                synth_dst_finger->written = 1;
+            }
+        }
+    }
+
+    if (!any_fingers_down) {
+        if (!MERGE_PLAYBACK) {
+            // read from pattern
+            FingerRecord *fr = readpattern(fi);
+            if (fr && (isplaying() || seq_rhythm.did_a_retrig)) {
+                read_from_seq = true;
+
+                int pr = fr->pressure[phase0] * 12;
+                int pos = fr->pos[phase0 / 2];
+                synth_dst_finger->pressure = (pr && !seq_rhythm.supress) ? randrange(pr, pr+12)-512 : -1024;
+                synth_dst_finger->pos = randrange(pos * 8, pos * 8 + 8);
+                synth_dst_finger->written = 1;
+            }
+        }
+        // read from latch
 		bool latchon = ((rampreset.flags & FLAGS_LATCH)) ;
 		if (latch_valid && latchon && shift_down != SB_CLEAR) {
 			int latchvel = latch[fi].avgvel * 12;

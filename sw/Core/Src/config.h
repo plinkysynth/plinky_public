@@ -49,4 +49,4 @@
 // 0.9z - fix shimmer click? thanks hippo!
 // 0.A - USB MIDI Sync
 // 0.A1 - HW SERIAL MIDI SYNC & More CCs
-#define VERSION2			  "v0.A1"
+#define VERSION2			  "v0.A2"
