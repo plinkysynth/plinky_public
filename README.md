@@ -32,7 +32,7 @@ if there is something missing or something in there that you think shouldn't be 
 
 Will there still be kit plinkys? eg from Thonk?
 --
-I havent spoken to steve about it, but I don't see why not!
+yes! thanks to the wonderful makingsonudmachines, v3 kits are starting to appear at thonk! thanks roland, enrica and steve!  https://www.thonk.co.uk/shop/plinky-kit-001/
 
 Thanks!
 --
