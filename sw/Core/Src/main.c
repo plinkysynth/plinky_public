@@ -326,7 +326,7 @@ int main(void)
 
 
   check_bootloader_flash();
-  midiinit();
+
   //  miditest();
 
 
@@ -362,7 +362,7 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
 
-
+  midiinit();
 
 	while (1) {
     /* USER CODE END WHILE */
