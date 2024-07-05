@@ -16,6 +16,8 @@
 // THIS SHOULD NOT BE DEFINED FOR REAL BOARDS:
 //#define HALF_FLASH // pcbway fitted the wrong CPU, with only half the flash ram! this disables all use of the upper 512k, to enable testing
 
+//#define DISABLE_AUTOSAVE // enables Demo Mode - changes are not written to flash. Disables ProgramPage() in params.h
+
 // 0.7 - flashed onto first units
 // 0.8 - fix stereo pan when changing waveshape, and the broken wipe pattern
 // 0.9 - click encoder to zero value
@@ -49,4 +51,7 @@
 // 0.9z - fix shimmer click? thanks hippo!
 // 0.A - USB MIDI Sync
 // 0.A1 - HW SERIAL MIDI SYNC & More CCs
-#define VERSION2			  "v0.A3"
+// 0.A2 - Allows for playing notes from the touch surface over a recorded sequence. Still buggy. In touch.h #define MERGE_PLAYBACK 1
+// 0.A3 - Fixes a USB bug in which some hosts wouldn't recognize Plinky. New startup sequence is plinky_init(), then midiinit().
+// 0.A4 - Disabled MERGE_PLAYBACK in touch.h. DISABLE_AUTOSAVE flag enables Demo Mode - changes are not written to flash. Disables ProgramPage() in params.h
+#define VERSION2			  "v0.A4"

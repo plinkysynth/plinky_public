@@ -745,7 +745,7 @@ void finger_synth_update(int fi) {
 		if (!want_recording_on)
 			last_rec_step = 255;
 	}
-#define MERGE_PLAYBACK 1
+#define MERGE_PLAYBACK 0
     if (MERGE_PLAYBACK) {
         // read from pattern
         FingerRecord *fr = readpattern(fi);
