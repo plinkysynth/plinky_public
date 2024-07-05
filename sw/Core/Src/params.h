@@ -754,6 +754,7 @@ u8 AllocAndEraseFlashPage(void) {
 
 
 void ProgramPage(void* datasrc, u32 datasize, u8 index) {
+#ifndef DISABLE_AUTOSAVE
 #ifndef HALF_FLASH
 
 	updating_bank2 = 1;
@@ -771,6 +772,7 @@ void ProgramPage(void* datasrc, u32 datasize, u8 index) {
 	HAL_FLASH_Lock();
 	latestpagesidx[index] = page;
 	updating_bank2 = 0;
+#endif
 #endif
 }
 
