@@ -1,0 +1,99 @@
+24083913799619
+hw
+AUDIO-TH_PJ-313_5JCJ
+
+
+0
+5
+3
+hw
+CUI_SJ1-3523N
+
+
+0
+3
+3
+hw
+CUI_SJ1-3523N_double
+
+
+0
+6
+3
+hw
+CUI_SJ1-3523N_nohole
+
+
+0
+3
+3
+hw
+DIODES_X_QFN10
+LQFN, 10 Pin (https://www.analog.com/media/en/package-pcb-resources/package/pkg_pdf/ltc-legacy-lqfn/05081644_0_LQFN10.pdf), generated with kicad-footprint-generator ipc_noLead_generator.py
+LQFN NoLead
+0
+10
+10
+hw
+HRO_TYPE-C-31-M-12
+
+
+0
+16
+16
+hw
+LUOYANG-DISHANG_PJ-320B
+
+
+0
+3
+3
+hw
+USB_Micro-B_Molex-105017-0001_with_3d
+http://www.molex.com/pdm_docs/sd/1050170001_sd.pdf
+Micro-USB SMD Typ-B
+0
+13
+6
+hw
+enc_3d
+Alps rotary encoder, EC12E... with switch, vertical shaft, http://www.alps.com/prod/info/E/HTML/Encoder/Incremental/EC12E/EC12E1240405.html & http://cdn-reichelt.de/documents/datenblatt/F100/402097STEC12E08.PDF
+rotary encoder
+0
+6
+6
+hw
+oled091
+
+
+0
+4
+4
+hw
+pec11r_encoder
+
+
+0
+7
+7
+hw
+pot3d
+Potentiometer, vertical, 9mm, single, http://www.taiwanalpha.com.tw/downloads?target=products&id=113
+potentiometer vertical 9mm single
+0
+5
+3
+hw
+text
+
+
+0
+0
+0
+hw
+thonk_with_3d
+TRS 3.5mm, vertical, Thonkiconn, PCB mount, (http://www.qingpu-electronics.com/en/products/WQP-PJ398SM-362.html)
+WQP-PJ398SM WQP-PJ301M-12 TRS 3.5mm mono vertical jack thonkiconn qingpu
+0
+3
+3
