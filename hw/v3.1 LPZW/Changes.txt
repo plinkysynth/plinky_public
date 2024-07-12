@@ -1,0 +1,16 @@
+Change List V3.1 LPZW
+
+- J12 & J13 are SMT now, had to unround the board corners for that
+- all line audio & TRS MIDI jacks are PJ-313 THT now 
+- R110 & R113 values changed 47R -> 1k, 15R -> 220R to remedy led switching noise
+- USB-C jacks VBUS is now decoupled viad 1N5819WS schottky diodes 
+- USB-C jacks data lines now go to a MUX IC PI3USB102EZLE, lower jack dominates that line
+- USB TVS array ommited cos ESD protection build into that MUX
+- serial resistors 100R and TVS arrays for clamping added to the expander port for protection 
+- D4 is also 1N5819WS now
+- removed pulldown & capacitor at U16B (did nothing anyway)
+- added Potentiometer and Encoder tap contacts to GND
+- removed all traces from In1.Cu layer (only GND there)
+- increased the expader window even more
+- changed "Thanks to" text
+- general schematic cleanup

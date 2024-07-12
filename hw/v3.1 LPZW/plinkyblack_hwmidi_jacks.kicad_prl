@@ -1,6 +1,6 @@
 {
   "board": {
-    "active_layer": 0,
+    "active_layer": 41,
     "active_layer_preset": "",
     "auto_track_width": true,
     "hidden_netclasses": [],
@@ -20,7 +20,7 @@
       "footprints": true,
       "graphics": true,
       "keepouts": true,
-      "lockedItems": true,
+      "lockedItems": false,
       "otherItems": true,
       "pads": true,
       "text": true,
@@ -67,8 +67,8 @@
       39,
       40
     ],
-    "visible_layers": "ffcf7cf_ffffffff",
-    "zone_display_mode": 1
+    "visible_layers": "ffc1010_7ffffff8",
+    "zone_display_mode": 0
   },
   "meta": {
     "filename": "plinkyblack_hwmidi_jacks.kicad_prl",
