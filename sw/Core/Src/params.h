@@ -808,7 +808,7 @@ void EditParamNoQuant(u8 paramidx, u8 mod, s16 data) {
 		return;
 	if (paramidx == P_HEADPHONE) {
 		if (mod == M_BASE) {
-			data = clampi(-45, (data / (FULL / 64)) - 45, 18);
+			data = clampi(-45, ((data + (FULL/128)) / (FULL / 64)) - 45, 18);
 			if (data == sysparams.headphonevol)
 				return;
 			sysparams.headphonevol = data;

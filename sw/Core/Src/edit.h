@@ -148,7 +148,9 @@ void finger_editing(int fi, int frame) {
 					cur += ev * (FULL / maxi);
 				}
 				else {
-					cur += (int)floorf(0.5f + ev * maxf(1.f, encaccel * encaccel));
+					int ev_sens = 1;
+					if (pi == P_HEADPHONE) ev_sens = 4;
+					cur += (int)floorf(0.5f + ev * ev_sens * maxf(1.f, encaccel * encaccel));
 #ifdef DEBUG
 					DebugLog("%d\r\n", (int)(maxf(1.f, encaccel * encaccel) * 100));
 #endif

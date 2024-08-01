@@ -54,4 +54,5 @@
 // 0.A2 - Allows for playing notes from the touch surface over a recorded sequence. Still buggy. In touch.h #define MERGE_PLAYBACK 1
 // 0.A3 - Fixes a USB bug in which some hosts wouldn't recognize Plinky. New startup sequence is plinky_init(), then midiinit().
 // 0.A4 - Disabled MERGE_PLAYBACK in touch.h. DISABLE_AUTOSAVE flag enables Demo Mode - changes are not written to flash. Disables ProgramPage() in params.h
-#define VERSION2			  "v0.A4"
+// 0.A5 - Encoder fix
+#define VERSION2			  "v0.A5"
