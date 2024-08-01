@@ -1500,6 +1500,11 @@ const s8 midicctable[128] = {
 	/* 112 */			P_DLRATIO,	P_DLWOB,	P_RVWOB,	-1,			P_JIT_POS,	P_JIT_GRAINSIZE, P_JIT_RATE, P_JIT_PULSE,
 	/* 120 */		-1,			-1,			-1,			-1,			-1,			-1,			-1,			-1,
 };
+
+
+
+
+
 bool midi_receive(unsigned char packet[4]); // usb midi poll
 void processmidimsg(u8 msg, u8 d1, u8 d2);
 bool processusbmidi(void) {
@@ -1532,12 +1537,19 @@ bool send_midimsg(u8 status, u8 data1, u8 data2);
 void processmidimsg(u8 msg, u8 d1, u8 d2) {
 	u8 chan = msg & 15;
 	u8 type = msg >> 4;
-	if ((chan != 0)&&(type != 0xF)) //LPZW KAY Fix for MIDI Sync type == F continue
+
+	//int midi_ch_in = ((GetParam(P_MIDI_CH_IN, 0) * 16)/FULL) & 15;
+	//int midi_ch_in = clampi(((GetParam(P_MIDI_CH_IN, 0) * 15)/FULL),0,15);
+
+	int midi_ch_in = clampi((mini(GetParam(P_MIDI_CH_IN, 0), FULL - 1) * 16) / FULL,0,15);
+
+	//if ((chan != 0)&&(type != 0xF)) // chan != 0 = allow all channels; LPZW KAY Fix for MIDI Sync type == F continue
+	if ((chan != midi_ch_in)&&(type != 0xF)) // allow only selected channel and MIDI sync
 		return; 
 	if (type < 8)
 		return;
 
-//	send_midimsg(msg, d1, d2); // midi echo!
+	//	send_midimsg(msg, d1, d2); // midi echo!
 
 	if (type == 9 && d2 == 0)
 		type = 8;
@@ -2972,13 +2984,22 @@ bool send_midi_serial(const u8 *data, int len) {
 }
 
 bool send_midimsg(u8 status, u8 data1, u8 data2) { // returns false if too full
+
 	u8 len=3;
-	if (status>=0xc0 && status<0xe0)
+
+	if (status>=0xc0 && status<0xe0) // Cn Program Change, Dn Mono / Channel Aftertouch
 		len=2;
 	if (!(status&0x80))
 		return true;
 	if (status == 0x80 && data1 == 0)
 		return true; // er, no
+
+	//int midi_ch_out = ((GetParam(P_MIDI_CH_OUT, 0) * 16)/FULL) & 15;
+	//int midi_ch_out = clampi(((GetParam(P_MIDI_CH_OUT, 0) * 16)/FULL),0,15);
+	int midi_ch_out = clampi((mini(GetParam(P_MIDI_CH_OUT, 0), FULL - 1) * 16) / FULL,0,15);
+
+	if (status<0xf0) status += midi_ch_out; // sets output channel
+
 	u8 buf[4]={status>>4, status,data1,data2};
 	usb_midi_write(buf);
 #ifdef DEBUG

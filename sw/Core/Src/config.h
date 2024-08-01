@@ -55,4 +55,5 @@
 // 0.A3 - Fixes a USB bug in which some hosts wouldn't recognize Plinky. New startup sequence is plinky_init(), then midiinit().
 // 0.A4 - Disabled MERGE_PLAYBACK in touch.h. DISABLE_AUTOSAVE flag enables Demo Mode - changes are not written to flash. Disables ProgramPage() in params.h
 // 0.A5 - Encoder fix
-#define VERSION2			  "v0.A5"
+// 0.A6 - Set Channels for MIDI in and out (unused pad)
+#define VERSION2			  "v0.A6"
