@@ -590,6 +590,14 @@ const char *getparamstr(int p, int mod, int v, char *valbuf, char *decbuf) {
 	case P_ARPOCT:
 		v += (FULL * 10) / displaymax; // 1 based
 		break;
+	case P_MIDI_CH_IN:
+	case P_MIDI_CH_OUT: {
+	    int midich = clampi(vscale,0,15)+1;
+	    int n=sprintf(valbuf, "%d", midich);
+	    if (!decbuf)
+	        decbuf = valbuf + n;
+	    return valbuf;
+	}
 	case P_ARPMODE:
 		return arpmodenames[clampi(vscale, 0, ARP_LAST - 1)];
 	case P_SEQMODE:

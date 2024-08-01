@@ -200,6 +200,10 @@ const char * const paramnames[P_LAST]={
 	[P_YSHAPE]=I_SHAPE "LFO Shape",
 	[P_YWARP]=I_WARP "LFO Warp",
 
+	[P_MIDI_CH_IN]=I_PIANO "MIDI In Ch",
+	[P_MIDI_CH_OUT]=I_PIANO "MIDI Out Ch",
+
+
 };
 
 #define FLAG_SIGNED 128
@@ -238,8 +242,6 @@ const static u8 param_flags[P_LAST] = {
 	[P_SEQLEN] = 17 + FLAG_SIGNED,
 	[P_SEQPAT]=24,
 	[P_SEQSTEP] = FLAG_SIGNED + 64,
-
-	
 
 	[P_DLSEND]=0,
 	[P_DLTIME]=FLAG_SIGNED,
@@ -306,6 +308,9 @@ const static u8 param_flags[P_LAST] = {
 	[P_SMP_TIME] = FLAG_SIGNED,
 	[P_CV_QUANT] = CVQ_LAST,
 	[P_JIT_PULSE] = FLAG_SIGNED,
+
+	[P_MIDI_CH_IN] = 16,
+	[P_MIDI_CH_OUT] = 16
 };
 
 #define C  ( 0*512)
@@ -1079,6 +1084,9 @@ static Preset const init_params = {
 				[P_YWARP] = {0},
 
 				[P_ACCEL_SENS] = {HALF},
+
+				[P_MIDI_CH_IN] = {0},
+				[P_MIDI_CH_OUT] = {0},
 				}
 }; // init params
 
