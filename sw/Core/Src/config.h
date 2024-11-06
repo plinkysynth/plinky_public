@@ -56,4 +56,6 @@
 // 0.A4 - Disabled MERGE_PLAYBACK in touch.h. DISABLE_AUTOSAVE flag enables Demo Mode - changes are not written to flash. Disables ProgramPage() in params.h
 // 0.A5 - Encoder fix
 // 0.A6 - Set Channels for MIDI in and out (unused pad)
-#define VERSION2			  "v0.A6"
+// 0.A7 - Bootloader work to make it work on MacOSX
+#define VERSION2			  "v0.A7"
+

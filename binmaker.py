@@ -49,6 +49,24 @@ def main():
     import uf2conv
     uf2conv.uf2conv(uf2args)
 
+    # read 'bootloader/Release/plinkybl.bin', pad to 64k, and write it back
+    try:
+        with open("bootloader/Release/plinkybl.bin", "rb") as f1:
+            bl_content = f1.read()
+        if len(bl_content) < 65536:
+            bl_content += b'\xff' * (65536 - len(bl_content))
+            with open("bootloader/Release/plinkybl.bin", "wb") as f1:
+                f1.write(bl_content)
+            print('padded bootloader to 64k')
+    except IOError as e:
+        print(f"Failed to open file: {e}")
+        exit(2)
+    uf2args.input='bootloader/Release/plinkybl.bin'
+    uf2args.base='0x20008000'
+    uf2args.output=f"boot{ver1}{ver2}{ver3}.uf2"
+    uf2conv.uf2conv(uf2args)
+
+
 
 if __name__ == "__main__":
     main()
