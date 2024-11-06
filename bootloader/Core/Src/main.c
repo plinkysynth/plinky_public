@@ -341,8 +341,9 @@ int main(void)
     /* USER CODE BEGIN 3 */
 	  if (encstate==1)
 		  startreset=true;
-	 if (encstate==0x80 && startreset) {
+	 if (encstate==0x0 && startreset) {
 		 // released the encoder
+		HAL_Delay(100);
 		 scb_reset_system();
 	 }
 	 if (encheld>10000)

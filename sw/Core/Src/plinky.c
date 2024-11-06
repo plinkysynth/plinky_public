@@ -2554,6 +2554,99 @@ void set_test_rgb(int c) {
 
 short *getrxbuf(void);
 
+#define REVERB_BUF 0x10000000
+#define DELAY_BUF  0x20008000
+
+void check_bootloader_flash(void) {
+	int count=0;
+	uint32_t *rb32=(uint32_t*)REVERB_BUF;
+	uint32_t magic=rb32[64];
+	char *rb=(char*)REVERB_BUF;
+	for (;count<64;++count) if (rb[count]!=1) break;
+	DebugLog("bootloader left %d ones for us magic is %08x\r\n", count, magic);
+	const uint32_t *app_base = (const uint32_t *)DELAY_BUF;
+
+  	if (count!=64/4 || magic!=0xa738ea75) {
+		return;
+	}
+	clear();
+  char buf[32];
+  snprintf(buf, sizeof(buf), "%08x %d", magic, count);
+  drawstr(0, 0, F_16, buf);
+  snprintf(buf, sizeof(buf), "%08x %08x", app_base[0], app_base[1]);
+  drawstr(0, 16, F_12, buf);
+  oled_flip(vrambuf);
+
+	rb32[64]++; // clear the magic
+  	
+	DebugLog("bootloader app base is %08x %08x\r\n", app_base[0], app_base[1]);
+
+	    /*
+	     * We refuse to program the first word of the app until the upload is marked
+	     * complete by the host.  So if it's not 0xffffffff, we should try booting it.
+	     */
+	    if (app_base[0] == 0xffffffff || app_base[0]== 0) {
+  		HAL_Delay(10000);
+	        return;
+	    }
+
+	    // first word is stack base - needs to be in RAM region and word-aligned
+	    if ((app_base[0] & 0xff000003) != 0x20000000) {
+  		HAL_Delay(10000);
+	        return;
+	    }
+
+	    /*
+	     * The second word of the app is the entrypoint; it must point within the
+	     * flash area (or we have a bad flash).
+	     */
+	    if (app_base[1] < 0x08000000 || app_base[1]>=0x08010000) {
+  		HAL_Delay(10000);
+	        return;
+	    }
+	    DebugLog("FLASHING BOOTLOADER! DO NOT RESET\r\n");
+		clear();
+		drawstr(0,0,F_16_BOLD,"FLASHING\nBOOTLOADER");
+		oled_flip(vrambuf);
+	    HAL_FLASH_Unlock();
+	    FLASH_EraseInitTypeDef EraseInitStruct;
+	    	EraseInitStruct.TypeErase = FLASH_TYPEERASE_PAGES;
+	    	EraseInitStruct.Banks = FLASH_BANK_1;
+	    	EraseInitStruct.Page = 0;
+	    	EraseInitStruct.NbPages = 65536/2048;
+	    	uint32_t SECTORError = 0;
+	    	if (HAL_FLASHEx_Erase(&EraseInitStruct, &SECTORError) != HAL_OK) {
+	    		DebugLog("BOOTLOADER flash erase error %d\r\n", SECTORError);
+				clear();
+				drawstr(0,0,F_16_BOLD,"BOOTLOADER\nERASE ERROR");
+				oled_flip(vrambuf);
+				HAL_Delay(10000);
+	    		return ;
+	    	}
+	    	DebugLog("BOOTLOADER flash erased ok!\r\n");
+
+	    	__HAL_FLASH_DATA_CACHE_DISABLE();
+	    	__HAL_FLASH_INSTRUCTION_CACHE_DISABLE();
+	    	__HAL_FLASH_DATA_CACHE_RESET();
+	    	__HAL_FLASH_INSTRUCTION_CACHE_RESET();
+	    	__HAL_FLASH_INSTRUCTION_CACHE_ENABLE();
+	    	__HAL_FLASH_DATA_CACHE_ENABLE();
+	    	uint64_t* s = (uint64_t*)DELAY_BUF;
+	    	volatile uint64_t* d = (volatile uint64_t*)0x08000000;
+	    	u32 size_bytes=65536;
+	    	for (;size_bytes>0;size_bytes-=8) {
+	    		HAL_FLASH_Program(FLASH_TYPEPROGRAM_DOUBLEWORD, (uint32_t)(size_t)(d++), *s++);
+	    	}
+		    HAL_FLASH_Lock();
+		    DebugLog("BOOTLOADER has been flashed!\r\n");
+			clear();
+			drawstr(0,0,F_16_BOLD,"BOOTLOADER\nFLASHED OK!");
+			oled_flip(vrambuf);
+			HAL_Delay(3000);
+
+}
+
+
 #undef ERROR
 #define ERROR(msg, ...) do { errorcount++; DebugLog("\r\n" msg "\r\n", __VA_ARGS__);  } while (0)
 
@@ -2919,7 +3012,9 @@ void serial_midi(const u8*buf, u8 len) {
 		else if (state == 3) state = 1; // running status
 		if (state < 3) {
 			msg[state++] = data;
-			if (state == 1 && (msg[0] >= 0xF8 && msg[0] <= 0xFC)) { //BUG FIX NO MIDI CLOCK FROM HW MIDI KAY LPZW				//real time start stop clock 				msg[1]=0;
+			if (state == 1 && (msg[0] >= 0xF8 && msg[0] <= 0xFC)) { //BUG FIX NO MIDI CLOCK FROM HW MIDI KAY LPZW
+				//real time start stop clock 
+				msg[1]=0;
 				msg[2]=0;
 				state = 3;
 			}
@@ -3045,10 +3140,11 @@ void EMSCRIPTEN_KEEPALIVE plinky_init(void) {
 	emu_setadc(0.5f, 0.5f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, false, false, false);
 #endif
 	dac_init();
-	reverb_clear(); // ram2 is not cleared by startup.s as written.
-	delay_clear();
 	HAL_Delay(100); // stablise power before bringing oled up
 	oled_init();
+	check_bootloader_flash();
+	reverb_clear(); // ram2 is not cleared by startup.s as written.
+	delay_clear();
 	codec_init();
 	adc_start(); // also dac_start effectively
 

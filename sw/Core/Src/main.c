@@ -188,71 +188,6 @@ bool update_accelerometer_raw(void) {
 	  return true;
 }
 
-#define REVERB_BUF 0x10000000
-#define DELAY_BUF  0x20008000
-
-void check_bootloader_flash(void) {
-	int count=0;
-	uint32_t *rb32=(uint32_t*)REVERB_BUF;
-	uint32_t magic=rb32[64];
-	char *rb=(char*)REVERB_BUF;
-	for (;count<64;++count) if (rb[count]!=1) break;
-	DebugLog("bootloader left %d ones for us magic is %08x\r\n", count, magic);
-	if (count!=64/4 || magic!=0xa738ea75)
-		return;
-	rb32[64]++; // clear the magic
-	const uint32_t *app_base = (const uint32_t *)DELAY_BUF;
-	DebugLog("bootloader app base is %08x %08x\r\n", app_base[0], app_base[1]);
-
-	    /*
-	     * We refuse to program the first word of the app until the upload is marked
-	     * complete by the host.  So if it's not 0xffffffff, we should try booting it.
-	     */
-	    if (app_base[0] == 0xffffffff || app_base[0]== 0) {
-	        return;
-	    }
-
-	    // first word is stack base - needs to be in RAM region and word-aligned
-	    if ((app_base[0] & 0xff000003) != 0x20000000) {
-	        return;
-	    }
-
-	    /*
-	     * The second word of the app is the entrypoint; it must point within the
-	     * flash area (or we have a bad flash).
-	     */
-	    if (app_base[1] < 0x08000000 || app_base[1]>=0x08010000) {
-	        return;
-	    }
-	    DebugLog("FLASHING BOOTLOADER! DO NOT RESET\r\n");
-	    HAL_FLASH_Unlock();
-	    FLASH_EraseInitTypeDef EraseInitStruct;
-	    	EraseInitStruct.TypeErase = FLASH_TYPEERASE_PAGES;
-	    	EraseInitStruct.Banks = FLASH_BANK_1;
-	    	EraseInitStruct.Page = 0;
-	    	EraseInitStruct.NbPages = 65536/2048;
-	    	uint32_t SECTORError = 0;
-	    	if (HAL_FLASHEx_Erase(&EraseInitStruct, &SECTORError) != HAL_OK) {
-	    		DebugLog("BOOTLOADER flash erase error %d\r\n", SECTORError);
-	    		return ;
-	    	}
-	    	DebugLog("BOOTLOADER flash erased ok!\r\n");
-
-	    	__HAL_FLASH_DATA_CACHE_DISABLE();
-	    	__HAL_FLASH_INSTRUCTION_CACHE_DISABLE();
-	    	__HAL_FLASH_DATA_CACHE_RESET();
-	    	__HAL_FLASH_INSTRUCTION_CACHE_RESET();
-	    	__HAL_FLASH_INSTRUCTION_CACHE_ENABLE();
-	    	__HAL_FLASH_DATA_CACHE_ENABLE();
-	    	uint64_t* s = (uint64_t*)DELAY_BUF;
-	    	volatile uint64_t* d = (volatile uint64_t*)0x08000000;
-	    	u32 size_bytes=65536;
-	    	for (;size_bytes>0;size_bytes-=8) {
-	    		HAL_FLASH_Program(FLASH_TYPEPROGRAM_DOUBLEWORD, (uint32_t)(size_t)(d++), *s++);
-	    	}
-		    HAL_FLASH_Lock();
-		    DebugLog("BOOTLOADER has been flashed!\r\n");
-}
 int miditest(void);
 void midiinit(void);
 
@@ -325,7 +260,7 @@ int main(void)
     }
 
 
-  check_bootloader_flash();
+  //check_bootloader_flash(); // used to be here, but now we do it in plinky_init
 
   //  miditest();
 
