@@ -304,13 +304,11 @@ int main(void)
 
   HAL_Delay(1);
   bool encdown = !((GPIOC->IDR>>13)&1);
-
   if (!encdown) { // encoder not down
 	  jump_to_app();
   }
   // BOOTLOADER FLASHING MODE!!
   memcpy((void*)DELAY_BUF,(void*)0x08000000,65536); // copy bootloader into RAM!:)
-  memset((void*)REVERB_BUF,0,32768); // use reverbbuf as a byte mask of which bootlder pages have been written
 
   /* USER CODE END SysInit */
 
@@ -338,6 +336,7 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
+
 
     /* USER CODE BEGIN 3 */
 	  if (encstate==1)

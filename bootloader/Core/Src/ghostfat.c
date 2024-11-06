@@ -30,12 +30,12 @@
 #include "main.h"
 
 #undef FLASH_PAGE_SIZE
-#define VOLUME_LABEL "PLINKY"
 #define FLASH_PAGE_SIZE 4096 // the mcu does 2k, but the SPI does 4k. lets go with 4k
 #define USER_FLASH_START 65536
 #define USER_FLASH_END (512*1024)
 #define UF2_FAMILY 0x00ff6919
 #define VALID_FLASH_ADDR(addr, sz) (USER_FLASH_START <= (addr) && (addr) + (sz) <= USER_FLASH_END)
+
 
 void target_flash_lock(void) {
 	HAL_FLASH_Lock();
@@ -50,29 +50,6 @@ void scb_reset_system(void) {
 }
 
 #include "uf2.h"
-
-typedef struct {
-	uint8_t JumpInstruction[3]; // 0
-	uint8_t OEMInfo[8]; // 3
-	uint16_t SectorSize; // 0xb
-	uint8_t SectorsPerCluster; // 0xd
-	uint16_t ReservedSectors; // 0xe
-	uint8_t FATCopies; // 0x10
-	uint16_t RootDirectoryEntries; // 0x11
-	uint16_t TotalSectors16; // 0x13
-	uint8_t MediaDescriptor; // 0x15
-	uint16_t SectorsPerFAT; // 0x16
-	uint16_t SectorsPerTrack; // 0x18
-	uint16_t Heads; // 0x1a
-	uint32_t HiddenSectors; // 0x1c
-	uint32_t TotalSectors32; // 0x20
-	uint8_t PhysicalDriveNum;
-	uint8_t Reserved;
-	uint8_t ExtendedBootSig;
-	uint32_t VolumeSerialNumber;
-	uint8_t VolumeLabel[11];
-	uint8_t FilesystemIdentifier[8];
-} __attribute__((packed)) FAT_BootBlock;
 
 typedef struct {
 	char name[8];
@@ -100,9 +77,9 @@ struct UF2File {
 };
 
 const char infoUf2File[] = //
-		"UF2 Bootloader v1.0.0 Plinky\r\n"
-				"Model: Plinky Synth v1.0.0\r\n"
-				"Board-ID: STM32L476-Plinky-100\r\n";
+		"UF2 Bootloader v1.0.3 Plinky\r\n"
+				"Model: Plinky Synth v1.0.3\r\n"
+				"Board-ID: STM32L476-Plinky-103\r\n";
 
 const char indexFile[] = //
 		"<!doctype html>\n"
@@ -117,8 +94,8 @@ const char indexFile[] = //
 // ae - rewrite this part completely, I dont like the define mess
 // the sizes here are as reported by FAT, so for UF2 files they are double the size on the actual flash chip
 static const struct UF2File info[] = {
-		{ .name = "INFO_UF2TXT", .content = infoUf2File, 		.size = sizeof(infoUf2File) - 1 },
 		{ .name = "INDEX   HTM", .content = indexFile, 			.size = sizeof(indexFile) - 1 },
+		{ .name = "INFO_UF2TXT", .content = infoUf2File, 		.size = sizeof(infoUf2File) - 1 },
 		{ .name = "BOOTLOADUF2", .content = (void*) DELAY_BUF, 	.size = 128 * 1024 },
 		{ .name = "CURRENT UF2", .content = (void*) 0x08010000, .size = (1024 - 128) * 1024 },
 		{ .name = "PRESETS UF2", .content = (void*) 0x08080000, .size = 1024 * 1024- 4 * 1024 },
@@ -132,24 +109,71 @@ static const struct UF2File info[] = {
 		{ .name = "SAMPLE6 UF2", .content = (void*) 0x41800000,	.size = 8 * 1024 * 1024 },
 		{ .name = "SAMPLE7 UF2", .content = (void*) 0x41c00000, .size = 8 * 1024 * 1024 },
 };
+
+static inline uint32_t mix(uint32_t a,uint32_t b,uint32_t c) \
+{ \
+  a -= b; a -= c; a ^= (c>>13); \
+  b -= c; b -= a; b ^= (a<<8); \
+  c -= a; c -= b; c ^= (b>>13); \
+  a -= b; a -= c; a ^= (c>>12);  \
+  b -= c; b -= a; b ^= (a<<16); \
+  c -= a; c -= b; c ^= (b>>5); \
+  a -= b; a -= c; a ^= (c>>3);  \
+  b -= c; b -= a; b ^= (a<<10); \
+  c -= a; c -= b; c ^= (b>>15); \
+  return c;
+}
+uint32_t get_serialno(void) {
+	uint32_t 	uid0=HAL_GetUIDw0 ();
+	uint32_t 	uid1=HAL_GetUIDw1 ();
+	uint32_t 	uid2=HAL_GetUIDw2 ();
+	return mix(uid0,uid1,uid2);
+}
+
 #define NUM_FILES 14
 #define FIRST_UF2_FILE 2
 
+// these dont count the MBR!
 #define RESERVED_SECTORS 1
-#define ROOT_DIR_SECTORS 1
-#define SECTORS_PER_FAT 191 // each fat sector has 256 cluster entries = 512k of disk,
+#define ROOT_DIR_SECTORS 32
+#define SECTORS_PER_FAT 129
+
+#define SECTORS_PER_CLUSTER 8
 
 #define START_FAT0 RESERVED_SECTORS // 1
-#define START_FAT1 (START_FAT0 + SECTORS_PER_FAT) // 192
-#define START_ROOTDIR (START_FAT1 + SECTORS_PER_FAT) // 192+191
-#define START_CLUSTERS (START_ROOTDIR + ROOT_DIR_SECTORS) // 192+192
+#define START_FAT1 (START_FAT0 + SECTORS_PER_FAT) // 130+1
+#define START_ROOTDIR (START_FAT1 + SECTORS_PER_FAT) // 259+1
+#define START_CLUSTERS (START_ROOTDIR + ROOT_DIR_SECTORS) // 260+1
 
-static const FAT_BootBlock BootBlock = { .JumpInstruction = { 0xeb, 0x3c, 0x90 }, .OEMInfo = "UF2 UF2 ", .SectorSize = 512,
-		.SectorsPerCluster = 4, // 2k clusters
-		.ReservedSectors = RESERVED_SECTORS, .FATCopies = 2, .RootDirectoryEntries = (ROOT_DIR_SECTORS * 512 / 32),
-		.TotalSectors16 = 0, //NUM_FAT_BLOCKS - 2,
-		.TotalSectors32 = (95 * 1024 * 1024) / 512, .MediaDescriptor = 0xF8, .SectorsPerFAT = SECTORS_PER_FAT, .SectorsPerTrack = 1, .Heads = 1,
-		.ExtendedBootSig = 0x29, .VolumeSerialNumber = 0x00420042, .VolumeLabel = VOLUME_LABEL, .FilesystemIdentifier = "FAT16   ", };
+const static uint8_t boot_sector[] = {
+	0xeb, 0x3c, 0x90, // jump
+	'M', 'S', 'W', 'I', 'N', '4', '.', '1',  
+	0x00, 0x02, // sector size 512
+	SECTORS_PER_CLUSTER, // sectors per cluster
+	0x01, 0x00, // reserved clusters (minus the MBR!)
+	
+	0x02, // number of FATs // 16
+	0x00, 0x02, // root directory entries - 512 (32 sectors)
+	0x00, 0x00, // total sectors (16 bit)
+	0xf8, // media descriptor
+	0x81, 0x00, // sectors per FAT
+	0x01, 0x00, // sectors per track
+	0x01, 0x00, // number of heads
+	0x01,0,0,0, // hidden sectors
+
+	0xff, 0xff, 0x03, 0x00, // total sectors (32 bit) // 32
+	0, // drive number
+	0, // reserved
+	0x29, // extended boot signature
+	0, 0, 0, 0, // volume serial number // 39
+	'P', 'L', 'I', 'N', 'K', 
+
+	'Y', ' ', ' ', ' ', ' ', ' ', // volume label
+	'F', 'A', 'T', '1', '6', ' ', ' ', ' ', // filesystem identifier
+	0xeb, 0xfe
+};
+static_assert(sizeof(boot_sector)==0x40,"boot sector size");
+
 
 static uint32_t ms;
 #ifdef FLASH_PAGE_SIZE
@@ -343,7 +367,7 @@ void flushFlash(void) {
 }
 
 int clustersize(int bytes) {
-	return (bytes+2043)/2048;
+	return (bytes+SECTORS_PER_CLUSTER*512-1)/(SECTORS_PER_CLUSTER*512);
 }
 
 void flash_write(uint32_t dst, const uint8_t *src, int len) {
@@ -382,21 +406,38 @@ static void padded_memcpy(char *dst, const char *src, int len) {
 	}
 }
 
+
 int read_block(uint32_t block_no, uint8_t *data) {
 	memset(data, 0, 512);
-	uint32_t sectionIdx = block_no;
-
 	if (block_no == 0) {
-		memcpy(data, &BootBlock, sizeof(BootBlock));
-		data[510] = 0x55;
-		data[511] = 0xaa;
+		// MBR - including partition table
+		*(uint32_t*)(data+0x1b8) = get_serialno();
+		data[0x1c2] = 0xe; // FAT16
+		data[0x1c6] = 0x1;
+		data[0x1ca] = 0xff; // disk size in sectors
+		data[0x1cb] = 0xff;
+		data[0x1cc] = 0x03;
+		data[0x1fe] = 0x55;
+		data[0x1ff] = 0xaa;
+		return 0;
+	}
+	block_no--; // skip mbr
+	uint32_t sectionIdx = block_no;
+	if (block_no == 0) {
+		// Boot sector
+		memcpy(data, boot_sector,sizeof(boot_sector));
+		*(uint32_t*)(data+39) = get_serialno();
+		data[0x1fe] = 0x55;
+		data[0x1ff] = 0xaa;
 	} else if (block_no < START_ROOTDIR) {
 		sectionIdx -= START_FAT0;
 		if (sectionIdx >= SECTORS_PER_FAT)
 			sectionIdx -= SECTORS_PER_FAT;
 		if (sectionIdx == 0) {
-			data[0] = 0xf0;
+			data[0] = 0xf8;
 			data[1] = 0xff;
+			data[2] = 0xff;
+			data[3] = 0xff;
 		}
 		int basecluster = sectionIdx * 256;
 		int first_cluster=2;
@@ -415,16 +456,27 @@ int read_block(uint32_t block_no, uint8_t *data) {
 		}
 	} else if (block_no < START_CLUSTERS) {
 		sectionIdx -= START_ROOTDIR;
+	// 19 Jul 2019 10:23:00
+#define PLINKY_TIME_FRAC 100
+#define PLINKY_TIME ((10u << 11u) | (23u << 5u) | (00u >> 1u))
+#define PLINKY_DATE ((39u << 9u) | (7u << 5u) | (19u))
 		if (sectionIdx == 0) {
 			DirEntry *d = (void*) data;
-			padded_memcpy(d->name, (const char*) BootBlock.VolumeLabel, 11);
+			padded_memcpy(d->name, "PLINKY     ", 11);
 			d->attrs = 0x28;
+			d->createTimeFine = PLINKY_TIME_FRAC;
+			d->createTime = d->updateTime = PLINKY_TIME;
+			d->createDate = d->updateDate = PLINKY_DATE;
 			int first_cluster=2;
 			for (int i = 0; i < NUM_FILES; ++i) {
 				d++;
 				const struct UF2File *inf = &info[i];
 				d->size = inf->size;
 				d->startCluster = first_cluster;
+				d->attrs = 0;	
+				d->createTimeFine = PLINKY_TIME_FRAC;
+				d->createTime = d->updateTime = PLINKY_TIME;
+				d->createDate = d->updateDate = PLINKY_DATE;
 				first_cluster+=clustersize(d->size);
 				padded_memcpy(d->name, inf->name, 11);
 			}
@@ -433,7 +485,7 @@ int read_block(uint32_t block_no, uint8_t *data) {
 		sectionIdx -= START_CLUSTERS;
 		int first_cluster=2;
 		for (int f = 0; f < NUM_FILES; ++f) {
-			int sector_in_file = sectionIdx - (first_cluster - 2) * 4;
+			int sector_in_file = sectionIdx - (first_cluster - 2) * SECTORS_PER_CLUSTER;
 			first_cluster+=clustersize(info[f].size);
 			if (sector_in_file < 0)
 				continue;

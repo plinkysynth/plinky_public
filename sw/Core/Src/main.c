@@ -200,7 +200,7 @@ void check_bootloader_flash(void) {
 	DebugLog("bootloader left %d ones for us magic is %08x\r\n", count, magic);
 	if (count!=64/4 || magic!=0xa738ea75)
 		return;
-
+	rb32[64]++; // clear the magic
 	const uint32_t *app_base = (const uint32_t *)DELAY_BUF;
 	DebugLog("bootloader app base is %08x %08x\r\n", app_base[0], app_base[1]);
 
