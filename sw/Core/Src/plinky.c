@@ -681,6 +681,7 @@ int arpdebugi;
 #endif
 
 
+extern const short wavetable[17][1031];
 
 //s16 wavetable[WAVETABLE_SIZE*WT_LAST];
 #ifndef EMU

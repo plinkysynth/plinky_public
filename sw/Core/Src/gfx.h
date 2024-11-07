@@ -71,7 +71,7 @@ void vline(int x1, int y1, int y2, int c) {
 		} else {
 			*dst |= b1 & mask;
 			dst += W;
-			for (; --n; dst += W)
+			if (--n) for (; --n; dst += W)
 				*dst |= mask;
 			*dst |= b2 & mask;
 		}
@@ -81,7 +81,7 @@ void vline(int x1, int y1, int y2, int c) {
 		} else {
 			*dst &= ~b1;
 			dst += W;
-			for (; --n; dst += W)
+			if (--n) for (; --n; dst += W)
 				*dst = 0;
 			*dst &= ~b2;
 		}

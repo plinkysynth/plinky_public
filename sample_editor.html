@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WebUSB App</title>
+</head>
+<body>
+<button id="connect">Connect...</button>
+<button id="send">Send</button>
+<br/>
+<canvas id="canvas" width="2048" height="256"></canvas>
+<script>
+let device;
+let interfaceNumber;
+let endpointIn;
+let endpointOut;
+let state = 0, cmd = 0, idx = 0, offset = 0, len = 0, big = 0, payload = [];
+
+function drawWaveform(bytes) {
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    const width = canvas.width = 2048; // ensure canvas is 2048 pixels wide
+    const height = canvas.height;
+
+    // Clear canvas
+    ctx.clearRect(0, 0, width, height);
+
+    // Interpret bytes as 16-bit little-endian signed integers
+    const values = [];
+    for (let i = 0; i < bytes.length; i += 2) {
+        const value = bytes[i] | (bytes[i + 1] << 8); // Little-endian conversion
+        values.push(value < 0x8000 ? value : value - 0x10000); // Interpret as signed
+    }
+
+    // Scale and draw waveform
+    ctx.beginPath();
+    for (let x = 0; x < values.length && x < width; x++) {
+        const y = ((-values[x] + 32768) / 65535) * height; // Map y range to canvas height
+        x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    }
+    ctx.stroke();
+}
+
+
+async function connectDevice() {
+    try {
+        device = await navigator.usb.requestDevice({ filters: [{ vendorId: 0xcafe }] });
+        await device.open();
+        if (device.configuration === null) await device.selectConfiguration(1);
+
+        const interfaces = device.configuration.interfaces;
+        for (const element of interfaces) {
+            for (const alternate of element.alternates) {
+                if (alternate.interfaceClass === 0xFF) {  // Vendor-specific interface class
+                    interfaceNumber = element.interfaceNumber;
+                    for (const endpoint of alternate.endpoints) {
+                        if (endpoint.direction === 'in') {
+                            endpointIn = endpoint.endpointNumber;
+                        }
+                        if (endpoint.direction === 'out') {
+                            endpointOut = endpoint.endpointNumber;
+                        }
+                    }
+                    break;
+                }
+            }
+        }
+
+        if (endpointIn === undefined || endpointOut === undefined) {
+            throw new Error('Endpoints not found');
+        }
+
+        await device.claimInterface(interfaceNumber);
+        await device.selectAlternateInterface(interfaceNumber, 0);
+        reset(0);  // Reset state machine
+        console.log("Device connected:", device, endpointIn, endpointOut);
+
+        // Change button to "Disconnect"
+        document.getElementById('connect').textContent = 'Disconnect';
+        
+        // Send initial message and start reading loop
+        readLoop();
+    } catch (error) {
+        console.error("Connection error:", error);
+    }
+}
+
+async function disconnectDevice() {
+    try {
+        if (device) {
+            await device.close();
+            device = null;
+            console.log("Device disconnected.");
+        }
+        reset(0);
+        document.getElementById('connect').textContent = 'Connect...';
+    } catch (error) {
+        console.error("Disconnection error:", error);
+    }
+}
+
+async function sendMsg(cmd, idx, offset, len, optionalData = []) {
+    const big = (offset>=65536 || len>=65536);
+    const header = big ? 
+    [0xf3, 0x0f, 0xab, 0xcb, cmd, idx, offset & 255, (offset >> 8) & 255, (offset >> 16) & 255, offset >> 24, len & 255, (len >> 8) & 255, (len >> 16) & 255, len >> 24] : 
+    [0xf3, 0x0f, 0xab, 0xca, cmd, idx, offset & 255, offset >> 8, len & 255, len >> 8];
+    const message = header.concat(optionalData);
+    for (let i = 0; i < message.length; i += 64) {
+        const chunk = message.slice(i, i + 64);
+        console.log("Sending data:", chunk);
+        await device.transferOut(endpointOut, new Uint8Array(chunk));
+    }
+}
+
+async function readLoop() {
+    while (device) {
+        try {
+            const result = await device.transferIn(endpointIn, 64);
+            const data = new Uint8Array(result.data.buffer);
+            console.log("Received data:", data);
+            data.forEach(byte => processByte(byte));
+            console.log("State:", state, big, cmd, idx, offset, len, payload.length);
+        } catch (error) {
+            console.error("Read error, device disconnected:", error);
+            disconnectDevice();  // Clean up on error
+            break;
+        }
+    }
+}
+
+function reset(x) {
+    state = big = cmd = idx = offset = len = 0;
+    payload = [];
+    if (x === 0xf3) state = 1;
+    console.log("State reset. Starting state:", state);
+}
+
+function processByte(x) {
+    switch (state) {
+        case 0: if (x === 0xf3) state++; else reset(x); break;
+        case 1: if (x === 0x0f) state++; else reset(x); break;
+        case 2: if (x === 0xab) state++; else reset(x); break;
+        case 3: big = (x=== 0xcb) ? 1 : 0; if (x === 0xca || x==0xcb) state++; else reset(x); break;
+        case 4: cmd = x; state++; break;
+        case 5: idx = x; state++; break;
+        case 6: offset = x; state++; break;
+        case 7: offset += x * 256; state=big ? 8 : 10; break;
+        case 8: offset += x * 65536; state++; break;
+        case 9: offset += x * 16777216; state++; break;
+        case 10: len = x; state++; break;
+        case 11: len += x * 256; 
+            if (big) state++; else {
+                state=14; 
+                if (len < 0) reset(x); 
+                else if (len === 0) processPacket(); 
+            }
+            break;
+        case 12: len += x * 65536; state++; break;
+        case 13: len += x * 16777216; state++; 
+            if (len < 0) reset(x); 
+            else if (len === 0) processPacket();
+            break;
+        case 14: payload.push(x); len--; 
+                 if (len === 0) processPacket(); 
+                 break;
+    }
+}
+
+function processPacket() {
+    console.log("Packet received:", { cmd, idx, offset, len, payload });
+    drawWaveform(payload);
+    reset();
+}
+
+document.getElementById('connect').addEventListener('click', async () => {
+    if (device) {
+        await disconnectDevice();
+    } else {
+        await connectDevice();
+    }
+});
+
+document.getElementById('send').addEventListener('click', async () => {
+    if (device) {
+        idx=5;
+        await sendMsg(4, 0, 1031*2*idx, 1031*2);
+    }
+});
+</script>
+</body>
+</html>

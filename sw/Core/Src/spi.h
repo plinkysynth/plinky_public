@@ -46,7 +46,8 @@ void spi_read_done(void) {
 			resetspistate();
 		} else {
 			int dacchan = spistate-MAX_SPI_STATE;
-			spi_update_dac(dacchan);
+			if (dacchan<4 && dacchan>=0)
+				spi_update_dac(dacchan);
 		}
 	}
 	else {
