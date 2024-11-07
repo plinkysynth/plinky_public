@@ -59,3 +59,8 @@
 // 0.A7 - Bootloader work to make it work on MacOSX
 #define VERSION2			  "v0.A7"
 
+// the bootloader is manually copied to the file golden_bootloader.bin
+// makebin.py uses it to make a UF2 file containing the bootloader + latest firmware together
+// it also checksums the firmware and prints out the value. it should match this value
+
+#define GOLDEN_CHECKSUM 0xb5a7228c

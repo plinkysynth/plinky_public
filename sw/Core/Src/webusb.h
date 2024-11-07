@@ -51,6 +51,7 @@ typedef struct WebUSBHeader { // 10 byte header
 	u16 len;
 } WebUSBHeader;
 const static u8 wu_magic[4] = { 0xf3,0x0f,0xab,0xca }; // we expect magic to be these
+const static u8 wu_magic_ext[4] = { 0xf4,0x1f,0xcb,0xdb }; // we expect magic to be these
 #define WEB_USB_TIMEOUT 500
 enum { // state machine ticks thru these in order, more or less
 	WU_MAGIC0,

@@ -76,10 +76,14 @@ struct UF2File {
 	int size;
 };
 
+#define BOOTLOADER_VERSION "1.04"
+__attribute__((section(".signature"), used)) const char firmware_signature[4] = BOOTLOADER_VERSION;
+
+
 const char infoUf2File[] = //
-		"UF2 Bootloader v1.0.3 Plinky\r\n"
-				"Model: Plinky Synth v1.0.3\r\n"
-				"Board-ID: STM32L476-Plinky-103\r\n";
+		"UF2 Bootloader v" BOOTLOADER_VERSION " Plinky\r\n"
+				"Model: Plinky Synth Bootloader v" BOOTLOADER_VERSION "\r\n"
+				"Board-ID: STM32L476-Plinky-v3\r\n";
 
 const char indexFile[] = //
 		"<!doctype html>\n"

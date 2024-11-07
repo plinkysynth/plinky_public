@@ -68,6 +68,7 @@ SECTIONS
 
     . = ALIGN(4);
     _etext = .;        /* define a global symbols at end of code */
+
   } >FLASH
 
   /* Constant data into "FLASH" Rom type memory */
@@ -122,6 +123,7 @@ SECTIONS
     . = ALIGN(4);
   } >FLASH
 
+
   /* Used by the startup to initialize data */
   _sidata = LOADADDR(.data);
 
@@ -137,6 +139,7 @@ SECTIONS
     _edata = .;        /* define a global symbol at data end */
     
   } >RAM AT> FLASH
+
 
   /* Uninitialized data section into "RAM" Ram type memory */
   . = ALIGN(4);
@@ -165,6 +168,11 @@ SECTIONS
     . = ALIGN(8);
   } >RAM
 
+  .signature : 
+  {
+    . = ALIGN(4);
+    KEEP(*(.signature))
+  } > FLASH
 
   /* Remove information from the compiler libraries */
   /DISCARD/ :

@@ -2557,6 +2557,7 @@ short *getrxbuf(void);
 #define REVERB_BUF 0x10000000
 #define DELAY_BUF  0x20008000
 
+
 void check_bootloader_flash(void) {
 	int count=0;
 	uint32_t *rb32=(uint32_t*)REVERB_BUF;
@@ -2569,8 +2570,23 @@ void check_bootloader_flash(void) {
   	if (count!=64/4 || magic!=0xa738ea75) {
 		return;
 	}
-	clear();
   char buf[32];
+	// checksum!
+	uint32_t checksum = 0;
+	for (int i=0;i<65536/4;++i) {
+		checksum = checksum * 23 + ((uint32_t*)DELAY_BUF)[i];
+	}
+	if (checksum != GOLDEN_CHECKSUM) {
+		DebugLog("bootloader checksum failed %08x != %08x\r\n", checksum, GOLDEN_CHECKSUM);
+			clear();
+			drawstr(0,0,F_8,"bad bootloader crc");
+			snprintf(buf, sizeof(buf), "%08x vs %08x", checksum, GOLDEN_CHECKSUM);
+			drawstr(0,8,F_8,buf);
+			oled_flip(vrambuf);
+			HAL_Delay(10000);
+		return;
+	}
+	clear();
   snprintf(buf, sizeof(buf), "%08x %d", magic, count);
   drawstr(0, 0, F_16, buf);
   snprintf(buf, sizeof(buf), "%08x %08x", app_base[0], app_base[1]);
@@ -2606,7 +2622,11 @@ void check_bootloader_flash(void) {
 	    }
 	    DebugLog("FLASHING BOOTLOADER! DO NOT RESET\r\n");
 		clear();
-		drawstr(0,0,F_16_BOLD,"FLASHING\nBOOTLOADER");
+		drawstr(0,0,F_12_BOLD,"FLASHING\nBOOTLOADER");
+		char verbuf[5]={};
+		memcpy(verbuf,(DELAY_BUF+65536-4),4);
+		drawstr(0,24,F_8,verbuf);
+
 		oled_flip(vrambuf);
 	    HAL_FLASH_Unlock();
 	    FLASH_EraseInitTypeDef EraseInitStruct;
@@ -2640,7 +2660,8 @@ void check_bootloader_flash(void) {
 		    HAL_FLASH_Lock();
 		    DebugLog("BOOTLOADER has been flashed!\r\n");
 			clear();
-			drawstr(0,0,F_16_BOLD,"BOOTLOADER\nFLASHED OK!");
+			drawstr(0,0,F_12_BOLD,"BOOTLOADER\nFLASHED OK!");
+			drawstr(0,24,F_8,verbuf);
 			oled_flip(vrambuf);
 			HAL_Delay(3000);
 
