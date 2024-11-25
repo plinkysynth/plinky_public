@@ -523,6 +523,7 @@ int update_clock(void) { // returns 1 for clock, 2 for half clock, 0 for neither
 	// if (playmode == PLAY_PREVIEW && shift_down==SB_PLAY) -- maybe eat a single clock if the finger is still down?
 
 	if (!gotclock) {
+		SetOutputCVClk(0); // trigger style clock
 		if (ticks_since_clock == last_clock_period / 2) {
 			SetOutputCVClk(0);
 			seq_step(0);

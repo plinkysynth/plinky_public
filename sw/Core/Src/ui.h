@@ -1132,6 +1132,8 @@ extern s16 noisegate;
 void plinky_frame(void) {
 	codec_setheadphonevol(sysparams.headphonevol + 45);
 
+	PumpWebUSB(false);
+
 #ifdef NOISETEST
 	static u8 foo;
 	foo++;
@@ -1157,6 +1159,13 @@ void plinky_frame(void) {
 
 	audiopeakhistory[audiohistpos] = clampi(audioin_peak / 64, 0, 255);
 
+	if (g_disable_fx) {
+		// web usb is up to its tricks :)
+		void draw_webusb_ui(int);
+		draw_webusb_ui(0);
+		HAL_Delay(30);
+		return;
+	}
 
 	if (editmode == EM_SAMPLE) {
 		samplemode_ui();

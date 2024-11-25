@@ -15,7 +15,8 @@ enum
 
 extern uint8_t const desc_ms_os_20[];
 
-static bool web_serial_connected = false;
+extern bool web_serial_connected;
+bool web_serial_connected = false;
 
 
 #define URL  "www.plinkysynth.com/webusb"
@@ -140,13 +141,7 @@ void midiinit(void)
   tusb_init();
 }
 
-void webserial_task(void);
 
-void usb_midi_update(void) {
-	tud_task();
-//	cdc_task();
-	webserial_task();
-}
 bool midi_receive(unsigned char packet[4]) {
 	  return tud_midi_available() && tud_midi_packet_read(packet);
 }
@@ -268,26 +263,9 @@ bool tud_vendor_control_xfer_cb(uint8_t rhport, uint8_t stage, tusb_control_requ
 
     return true;
 }
-void PumpWebUSB(void);
 
-void webserial_task(void)
-{
-    if (web_serial_connected)
-    {
-       // if (tud_vendor_available())
-        {
-            /*
-            uint8_t buf[64];
-            uint32_t count = tud_vendor_read(buf, sizeof(buf));
+void PumpWebUSB(bool calling_from_audio_thread);
 
-            // echo back to both web serial and cdc
-            for (int c1=0;c1<count;++c1)
-            	buf[c1]&=~0x20;
-            tud_vendor_write(buf, count);*/
-            PumpWebUSB();
-        }
-    }
-}
 
 /*
 //--------------------------------------------------------------------+

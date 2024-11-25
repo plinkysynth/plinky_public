@@ -16,6 +16,9 @@ u16 expander_out[4] = { EXPANDER_ZERO,EXPANDER_ZERO,EXPANDER_ZERO,EXPANDER_ZERO 
 
 int spi_readgrain_dma(int gi);
 volatile u8 spistate=0;
+extern volatile uint8_t g_disable_fx;
+volatile uint8_t g_disable_fx = 0; // if you set this to 1, it will then tick to 2 and we can guaruntee that fx wont be used
+
 u32 startspi;
 u8 alexdmamode;
 volatile u32 spiduration;

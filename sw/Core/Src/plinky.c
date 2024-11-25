@@ -1894,7 +1894,8 @@ void DoAudio(u32 *dst, u32 *audioin) {
 	if (1) {
 		midi_send_update();
 #ifndef EMU
-		usb_midi_update();
+		//usb_midi_update();
+		PumpWebUSB(true);
 		serial_midi_update();
 #endif
 		for (int i = 0; i < 2; ++i) if (!processusbmidi())
@@ -2077,6 +2078,7 @@ void DoAudio(u32 *dst, u32 *audioin) {
 	SetOutputCVGate(maxvol);
 	AdvanceCVOut();
 	tc_stop(&_tc_audio);
+
 
 	if (ramsample.samplelen > 0) {
 		// decide on a priority for 8 voices
@@ -2280,12 +2282,14 @@ if (ENABLE_HPF) for (int i = 0; i < BLOCK_SAMPLES; ++i) {
 	int scopescale = (65536 * 24) / maxi(16384, (int)peak);
 	//int scopetrig = (65536 / 2) / (1 + scopex);
 
+	if (g_disable_fx==1)
+		g_disable_fx=2; // tell the webusb on the main thread we are ready for them
 #ifdef DEBUG
 #define ENABLE_FX 0
 #else
 #define ENABLE_FX 1
 #endif
-	if (ENABLE_FX) for (int i = 0; i < BLOCK_SAMPLES / 2; ++i) {
+	if (ENABLE_FX && g_disable_fx == 0) for (int i = 0; i < BLOCK_SAMPLES / 2; ++i) {
 		//float lfopos1 = lfo_next(&delaylfo1) * wob;
 		//int wobpos1 = FLOAT2FIXED(lfopos1, 12 + 6);
 		int targetdt=k_target_delaytime+2048-(int)wobpos;
