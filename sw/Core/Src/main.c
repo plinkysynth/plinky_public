@@ -238,6 +238,11 @@ int main(void)
   MX_USB_OTG_FS_PCD_Init();
   /* USER CODE BEGIN 2 */
   // check if the bootloader wants us to flash
+    /* Peripheral interrupt init */
+    HAL_NVIC_SetPriority(OTG_FS_IRQn, 0, 0);
+    HAL_NVIC_EnableIRQ(OTG_FS_IRQn);
+  /* USER CODE BEGIN USB_OTG_FS_MspInit 1 */
+
 
   HAL_Delay(8);
   uint8_t whoamI=0;

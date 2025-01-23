@@ -66,7 +66,9 @@ void I2C2_EV_IRQHandler(void);
 void USART3_IRQHandler(void);
 void DMA2_Channel1_IRQHandler(void);
 void DMA2_Channel2_IRQHandler(void);
+
 /* USER CODE BEGIN EFP */
+void OTG_FS_IRQHandler(void);
 
 /* USER CODE END EFP */
 

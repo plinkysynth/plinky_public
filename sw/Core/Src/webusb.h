@@ -230,6 +230,9 @@ void PumpWebUSB(bool calling_from_audio_thread) {
       if (wu_hdr.cmd < 2) {
         if (wu_hdr.idx >= 64 + 8)
           wu_hdr.idx = ((ramsample1_idx - 1) & 7) + 64;
+        else if (wu_hdr.idx>=64) {
+        	// leave it
+        }
         else if (wu_hdr.idx >= 32)
           wu_hdr.idx = sysparams.curpreset;
       } else if (wu_hdr.cmd == 2 || wu_hdr.cmd == 3) {

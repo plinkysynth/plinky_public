@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plinky Sample Upload/Download</title>
+    <style>
+        body {
+            font-family: Helvetica, Arial, sans-serif;
+            background-color: #eee;
+            color: #222;
+            margin: 10;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: left;
+        }
+
+        .connect-button {
+            display: block;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background-color: #28e;
+            border: none;
+            cursor: pointer;
+            text-align: left;
+        }
+
+        .connect-button:hover {
+            background-color: #4af;
+        }
+
+        .connect-button:active {
+            background-color: white;
+            color: #28e;
+        }
+
+        .row {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            width: 100%;
+            height: 64px;
+            padding: 0px 10px 10px 10px;
+        }
+
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+            width: 10%;
+            margin-right: 10px;
+        }
+
+        .buttons button {
+            height: 64px;
+            font-size: 12px;
+            cursor: pointer;
+            border: 1px solid #ccc;
+            background-color: #fff;
+        }
+
+        .buttons button:hover {
+            background-color: #eee;
+        }
+
+        .canvas-container {
+            flex-grow: 1;
+            width: 80%;
+            height: 100%;
+            background-color: #fff;
+            border: 1px solid #ccc;
+        }
+
+        #sample-container {
+            display: block;
+            /* none */
+        }
+
+        .control-bar {
+            display: flex;
+            align-items: center;
+            margin: 10px;
+        }
+
+        .control-bar .connect-button {
+            margin-right: 10px;
+        }
+
+        .input-container label {
+            margin-right: 10px;
+            font-size: 14px;
+        }
+
+        .input-container input {
+            padding: 5px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Plinky Sample Upload/Download</h1>
+    <div class="control-bar">
+        <button class="connect-button" id="connect">Connect...</button>
+        <div class="input-container">
+            <label for="filename-prefix">Filename Prefix:</label>
+            <input id="filename-prefix" type="text" value="plinky_sample_">
+        </div>
+    </div>
+
+
+    <div id="sample-container">
+        <!-- Rows -->
+        <div class="row" id="row0">
+            <div class="buttons">
+                <button onclick="getFromPlinky(0)">Get from Plinky</button>
+            </div>
+            <canvas id="sample0" class="canvas-container"></canvas>
+        </div>
+        <div class="row" id="row1">
+            <div class="buttons">
+                <button onclick="getFromPlinky(1)">Get from Plinky</button>
+            </div>
+            <canvas id="sample1" class="canvas-container"></canvas>
+        </div>
+        <div class="row" id="row2">
+            <div class="buttons">
+                <button onclick="getFromPlinky(2)">Get from Plinky</button>
+            </div>
+            <canvas id="sample2" class="canvas-container"></canvas>
+        </div>
+        <div class="row" id="row3">
+            <div class="buttons">
+                <button onclick="getFromPlinky(3)">Get from Plinky</button>
+            </div>
+            <canvas id="sample3" class="canvas-container"></canvas>
+        </div>
+        <div class="row" id="row4">
+            <div class="buttons">
+                <button onclick="getFromPlinky(4)">Get from Plinky</button>
+            </div>
+            <canvas id="sample4" class="canvas-container"></canvas>
+        </div>
+        <div class="row" id="row5">
+            <div class="buttons">
+                <button onclick="getFromPlinky(5)">Get from Plinky</button>
+            </div>
+            <canvas id="sample5" class="canvas-container"></canvas>
+        </div>
+        <div class="row" id="row6">
+            <div class="buttons">
+                <button onclick="getFromPlinky(6)">Get from Plinky</button>
+            </div>
+            <canvas id="sample6" class="canvas-container"></canvas>
+        </div>
+        <div class="row" id="row7">
+            <div class="buttons">
+                <button onclick="getFromPlinky(7)">Get from Plinky</button>
+            </div>
+            <canvas id="sample7" class="canvas-container"></canvas>
+        </div>
+        <div>
+            <details open>
+                <summary>Instructions:</summary>
+                <p>This page lets you copy samples from your computer to your plinky, and vice versa.</p>
+                <p>Drag and drop PRESETS.UF2 and SAMPLEx.UF2 files onto this page to upload them to plinky. You will
+                    want BOTH PRESETS and SAMPLEx files to get all the correct settings.</p>
+                <p>Audio files (WAV, MP4, etc) are also supported - be sure to drag them onto the specific slot you want
+                    to change.</p>
+                <p>Alternatively, click a 'Get From Plinky' button to save a WAV file to your computer with the chosen
+                    filename prefix (box above).
+                    These WAV files include metadata in the 'comments' field that preserve the plinky slice points &
+                    note pitches. If you edit the WAV file, be sure to preserve this data, or you can re-edit that data
+                    on the plinky itself.
+                </p>
+            </details>
+        </div>
+    </div>
+
+    <script>
+
+
+        //////////////////////////// file processing
+        /*
+this code can parse the raw structures out of presets.uf2.
+they are in the plinky code, but pasted here for reference.
+at the moment this code does nothing with SysParams nor patterns.
+typedef struct PageFooter {
+    u8 idx; // preset 0-31, pattern (quarters!) 32-127, sample 128-136, blank=0xff
+    u8 version;
+    u16 crc;
+    u32 seq;
+} PageFooter;
+typedef struct SysParams {
+    u8 curpreset;
+    u8 paddy;
+    u8 systemflags;
+    s8 headphonevol;
+    u8 pad[16 - 4];
+} SysParams;
+enum {
+    SYS_DEPRACATED_ARPON=1,
+    SYS_DEPRACATED_LATCHON=2,
+};
+enum {
+    FLAGS_ARP=1,
+    FLAGS_LATCH=2,
+};
+// preset version 1: ??
+// preset version 2: add SAW lfo shape
+#define CUR_PRESET_VERSION 2
+typedef struct Preset {
+    s16 params[96][8];
+    u8 flags;
+    s8 loopstart_step_no_offset;
+    s8 looplen_step;
+    u8 paddy[3];
+    u8 version; // 2
+    u8 category;
+    u8 name[8];
+} Preset;
+static_assert((sizeof(Preset)&15)==0,"?");
+static_assert(sizeof(Preset)+sizeof(SysParams)+sizeof(PageFooter)<=2048, "?");
+typedef struct SampleInfo {
+    u8 waveform4_b[1024]; // 4 bits x 2048 points, every 1024 samples
+    int splitpoints[8];
+    int samplelen; // must be after splitpoints, so that splitpoints[8] is always the length.
+    s8 notes[8];
+    u8 pitched; 
+    u8 loop; // bottom bit: loop; next bit: slice vs all
+    u8 paddy[2]; 
+} SampleInfo;
+static_assert(sizeof(SampleInfo) + sizeof(SysParams) + sizeof(PageFooter) <= 2048, "?");
+static_assert((sizeof(SampleInfo)&15)==0,"?");
+typedef struct FlashPage {
+    union {
+        u8 raw[2048 - sizeof(SysParams) - sizeof(PageFooter)];
+        Preset preset;
+        PatternQuarter patternquarter;
+        SampleInfo sampleinfo;
+    };
+    SysParams sysparams;
+    PageFooter footer;
+} FlashPage;
+static_assert(sizeof(FlashPage) == 2048, "?");
+*/
+        const presetblock = new Uint8Array(512 * 1024); // PRESETS.UF2 writes here
+        const presets = Array.from({ length: 256 }, () => new Uint8Array(2048)); // this is the latest data for each 'preset' (or pattern or sample)
+        const presets_seq = Array.from({ length: 256 }, () => -1); // the latest version number
+        const samples = Array.from({ length: 8 }, () => new Int16Array(2 * 1024 * 1024)); // these are the SAMPLE0.UF2 to 7.
+        let presets_dirty = false;
+        const samples_dirty = Array(8).fill(false);
+
+        document.body.addEventListener('dragover', event => {
+            event.preventDefault();
+        });
+
+        document.body.addEventListener('drop', async event => {
+            event.preventDefault();
+            const dropTarget = document.elementFromPoint(event.clientX, event.clientY);
+            let dropZone = dropTarget && dropTarget.classList.contains('canvas-container') ? parseInt(dropTarget.id.replace('sample', '')) : -1;
+            console.log(`Dropped on ${dropZone >= 0 ? `sample ${dropZone}` : 'none'}`);
+
+            const files = event.dataTransfer.files;
+            for (const file of files) {
+                console.log(`Processing file: ${file.name}`);
+                const buffer = await file.arrayBuffer();
+                dropZone = processFile(buffer, dropZone);
+            }
+            checkDirty();
+        });
+
+        function update_sample_preview_from_sample_ram(i) {
+            // rebuild preview sample thingy
+            let peaks = []
+            for (let j = 0; j < 2048; ++j) {
+                let max = 0;
+                for (let k = j * 1024; k < (j + 1) * 1024; ++k) {
+                    max = Math.max(max, Math.abs(samples[i][k]));
+                }
+                peaks.push((max / 2048) | 0)
+            }
+            for (let j = 0; j < 1024; ++j) {
+                presets[128 + i][j] = peaks[j * 2] + (peaks[j * 2 + 1] << 4);
+            }
+            rendercanvas(i);
+        }
+
+        function checkDirty() {
+            if (presets_dirty) {
+                console.log("presets_dirty - parsing PRESETS.UF2 type file");
+                presets_dirty = false;
+                for (let page = 0; page < 255; ++page) {
+                    pagedata = presetblock.slice(page * 2048, (page + 1) * 2048);
+                    const idx = pagedata[2040];
+                    const version = pagedata[2041];
+                    const crc = pagedata[2042] + pagedata[2043] * 256;
+                    const seq = pagedata[2044] + pagedata[2045] * 256 + pagedata[2046] * 65536 + pagedata[2047] * 16777216;
+                    if (version >= 2 && idx < 136) {
+                        let hash = 123;
+                        for (let i = 0; i < 2040; ++i) {
+                            hash = (hash * 23 + pagedata[i]) & 0xffff;
+                        }
+                        if (hash == crc) {
+                            if (seq > presets_seq[idx]) {
+                                presets_seq[idx] = seq;
+                                presets[idx].set(pagedata);
+                                if (idx >= 128 && idx < 136) {
+                                    console.log("Updated sample", idx - 128, "to seq", seq);
+                                    update_sample_preview_from_sample_ram(idx - 128);
+                                } else {
+                                    //console.log("Updated preset",idx,"to seq",seq);
+                                }
+                                //console.log("Updated preset",idx,"to seq",seq);
+                            }
+                        } else {
+                            console.log("CRC error in page", page, "idx", idx, "version", version, "crc", crc, "seq", seq);
+                        }
+                    }
+                }
+                for (let i = 0; i < 8; ++i) {
+                    rendercanvas(i);
+                }
+            } // presets
+            for (let i = 0; i < 8; ++i) {
+                if (samples_dirty[i]) {
+                    console.log("samples_dirty", i);
+                    samples_dirty[i] = false;
+                    update_sample_preview_from_sample_ram(i);
+                }
+            }
+        }
+
+        function readIntAtOffset(array, offset) {
+            return array[offset] + (array[offset + 1] << 8) + (array[offset + 2] << 16) + (array[offset + 3] << 24);
+        }
+
+        function setIntAtOffset(array, offset, value) {
+            array[offset] = value & 0xFF;
+            array[offset + 1] = (value >> 8) & 0xFF;
+            array[offset + 2] = (value >> 16) & 0xFF;
+            array[offset + 3] = (value >> 24) & 0xFF;
+        }
+
+        function note2idx(str_or_int) {
+            if (typeof str_or_int === 'string') {
+                const notes = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
+                // Extract the note (letters and possibly '#') and the octave (digits).
+                const match = str_or_int.match(/^([A-Ga-g]#?)(\d)$/);
+                if (!match) {
+                    throw new Error(`Invalid note format: ${str_or_int}`);
+                }
+                const [_, note, octave] = match;
+                const noteIndex = notes.indexOf(note.toUpperCase());
+                if (noteIndex === -1) {
+                    throw new Error(`Invalid note: ${note}`);
+                }
+                return noteIndex + parseInt(octave, 10) * 12;
+            } else {
+                return str_or_int;
+            }
+        }
+        async function processFile(fileBuffer, dropZone) {
+            if (isUF2File(fileBuffer)) {
+                console.log('processing this file as UF2')
+                processUF2(fileBuffer);
+                return dropZone;
+            } else {
+                try {
+                    console.log('processing this file as audio')
+                    wavinfo = decodeWAVComment(fileBuffer);
+                    const audioBuffer = await decodeAudio(fileBuffer);
+                    console.log(`Decoded audio buffer length: ${audioBuffer.length}`);
+                    let splitpoints = Array.from({ length: 8 }, (v, k) => (k * audioBuffer.length / 8) | 0);
+                    let notes = Array.from({ length: 8 }, (v, k) => 0);
+                    let pitched = 0;
+                    let loop = 0;
+                    if (wavinfo != null) {
+                        pitched = wavinfo.pitched || 0;
+                        loop = wavinfo.loop || 0;
+                        for (let i = 0; i < 8; ++i) {
+                            notes[i] = wavinfo.notes ? note2idx(wavinfo.notes[i]) : 0;
+                            splitpoints[i] = wavinfo.splitpoints ? wavinfo.splitpoints[i] | 0 : (i * audioBuffer.length / 8) | 0;
+                        }
+                        notes = wavinfo.notes || notes;
+                        splitpoints = wavinfo.splitpoints || splitpoints;
+                    }
+                    if (dropZone >= 0 && dropZone < 8) {
+                        console.log("updating sample", dropZone, "length", audioBuffer.length, 'splitpoints', splitpoints, 'notes', notes, 'pitched', pitched, 'loop', loop);
+                        for (let i = 0; i < 8; ++i) {
+                            setIntAtOffset(presets[128 + dropZone], 1024 + 4 * i, splitpoints[i]);
+                        }
+                        setIntAtOffset(presets[128 + dropZone], 1024 + 4 * 8, audioBuffer.length);
+                        const slicedAudio = audioBuffer.slice(0, 2 * 1024 * 1024);
+                        samples[dropZone].set(slicedAudio);
+                        samples_dirty[dropZone] = true;
+                        console.log(`Sample ${dropZone} updated.`);
+                        return (dropZone + 1) & 7;
+                    }
+                } catch (error) {
+                    console.error(`Failed to decode audio: ${error.message}`);
+                }
+            }
+            return dropZone;
+        }
+
+        function CheckUF2BlockMagic(uint32View, blockIndex) {
+            const MAGIC_START = 0x0A324655;
+            const MAGIC_SECOND = 0x9E5D5157;
+            const MAGIC_END = 0x0AB16F30;
+            const FAMILY_ID = 0x00FF6919;
+            const blockStart = blockIndex * 128; // 128 uint32s per block
+            const flags = uint32View[blockStart + 2];
+            if ((flags & 0x00002000) && uint32View[blockStart + 7] !== FAMILY_ID) {
+                return false;
+            }
+            return (
+                uint32View[blockStart] === MAGIC_START &&
+                uint32View[blockStart + 1] === MAGIC_SECOND &&
+                uint32View[blockStart + 127] === MAGIC_END &&
+                uint32View[blockStart + 4] === 256
+            );
+        }
+
+        function isUF2File(fileBuffer) {
+            console.log(fileBuffer.byteLength)
+            if (fileBuffer.byteLength % 512 !== 0) {
+                return false;
+            }
+            const uint32View = new Uint32Array(fileBuffer);
+            for (let i = 0; i < uint32View.length / 128; i++) { // 128 uint32s per 512-byte block
+                if (CheckUF2BlockMagic(uint32View, i)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        function processUF2(fileBuffer) {
+            const uint32View = new Uint32Array(fileBuffer);
+            for (let i = 0; i < uint32View.length / 128; i++) { // 128 uint32s per 512-byte block
+                if (CheckUF2BlockMagic(uint32View, i)) {
+                    const blockStart = i * 128;
+                    const address = uint32View[blockStart + 3];
+                    const data = new Uint8Array(uint32View.buffer, (blockStart + 8) * 4, 256); // Extract 256 bytes of data
+                    processUF2DataBlock(address, data);
+                }
+            }
+        }
+
+        function processUF2DataBlock(address, data) {
+            if (address >= 0x8080000 && address <= 0x80FF700) {
+                const offset = address - 0x8080000;
+                presetblock.set(data, offset);
+                presets_dirty = true;
+                //console.log(`Presets updated at offset: ${offset}`);
+            } else if (address >= 0x40000000 && address < 0x42000000) {
+                const sampleIndex = (address - 0x40000000) >>> 22; // Divide by 4 MB to get sample index
+                const offset = (address & 0x3FFFFF) >>> 1; // Address within the sample, divide by 2 for int16
+                if (sampleIndex >= 0 && sampleIndex < 8) {
+                    const int16Data = new Int16Array(data.buffer, data.byteOffset, data.length / 2);
+                    samples[sampleIndex].set(int16Data, offset);
+                    samples_dirty[sampleIndex] = true;
+                    //console.log(`Sample ${sampleIndex} updated at offset: ${offset}`);
+                }
+            } else {
+                console.warn(`Unknown UF2 data block address: 0x${address.toString(16)}`);
+            }
+        }
+
+        async function decodeAudio(buffer) {
+            const audioContext = new AudioContext({ sampleRate: 32000 });
+            const audioBuffer = await audioContext.decodeAudioData(buffer);
+
+            // Mix down to mono and clip to 16-bit integers
+            const monoData = new Float32Array(audioBuffer.length);
+            for (let i = 0; i < audioBuffer.length; i++) {
+                monoData[i] = Math.max(-1, Math.min(1, audioBuffer.getChannelData(0)[i]));
+            }
+
+            const int16Data = new Int16Array(monoData.map(sample => sample * 0x7FFF));
+            return int16Data;
+        }
+
+        function decodeWAVComment(buffer) {
+            try {
+                const uint8View = new Uint8Array(buffer);
+                const riff = String.fromCharCode(...uint8View.slice(0, 4));
+                if (riff !== 'RIFF') {
+                    console.log('Not a WAVE file');
+                    return;
+                }
+
+                const fileType = String.fromCharCode(...uint8View.slice(8, 12));
+                if (fileType !== 'WAVE') {
+                    console.log('Not a WAVE file');
+                    return;
+                }
+
+                let offset = 12;
+                while (offset < uint8View.length) {
+                    const chunkID = String.fromCharCode(...uint8View.slice(offset, offset + 4));
+                    const chunkSize = uint8View[offset + 4] |
+                        (uint8View[offset + 5] << 8) |
+                        (uint8View[offset + 6] << 16) |
+                        (uint8View[offset + 7] << 24);
+
+                    if (chunkID === 'LIST') {
+                        const listType = String.fromCharCode(...uint8View.slice(offset + 8, offset + 12));
+                        if (listType === 'INFO') {
+                            let listOffset = offset + 12;
+                            while (listOffset < offset + 8 + chunkSize) {
+                                const subChunkID = String.fromCharCode(...uint8View.slice(listOffset, listOffset + 4));
+                                const subChunkSize = uint8View[listOffset + 4] |
+                                    (uint8View[listOffset + 5] << 8) |
+                                    (uint8View[listOffset + 6] << 16) |
+                                    (uint8View[listOffset + 7] << 24);
+
+                                if (subChunkID === 'ICMT') {
+                                    let comment = String.fromCharCode(...uint8View.slice(listOffset + 8, listOffset + 8 + subChunkSize));
+                                    console.log(`WAV Comment: ${comment}`);
+                                    // strip any nulls off the end
+                                    const nullpos = comment.indexOf('\0');
+                                    if (nullpos >= 0) {
+                                        comment = comment.substr(0, nullpos);
+                                    }
+                                    const parsedComment = JSON.parse(comment.trim());
+                                    console.log('Parsed comment:', parsedComment);
+                                    return parsedComment;
+                                }
+                                listOffset += 8 + subChunkSize;
+                            }
+                        }
+                    }
+                    offset += 8 + chunkSize;
+                }
+                console.log('No ICMT comment found in WAVE file');
+            } catch (error) {
+                console.error(`Error decoding WAV comment: ${error.message}`);
+            }
+        }
+
+        /////////////////////////////////////////////////////////////////////////////
+        // webusb stuff
+
+        let device;
+        let interfaceNumber;
+        let endpointIn;
+        let endpointOut;
+        let state = 0, cmd = 0, idx = 0, offset = 0, len = 0, payload = [], packet32 = false, lastbytetime = 0;
+
+        async function connectDevice() {
+            try {
+                device = await navigator.usb.requestDevice({ filters: [{ vendorId: 0xcafe }] });
+                await device.open();
+                if (device.configuration === null) await device.selectConfiguration(1);
+
+                const interfaces = device.configuration.interfaces;
+                for (const element of interfaces) {
+                    for (const alternate of element.alternates) {
+                        if (alternate.interfaceClass === 0xFF) {  // Vendor-specific interface class
+                            interfaceNumber = element.interfaceNumber;
+                            for (const endpoint of alternate.endpoints) {
+                                if (endpoint.direction === 'in') {
+                                    endpointIn = endpoint.endpointNumber;
+                                }
+                                if (endpoint.direction === 'out') {
+                                    endpointOut = endpoint.endpointNumber;
+                                }
+                            }
+                            break;
+                        }
+                    }
+                }
+
+                if (endpointIn === undefined || endpointOut === undefined) {
+                    throw new Error('Endpoints not found');
+                }
+
+                await device.claimInterface(interfaceNumber);
+                await device.selectAlternateInterface(interfaceNumber, 0);
+                reset(0);
+                console.log("Device connected:", device);
+                document.getElementById('connect').textContent = 'Disconnect';
+                document.getElementById('sample-container').style.display = 'block';
+                readLoop();
+            } catch (error) {
+                console.error("Connection error:", error);
+            }
+        }
+
+        async function disconnectDevice() {
+            try {
+                if (device) {
+                    await device.close();
+                    device = null;
+                    console.log("Device disconnected.");
+                }
+                reset(0);
+                document.getElementById('connect').textContent = 'Connect...';
+                document.getElementById('sample-container').style.display = 'none';
+            } catch (error) {
+                console.error("Disconnection error:", error);
+            }
+        }
+
+        async function sendMsg(cmd, idx, offset, len, optionalData = []) {
+            console.log("optionalData", optionalData.length);
+            const bigpacket = (len >= 32767 || offset >= 32767);
+            const header = bigpacket ?
+                [0xf3, 0x0f, 0xab, 0xcb, cmd, idx, offset & 255, offset >> 8, offset >> 16, offset >> 24, len & 255, len >> 8, len >> 16, len >> 24] :
+                [0xf3, 0x0f, 0xab, 0xca, cmd, idx, offset & 255, offset >> 8, len & 255, len >> 8];
+            const message = new Uint8Array(header.length + optionalData.length);
+            message.set(header);
+            message.set(optionalData, header.length);
+            console.log("sending message", message.length)
+            for (let i = 0; i < message.length; i += 64) {
+                const chunk = message.subarray(i, i + 64);
+                await device.transferOut(endpointOut, chunk);
+            }
+        }
+
+        async function readLoop() {
+            while (device) {
+                try {
+                    const result = await device.transferIn(endpointIn, 64);
+                    const data = new Uint8Array(result.data.buffer, result.data.byteOffset, result.data.byteLength);
+                    data.forEach(byte => processByte(byte));
+                } catch (error) {
+                    console.error("Read error, device disconnected:", error);
+                    disconnectDevice();  // Clean up on error
+                    break;
+                }
+            }
+        }
+
+        function reset(x) {
+            if (x) console.log("Resetting state machine with byte:", x);
+            state = 0;
+            packet32 = false;
+            cmd = idx = offset = len = 0;
+            payload = [];
+            if (x === 0xf3) state = 1;
+        }
+
+        function processByte(x) {
+            // accurate time in milliseconds
+            const now = performance.now();
+            const elapsed = now - lastbytetime;
+            if (elapsed > 5000) {
+                reset();
+            }
+            lastbytetime = now;
+            if (state < 14) console.log("state", state, "byte", x);
+            switch (state) {
+                case 0: if (x === 0xf3) state++; else reset(x); break;
+                case 1: if (x === 0x0f) state++; else reset(x); break;
+                case 2: if (x === 0xab) state++; else reset(x); break;
+                case 3: packet32 = (x == 0xcb); if (x === 0xca || x === 0xcb) state++; else reset(x); break;
+                case 4: cmd = x; state++; break;
+                case 5: idx = x; state++; break;
+                case 6: offset = x; state++; break;
+                case 7: offset += x << 8; state = packet32 ? 8 : 10; break;
+                case 8: offset += x << 16; state++; break;
+                case 9: offset += x << 24; state++; break;
+                case 10: len = x; state++; break;
+                case 11: len += x << 8; state++; if (packet32) break;
+                    startPayload();
+                    break;
+                case 12: len += x << 16; state++; break;
+                case 13: len += x << 24; state++;
+                    startPayload();
+                    break;
+                case 14:
+                    let ofs = payload.length - len;
+                    payload[ofs++] = x;
+                    if ((ofs % 1024) == 0 || len == 1) {
+                        console.log("Received", ofs, "bytes out of ", payload.length, 'len', len);
+                        //sampleinfos[idx & 7].progress = ofs / 2;
+                        rendercanvas(idx & 7);
+                    }
+                    if (--len == 0)
+                        processPacket();
+                    break;
+            }
+        }
+
+        function startPayload() {
+            //console.log("start payload", len);
+            //setProgress(0);
+            if (len <= 0) processPacket(); else {
+                state = 14;
+                payload = new Uint8Array(len);
+            }
+        }
+
+        function rendercanvas(sampleidx) {
+            const canvas = document.getElementById('sample' + sampleidx);
+            const ctx = canvas.getContext('2d');
+            const width = canvas.width = 2048; // ensure canvas is 2048 pixels wide
+            const height = canvas.height = 64;
+            ctx.clearRect(0, 0, width, height);
+            sampleInfo = presets[128 + sampleidx];
+            ctx.fillStyle = 'red';
+            // if (sampleInfo.progress > 0 && sampleInfo.progress < sampleInfo.samplelen) {
+            //     ctx.fillRect(0, 0, sampleInfo.progress / 1024, 64);
+            // }
+            {
+                ctx.linewidth = 1;
+                ctx.strokeStyle = 'black';
+                ctx.beginPath();
+                ctx.moveTo(0, 32);
+                for (let i = 0; i < 2048; ++i) {
+                    const y = (sampleInfo[i >> 1] >> ((i & 1) * 4)) & 15;
+                    ctx.lineTo(i, 32 - y * 2);
+                    ctx.lineTo(i, 32 + y * 2);
+                }
+                ctx.stroke();
+                ctx.strokeStyle = 'red';
+                for (let i = 0; i < 8; ++i) {
+                    const x = readIntAtOffset(sampleInfo, 1024 + i * 4) / 1024;
+                    ctx.beginPath();
+                    ctx.moveTo(x, 0);
+                    ctx.lineTo(x, 64);
+                    ctx.stroke();
+                }
+                ctx.fillStyle = 'gray';
+                ctx.globalAlpha = 0.5;
+                const x = readIntAtOffset(sampleInfo, 1024 + 8 * 4) / 1024;
+                ctx.fillRect(x, 0, 2048 - x, 64);
+                ctx.globalAlpha = 1;
+
+            }
+        }
+
+
+        function createWavFile(audioDataSamples, metadataString, filename = "audio.wav") {
+    const sampleRate = 32000; // 32kHz
+    const numChannels = 1; // Mono
+    const bitsPerSample = 16; // 16-bit PCM
+    const byteRate = sampleRate * numChannels * bitsPerSample / 8;
+    const blockAlign = numChannels * bitsPerSample / 8;
+    const subchunk1Size = 16; // PCM header size
+    const audioFormat = 1; // PCM
+
+    // Convert Int16Array to Uint8Array
+    const audioData = new Uint8Array(audioDataSamples.buffer, audioDataSamples.byteOffset, audioDataSamples.byteLength);
+    const dataChunkSize = audioData.length;
+
+    // Prepare metadata (ICMT subchunk)
+    const metadataBuffer = new TextEncoder().encode(metadataString + "\0"); // Null-terminated
+    const paddedMetadataLength = metadataBuffer.length + (metadataBuffer.length % 2); // Align to even byte boundary
+    const metadataChunkSize = 4 + 4 + paddedMetadataLength; // "ICMT" ID + size field + data
+    const listChunkSize = 4 + metadataChunkSize; // "INFO" ID + ICMT chunk
+
+    // Calculate total file size
+    const totalSize = 4 + 4 + // RIFF header
+        4 + // WAVE header
+        4 + 4 + subchunk1Size + // fmt chunk
+        4 + 4 + listChunkSize + // LIST chunk
+        4 + 4 + dataChunkSize; // data chunk
+
+    // Allocate buffer
+    const buffer = new ArrayBuffer(totalSize);
+    const view = new DataView(buffer);
+    let offset = 0;
+
+    // Write RIFF header
+    view.setUint32(offset, 0x52494646, false); // "RIFF"
+    offset += 4;
+    view.setUint32(offset, totalSize - 8, true); // Chunk size (excluding "RIFF" and this field)
+    offset += 4;
+    view.setUint32(offset, 0x57415645, false); // "WAVE"
+    offset += 4;
+
+    // Write fmt chunk
+    view.setUint32(offset, 0x666d7420, false); // "fmt "
+    offset += 4;
+    view.setUint32(offset, subchunk1Size, true); // Subchunk1 size
+    offset += 4;
+    view.setUint16(offset, audioFormat, true); // Audio format (PCM)
+    offset += 2;
+    view.setUint16(offset, numChannels, true); // Num channels
+    offset += 2;
+    view.setUint32(offset, sampleRate, true); // Sample rate
+    offset += 4;
+    view.setUint32(offset, byteRate, true); // Byte rate
+    offset += 4;
+    view.setUint16(offset, blockAlign, true); // Block align
+    offset += 2;
+    view.setUint16(offset, bitsPerSample, true); // Bits per sample
+    offset += 2;
+
+    // Write LIST chunk
+    view.setUint32(offset, 0x4C495354, false); // "LIST"
+    offset += 4;
+    view.setUint32(offset, listChunkSize, true); // LIST chunk size
+    offset += 4;
+    view.setUint32(offset, 0x494E464F, false); // "INFO"
+    offset += 4;
+
+    // Write ICMT subchunk
+    view.setUint32(offset, 0x49434D54, false); // "ICMT"
+    offset += 4;
+    view.setUint32(offset, metadataBuffer.length, true); // Metadata length (un-padded)
+    offset += 4;
+    new Uint8Array(buffer, offset).set(metadataBuffer); // Metadata content
+    offset += metadataBuffer.length;
+    if (metadataBuffer.length % 2 !== 0) offset++; // Padding for even alignment
+
+    // Write data chunk
+    view.setUint32(offset, 0x64617461, false); // "data"
+    offset += 4;
+    view.setUint32(offset, dataChunkSize, true); // Data chunk size
+    offset += 4;
+    new Uint8Array(buffer, offset).set(audioData); // Audio data
+    offset += dataChunkSize;
+
+    // Ensure offset matches the total size
+    if (offset !== totalSize) {
+        throw new Error(`Buffer overflow: offset (${offset}) does not match total size (${totalSize})`);
+    }
+
+    // Create a Blob and trigger download
+    const blob = new Blob([buffer], { type: "audio/wav" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = filename; // Set the desired filename
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
+
+
+        function processPacket() {
+            //setProgress(1);
+            len = payload.length;
+            console.log("Packet received:", { cmd, idx, offset, len, payload });
+            if (cmd == 1) {
+                const sampleidx = idx & 7;
+                presets[128 + sampleidx].set(payload);
+                rendercanvas(sampleidx);
+                sendMsg(2, sampleidx, 0, 4096); // 2 * sampleInfo.samplelen);
+            }
+            if (cmd == 3) {
+                // we got a sample!
+                const sampleidx = idx & 7;
+                samples[sampleidx].set(payload);
+                saveSampleAsWav(sampleidx);
+            }
+            reset();
+        }
+
+        function saveSampleAsWav(sampleidx) {
+            const sampleInfo = presets[sampleidx + 128];
+            const prefix = document.getElementById('filename-prefix').value;
+            console.log(`Filename prefix is: ${prefix}`);
+            notenames = "C C# D D# E F F# G G# A A# B".split(' ');
+            metadata = { "pitched": sampleInfo[1068], "loop": sampleInfo[1069], "notes": [], "splitpoints": [] };
+            for (let i = 0; i < 8; i++) {
+                const note = sampleInfo[1060 + i];
+                const split = readIntAtOffset(sampleInfo, 1024 + i * 4);
+                metadata.notes.push(notenames[note % 12] + Math.floor(note / 12));
+                metadata.splitpoints.push(split);
+            }
+            console.log(JSON.stringify(metadata));
+            createWavFile(samples[sampleidx], JSON.stringify(metadata), `${prefix}${sampleidx}.wav`);
+        }
+
+
+        document.getElementById('connect').addEventListener('click', async () => {
+            if (device) {
+                await disconnectDevice();
+            } else {
+                await connectDevice();
+            }
+        });
+        async function getFromPlinky(slot) {
+            console.log(`Get from Plinky clicked for slot ${slot}`);
+            // if (device) {
+            //     sendMsg(0, 64 + slot, 0, 1072);
+            // }
+            saveSampleAsWav(slot);
+        }
+
+        async function putToPlinky(slot) {
+            console.log(`Put to Plinky clicked for slot ${slot}`);
+        }
+    </script>
+</body>
+
+</html>

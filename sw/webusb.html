@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebUSB App</title>
+    <style>
+        /* Progress bar container */
+        #progress-bar {
+            width: 100%;
+            height: 24px;
+            background-color: lightgray;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Inner bar */
+        #progress-bar-inner {
+            height: 100%;
+            width: 0%;
+            background-color: red;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        /* Text */
+        #progress-text {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            line-height: 24px;
+            text-align: center;
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            user-select: none;
+        }
+    </style>
+</head>
+
+<body>
+    <button id="connect">Connect...</button>
+    <button id="send">Read...</button>
+    <button id="overwrite">Overwrite...</button>
+    <br />
+    <div id="progress-bar">
+        <div id="progress-bar-inner">
+            <span id="progress-text"></span>
+        </div>
+    </div>
+    <canvas id="canvas" width="2048" height="2176"></canvas>
+
+
+    <script>
+        let device;
+        let interfaceNumber;
+        let endpointIn;
+        let endpointOut;
+        let state = 0, cmd = 0, idx = 0, offset = 0, len = 0, payload = [], packet32 = false, lastbytetime = 0;
+
+        function setProgress(value) {
+            const progressBarInner = document.getElementById('progress-bar-inner');
+            const progressText = document.getElementById('progress-text');
+
+            // Clamp value between 0 and 1
+            const clampedValue = Math.max(0, Math.min(value, 1));
+
+            // Set the width of the progress bar
+            progressBarInner.style.width = `${clampedValue * 100}%`;
+
+            // Update the text
+            progressText.textContent = `${Math.round(clampedValue * 100)}%`;
+        }
+
+
+        async function connectDevice() {
+            try {
+                device = await navigator.usb.requestDevice({ filters: [{ vendorId: 0xcafe }] });
+                await device.open();
+                if (device.configuration === null) await device.selectConfiguration(1);
+
+                const interfaces = device.configuration.interfaces;
+                for (const element of interfaces) {
+                    for (const alternate of element.alternates) {
+                        if (alternate.interfaceClass === 0xFF) {  // Vendor-specific interface class
+                            interfaceNumber = element.interfaceNumber;
+                            for (const endpoint of alternate.endpoints) {
+                                if (endpoint.direction === 'in') {
+                                    endpointIn = endpoint.endpointNumber;
+                                }
+                                if (endpoint.direction === 'out') {
+                                    endpointOut = endpoint.endpointNumber;
+                                }
+                            }
+                            break;
+                        }
+                    }
+                }
+
+                if (endpointIn === undefined || endpointOut === undefined) {
+                    throw new Error('Endpoints not found');
+                }
+
+                await device.claimInterface(interfaceNumber);
+                await device.selectAlternateInterface(interfaceNumber, 0);
+                reset(0);
+                console.log("Device connected:", device);
+                document.getElementById('connect').textContent = 'Disconnect';
+                readLoop();
+            } catch (error) {
+                console.error("Connection error:", error);
+            }
+        }
+
+        async function disconnectDevice() {
+            try {
+                if (device) {
+                    await device.close();
+                    device = null;
+                    console.log("Device disconnected.");
+                }
+                reset(0);
+                document.getElementById('connect').textContent = 'Connect...';
+            } catch (error) {
+                console.error("Disconnection error:", error);
+            }
+        }
+
+        async function sendMsg(cmd, idx, offset, len, optionalData = []) {
+            console.log("optionalData", optionalData.length);
+            const bigpacket = (len >= 32767 || offset >= 32767);
+            const header = bigpacket ?
+                [0xf3, 0x0f, 0xab, 0xcb, cmd, idx, offset & 255, offset >> 8, offset >> 16, offset >> 24, len & 255, len >> 8, len >> 16, len >> 24] :
+                [0xf3, 0x0f, 0xab, 0xca, cmd, idx, offset & 255, offset >> 8, len & 255, len >> 8];
+            const message = new Uint8Array(header.length + optionalData.length);
+            message.set(header);
+            message.set(optionalData, header.length);
+            console.log("sending message", message.length)
+            for (let i = 0; i < message.length; i += 64) {
+                const chunk = message.subarray(i, i + 64);
+                await device.transferOut(endpointOut, chunk);
+            }
+        }
+
+        async function readLoop() {
+            while (device) {
+                try {
+                    const result = await device.transferIn(endpointIn, 64);
+                    const data = new Uint8Array(result.data.buffer);
+                    data.forEach(byte => processByte(byte));
+                } catch (error) {
+                    console.error("Read error, device disconnected:", error);
+                    disconnectDevice();  // Clean up on error
+                    break;
+                }
+            }
+        }
+
+        function reset(x) {
+            if (x) console.log("Resetting state machine with byte:", x);
+            state = 0;
+            packet32 = false;
+            cmd = idx = offset = len = 0;
+            payload = [];
+            if (x === 0xf3) state = 1;
+        }
+
+        function processByte(x) {
+            // accurate time in milliseconds
+            const now = performance.now();
+            const elapsed = now - lastbytetime;
+            if (elapsed > 5000) {
+                reset();
+            }
+            lastbytetime = now;
+            if (state<14) console.log("state", state, "byte", x);
+            switch (state) {
+                case 0: if (x === 0xf3) state++; else reset(x); break;
+                case 1: if (x === 0x0f) state++; else reset(x); break;
+                case 2: if (x === 0xab) state++; else reset(x); break;
+                case 3: packet32 = (x == 0xcb); if (x === 0xca || x === 0xcb) state++; else reset(x); break;
+                case 4: cmd = x; state++; break;
+                case 5: idx = x; state++; break;
+                case 6: offset = x; state++; break;
+                case 7: offset += x << 8; state = packet32 ? 8 : 10; break;
+                case 8: offset += x << 16; state++; break;
+                case 9: offset += x << 24; state++; break;
+                case 10: len = x; state++; break;
+                case 11: len += x << 8; state++; if (packet32) break;
+                    startPayload();
+                    break;
+                case 12: len += x << 16; state++; break;
+                case 13: len += x << 24; state++;
+                    startPayload();
+                    break;
+                case 14: 
+                    let ofs = payload.length - len;
+                    payload[ofs++] = x;
+                    if ((ofs%1024)==0 || len == 1) {
+                        console.log("Received", ofs, "bytes out of ", payload.length, 'len',len);
+                        setProgress(ofs / payload.length);
+                    }
+                    if (--len == 0) 
+                        processPacket();
+                    break;
+            }
+        }
+        function startPayload() {
+            //console.log("start payload", len);
+            setProgress(0);
+            if (len <= 0) processPacket(); else {
+                state = 14;
+                payload = new Uint8Array(len);
+            }
+        }
+
+        function drawWaveform(bytes2) {
+            const canvas = document.getElementById('canvas');
+            const ctx = canvas.getContext('2d');
+            const width = canvas.width = 2048; // ensure canvas is 2048 pixels wide
+            const height = canvas.height;
+
+            // Clear canvas
+            ctx.clearRect(0, 0, width, height);
+
+            // Interpret bytes as 16-bit little-endian signed integers
+            for (let wf = 0; wf < 17; ++wf) {
+                const values = [];
+                const bytes = bytes2.slice(wf * 1031 * 2, (wf + 1) * 1031 * 2);
+                for (let i = 0; i < bytes.length; i += 2) {
+                    const value = bytes[i] | (bytes[i + 1] << 8); // Little-endian conversion
+                    values.push(value < 0x8000 ? value : value - 0x10000); // Interpret as signed
+                }
+
+                // Scale and draw waveform
+                ctx.beginPath();
+                for (let x = 0; x < values.length && x < width; x++) {
+                    const y = ((-values[x] + 32768) / 65535) * 128 + 128 * wf; // Map y range to canvas height
+                    x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+                }
+                ctx.stroke();
+            }
+        }
+
+        let lastpayload=null;
+        
+        function parseSampleInfo(buffer) {
+            const view = new DataView(buffer);
+            let offset = 0;
+           const waveform4_b = new Uint8Array(buffer, offset, 1024);
+            offset += 1024;
+            const splitpoints = Array.from({ length: 8 }, (_, i) => view.getInt32(offset + i * 4, true));
+            offset += 32;
+            const samplelen = view.getInt32(offset, true);
+            offset += 4;
+            const notes = Array.from({ length: 8 }, (_, i) => view.getInt8(offset + i));
+            offset += 8;
+            const pitched = view.getUint8(offset++);
+            const loop = view.getUint8(offset++);
+            return {
+                waveform4_b,
+                splitpoints,
+                samplelen,
+                notes,
+                pitched,
+                loop,
+            };
+        }
+        
+        function processPacket() {
+            setProgress(1);
+            len = payload.length;
+            console.log("Packet received:", { cmd, idx, offset, len, payload });
+            const sampleInfo = parseSampleInfo(payload.buffer);
+            console.log(sampleInfo);
+            const canvas = document.getElementById('canvas');
+            const ctx = canvas.getContext('2d');
+            const width = canvas.width = 2048; // ensure canvas is 2048 pixels wide
+            const height = 64;
+            ctx.clearRect(0, 0, width, height);            
+            ctx.beginPath();
+            ctx.moveTo(0,32);
+            for (let i = 0;i<2048;++i) {
+                const y = (sampleInfo.waveform4_b[i>>1]>>((i&1)*4))&15;
+                ctx.lineTo(i, 32-y*2);
+                ctx.lineTo(i, 32+y*2);    
+            }
+            ctx.stroke();
+            //drawWaveform(payload);
+            if (payload.length > 1024 * 1024) {
+                // save payload to file
+                const blob = new Blob([payload], { type: 'application/octet-stream' });
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = 'sample.raw'; // Set desired file name
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                URL.revokeObjectURL(url);
+            }
+            lastpayload = payload;
+            reset();
+        }
+        document.getElementById('send').addEventListener('click', async () => {
+            if (device) {
+                // cmd 4= read wavetable
+                // cmd 2= read spi ram
+                // cmd 0 = read preset
+                sendMsg(0, 64+0, 0, 1072);
+                //sendMsg(2, 0, 0, 4 * 1024 * 1024);
+                //sendMsg(4, 0, 0, 2 * 1031 * 17);
+            }
+        });
+        document.getElementById('overwrite').addEventListener('click', async () => {
+            if (device) {
+                // cmd 4= read wavetable
+                // cmd 2= read spi ram
+                const int16Buffer = new Int16Array(lastpayload.buffer, lastpayload.byteOffset, lastpayload.byteLength / 2);
+                // for (let wf=1;wf<17;++wf) { 
+                //     for (let smp=0;smp<1031;++smp)
+                //         int16Buffer[wf*1031+smp] = int16Buffer[smp]/wf;
+                // }
+                // sendMsg(5, 0, 0, lastpayload.length, lastpayload);
+                for (let s=0;s<int16Buffer.length;++s) int16Buffer[s]=16384*Math.sin((s/231)**2); 
+                sendMsg(3, 0, 0, lastpayload.length, lastpayload);
+            }
+        });
+        document.getElementById('connect').addEventListener('click', async () => {
+            if (device) {
+                await disconnectDevice();
+            } else {
+                await connectDevice();
+            }
+        });
+    </script>
+</body>
+
+</html>

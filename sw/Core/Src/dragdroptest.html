@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drag and Drop File Handler</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+
+        .drop-zone {
+            border: 2px dashed #999;
+            border-radius: 10px;
+            width: 200px;
+            height: 100px;
+            margin: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="drop-zone" id="div1">Div 1</div>
+    <div class="drop-zone" id="div2">Div 2</div>
+    <div class="drop-zone" id="div3">Div 3</div>
+    <div class="drop-zone" id="div4">Div 4</div>
+    <div class="drop-zone" id="div5">Div 5</div>
+    <div class="drop-zone" id="div6">Div 6</div>
+    <div class="drop-zone" id="div7">Div 7</div>
+    <div class="drop-zone" id="div8">Div 8</div>
+
+    <script>
+        /*
+        this code can parse the raw structures out of presets.uf2.
+        they are in the plinky code, but pasted here for reference.
+        at the moment this code does nothing with SysParams nor patterns.
+        typedef struct PageFooter {
+            u8 idx; // preset 0-31, pattern (quarters!) 32-127, sample 128-136, blank=0xff
+            u8 version;
+            u16 crc;
+            u32 seq;
+        } PageFooter;
+        typedef struct SysParams {
+            u8 curpreset;
+            u8 paddy;
+            u8 systemflags;
+            s8 headphonevol;
+            u8 pad[16 - 4];
+        } SysParams;
+        enum {
+            SYS_DEPRACATED_ARPON=1,
+            SYS_DEPRACATED_LATCHON=2,
+        };
+        enum {
+            FLAGS_ARP=1,
+            FLAGS_LATCH=2,
+        };
+        // preset version 1: ??
+        // preset version 2: add SAW lfo shape
+        #define CUR_PRESET_VERSION 2
+        typedef struct Preset {
+            s16 params[96][8];
+            u8 flags;
+            s8 loopstart_step_no_offset;
+            s8 looplen_step;
+            u8 paddy[3];
+            u8 version; // 2
+            u8 category;
+            u8 name[8];
+        } Preset;
+        static_assert((sizeof(Preset)&15)==0,"?");
+        static_assert(sizeof(Preset)+sizeof(SysParams)+sizeof(PageFooter)<=2048, "?");
+        typedef struct SampleInfo {
+            u8 waveform4_b[1024]; // 4 bits x 2048 points, every 1024 samples
+            int splitpoints[8];
+            int samplelen; // must be after splitpoints, so that splitpoints[8] is always the length.
+            s8 notes[8];
+            u8 pitched; 
+            u8 loop; // bottom bit: loop; next bit: slice vs all
+            u8 paddy[2]; 
+        } SampleInfo;
+        static_assert(sizeof(SampleInfo) + sizeof(SysParams) + sizeof(PageFooter) <= 2048, "?");
+        static_assert((sizeof(SampleInfo)&15)==0,"?");
+        typedef struct FlashPage {
+            union {
+                u8 raw[2048 - sizeof(SysParams) - sizeof(PageFooter)];
+                Preset preset;
+                PatternQuarter patternquarter;
+                SampleInfo sampleinfo;
+            };
+            SysParams sysparams;
+            PageFooter footer;
+        } FlashPage;
+        static_assert(sizeof(FlashPage) == 2048, "?");
+        */
+        const presetblock = new Uint8Array(512 * 1024); // PRESETS.UF2 writes here
+        const presets = Array.from({ length: 256 }, () => new Uint8Array(2048)); // this is the latest data for each 'preset' (or pattern or sample)
+        const presets_seq = Array.from({ length: 256 }, () => -1); // the latest version number
+        const samples = Array.from({ length: 8 }, () => new Int16Array(2 * 1024 * 1024)); // these are the SAMPLE0.UF2 to 7.
+        let presets_dirty = false;
+        const samples_dirty = Array(8).fill(false);
+
+        document.body.addEventListener('dragover', event => {
+            event.preventDefault();
+        });
+
+        document.body.addEventListener('drop', async event => {
+            event.preventDefault();
+            const dropTarget = document.elementFromPoint(event.clientX, event.clientY);
+            let dropZone = dropTarget && dropTarget.classList.contains('drop-zone') ? parseInt(dropTarget.id.replace('div', '')) - 1 : -1;
+            console.log(`Dropped on ${dropZone >= 0 ? `sample ${dropZone}` : 'none'}`);
+
+            const files = event.dataTransfer.files;
+            for (const file of files) {
+                console.log(`Processing file: ${file.name}`);
+                const buffer = await file.arrayBuffer();
+                dropZone = processFile(buffer, dropZone);
+            }
+            checkDirty();
+        });
+
+        function checkDirty() {
+            if (presets_dirty) {
+                console.log("presets_dirty - parsing PRESETS.UF2 type file");
+                presets_dirty = false;
+                for (let page = 0; page< 255; ++page) {
+                    pagedata = presetblock.slice(page * 2048, (page + 1) * 2048);
+                    const idx = pagedata[2040];
+                    const version = pagedata[2041];
+                    const crc = pagedata[2042] + pagedata[2043] * 256;
+                    const seq = pagedata[2044] + pagedata[2045] * 256 + pagedata[2046] * 65536 + pagedata[2047] * 16777216;
+                    if (version>=2 && idx < 136) {
+                        let hash = 123;
+                        for (let i = 0; i < 2040; ++i) {
+                            hash = (hash * 23 + pagedata[i])& 0xffff;
+                        }
+                        if (hash == crc) {
+                            if (seq > presets_seq[idx]) {
+                                presets_seq[idx] = seq;
+                                presets[idx].set(pagedata);
+                                //console.log("Updated preset",idx,"to seq",seq);
+                            }
+                        } else {
+                            console.log("CRC error in page",page,"idx",idx,"version",version,"crc",crc,"seq",seq);
+                        }
+                    }
+                }
+            }
+            for (let i = 0; i < 8; ++i) {
+                if (samples_dirty[i]) {
+                    console.log("samples_dirty",i);
+                    samples_dirty[i] = false;
+                    // rebuild preview sample thingy
+                    let peaks=[]
+                    for (let j=0;j<2048;++j) {
+                        let max = 0;
+                        for (let k=j*1024;k<(j+1)*1024;++k) {
+                            max = Math.max(max,Math.abs(samples[i][k]));
+                        }
+                        peaks.push((max/2048)|0)
+                    }
+                    for (let j=0;j<1024;++j) {
+                        presets[128+i][j] = peaks[j*2]+(peaks[j*2+1]<<4);
+                    }
+                }
+            }
+        }
+
+        function setIntAtOffset(array, offset, value) {
+            array[offset] = value & 0xFF;
+            array[offset + 1] = (value >> 8) & 0xFF;
+            array[offset + 2] = (value >> 16) & 0xFF;
+            array[offset + 3] = (value >> 24) & 0xFF;
+        }
+
+        async function processFile(fileBuffer, dropZone) {
+            const uint32View = new Uint32Array(fileBuffer);
+            if (isUF2File(uint32View)) {
+                processUF2(uint32View);
+                return dropZone;
+            } else {
+                try {
+                    wavinfo = decodeWAVComment(fileBuffer);
+                    const audioBuffer = await decodeAudio(fileBuffer);
+                    console.log(`Decoded audio buffer length: ${audioBuffer.length}`);
+                    let splitpoints=Array.from({length:8},(v,k)=>(k*audioBuffer.length/8)|0);
+                    let notes=Array.from({length:8},(v,k)=>0);
+                    let pitched=0;
+                    let loop=0;
+                    if (wavinfo!=null) {
+                        pitched = wavinfo.pitched || 0;
+                        loop = wavinfo.loop || 0;
+                        notes = wavinfo.notes || notes;
+                        splitpoints = wavinfo.splitpoints || splitpoints;
+                    }
+                    if (dropZone >= 0 && dropZone < 8) {
+                        console.log("updating sample",dropZone,"length", audioBuffer.length,'splitpoints', splitpoints,'notes',notes,'pitched',pitched,'loop',loop);
+                        for (let i = 0; i < 8; ++i) {
+                            setIntAtOffset(presets[128+dropZone], 1024+4*i, splitpoints[i]);
+                        }
+                        setIntAtOffset(presets[128+dropZone], 1024+4*8, audioBuffer.length);                        
+                        const slicedAudio = audioBuffer.slice(0, 2 * 1024 * 1024);
+                        samples[dropZone].set(slicedAudio);
+                        samples_dirty[dropZone] = true;
+                        console.log(`Sample ${dropZone} updated.`);
+                        return (dropZone+1)&7;
+                    }
+                } catch (error) {
+                    console.error(`Failed to decode audio: ${error.message}`);
+                }
+            }
+            return dropZone;
+        }
+
+        function CheckUF2BlockMagic(uint32View, blockIndex) {
+            const MAGIC_START = 0x0A324655;
+            const MAGIC_SECOND = 0x9E5D5157;
+            const MAGIC_END = 0x0AB16F30;
+            const FAMILY_ID = 0x00FF6919;
+            const blockStart = blockIndex * 128; // 128 uint32s per block
+            const flags = uint32View[blockStart + 2];
+            if ((flags & 0x00002000) && uint32View[blockStart + 7] !== FAMILY_ID) {
+                return false;
+            }
+            return (
+                uint32View[blockStart] === MAGIC_START &&
+                uint32View[blockStart + 1] === MAGIC_SECOND &&
+                uint32View[blockStart + 127] === MAGIC_END &&
+                uint32View[blockStart + 4] === 256
+            );
+        }
+
+        function isUF2File(uint32View) {
+            for (let i = 0; i < uint32View.length / 128; i++) { // 128 uint32s per 512-byte block
+                if (CheckUF2BlockMagic(uint32View, i)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        function processUF2(uint32View) {
+            for (let i = 0; i < uint32View.length / 128; i++) { // 128 uint32s per 512-byte block
+                if (CheckUF2BlockMagic(uint32View, i)) {
+                    const blockStart = i * 128;
+                    const address = uint32View[blockStart + 3];
+                    const data = new Uint8Array(uint32View.buffer, (blockStart + 8) * 4, 256); // Extract 256 bytes of data
+                    processUF2DataBlock(address, data);
+                }
+            }
+        }
+
+        function processUF2DataBlock(address, data) {
+            if (address >= 0x8080000 && address <= 0x80FF700) {
+                const offset = address - 0x8080000;
+                presetblock.set(data, offset);
+                presets_dirty = true;
+                //console.log(`Presets updated at offset: ${offset}`);
+            } else if (address >= 0x40000000 && address < 0x40400000) {
+                const sampleIndex = (address - 0x40000000) >>> 22; // Divide by 4 MB to get sample index
+                const offset = (address & 0x3FFFFF) >>> 1; // Address within the sample, divide by 2 for int16
+                if (sampleIndex >= 0 && sampleIndex < 8) {
+                    const int16Data = new Int16Array(data.buffer, data.byteOffset, data.length / 2);
+                    samples[sampleIndex].set(int16Data, offset);
+                    samples_dirty[sampleIndex] = true;
+                    //console.log(`Sample ${sampleIndex} updated at offset: ${offset}`);
+                }
+            } else {
+                console.warn(`Unknown UF2 data block address: 0x${address.toString(16)}`);
+            }
+        }
+
+        async function decodeAudio(buffer) {
+            const audioContext = new AudioContext({ sampleRate: 32000 });
+            const audioBuffer = await audioContext.decodeAudioData(buffer);
+
+            // Mix down to mono and clip to 16-bit integers
+            const monoData = new Float32Array(audioBuffer.length);
+            for (let i = 0; i < audioBuffer.length; i++) {
+                monoData[i] = Math.max(-1, Math.min(1, audioBuffer.getChannelData(0)[i]));
+            }
+
+            const int16Data = new Int16Array(monoData.map(sample => sample * 0x7FFF));
+            return int16Data;
+        }
+
+        function decodeWAVComment(buffer) {
+            try {
+                const uint8View = new Uint8Array(buffer);
+                const riff = String.fromCharCode(...uint8View.slice(0, 4));
+                if (riff !== 'RIFF') {
+                    console.log('Not a WAVE file');
+                    return;
+                }
+
+                const fileType = String.fromCharCode(...uint8View.slice(8, 12));
+                if (fileType !== 'WAVE') {
+                    console.log('Not a WAVE file');
+                    return;
+                }
+
+                let offset = 12;
+                while (offset < uint8View.length) {
+                    const chunkID = String.fromCharCode(...uint8View.slice(offset, offset + 4));
+                    const chunkSize = uint8View[offset + 4] |
+                        (uint8View[offset + 5] << 8) |
+                        (uint8View[offset + 6] << 16) |
+                        (uint8View[offset + 7] << 24);
+
+                    if (chunkID === 'LIST') {
+                        const listType = String.fromCharCode(...uint8View.slice(offset + 8, offset + 12));
+                        if (listType === 'INFO') {
+                            let listOffset = offset + 12;
+                            while (listOffset < offset + 8 + chunkSize) {
+                                const subChunkID = String.fromCharCode(...uint8View.slice(listOffset, listOffset + 4));
+                                const subChunkSize = uint8View[listOffset + 4] |
+                                    (uint8View[listOffset + 5] << 8) |
+                                    (uint8View[listOffset + 6] << 16) |
+                                    (uint8View[listOffset + 7] << 24);
+
+                                if (subChunkID === 'ICMT') {
+                                    const comment = String.fromCharCode(...uint8View.slice(listOffset + 8, listOffset + 8 + subChunkSize));
+                                    console.log(`WAV Comment: ${comment}`);
+                                    const parsedComment = JSON.parse(comment);
+                                    console.log('Parsed comment:', parsedComment);
+                                    return parsedComment;
+                                }
+                                listOffset += 8 + subChunkSize;
+                            }
+                        }
+                    }
+                    offset += 8 + chunkSize;
+                }
+                console.log('No ICMT comment found in WAVE file');
+            } catch (error) {
+                console.error(`Error decoding WAV comment: ${error.message}`);
+            }
+        }
+    </script>
+</body>
+
+</html>
