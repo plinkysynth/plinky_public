@@ -57,7 +57,8 @@
 // 0.A5 - Encoder fix
 // 0.A6 - Set Channels for MIDI in and out (unused pad)
 // 0.A7 - Bootloader work to make it work on MacOSX
-#define VERSION2			  "v0.A7"
+// 0.A8 - Midi fixes from RJ-Eckie. Many thanks!
+#define VERSION2			  "v0.A8"
 
 // the bootloader is manually copied to the file golden_bootloader.bin
 // makebin.py uses it to make a UF2 file containing the bootloader + latest firmware together
