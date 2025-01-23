@@ -1594,7 +1594,7 @@ void processmidimsg(u8 msg, u8 d1, u8 d2) {
 		}
 		break;
 	case 0xd: { // channel aftertouch
-			midi_chan_aftertouch[chan] = d2;
+			midi_chan_aftertouch[chan] = d1;
 		}
 		break;
 	case 0xb: // cc param
@@ -3031,22 +3031,44 @@ void serial_midi_init(void) {
 }
 void serial_midi(const u8*buf, u8 len) {
 	static u8 state=0;
-	static u8 msg[3];
+	static u8 msg[3] = {0};
 	for (;len--;){
 		u8 data=*buf++;
-		if (data & 0x80) state = 0;
-		else if (state == 3) state = 1; // running status
-		if (state < 3) {
+		// status byte
+		if (data & 0x80) {
+			// real-time msg
+			if ((data & 0xF8) == 0xF8) {
+				// handle immediately
+				processmidimsg(data, 0, 0);
+			}
+			// channel mode msg
+			else if ((data & 0xF0) == 0xF0) {
+				// cancels running status, no further processing
+				msg[0] = 0;
+			}
+			// channel voice msg, start new
+			else {
+				msg[0] = data;
+				state = 1;
+			}
+		}
+		// data byte
+		else {
+			// not gathering a channel voice msg, ignore
+			if (msg[0] == 0) {
+				continue;
+			}
+			// running status
+			if (state == 3) {
+				state = 1;
+			}
+			// save data
 			msg[state++] = data;
-			if (state == 1 && (msg[0] >= 0xF8 && msg[0] <= 0xFC)) { //BUG FIX NO MIDI CLOCK FROM HW MIDI KAY LPZW
-				//real time start stop clock 
-				msg[1]=0;
-				msg[2]=0;
-				state = 3;
+			// program change and channel pressure only have one data byte
+			if (state == 2 && ((msg[0] & 0xF0) == 0xC0 || (msg[0] & 0xF0) == 0xD0)) {
+				msg[state++] = 0;
 			}
-			if (state == 2 && (msg[0] >= 0xc0 && msg[0] <= 0xdf)) {
-				msg[state++] = 0; // two byte messages. wtf midi.//WE NEED TO DEBUG THIS COS IT SEEMS NOT TO WORK
-			}
+			// we received a full midi msg, process
 			if (state==3) {
 				processmidimsg(msg[0], msg[1], msg[2]);
 			}
