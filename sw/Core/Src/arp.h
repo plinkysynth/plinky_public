@@ -501,7 +501,12 @@ int update_clock(void) { // returns 1 for clock, 2 for half clock, 0 for neither
 //	clk_in_high_prev = clk_in_high;
 //	reset_in_high_prev = reset_in_high;
 #define ACCURATE_FS 31250
-	//////////////////////////////////////////// intenral clock
+
+	// revert to internal clock after not getting any external clock signal for a second
+	if (external_clock_enable && ticks_since_clock >= 500) // a tick is 2ms
+		external_clock_enable = false;
+
+	//////////////////////////////////////////// internal clock
 	if (!external_clock_enable) {
 		bpm10x = ((param_eval_int(P_TEMPO, any_rnd, env16, pressure16) * 1200) >> 16) + 1200;
 
