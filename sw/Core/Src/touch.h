@@ -522,8 +522,13 @@ bool read_from_seq = false;
 
 FingerRecord* readpattern(int fi) {
 	if (rampattern_idx == cur_pattern && shift_down != SB_CLEAR) {
-		return &rampattern[(cur_step >> 4) & 3].steps[cur_step & 15][fi];
-	} // pattern is ok?
+		FingerRecord* fr = &rampattern[(cur_step >> 4) & 3].steps[cur_step & 15][fi];
+        // is the first frame empty?
+        if (fr->pressure[0] == 0) {
+            return 0; // not a valid pattern step
+        }
+		return fr;
+	}
 	return 0;
 }
 
