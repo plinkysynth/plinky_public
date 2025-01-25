@@ -410,7 +410,6 @@ void finger_editing(int fi, int frame) {
 							firsttaptime = ticks();
 						tapcount++;
 
-						external_clock_enable = false;
 						if (tapcount > 1) { // tap tempo!
 							float taps_per_minute = (32000.f * (tapcount - 1) * 60.f) / ((ticks() - firsttaptime) * BLOCK_SAMPLES);
 							//DebugLog("%d - %0.1f\n", tapcount, taps_per_minute);
