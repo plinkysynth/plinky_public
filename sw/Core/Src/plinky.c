@@ -2023,7 +2023,7 @@ void DoAudio(u32 *dst, u32 *audioin) {
 					++f;
 				}
 				// midi note is released and volume has rung out
-				if ((!midi_pressure_override & (1 << fi)) && (voices[fi].vol < 0.001f)) {
+				if (!(midi_pressure_override & (1 << fi)) && (voices[fi].vol < 0.001f)) {
 					// disable pitch override, this truly turns off the note
 					midi_pitch_override &= ~(1 << fi);
 				}
