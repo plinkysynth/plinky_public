@@ -578,9 +578,12 @@ u8 find_midi_free_channel(void) {
 bool is_finger_an_edit_operation(int fi);
 
 void finger_synth_update(int fi) {
+	// only on first time, belongs outside this method
 	if (fi == 0) {
 		total_ui_pressure = 0;
 	}
+
+	// Set up variables - do we need all of these?
 	int bit = 1 << fi;
 	int frame_ui = (finger_frame_ui-1) & 7;
 	if (finger_ui_done_this_frame & bit)
@@ -589,10 +592,11 @@ void finger_synth_update(int fi) {
 	Finger* uif = &fingers_ui_time[fi][frame_ui];
 	Finger* uif_prevprev = &fingers_ui_time[fi][prevprevframe_ui];
 	Finger* synth_dst_finger = &fingers_synth_time[fi][finger_frame_synth];
-
 	int p = uif->pressure;
 	int prevprevp = uif_prevprev->pressure;
 	bool pressure_not_rapidly_decreasing = (p > (prevprevp)); // we do this BEFORE compensating for edit mode, so that we dont accidentally see it as increasing after edit ends
+
+	// Clear pressure during clear/edit operations, why?
 	if (editmode != EM_SAMPLE) {
 		if ((fingerediting | prevfingerediting) & bit)
 			p = -256;
@@ -602,26 +606,41 @@ void finger_synth_update(int fi) {
 			p = -256;
 	}
 
+	// Midi - override when string is pressed
 	if (p > 0) {
 		midi_pressure_override &= ~bit;
 		midi_pitch_override &= ~bit;
 	}
+	// Midi - take pressure from midi data
 	else if (midi_pressure_override & bit) {
 		u8 chan = midi_channels[fi];
 		p = 1+(midi_velocities[fi] + maxi(midi_aftertouch[fi], midi_chan_aftertouch[chan]))*16;
 		pressure_not_rapidly_decreasing = (p > (prevprevp) );
 	}
 
+	// We write the touch/midi pressure to the string itself, before checking latch or 
+	// the sequencer. It seems logical to only do this at the very end of the method,
+	// when we know what we're actually going to play
 	synth_dst_finger->pressure = p;
+	// This should maybe also move to the end of the method
 	total_ui_pressure += maxi(0, p);
-
+	// Write the position to the string before checking latch or sequencer, same
+	// concerns
 	synth_dst_finger->pos = uif->pos;
 
+	// Why do we calculate where we are in a step if we don't even know that
+	// we're sequencing?
 	int phase0 = calcseqsubstep(0, 8);
+
+	// only on first time, belongs outside this method
 	if (fi==0)
 		read_from_seq = false;
+
 	bool any_fingers_down = (total_ui_pressure > 0 || prev_total_ui_pressure > 0);
+
+	// only on last time, belongs outside this method
 	if (fi==7 && shift_down!=SB_CLEAR && total_ui_pressure > 0 && total_ui_pressure >= prev_total_ui_pressure) {
+		// this looks like it's saving the latch data
 		for (int fi=0;fi<8;++fi) {
 			u8 maxpos = 0, minpos = 255, maxpressure = 0;
 			Finger* f = fingers_synth_time[fi];
@@ -640,6 +659,12 @@ void finger_synth_update(int fi) {
 		}
 		latch_valid = true;
 	} 
+	
+	// There's a full block of code here that handles recording and doesn't seem to be
+	// relating to handling a finger in any way. It mostly handles recording movement into
+	// autoknobs (lfo's?), a behavior that I've not been able to find in the videos or manual
+	//
+	// This entire block should get its own place, separate from handling the strings
 
 	static u8 last_rec_step=255;
 	static u8 last_rec_phase = 0;
@@ -648,7 +673,7 @@ void finger_synth_update(int fi) {
 	FingerRecord* fr = &rampattern[q].steps[cur_step & 15][fi];
 	bool want_recording_on = any_fingers_down && recording && rampattern_idx == cur_pattern ; // && (isplaying() || pressure_increasing)
 
-	if (recording && rampattern_idx == cur_pattern && fi < 2) { // check for knob recording?
+	if (recording && rampattern_idx == cur_pattern && fi < 2) {
 		int k = fi;
 		float knob = adc_smooth[4 + k].y2;
 		if (shift_down == SB_RECORD && fabsf(knob - knobbase[k]) > 0.01f)
@@ -718,13 +743,17 @@ void finger_synth_update(int fi) {
 		}
 	}
 
+	// === End of unrelated block === //
+
+	// only on last time, belongs outside this method
 	if (fi == 7) {
 		last_rec_step = cur_step;
 		last_rec_phase = phase0;
 		if (!want_recording_on)
 			last_rec_step = 255;
 	}
-	
+
+	// Playback merging, sequencer and arp reading. We're rewriting this
 #define MERGE_PLAYBACK 0
     if (MERGE_PLAYBACK) {
         FingerRecord *fr = readpattern(fi);
@@ -768,9 +797,12 @@ void finger_synth_update(int fi) {
 		
 	}
 
+	// Handling CV
+
 	float gate_cv = adc_smooth[7].y2;
 	synth_dst_finger->pressure = (int)((synth_dst_finger->pressure + 256) * gate_cv) - 256;
 	
+	// Setting finger down flags based on presence of pressure
 	if (synth_dst_finger->pressure > 0) {
 		synthfingerdown_nogatelen_internal |= bit;
 	}
@@ -780,6 +812,8 @@ void finger_synth_update(int fi) {
 	}
 	
 	int gatelen = param_eval_finger(P_GATE_LENGTH, fi, synth_dst_finger) >> 8;
+
+	// This block handls suppressing the sequencer, which we are rewriting
 	if (gatelen < 256 && !isgrainpreview()) {
 		int phase = (rampreset.flags & FLAGS_ARP) ? calcarpsubstep(0, 256) : calcseqsubstep(0, 256);
 		int suppress_seq=false;
@@ -803,6 +837,8 @@ void finger_synth_update(int fi) {
 		}
 	}
 
+	// This bit shifts some values around but I'm not sure what they are doing exactly?
+	// It XORs the last two bits with the new position? Why?
 	static s16 prevpressure[8];
 
 	if (prevpressure[fi]<= 0 && synth_dst_finger->pressure > 0) {
@@ -817,6 +853,8 @@ void finger_synth_update(int fi) {
 	}
 	prevpressure[fi] = synth_dst_finger->pressure;
 
+	// Save the handled finger in the sorted array. We should not sort on
+	// every finger, but only once at the end. Move outside of this method
 	sort8((int*)fingers_synth_sorted[fi], (int*)fingers_synth_time[fi]);
 }
 
