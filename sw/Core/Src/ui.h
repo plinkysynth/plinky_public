@@ -523,7 +523,6 @@ void DrawLFOs(void) {
 
 void DrawVoices(void) {
     const static u8 leftOffset = 44;
-    const static u8 rightOffset = 14;
 	const static u8 maxHeight = 10;
 	const static u8 barWidth = 3;
 	const static float moveSpeed = 5; // pixels per frame
@@ -531,6 +530,7 @@ void DrawVoices(void) {
 	static float maxVolume[8];
 	static float volLineHeight[8];
 	static bool stringWasTouched[8];
+    u8 rightOffset = (rampreset.flags & FLAGS_LATCH) ? 38 : 14;
 
     for (u8 i = 0; i < 8; i++) {
 		// string volume
@@ -546,6 +546,8 @@ void DrawVoices(void) {
 				touchLineHeight[i] = maxHeight;
 			// volume line catches up
 			volLineHeight[i] = maxf(volLineHeight[i], touchLineHeight[i]);
+			// remember peak volume
+			maxVolume[i] = voices[i].vol;
 		}
 		// string not pressed
 		else {
@@ -553,10 +555,9 @@ void DrawVoices(void) {
 				touchLineHeight[i] -= moveSpeed;
 			if (touchLineHeight[i] < 0 )
 				touchLineHeight[i] = 0;
-			// released this frame
-			if (stringWasTouched[i])
-				// remember peak volume
-				maxVolume[i] = voices[i].vol;
+			// // released this frame
+			// if (stringWasTouched[i])
+
 			// has the sound died out?
 			if (maxVolume[i] != 0 && volLineHeight[i] < 0.25) {
 				// disable volume line
