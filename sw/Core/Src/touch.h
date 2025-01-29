@@ -464,25 +464,25 @@ void on_shift_up(int release_button) {
 		break;
 	case SB_CLEAR:
 		if (!isplaying() && recording && editmode == EM_PLAY) {
-			bool dirty = false;
-			int q = (cur_step >> 4) & 3;
-			FingerRecord* fr = &rampattern[q].steps[cur_step & 15][0];
-			for (int fi = 0; fi < 8; ++fi, ++fr) {
-				for (int k = 0; k < 8; ++k) {
-					if (fr->pressure[k] > 0)
-						dirty = true;
-					fr->pressure[k] = 0;
-					if (fi < 2) {
-						s8* d = &rampattern[q].autoknob[(cur_step & 15) * 8 + k][fi];
-						if (*d) {
-							*d = 0; dirty = true;
-						}
-					}
-				}
+			// bool dirty = false;
+			// int q = (cur_step >> 4) & 3;
+			// FingerRecord* fr = &rampattern[q].steps[cur_step & 15][0];
+			// for (int fi = 0; fi < 8; ++fi, ++fr) {
+			// 	for (int k = 0; k < 8; ++k) {
+			// 		if (fr->pressure[k] > 0)
+			// 			dirty = true;
+			// 		fr->pressure[k] = 0;
+			// 		if (fi < 2) {
+			// 			s8* d = &rampattern[q].autoknob[(cur_step & 15) * 8 + k][fi];
+			// 			if (*d) {
+			// 				*d = 0; dirty = true;
+			// 			}
+			// 		}
+			// 	}
 
-			}
-			if (dirty)
-				ramtime[GEN_PAT0 + ((cur_step >> 4) & 3)] = millis();
+			// }
+			// if (dirty)
+			// 	ramtime[GEN_PAT0 + ((cur_step >> 4) & 3)] = millis();
 			set_cur_step(cur_step + 1, false);
 		}
 		
@@ -590,6 +590,7 @@ void finger_synth_update(int fi) {
 	Finger* ui_finger = &fingers_ui_time[fi][ui_frame];
 	Finger* synth_finger = &fingers_synth_time[fi][finger_frame_synth];
 	int previous_pressure = fingers_ui_time[fi][(ui_frame - 2) & 7].pressure;
+	int previous_position = fingers_ui_time[fi][(ui_frame - 2) & 7].pos;
 	int substep = calcseqsubstep(0, 8);
 	bool latchon = (rampreset.flags & FLAGS_LATCH);
 	int pressure;
@@ -616,19 +617,9 @@ void finger_synth_update(int fi) {
 	}
 	// finger not used by midi
 	else {
-		// Clear pressure during clear/edit operations
-		// RJ: why like this? And why not in EM_SAMPLE mode? Needs cleaning up
-		if (editmode != EM_SAMPLE) {
-			if ((fingerediting | prevfingerediting) & bit)
-				// pressure = -256;
-				ignore_touch_for_synth = true;
-			else if (shift_down == SB_CLEAR)
-				// pressure = -256;
-				ignore_touch_for_synth = true;
-			else if (is_finger_an_edit_operation(fi))
-				// pressure = -256;
-				ignore_touch_for_synth = true;
-		}
+		// In some situations, touches should not be considered for synth playing
+		if (editmode != EM_SAMPLE && (((fingerediting | prevfingerediting) & bit) || is_finger_an_edit_operation(fi)))
+			ignore_touch_for_synth = true;
 
 		if (!ignore_touch_for_synth) {
 
@@ -720,10 +711,12 @@ void finger_synth_update(int fi) {
 			if (recording && rampattern_idx == cur_pattern) {
 				// RJ: why do we modify position and pressure before saving it?
 				// Also the calculations for writing/reading, and seq/latch, do not match up
-				int seq_pressure = clampi((pressure + 512) / 12, 0, 255);
+
+				// holding clear sets the pressure to zero, which will effectively clear the sequencer at this point
+				int seq_pressure = shift_down == SB_CLEAR ? 0 : clampi((pressure + 512) / 12, 0, 255);
 				int seq_position = clampi(position / 8, 0, 255);
-				// holding a note
-				if (seq_pressure > 0) {
+				// holding a note or clearing
+				if (seq_pressure > 0 || shift_down == SB_CLEAR) {
 					// playing
 					if (isplaying()) {
 						// first time editing this step
@@ -778,10 +771,14 @@ void finger_synth_update(int fi) {
 	// === END OF HANDLING TOUCH AND MIDI === //
 
 	// save input results to global variables to be used by other code
-	if (!ignore_touch_for_synth) {
+	if (ignore_touch_for_synth) {
+		synth_finger->pressure = previous_pressure;
+		synth_finger->pos = previous_position;
+	}
+	else {
 		synth_finger->pressure = pressure;
-		total_ui_pressure += maxi(0, pressure);
 		synth_finger->pos = position;
+		total_ui_pressure += maxi(0, pressure);
 		if (synth_finger->pressure > 0) {
 			synthfingerdown_nogatelen_internal |= bit;
 		}
@@ -819,6 +816,9 @@ void finger_synth_update(int fi) {
 				}
 	        }
 		}
+		// mute sequencer while pressing clear
+		if (shift_down == SB_CLEAR)
+			synth_finger->pressure = 0;
 	}
 
 	// RJ: This bit shifts some values around but I'm not sure what they are doing exactly?
