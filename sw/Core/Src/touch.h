@@ -464,25 +464,25 @@ void on_shift_up(int release_button) {
 		break;
 	case SB_CLEAR:
 		if (!isplaying() && recording && editmode == EM_PLAY) {
-			bool dirty = false;
-			int q = (cur_step >> 4) & 3;
-			FingerRecord* fr = &rampattern[q].steps[cur_step & 15][0];
-			for (int fi = 0; fi < 8; ++fi, ++fr) {
-				for (int k = 0; k < 8; ++k) {
-					if (fr->pressure[k] > 0)
-						dirty = true;
-					fr->pressure[k] = 0;
-					if (fi < 2) {
-						s8* d = &rampattern[q].autoknob[(cur_step & 15) * 8 + k][fi];
-						if (*d) {
-							*d = 0; dirty = true;
-						}
-					}
-				}
+			// bool dirty = false;
+			// int q = (cur_step >> 4) & 3;
+			// FingerRecord* fr = &rampattern[q].steps[cur_step & 15][0];
+			// for (int fi = 0; fi < 8; ++fi, ++fr) {
+			// 	for (int k = 0; k < 8; ++k) {
+			// 		if (fr->pressure[k] > 0)
+			// 			dirty = true;
+			// 		fr->pressure[k] = 0;
+			// 		if (fi < 2) {
+			// 			s8* d = &rampattern[q].autoknob[(cur_step & 15) * 8 + k][fi];
+			// 			if (*d) {
+			// 				*d = 0; dirty = true;
+			// 			}
+			// 		}
+			// 	}
 
-			}
-			if (dirty)
-				ramtime[GEN_PAT0 + ((cur_step >> 4) & 3)] = millis();
+			// }
+			// if (dirty)
+			// 	ramtime[GEN_PAT0 + ((cur_step >> 4) & 3)] = millis();
 			set_cur_step(cur_step + 1, false);
 		}
 		
@@ -501,10 +501,8 @@ typedef struct FingerStorage {
 	u8 avgvel;
 } FingerStorage;
 FingerStorage latch[8];
-bool latch_valid;
 void clearlatch(void) {
 	memset(latch, 0, sizeof(latch));
-	latch_valid = false;
 }
 
 	
@@ -516,15 +514,19 @@ static inline int randrange(int mn, int mx) {
 
 int param_eval_finger(u8 paramidx, int fingeridx, Finger* f);
 u8 synthfingerdown_nogatelen_internal;
-u8 synthfingersupress_nogatelen;
+u8 physical_touch_finger = 0;
 bool read_from_seq = false;
 
 
 FingerRecord* readpattern(int fi) {
-	if (rampattern_idx == cur_pattern && shift_down != SB_CLEAR) {
-		return &rampattern[(cur_step >> 4) & 3].steps[cur_step & 15][fi];
-	} // pattern is ok?
-	return 0;
+	if (rampattern_idx != cur_pattern || shift_down == SB_CLEAR)
+		return 0;
+	FingerRecord* fr = &rampattern[(cur_step >> 4) & 3].steps[cur_step & 15][fi];
+    // does any substep hold data?
+	int record_pressure = 0;
+	for (u8 i = 0; i < 8; i++)
+		record_pressure += fr->pressure[i];
+	return record_pressure == 0 ? 0 : fr;
 }
 
 /////////////////// XXXXX MIDI HERE?
@@ -545,148 +547,336 @@ s16 midi_chan_pitchbend[16];
 u8 midi_next_finger;
 u8 midi_lsb[32];
 u8 find_midi_note(u8 chan, u8 note) {
-	for (int fi = 0; fi < 8; ++fi) if (midi_notes[fi] == note && midi_channels[fi] == chan)
+	for (int fi = 0; fi < 8; ++fi) if ((midi_pitch_override & (1 << fi)) && midi_notes[fi] == note && midi_channels[fi] == chan)
 		return fi;
 	return 255;
 }
 u8 find_midi_free_channel(void) {
-	u8 numfingerdown = 0;
-	
-	for (int attempt = 0; attempt < 16; ++attempt) {
-		u8 ch = (midi_next_finger++) & 7;
-		bool fingerdown = touch_synth_getlatest(ch)->pressure > 0 && (midi_pressure_override&(1<<ch))==0; // synth_dst_finger>0, and midi_pressure_override bit is not set
-		if (fingerdown) {
-			if (attempt < 8) {
-				numfingerdown++;
-				if (numfingerdown == 8)
-					return 255; // all fingers using channels! NO ROOM! TOUGH
-			}
-			continue;
-		}
-		if (attempt >=8 || midi_channels[ch] == 255)
-			return ch;
-	}
-	// give up
-	return (midi_next_finger++) & 7;
+	// "dumb" implementation: just find the lowest unused string
+	for (u8 i = 0; i < 8; i++)
+		// string is not pressed
+		if ((synthfingerdown_nogatelen_internal & (1 << i)) == 0 && 
+			// and we're not editing a parameter, which disables the first string to play on
+			!(i == 0 && (edit_param < P_LAST)))
+			return i;
+	return 255;
+
+	// RJ: I'm really not quite sure what this code was doing exactly. Keeping it here for reference
+	//
+	// u8 numfingerdown = 0;
+	// for (int attempt = 0; attempt < 16; ++attempt) {
+	// 	u8 ch = (midi_next_finger++) & 7;
+	// 	bool fingerdown = touch_synth_getlatest(ch)->pressure > 0 && (midi_pressure_override&(1<<ch))==0; // synth_dst_finger>0, and midi_pressure_override bit is not set
+	// 	if (fingerdown) {
+	// 		if (attempt < 8) {
+	// 			numfingerdown++;
+	// 			if (numfingerdown == 8)
+	// 				return 255; // all fingers using channels! NO ROOM! TOUGH
+	// 		}
+	// 		continue;
+	// 	}
+	// 	if (attempt >=8 || midi_channels[ch] == 255)
+	// 		return ch;
+	// }
+	// // give up
+	// return (midi_next_finger++) & 7;
 }
 
 bool is_finger_an_edit_operation(int fi);
 
 void finger_synth_update(int fi) {
-	if (fi == 0) {
-		total_ui_pressure = 0;
-	}
+	static u8 last_edited_step_global = 255;
+	static u8 last_edited_step[8] = {255, 255, 255, 255, 255, 255, 255, 255};
+	static u8 last_edited_substep[8] = {255, 255, 255, 255, 255, 255, 255, 255};
+	static u8 step_full = 0;
+
 	int bit = 1 << fi;
-	int frame_ui = (finger_frame_ui-1) & 7;
-	if (finger_ui_done_this_frame & bit)
-		frame_ui = (frame_ui + 1) & 7;
-//	int prevframe_ui = (frame_ui - 1) & 7;
-	int prevprevframe_ui = (frame_ui - 2) & 7;
-//	int prev4frame_ui = (frame_ui - 4) & 7;
-	Finger* uif = &fingers_ui_time[fi][frame_ui];
-//	Finger* uif_prev = &fingers_ui_time[fi][prevframe_ui];
-	Finger* uif_prevprev = &fingers_ui_time[fi][prevprevframe_ui];
-//	Finger* uif_prev4= &fingers_ui_time[fi][prev4frame_ui];
-	Finger* synth_dst_finger = &fingers_synth_time[fi][finger_frame_synth];
-//	Finger* synth_prev_finger = &fingers_synth_time[fi][(finger_frame_synth-1)&7];
+	int ui_frame = (finger_frame_ui - (finger_ui_done_this_frame & bit ? 0 : 1)) & 7;
+	Finger* ui_finger = &fingers_ui_time[fi][ui_frame];
+	Finger* synth_finger = &fingers_synth_time[fi][finger_frame_synth];
+	int previous_pressure = fingers_ui_time[fi][(ui_frame - 2) & 7].pressure;
+	int previous_position = fingers_ui_time[fi][(ui_frame - 2) & 7].pos;
+	int substep = calcseqsubstep(0, 8);
+	bool latchon = (rampreset.flags & FLAGS_LATCH);
+	int pressure;
+	int position = ui_finger->pos;
+	bool pressure_increasing;
+	bool ignore_touch_for_synth = false;
 
-	int p = uif->pressure;
-//	int prevp = uif_prev->pressure;
-	int prevprevp = uif_prevprev->pressure;
-//	int prev4p = uif_prev4->pressure;
-//	bool fingerup = (p <= 0 && prevprevp <= 0 && prev4p<=0);
-	bool pressure_not_rapidly_decreasing = (p > (prevprevp)); // we do this BEFORE compensating for edit mode, so that we dont accidentally see it as increasing after edit ends
-	if (editmode != EM_SAMPLE) {
-		if ((fingerediting | prevfingerediting) & bit)
-			p = -256;
-		else if (shift_down == SB_CLEAR)
-			p = -256;
-		else if (is_finger_an_edit_operation(fi))
-			p = -256;
+	// midi and finger-touches are handled on a first come, first serve basis
+	// if this string is already playing a midi note, the finger touch is ignored
+
+	// finger is used by midi
+	if (midi_pressure_override & bit) {	
+
+		// === MIDI INPUT === //
+
+		pressure = 1+(midi_velocities[fi] + maxi(midi_aftertouch[fi], midi_chan_aftertouch[midi_channels[fi]]))*16;
+		pressure_increasing = (pressure > previous_pressure);
+		position = 8 * 256 - ((midi_notes[fi] % 12) * 256 * 7 / 11) - 1; // Map notes to pads
+
+		// === CV GATE === //
+
+		// scale pressure with cv gate input
+		pressure = (int)((pressure + 256) * adc_smooth[7].y2) - 256;
 	}
+	// finger not used by midi
+	else {
+		ignore_touch_for_synth = editmode != EM_PLAY;
+		
+		if (!ignore_touch_for_synth) {
 
+			// === TOUCH INPUT === //
+			
+			pressure = ui_finger->pressure;
+			pressure_increasing = (pressure > previous_pressure);
+			if (pressure > 0) physical_touch_finger |= (1 << fi);
+			else physical_touch_finger &= ~(1 << fi);
 
-	//if (fi == 0)
-	//	DebugLog("process finger0 pressure %d %f\n", p);
+			// === LATCHING === // 
 
-	// MIDI HERE
+			if (latchon) {
+				// RJ: I feel like previous_pressure is not responding accurately, I'm still getting
+				// latched pressure drops on releasing
+					
+				// finger touching and pressure increasing
+				if (pressure > 0 && pressure_increasing) {
+					// is this a new touch after no fingers where touching?
+					if (previous_pressure <= 0 && physical_touch_finger == 1 << fi) {
+						// start a new latch, clear all previous latch values
+						for (uint8_t i = 0; i < 8; i++) {
+							latch[i].avgvel = 0;
+							latch[i].minpos = 0;
+							latch[i].maxpos = 0;
+						}
+					}
+					// save latch values
+					latch[fi].avgvel = clampi(pressure / 12, 0, 255);
+					latch[fi].minpos = clampi((position + 4) / 8, 0, 255);
 
-	
-	if (p > 0) {
-		midi_pressure_override &= ~bit;
-		midi_pitch_override &= ~bit;
-	}
-	else if (midi_pressure_override & bit) {
-		u8 chan = midi_channels[fi];
-		p = 1+(midi_velocities[fi] + maxi(midi_aftertouch[fi], midi_chan_aftertouch[chan]))*16;
-		pressure_not_rapidly_decreasing = (p > (prevprevp) ); // update for midi
-	}
+					// RJ: I could not work out a way to work with average values that wasn't
+					// sluggish or gave undesired intermediate values - slides and in-between notes
+					// Current solution is just saving one value and randomizing when reading it out
+					// Result feels great, but good to reconsider when the exact contents of
+					// fingers_ui_time and fingers_synth_time are more clear
 
-	/////////////////// 
+					// Averaging code for reference:
+					//
+					// u8 maxpos = 0, minpos = 255, maxpressure = 0;
+					// Finger* f = fingers_synth_time[fi];
+					// for (int j = 0; j < 8; ++j, ++f) {
+					// 	u8 p = clampi((f->pos + 4) / 8, 0, 255);
+					// 	minpos = mini(p, minpos);
+					// 	maxpos = maxi(p, maxpos);
+					// 	u8 pr = clampi(f->pressure / 12, 0, 255);
+					// 	maxpressure = maxi(maxpressure, pr);
+					// }
+					// latch[fi].avgvel = maxpressure;
+					// latch[fi].minpos = minpos;
+					// latch[fi].maxpos = maxpos;
+				}
+				// latch pressure larger than touch pressure
+				int latchpres = latch[fi].avgvel * 12;
+				if (latchpres > 0 && latchpres > pressure) {
+					//recall latch values
+					pressure = clampi(randrange(latchpres - 6, latchpres + 6), 0, 8 * 256 - 1);
+					position = randrange(latch[fi].minpos * 8 + 2 - 6,latch[fi].minpos * 8 + 2 + 6);
 
-	synth_dst_finger->pressure = p;
-//	int total_ui_pressure_before_me = total_ui_pressure;
-	total_ui_pressure += maxi(0, p);
-
-	//if (uif->written) // written is only set if we are confident to update the position
-		synth_dst_finger->pos = uif->pos;
-	//else
-	//	synth_dst_finger->pos = synth_prev_finger->pos;
-
-	int phase0 = calcseqsubstep(0, 8);
-	if (fi==0)
-		read_from_seq = false;
-	bool any_fingers_down = (total_ui_pressure > 0 || prev_total_ui_pressure > 0);
-	if (fi==7 && shift_down!=SB_CLEAR && total_ui_pressure > 0 && total_ui_pressure >= prev_total_ui_pressure) {
-		// update latch from ui state
-		for (int fi=0;fi<8;++fi) {
-			u8 maxpos = 0, minpos = 255, maxpressure = 0;
-			Finger* f = fingers_synth_time[fi];
-			for (int j = 0; j < 8; ++j, ++f) {
-				u8 p = clampi((f->pos + 4) / 8, 0, 255);
-				minpos = mini(p, minpos);
-				maxpos = maxi(p, maxpos);
-				u8 pr = clampi(f->pressure / 12, 0, 255);
-				maxpressure = maxi(maxpressure, pr);
+					// Averaging code for reference:
+					//
+					// int minpos = latch[fi].minpos * 8 + 2;
+					// int maxpos = latch[fi].maxpos * 8 + 6;
+					// int avgpos = (minpos + maxpos) / 2;
+					// int range = (maxpos - minpos) / 4;
+					// pressure = latchpres ? randrange(latchpres - 12, latchpres) : -1024;
+					// position = randrange(avgpos-range,avgpos+range);
+				}
 			}
-			//if (avgvel > latch[fi].avgvel+1 || pressure_not_rapidly_decreasing)
-			{
-//				if (fi == 4) EmuDebugLog("latch pressure %d, tot %d prev %d\n", maxpressure, total_ui_pressure, prev_total_ui_pressure);
-				latch[fi].avgvel = maxpressure;
-				latch[fi].minpos = minpos;
-				latch[fi].maxpos = maxpos;
+
+			// === CV GATE === //
+
+			// scale pressure with cv gate input
+			pressure = (int)((pressure + 256) * adc_smooth[7].y2) - 256;
+
+			// === SEQ RECORDING === //
+
+			// RJ: because of the way data is stored in the sequencer, it is currently not possible to record
+			// midi data into it without imposing some serious restrictions on the range of midi notes that 
+			// can be played. So we're only doing this for touches for now
+			int quarter = (cur_step >> 4) & 3;
+			FingerRecord* seq_record = &rampattern[quarter].steps[cur_step & 15][fi];
+			int data_saved = false;	
+			// We're recording into the loaded pattern
+			if (recording && rampattern_idx == cur_pattern) {
+				// RJ: why do we modify position and pressure before saving it?
+				// Also the calculations for writing/reading, and seq/latch, do not match up
+
+				// holding clear sets the pressure to zero, which will effectively clear the sequencer at this point
+				int seq_pressure = shift_down == SB_CLEAR ? 0 : clampi((pressure + 512) / 12, 0, 255);
+				int seq_position = clampi(position / 8, 0, 255);
+				// holding a note or clearing during playback
+				if (seq_pressure > 0 || (isplaying() && shift_down == SB_CLEAR)) {
+					// first time editing this step
+					if (cur_step != last_edited_step_global) {
+						step_full = 0;
+						memset(last_edited_step, 255, sizeof(last_edited_step));
+						last_edited_step_global = cur_step;
+					}
+					if (cur_step != last_edited_step[fi]) {
+						// if not playing
+						if (!isplaying()) {
+							// clear the step for this finger
+							memset(seq_record->pressure, 0, sizeof(seq_record->pressure));
+							memset(seq_record->pos, 0, sizeof(seq_record->pos));
+						}
+						// we have not edited any substep here
+						last_edited_substep[fi] = 255;
+						// but we have edited this step
+						last_edited_step[fi] = cur_step;
+					}		
+					// first time editing this substep
+					if (substep != last_edited_substep[fi]) {
+						// save last edited substep before substep is possibly altered
+						last_edited_substep[fi] = substep;
+						// are we recording into a full step in step record?
+						if (step_full && !isplaying()) { // a step is full when *any* of the fingers has recorded into the last step
+							// push existing data to front of step
+							for (u8 i = 0; i < 7; i++) {
+								seq_record->pressure[i] = seq_record->pressure[i + 1];
+								if (((substep & 1) == 0) && ((i & 1) == 0))
+									seq_record->pos[i / 2] = seq_record->pos[i / 2 + 1];
+							}
+							// record the incoming data to the last substep
+							substep = 7;
+						}
+						// save input
+						seq_record->pressure[substep] = seq_pressure;
+						seq_record->pos[substep / 2] = seq_position;
+						data_saved = true;
+						// step is full if we just saved the last step
+						if (substep == 7) step_full |= (1 << fi);
+						else step_full &= ~(1 << fi);
+					}			
+				}
+				if (data_saved)
+					ramtime[GEN_PAT0 + quarter] = millis();
+			}
+			// not recording
+			else {
+				// clear this for next recording
+				last_edited_step_global = 255;
 			}
 		}
-		latch_valid = true;
-	} // latch fingers down!
+	}
 
-	// recording
+	// === END OF HANDLING TOUCH AND MIDI === //
+
+	// save input results to global variables to be used by other code
+	if (ignore_touch_for_synth) {
+		synth_finger->pressure = 0;
+		synth_finger->pos = 0;
+	}
+	else {
+		synth_finger->pressure = pressure;
+		synth_finger->pos = position;
+	}
+	total_ui_pressure += maxi(0, synth_finger->pressure);
+	if (synth_finger->pressure > 0) {
+		synthfingerdown_nogatelen_internal |= bit;
+	}
+	else {
+		synthfingerdown_nogatelen_internal &= ~bit;
+	}
+
+	// === SEQ PLAYING === //
+
+	// sequencer overrides any touch or midi input, when it is playing and data is present for the finger on this step
+
+	if (isplaying() || seq_rhythm.did_a_retrig) {
+		FingerRecord *seq_record = readpattern(fi);
+		if (seq_record) {
+            read_from_seq = true;
+            int seq_pressure = seq_record->pressure[substep] * 12;
+            int seq_position = seq_record->pos[substep / 2];
+			int gatelen = param_eval_finger(P_GATE_LENGTH, fi, synth_finger) >> 8;
+			int small_substep = calcseqsubstep(0, 256);
+            seq_pressure = (seq_pressure && !seq_rhythm.supress && small_substep <= gatelen) ? randrange(seq_pressure, seq_pressure+12)-512 : 0;
+            if (seq_pressure > 0) {
+                pressure = seq_pressure;
+                position = randrange(seq_position * 8, seq_position * 8 + 8);
+
+				// override touch and midi data
+				midi_pressure_override &= ~(1 << fi);
+				midi_pitch_override &= ~(1 << fi);
+				synth_finger->pressure = pressure;
+				total_ui_pressure += maxi(0, pressure);
+				synth_finger->pos = position;
+				if (synth_finger->pressure > 0) {
+					synthfingerdown_nogatelen_internal |= bit;
+				}
+				else {
+					synthfingerdown_nogatelen_internal &= ~bit;
+				}
+	        }
+		}
+		// mute sequencer while pressing clear
+		if (shift_down == SB_CLEAR)
+			synth_finger->pressure = 0;
+	}
+
+	// RJ: This bit shifts some values around but I'm not sure what they are doing exactly?
+	// It XORs the last two bits with the new position? Why? Randomization?
+	static s16 prevpressure[8];
+	if (prevpressure[fi]<= 0 && synth_finger->pressure > 0) {
+		// the finger has just gone down! lets go fix a bunch of positions in the history
+		Finger* of = fingers_synth_time[fi];
+		int newp = synth_finger->pos;
+		for (int h = 0; h < 8; ++h, of++) if (h != finger_frame_synth) {
+			if (of->pressure <= 0) {
+				of->pos = (of->pos & 3) ^ newp;
+			}
+		}
+	}
+	prevpressure[fi] = synth_finger->pressure;
+
+	// sort frames in this finger by time (RJ: Surely we can make this more efficient?)
+	sort8((int*)fingers_synth_sorted[fi], (int*)fingers_synth_time[fi]);
+}
+
+void autoknob_recording(int knobId) {
+	// last rec step is only used to check whether we're recording into
+	// a new step and then fully clearing it. this doesn't make sense for
+	// overdubbing as well as allowing substep recording
 	static u8 last_rec_step=255;
 	static u8 last_rec_phase = 0;
 	static u8 step_filled = 0;
-	int q = (cur_step >> 4) & 3;
-	FingerRecord* fr = &rampattern[q].steps[cur_step & 15][fi];
+	int phase0 = calcseqsubstep(0, 8);
+	bool any_fingers_down = (total_ui_pressure > 0 || prev_total_ui_pressure > 0);
+	
+	int quart = (cur_step >> 4) & 3;
+	FingerRecord* fr = &rampattern[quart].steps[cur_step & 15][knobId];
 	bool want_recording_on = any_fingers_down && recording && rampattern_idx == cur_pattern ; // && (isplaying() || pressure_increasing)
 
-	if (recording && rampattern_idx == cur_pattern && fi < 2) { // check for knob recording?
-		int k = fi;
-		float knob = adc_smooth[4 + k].y2;
-		if (shift_down == SB_RECORD && fabsf(knob - knobbase[k]) > 0.01f)
-			recordingknobs |= 1 << k;
+	if (recording && rampattern_idx == cur_pattern) {
+		float knob = adc_smooth[4 + knobId].y2;
+		if (shift_down == SB_RECORD && fabsf(knob - knobbase[knobId]) > 0.01f)
+			recordingknobs |= 1 << knobId;
 	}
 	if (shift_down == SB_CLEAR && recording)
 		want_recording_on = true;
 	if (want_recording_on) {
 		if (last_rec_step != cur_step) {
-			// new step! blank it out
-		//	DebugLog("cear step %d (fi=%d)\r\n", cur_step, fi);
+			// This clears out any step that we record into, which disables any overdubbing
 			for (int fi = 0; fi < 8; ++fi) {
-				FingerRecord* fr = &rampattern[q].steps[cur_step & 15][fi];
+				FingerRecord* fr = &rampattern[quart].steps[cur_step & 15][fi];
 				memset(fr, 0, sizeof(FingerRecord));
 			}
+			// This clears out autoknob recording values for the current step
+			// This should not rely on any_fingers_down!
 			for (int k = 0; k < 2; ++k)
-				if (recordingknobs&(1<<k)) for (int i = 0; i < 8; ++i)
-					rampattern[q].autoknob[(cur_step & 15) * 8 + i][k] = 0;
+				if (recordingknobs&(1<<k)) 
+					for (int i = 0; i < 8; ++i)
+						rampattern[quart].autoknob[(cur_step & 15) * 8 + i][k] = 0;
 			if (playmode != PLAYING && phase0 != 0) {
 				// force the sequencer step clock back to the start of the step!
 				phase0 = 0;
@@ -698,193 +888,30 @@ void finger_synth_update(int fi) {
 			last_rec_step = cur_step;
 		}
 		ramtime[GEN_PAT0 + ((cur_step >> 4) & 3)] = millis();
-		int pressure = clampi((synth_dst_finger->pressure+512) / 12, 0, 255);
-		int pos = clampi(synth_dst_finger->pos / 8, 0, 255);
-		if (shift_down == SB_CLEAR) {
-			if (fi<2)
-				for (int i=0;i<8;++i)
-					rampattern[q].autoknob[(cur_step & 15) * 8 + i][fi] = 0;
-			pressure = 0;
-		}
-		if (phase0 < last_rec_phase)
-			step_filled = 1;
-		if (step_filled) {
-			// scroll right! but dont record lift offs
-			if (phase0!=last_rec_phase && (isplaying() || pressure_not_rapidly_decreasing)) {
-				for (int i = 0; i < 7; ++i) fr->pressure[i] = fr->pressure[i + 1];
-				for (int i = 0; i < 3; ++i) fr->pos[i] = fr->pos[i + 1];
-				fr->pressure[7] = pressure;
-				fr->pos[3] = pos;
-			}
-		}
-		else {
-			// fill from left!
-			fr->pressure[phase0] = maxi(fr->pressure[phase0], pressure);
-			for (int phase = phase0 + 1; phase < 8; ++phase)
-				fr->pressure[phase] = 0;
-			for (int phase = phase0 / 2; phase < 4; ++phase)
-				fr->pos[phase] = pos;
 
+		// This clears out autoknob values - again?
+		if (shift_down == SB_CLEAR) {
+			for (int i=0;i<8;++i)
+				rampattern[quart].autoknob[(cur_step & 15) * 8 + i][knobId] = 0;
 		}
 	}
-	if (recording && rampattern_idx == cur_pattern && fi < 2 && recordingknobs>0) {
-		int k = fi;
-		float knob = adc_smooth[4 + k].y2;
-		if (recordingknobs & (1 << k)) {
+	if (recording && rampattern_idx == cur_pattern && recordingknobs>0) {
+		float knob = adc_smooth[4 + knobId].y2;
+		if (recordingknobs & (1 << knobId)) {
 			if (isplaying())
-				rampattern[q].autoknob[(cur_step & 15) * 8 + phase0][k] = clampi((int)(knob * 127.f), -127, 127);
+				rampattern[quart].autoknob[(cur_step & 15) * 8 + phase0][knobId] = clampi((int)(knob * 127.f), -127, 127);
 			else for (int i = 0; i < 8; ++i)
-				rampattern[q].autoknob[(cur_step & 15) * 8 + i][k] = clampi((int)(knob * 127.f), -127, 127);
+				rampattern[quart].autoknob[(cur_step & 15) * 8 + i][knobId] = clampi((int)(knob * 127.f), -127, 127);
 			ramtime[GEN_PAT0 + ((cur_step >> 4) & 3)] = millis();
 		}
 	}
 
-	if (fi == 7) {
+	if (knobId == 1) {
 		last_rec_step = cur_step;
 		last_rec_phase = phase0;
 		if (!want_recording_on)
 			last_rec_step = 255;
 	}
-#define MERGE_PLAYBACK 0
-    if (MERGE_PLAYBACK) {
-        // read from pattern
-        FingerRecord *fr = readpattern(fi);
-        if (fr && (isplaying() || seq_rhythm.did_a_retrig)) {
-
-            int pr = fr->pressure[phase0] * 12;
-            int pos = fr->pos[phase0 / 2];
-            pr = (pr && !seq_rhythm.supress) ? randrange(pr, pr+12)-512 : -1024;
-            if (pr > 0) {
-                read_from_seq = true;
-                synth_dst_finger->pressure = pr;
-                synth_dst_finger->pos = randrange(pos * 8, pos * 8 + 8);
-                synth_dst_finger->written = 1;
-            }
-        }
-    }
-
-    if (!any_fingers_down) {
-        if (!MERGE_PLAYBACK) {
-            // read from pattern
-            FingerRecord *fr = readpattern(fi);
-            if (fr && (isplaying() || seq_rhythm.did_a_retrig)) {
-                read_from_seq = true;
-
-                int pr = fr->pressure[phase0] * 12;
-                int pos = fr->pos[phase0 / 2];
-                synth_dst_finger->pressure = (pr && !seq_rhythm.supress) ? randrange(pr, pr+12)-512 : -1024;
-                synth_dst_finger->pos = randrange(pos * 8, pos * 8 + 8);
-                synth_dst_finger->written = 1;
-            }
-        }
-        // read from latch
-		bool latchon = ((rampreset.flags & FLAGS_LATCH)) ;
-		if (latch_valid && latchon && shift_down != SB_CLEAR) {
-			int latchvel = latch[fi].avgvel * 12;
-			if (latchvel >= synth_dst_finger->pressure) {
-				int mnpos = latch[fi].minpos * 8 + 2, mxpos = latch[fi].maxpos * 8 + 6;
-				int avgpos = (mnpos + mxpos) / 2;
-				int range = (mxpos - mnpos) / 4;
-				synth_dst_finger->pos = randrange(avgpos-range,avgpos+range);
-				synth_dst_finger->pressure = latchvel ? randrange(latchvel - 12, latchvel) : -1024;
-				synth_dst_finger->written = 1;
-			}
-		}
-		
-	}
-
-	float gate_cv = adc_smooth[7].y2;
-	synth_dst_finger->pressure = (int)((synth_dst_finger->pressure + 256) * gate_cv) - 256;
-
-	//if (fi == 0)
-	//	DebugLog("finger0 pressure %d %f\n", synth_dst_finger->pressure, gate_cv);
-
-
-	//if (fi==7)
-	//	DebugLog("frame_ui %d frame_synth %d uif %d synth %d\n", finger_frame_ui, finger_frame_synth, uif->pressure, synth_dst_finger->pressure);
-
-	
-	if (synth_dst_finger->pressure > 0) {
-		synthfingerdown_nogatelen_internal |= bit;
-	}
-	else {
-		synthfingerdown_nogatelen_internal &= ~bit;
-		synthfingersupress_nogatelen &= ~bit;
-	}
-	// /////////////////////////////////////////
-	int gatelen = param_eval_finger(P_GATE_LENGTH, fi, synth_dst_finger) >> 8;
-	if (gatelen < 256 && !isgrainpreview()) {
-		int phase = (rampreset.flags & FLAGS_ARP) ? calcarpsubstep(0, 256) : calcseqsubstep(0, 256);
-		int suppress_seq=false;
-		if (read_from_seq)
-			suppress_seq = (!seq_rhythm.did_a_retrig && !isplaying());
-		else
-			suppress_seq = (synthfingersupress_nogatelen & bit);
-		if (rampreset.flags & FLAGS_ARP)
-			suppress_seq |= !arp_rhythm.did_a_retrig;
-		//suppress_seq = !arp_rhythm.did_a_retrig;
-		if (phase > gatelen || suppress_seq) {
-			synth_dst_finger->pressure = -1024;
-			if (!read_from_seq && !(rampreset.flags & FLAGS_ARP)) {
-				if (synthfingerdown_nogatelen & bit)
-					synthfingersupress_nogatelen |=bit; // once we've supressed, we keep supressing!
-			}
-		}
-	}
-	else {
-		if (!isplaying() && read_from_seq && !seq_rhythm.did_a_retrig) {
-			synth_dst_finger->pressure = -1024;
-		}
-	}
-	// /////////////////////////////////////////
-
-	/* test hold fingers down 
-	if (fi > 0 && fi < 5) {
-		synth_dst_finger->pos = 128;
-		synth_dst_finger->pressure = (fi==1)?2047:1024;
-	}
-	*/
-
-#define ENABLE_TEST_TONE 0
-	if (ENABLE_TEST_TONE) if (fi == 5) {
-		synth_dst_finger->pressure = 1500;
-		synth_dst_finger->pos = 128;
-	}
-	/*
-	static int log3=0;
-	if (log3>0 && fi==3) {
-		DebugLog("%d %d (%d)\r\n",synth_dst_finger->pressure, synth_dst_finger->pos, written);
-		if (synth_dst_finger->pressure<=0)
-			log3--;
-	}*/
-
-	static s16 prevpressure[8];
-
-	if (prevpressure[fi]<= 0 && synth_dst_finger->pressure > 0) {
-		// the finger has just gone down! lets go fix a bunch of positions in the history
-		Finger* of = fingers_synth_time[fi];
-		int newp = synth_dst_finger->pos;
-		int numfix=0;
-		for (int h = 0; h < 8; ++h, of++) if (h != finger_frame_synth) {
-			if (of->pressure <= 0) {
-				of->pos = (of->pos & 3) ^ newp;
-				numfix++;
-			}
-		}
-		/*
-		DebugLog("fi %d fixed %d vol=%d -> %d pos = %d\r\n", fi, numfix, synth_prev_finger->pressure, synth_dst_finger->pressure, newp);
-		sort8((int*)fingers_synth_sorted[fi], (int*)fingers_synth_time[fi]);
-		for (int i=0;i<8;++i) DebugLog("%d ",fingers_synth_sorted[fi][i].pos);
-		DebugLog("\r\n");
-		log3=10;
-		*/
-	}
-	prevpressure[fi] = synth_dst_finger->pressure;
-
-	sort8((int*)fingers_synth_sorted[fi], (int*)fingers_synth_time[fi]);
-
-	
-
 }
 
 void finger_editing(int fi, int frame);

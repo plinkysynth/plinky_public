@@ -1565,7 +1565,6 @@ void processmidimsg(u8 msg, u8 d1, u8 d2) {
 		u8 fi = find_midi_note(chan, d1);
 		if (fi < 8) {
 			midi_pressure_override &= ~(1 << fi);
-			midi_channels[fi] = 255;
 		}
 	}
 	break;
@@ -1904,21 +1903,26 @@ void DoAudio(u32 *dst, u32 *audioin) {
 	// do the clock first so we can update the sequencer step etc
 	bool gotclock = update_clock();
 	static u8 whichhalf = 0;
+	// start of a full update of all strings
+	if (!whichhalf) {
+		total_ui_pressure = 0;
+		read_from_seq = false;
+	}
+	// update strings
 	for (int fi = whichhalf; fi < whichhalf + 4; ++fi) {
 		finger_synth_update(fi);
-		if (fi == 7) {
-
-			if (total_ui_pressure<=0 && prev_total_ui_pressure <= 0 && prev_prev_total_ui_pressure > 0 && recording && playmode != PLAYING) {
-				// you've released your fingers, you're recording in step mode - let's advance!
-				set_cur_step(cur_step + 1, false);
-			}
-			prev_prev_total_ui_pressure = prev_total_ui_pressure;
-			prev_total_ui_pressure = total_ui_pressure;
-			//  rather than incrementing, we let finger_frame_synth shadow the ui. that way we get the full variability of the 
-			// ui input (due to it tikcing slowly), but we dont accidentally read ahead
-			finger_frame_synth = finger_frame_ui;
-			//(finger_frame_synth + 1) & 7;
+	}
+	// end of a full update of all strings
+	if (whichhalf) {
+		// you've released your fingers, you're recording in step mode - let's advance!
+		if (total_ui_pressure<=0 && prev_total_ui_pressure <= 0 && prev_prev_total_ui_pressure > 0 && recording && playmode != PLAYING) {
+			set_cur_step(cur_step + 1, false);
 		}
+		prev_prev_total_ui_pressure = prev_total_ui_pressure;
+		prev_total_ui_pressure = total_ui_pressure;
+		// rather than incrementing, we let finger_frame_synth shadow the ui. that way we get the full variability of the 
+		// ui input (due to it ticking slowly), but we dont accidentally read ahead
+		finger_frame_synth = finger_frame_ui;
 	}
 	whichhalf ^= 4;
 
@@ -2015,12 +2019,18 @@ void DoAudio(u32 *dst, u32 *audioin) {
 			if (midi_pitch_override & (1 << fi)) {
 				Finger* f = fingers_synth_sorted[fi] + 2;
 				int midinote = ((midi_notes[fi]-12*2) << 9) + midi_chan_pitchbend[midi_channels[fi]]/8;
+				// set pitches for each of the four oscillators
 				for (int i = 0; i < 4; ++i) {
 					int pitch = pitchbase + ((i & 1) ? interval : 0) + (i-2)*64 + midinote; //  (lookupscale(scale, ystep + root)) + +((fine * microtune) >> 14);
 					totpitch += pitch;
 					voices[fi].theosc[i].pitch = pitch;
 					voices[fi].theosc[i].targetdphase = maxi(65536, (int)(table_interp(pitches, pitch + PITCH_BASE) * (65536.f * 128.f)));
 					++f;
+				}
+				// midi note is released and volume has rung out
+				if (!(midi_pressure_override & (1 << fi)) && (voices[fi].vol < 0.001f)) {
+					// disable pitch override, this truly turns off the note
+					midi_pitch_override &= ~(1 << fi);
 				}
 			}
 			else {
