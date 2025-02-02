@@ -521,10 +521,14 @@ bool read_from_seq = false;
 
 
 FingerRecord* readpattern(int fi) {
-	if (rampattern_idx == cur_pattern && shift_down != SB_CLEAR) {
-		return &rampattern[(cur_step >> 4) & 3].steps[cur_step & 15][fi];
-	} // pattern is ok?
-	return 0;
+	if (rampattern_idx != cur_pattern || shift_down == SB_CLEAR)
+		return 0;
+	FingerRecord* fr = &rampattern[(cur_step >> 4) & 3].steps[cur_step & 15][fi];
+    // does any substep hold data?
+	int record_pressure = 0;
+	for (u8 i = 0; i < 8; i++)
+		record_pressure += fr->pressure[i];
+	return record_pressure == 0 ? 0 : fr;
 }
 
 /////////////////// XXXXX MIDI HERE?
