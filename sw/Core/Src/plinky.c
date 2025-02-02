@@ -1565,7 +1565,6 @@ void processmidimsg(u8 msg, u8 d1, u8 d2) {
 		u8 fi = find_midi_note(chan, d1);
 		if (fi < 8) {
 			midi_pressure_override &= ~(1 << fi);
-			midi_channels[fi] = 255;
 		}
 	}
 	break;
@@ -2021,6 +2020,11 @@ void DoAudio(u32 *dst, u32 *audioin) {
 					voices[fi].theosc[i].pitch = pitch;
 					voices[fi].theosc[i].targetdphase = maxi(65536, (int)(table_interp(pitches, pitch + PITCH_BASE) * (65536.f * 128.f)));
 					++f;
+				}
+				// midi note is released and volume has rung out
+				if (!(midi_pressure_override & (1 << fi)) && (voices[fi].vol < 0.001f)) {
+					// disable pitch override, this truly turns off the note
+					midi_pitch_override &= ~(1 << fi);
 				}
 			}
 			else {
