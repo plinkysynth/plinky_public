@@ -787,6 +787,7 @@ void SetPreset(u8 preset, bool force) {
 	if (preset == sysparams.curpreset && !force)
 		return;
 	sysparams.curpreset = preset;
+	clearlatch();
 	CopyPresetToRam(force);
 	ramtime[GEN_SYS]=millis();
 }
