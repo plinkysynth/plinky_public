@@ -1915,7 +1915,7 @@ void DoAudio(u32 *dst, u32 *audioin) {
 	// end of a full update of all strings
 	if (whichhalf) {
 		// you've released your fingers, you're recording in step mode - let's advance!
-		if (total_ui_pressure<=0 && prev_total_ui_pressure <= 0 && prev_prev_total_ui_pressure > 0 && recording && playmode != PLAYING) {
+		if (total_ui_pressure<=0 && prev_total_ui_pressure <= 0 && prev_prev_total_ui_pressure > 0 && recording && !isplaying()) {
 			set_cur_step(cur_step + 1, false);
 		}
 		prev_prev_total_ui_pressure = prev_total_ui_pressure;

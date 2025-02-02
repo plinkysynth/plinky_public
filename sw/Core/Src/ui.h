@@ -521,6 +521,22 @@ void DrawLFOs(void) {
 	}
 }
 
+void DrawSubsteps(void) {
+    const static u8 leftOffset = 44;
+	const static u8 rectSize = 6;
+    u8 rightOffset = (rampreset.flags & FLAGS_LATCH) ? 38 : 14;	
+	int num_blocks = calcseqsubstep(0, 8) + 1;
+	u8 x;
+
+	for (int i = 0; i < num_blocks; i++) {
+		x = i * (W - leftOffset - rightOffset) / 8 + leftOffset;
+		fillrectangle(x - rectSize / 2, rectSize, x + rectSize / 2, 3 * rectSize);
+	}
+
+	x = record_to_substep * (W - leftOffset - rightOffset) / 8 + leftOffset;
+	fillrectangle(x - rectSize / 2, 3 * rectSize + 2, x + rectSize / 2, 5 * rectSize);
+}
+
 void DrawVoices(void) {
     const static u8 leftOffset = 44;
 	const static u8 maxHeight = 10;
@@ -823,6 +839,7 @@ void editmode_ui(void) {
 		}
 		DrawLFOs();
 		DrawVoices();
+		// DrawSubsteps();
 		textcol = 2;
 		if (ui_edit_param < P_LAST)
 			goto draw_parameter;
