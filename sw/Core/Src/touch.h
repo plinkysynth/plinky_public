@@ -549,7 +549,7 @@ s16 midi_chan_pitchbend[16];
 u8 midi_next_finger;
 u8 midi_lsb[32];
 u8 find_midi_note(u8 chan, u8 note) {
-	for (int fi = 0; fi < 8; ++fi) if (midi_notes[fi] == note && midi_channels[fi] == chan)
+	for (int fi = 0; fi < 8; ++fi) if ((midi_pitch_override & (1 << fi)) && midi_notes[fi] == note && midi_channels[fi] == chan)
 		return fi;
 	return 255;
 }
