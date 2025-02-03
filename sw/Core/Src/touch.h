@@ -572,6 +572,20 @@ u8 find_midi_free_channel(void) {
 
 bool is_finger_an_edit_operation(int fi);
 
+u8 pres_compress(int pressure) {
+	return clampi((pressure + 12) / 24, 0, 255);
+}
+int pres_decompress(int pressure) {
+	return maxi(randrange(24 * pressure - 12, 24 * pressure + 12), 0);
+}
+
+u8 pos_compress(int position) {
+	return clampi((position + 4) / 8, 0, 255);
+}
+int pos_decompress(int position) {
+	return maxi(randrange(8 * position - 4, 8 * position + 4), 0);
+}
+
 void finger_synth_update(int fi) {
 	if (fi == 0) {
 		total_ui_pressure = 0;
@@ -643,10 +657,10 @@ void finger_synth_update(int fi) {
 			u8 maxpos = 0, minpos = 255, maxpressure = 0;
 			Finger* f = fingers_synth_time[fi];
 			for (int j = 0; j < 8; ++j, ++f) {
-				u8 p = clampi(f->pos / 8, 0, 255);
+				u8 p = pos_compress(f->pos);
 				minpos = mini(p, minpos);
 				maxpos = maxi(p, maxpos);
-				u8 pr = clampi(f->pressure / 24, 0, 255);
+				u8 pr = pres_compress(f->pressure);
 				maxpressure = maxi(maxpressure, pr);
 			}
 			//if (avgvel > latch[fi].avgvel+1 || pressure_not_rapidly_decreasing)
@@ -698,8 +712,8 @@ void finger_synth_update(int fi) {
 			last_rec_step = cur_step;
 		}
 		ramtime[GEN_PAT0 + ((cur_step >> 4) & 3)] = millis();
-		int pressure = clampi(synth_dst_finger->pressure / 24, 0, 255);
-		int pos = clampi(synth_dst_finger->pos / 8, 0, 255);
+		int pressure = pres_compress(synth_dst_finger->pressure);
+		int pos = pos_compress(synth_dst_finger->pos);
 		if (shift_down == SB_CLEAR) {
 			if (fi<2)
 				for (int i=0;i<8;++i)
@@ -751,13 +765,12 @@ void finger_synth_update(int fi) {
         FingerRecord *fr = readpattern(fi);
         if (fr && (isplaying() || seq_rhythm.did_a_retrig)) {
 
-            int pr = fr->pressure[phase0] * 12;
-            int pos = fr->pos[phase0 / 2];
-            pr = (pr && !seq_rhythm.supress) ? randrange(pr - 6, pr + 6) : -1024;
+            int pr = fr->pressure[phase0];
+            pr = (pr && !seq_rhythm.supress) ? pr : -1024;
             if (pr > 0) {
                 read_from_seq = true;
-                synth_dst_finger->pressure = pr;
-                synth_dst_finger->pos = randrange(pos * 8 - 4, pos * 8 + 4);
+                synth_dst_finger->pressure = pres_decompress(pr);
+                synth_dst_finger->pos = pos_decompress(fr->pos[phase0/2]);
                 synth_dst_finger->written = 1;
             }
         }
@@ -770,24 +783,23 @@ void finger_synth_update(int fi) {
             if (fr && (isplaying() || seq_rhythm.did_a_retrig)) {
                 read_from_seq = true;
 
-                int pr = fr->pressure[phase0] * 24;
-                int pos = fr->pos[phase0 / 2];
-                synth_dst_finger->pressure = (pr && !seq_rhythm.supress) ? randrange(pr - 6, pr + 6) : -1024;
-                synth_dst_finger->pos = randrange(pos * 8 - 4, pos * 8 + 4);
+                int pr = fr->pressure[phase0];
+                synth_dst_finger->pressure = (pr && !seq_rhythm.supress) ? pres_decompress(pr) : -1024;
+                synth_dst_finger->pos = pos_decompress(fr->pos[phase0 / 2]);
                 synth_dst_finger->written = 1;
             }
         }
         // read from latch
 		bool latchon = ((rampreset.flags & FLAGS_LATCH)) ;
 		if (latch_valid && latchon && shift_down != SB_CLEAR) {
-			int latchvel = latch[fi].avgvel * 24;
+			int latchvel = pres_decompress(latch[fi].avgvel);
 			if (latchvel >= synth_dst_finger->pressure) {
-				int mnpos = latch[fi].minpos * 8;
-				int mxpos = latch[fi].maxpos * 8;
+				int mnpos = latch[fi].minpos;
+				int mxpos = latch[fi].maxpos;
 				int avgpos = (mnpos + mxpos) / 2;
 				int range = (mxpos - mnpos) / 4;
 				synth_dst_finger->pos = randrange(avgpos-range,avgpos+range);
-				synth_dst_finger->pressure = latchvel ? randrange(latchvel - 6, latchvel + 6) : -1024;
+				synth_dst_finger->pressure = latchvel;
 				synth_dst_finger->written = 1;
 			}
 		}
