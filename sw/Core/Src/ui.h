@@ -274,7 +274,7 @@ void DrawSamplePlayback(SampleInfo* s) {
 	static int curofscenter = 0;
 	static bool jumpable = false;
 	int ofs = curofscenter / 1024;
-	int maxx = s->samplelen / 1024;
+	//int maxx = s->samplelen / 1024;
 	textcol = 3;
 	for (int i = 32; i < 128-16; ++i) {
 		int x = i - 32 + ofs;
@@ -519,6 +519,62 @@ void DrawLFOs(void) {
 		vr++;
 		lfohp = (lfohp + 1) & 15;
 	}
+}
+
+void DrawVoices(void) {
+    const static u8 leftOffset = 44;
+	const static u8 maxHeight = 10;
+	const static u8 barWidth = 3;
+	const static float moveSpeed = 5; // pixels per frame
+	static float touchLineHeight[8];
+	static float maxVolume[8];
+	static float volLineHeight[8];
+	//static bool stringWasTouched[8];
+    u8 rightOffset = (rampreset.flags & FLAGS_LATCH) ? 38 : 14;
+
+    for (u8 i = 0; i < 8; i++) {
+		// string volume
+		if (maxVolume[i] != 0) {
+			volLineHeight[i] = voices[i].vol / maxVolume[i] * maxHeight;
+		}
+		// string pressed
+        if (synthfingerdown_nogatelen & (1 << i)) {
+			// move touch line
+			if (touchLineHeight[i] < maxHeight)
+				touchLineHeight[i] += moveSpeed;
+			if (touchLineHeight[i] > maxHeight)
+				touchLineHeight[i] = maxHeight;
+			// volume line catches up
+			volLineHeight[i] = maxf(volLineHeight[i], touchLineHeight[i]);
+			// remember peak volume
+			maxVolume[i] = voices[i].vol;
+		}
+		// string not pressed
+		else {
+			if (touchLineHeight[i] > 0)
+				touchLineHeight[i] -= moveSpeed;
+			if (touchLineHeight[i] < 0 )
+				touchLineHeight[i] = 0;
+			// // released this frame
+			// if (stringWasTouched[i])
+
+			// has the sound died out?
+			if (maxVolume[i] != 0 && volLineHeight[i] < 0.25) {
+				// disable volume line
+				maxVolume[i] = 0;
+				volLineHeight[i] = 0;
+			}
+		}
+		// draw bars
+		u8 x = i * (W - leftOffset - rightOffset) / 8 + leftOffset;
+		if (touchLineHeight[i] > 0) {
+			for (uint8_t dx = 0; dx < barWidth; dx++)
+				vline(x - barWidth / 2 + dx, H - 1 - touchLineHeight[i], H - 1, 2);
+		}
+		hline(x - barWidth / 2, H - 1 - volLineHeight[i], x - barWidth / 2 + barWidth, 1);
+		// remember string touches
+		//stringWasTouched[i] = synthfingerdown_nogatelen & (1 << i);
+    }
 }
 
 void DrawFlags()
@@ -766,6 +822,7 @@ void editmode_ui(void) {
 			}
 		}
 		DrawLFOs();
+		DrawVoices();
 		textcol = 2;
 		if (ui_edit_param < P_LAST)
 			goto draw_parameter;
@@ -933,8 +990,8 @@ void editmode_ui(void) {
 		///////////////////////////////////// ROOT NOTE DISPLAY
 		/// per finger    
 		int root = param_eval_finger(P_ROTATE, fi, synthf);
-		int interval = (param_eval_finger(P_INTERVAL, fi, synthf) * 12) >> 7;
-		int totpitch = 0;
+		//int interval = (param_eval_finger(P_INTERVAL, fi, synthf) * 12) >> 7;
+		//int totpitch = 0;
 		u32 scale = param_eval_finger(P_SCALE, fi, synthf);
 		if (scale >= S_LAST) scale = 0;
 		if (cvquant == CVQ_SCALE) {

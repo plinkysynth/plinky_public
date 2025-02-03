@@ -105,7 +105,7 @@ void cv_calib(void) {
 	for (int i = 0; i < 6; ++i)
 		adcavgs[i][0] = -1.f;
 	int curx = -1;
-	float downpos[4], downval[4];
+	float downpos[4]={}, downval[4]={};
 	float cvout[4] = {
 		cvcalib[8].bias, cvcalib[8].bias + cvcalib[8].scale * 2048.f * 24.f,
 		cvcalib[9].bias, cvcalib[9].bias + cvcalib[9].scale * 2048.f * 24.f,

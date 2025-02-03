@@ -78,6 +78,7 @@ void togglearp(void) {
 	ShowMessage(F_32_BOLD, ((rampreset.flags & FLAGS_ARP)) ? "arp on" : "arp off", 0);
 	ramtime[GEN_SYS] = millis();
 }
+void clearlatch(void);
 void togglelatch(void) {
 	rampreset.flags^= FLAGS_LATCH;
 	ShowMessage(F_32_BOLD, ((rampreset.flags & FLAGS_LATCH)) ? "latch on" : "latch off", 0);
@@ -226,7 +227,7 @@ void finger_editing(int fi, int frame) {
 	bool pressurestable = abs(uif_prev->pressure-uif->pressure)<200;
 	bool posstable = abs(uif_prev->pos - uif->pos) < 32;
 	if (uif->pressure > 100) {
-		int fy = uif->pos >> 8;
+		//int fy = uif->pos >> 8;
 		//if (fi == 7) EmuDebugLog("pressure delta %d, pos delta %d, y=%d\n", abs(uif_prev->pressure - uif->pressure), abs(uif_prev->pos - uif->pos), fy);
 		// finger down
 		bool isediting = is_finger_an_edit_operation(fi);

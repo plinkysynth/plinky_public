@@ -8,7 +8,7 @@ static inline int led_gamma(int i){
 
 #ifdef IMPL
 
-static u8 led_state_2=0;
+//static u8 led_state_2=0;
 u8 led_ram[9][8];
 
 static u8 led_state=0;
