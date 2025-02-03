@@ -611,7 +611,7 @@ void finger_synth_update(int fi) {
 	int previous_position = fingers_ui_time[fi][(ui_frame - 2) & 7].pos;
 	int substep = calcseqsubstep(0, 8);
 	bool latchon = (rampreset.flags & FLAGS_LATCH);
-	int pressure;
+	int pressure = 0;
 	int position = ui_finger->pos;
 	bool pressure_increasing;
 	bool ignore_touch_for_synth = false;
