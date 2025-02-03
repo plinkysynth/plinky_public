@@ -853,8 +853,6 @@ void finger_synth_update(int fi) {
 			synth_finger->pressure = 0;
 	}
 
-	// RJ: This bit shifts some values around but I'm not sure what they are doing exactly?
-	// It XORs the last two bits with the new position? Why? Randomization?
 	static s16 prevpressure[8];
 	if (prevpressure[fi]<= 0 && synth_finger->pressure > 0) {
 		// the finger has just gone down! lets go fix a bunch of positions in the history
@@ -868,7 +866,6 @@ void finger_synth_update(int fi) {
 	}
 	prevpressure[fi] = synth_finger->pressure;
 
-	// sort frames in this finger by time (RJ: Surely we can make this more efficient?)
 	sort8((int*)fingers_synth_sorted[fi], (int*)fingers_synth_time[fi]);
 }
 
