@@ -554,24 +554,32 @@ u8 find_midi_note(u8 chan, u8 note) {
 	return 255;
 }
 u8 find_midi_free_channel(void) {
-	u8 numfingerdown = 0;
-	
-	for (int attempt = 0; attempt < 16; ++attempt) {
-		u8 ch = (midi_next_finger++) & 7;
-		bool fingerdown = touch_synth_getlatest(ch)->pressure > 0 && (midi_pressure_override&(1<<ch))==0; // synth_dst_finger>0, and midi_pressure_override bit is not set
-		if (fingerdown) {
-			if (attempt < 8) {
-				numfingerdown++;
-				if (numfingerdown == 8)
-					return 255; // all fingers using channels! NO ROOM! TOUGH
-			}
-			continue;
-		}
-		if (attempt >=8 || midi_channels[ch] == 255)
-			return ch;
-	}
-	// give up
-	return (midi_next_finger++) & 7;
+	// "dumb" implementation: just find the lowest unused string
+	for (u8 i = 0; i < 8; i++)
+		if (!(synthfingerdown_nogatelen_internal & (1 << i)))
+			return i;
+	// no unused string found
+	return 255;
+
+	// RJ: I'm really not quite sure what this code was doing exactly. Keeping it here for reference
+	//
+	// u8 numfingerdown = 0;
+	// for (int attempt = 0; attempt < 16; ++attempt) {
+	// 	u8 ch = (midi_next_finger++) & 7;
+	// 	bool fingerdown = touch_synth_getlatest(ch)->pressure > 0 && (midi_pressure_override&(1<<ch))==0; // synth_dst_finger>0, and midi_pressure_override bit is not set
+	// 	if (fingerdown) {
+	// 		if (attempt < 8) {
+	// 			numfingerdown++;
+	// 			if (numfingerdown == 8)
+	// 				return 255; // all fingers using channels! NO ROOM! TOUGH
+	// 		}
+	// 		continue;
+	// 	}
+	// 	if (attempt >=8 || midi_channels[ch] == 255)
+	// 		return ch;
+	// }
+	// // give up
+	// return (midi_next_finger++) & 7;
 }
 
 bool is_finger_an_edit_operation(int fi);
