@@ -114,12 +114,14 @@ void SetWUState(u8 state, u8 *data, int len) {
 
 extern u8 erasepos;
 
+void flip(void);
 void draw_webusb_ui(int o) {
   clear();
   fdrawstr(0, 0, F_20, "writing %d...",o);
   invertrectangle(0, 0, (erasepos * 2) & 127, 32);
   flip();
 }
+void tud_task(void);
 void draw_webusb_ui2() {
   draw_webusb_ui(0);
   tud_task(); // keep the host happy
@@ -362,7 +364,7 @@ void PumpWebUSB(bool calling_from_audio_thread) {
       } else if (wu_hdr.cmd == 5) {
         // write to wavetable ram
         flash_program_array((void *)wavetable, (void *)delaybuf, (sizeof(wavetable) + 7) & ~7);
-        memset(delaybuf, 0, sizeof(delaybuf));
+        memset(delaybuf, 0, (DLMASK+1)*2);
         g_disable_fx = 0;
       }
       goto reset;

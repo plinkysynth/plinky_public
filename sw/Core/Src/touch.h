@@ -600,7 +600,7 @@ void finger_synth_update(int fi) {
 	static u8 last_edited_step_global = 255;
 	static u8 last_edited_substep_global = 255;
 	static u8 last_edited_step[8] = {255, 255, 255, 255, 255, 255, 255, 255};
-	static u8 last_edited_substep[8] = {255, 255, 255, 255, 255, 255, 255, 255};
+	//static u8 last_edited_substep[8] = {255, 255, 255, 255, 255, 255, 255, 255};
 	static int record_to_substep;
 
 	int bit = 1 << fi;
@@ -608,7 +608,7 @@ void finger_synth_update(int fi) {
 	Finger* ui_finger = &fingers_ui_time[fi][ui_frame];
 	Finger* synth_finger = &fingers_synth_time[fi][finger_frame_synth];
 	int previous_pressure = fingers_ui_time[fi][(ui_frame - 2) & 7].pressure;
-	int previous_position = fingers_ui_time[fi][(ui_frame - 2) & 7].pos;
+	//int previous_position = fingers_ui_time[fi][(ui_frame - 2) & 7].pos;
 	int substep = calcseqsubstep(0, 8);
 	bool latchon = (rampreset.flags & FLAGS_LATCH);
 	int pressure = 0;

@@ -780,6 +780,7 @@ void ProgramPage(void* datasrc, u32 datasize, u8 index) {
 #endif
 #endif
 }
+void clearlatch(void);
 
 void SetPreset(u8 preset, bool force) {
 	if (preset >= 32)

@@ -274,7 +274,7 @@ void DrawSamplePlayback(SampleInfo* s) {
 	static int curofscenter = 0;
 	static bool jumpable = false;
 	int ofs = curofscenter / 1024;
-	int maxx = s->samplelen / 1024;
+	//int maxx = s->samplelen / 1024;
 	textcol = 3;
 	for (int i = 32; i < 128-16; ++i) {
 		int x = i - 32 + ofs;
@@ -529,7 +529,7 @@ void DrawVoices(void) {
 	static float touchLineHeight[8];
 	static float maxVolume[8];
 	static float volLineHeight[8];
-	static bool stringWasTouched[8];
+	//static bool stringWasTouched[8];
     u8 rightOffset = (rampreset.flags & FLAGS_LATCH) ? 38 : 14;
 
     for (u8 i = 0; i < 8; i++) {
@@ -573,7 +573,7 @@ void DrawVoices(void) {
 		}
 		hline(x - barWidth / 2, H - 1 - volLineHeight[i], x - barWidth / 2 + barWidth, 1);
 		// remember string touches
-		stringWasTouched[i] = synthfingerdown_nogatelen & (1 << i);
+		//stringWasTouched[i] = synthfingerdown_nogatelen & (1 << i);
     }
 }
 
@@ -990,8 +990,8 @@ void editmode_ui(void) {
 		///////////////////////////////////// ROOT NOTE DISPLAY
 		/// per finger    
 		int root = param_eval_finger(P_ROTATE, fi, synthf);
-		int interval = (param_eval_finger(P_INTERVAL, fi, synthf) * 12) >> 7;
-		int totpitch = 0;
+		//int interval = (param_eval_finger(P_INTERVAL, fi, synthf) * 12) >> 7;
+		//int totpitch = 0;
 		u32 scale = param_eval_finger(P_SCALE, fi, synthf);
 		if (scale >= S_LAST) scale = 0;
 		if (cvquant == CVQ_SCALE) {

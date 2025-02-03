@@ -949,10 +949,10 @@ void RunVoice(Voice *v, int fingeridx, float targetvol, u32 *outbuf) {
 //				if (targetvol > 0.01f)
 //					DebugLog("%c", 'a' + (int)(targetvol * 25));
 				if (targetvol > 0.01f) {
-					int i = 1;
+					//int i = 1;
 				}
 				if (!trig) {
-					int i = 1;
+					//int i = 1;
 				}
 				int ph = v->playhead8 >> 8;
 				int slicelen = ramsample.splitpoints[v->sliceidx + 1] - ramsample.splitpoints[v->sliceidx];
@@ -2594,22 +2594,22 @@ void check_bootloader_flash(void) {
 		DebugLog("bootloader checksum failed %08x != %08x\r\n", checksum, GOLDEN_CHECKSUM);
 			clear();
 			drawstr(0,0,F_8,"bad bootloader crc");
-			snprintf(buf, sizeof(buf), "%08x vs %08x", checksum, GOLDEN_CHECKSUM);
+			snprintf(buf, sizeof(buf), "%08x vs %08x", (unsigned int)checksum, (unsigned int)GOLDEN_CHECKSUM);
 			drawstr(0,8,F_8,buf);
 			oled_flip(vrambuf);
 			HAL_Delay(10000);
 		return;
 	}
 	clear();
-  snprintf(buf, sizeof(buf), "%08x %d", magic, count);
+  snprintf(buf, sizeof(buf), "%08x %d", (unsigned int)magic, count);
   drawstr(0, 0, F_16, buf);
-  snprintf(buf, sizeof(buf), "%08x %08x", app_base[0], app_base[1]);
+  snprintf(buf, sizeof(buf), "%08x %08x", (unsigned int)app_base[0], (unsigned int)app_base[1]);
   drawstr(0, 16, F_12, buf);
   oled_flip(vrambuf);
 
 	rb32[64]++; // clear the magic
   	
-	DebugLog("bootloader app base is %08x %08x\r\n", app_base[0], app_base[1]);
+	DebugLog("bootloader app base is %08x %08x\r\n", (unsigned int)app_base[0], (unsigned int)app_base[1]);
 
 	    /*
 	     * We refuse to program the first word of the app until the upload is marked
@@ -2638,7 +2638,7 @@ void check_bootloader_flash(void) {
 		clear();
 		drawstr(0,0,F_12_BOLD,"FLASHING\nBOOTLOADER");
 		char verbuf[5]={};
-		memcpy(verbuf,(DELAY_BUF+65536-4),4);
+		memcpy(verbuf,(void*)(DELAY_BUF+65536-4),4);
 		drawstr(0,24,F_8,verbuf);
 
 		oled_flip(vrambuf);
@@ -2808,14 +2808,14 @@ void test_jig(void) {
 				if (lohi)
 					invertrectangle(0,0,128,32);
 				oled_flip(vrambuf);
-				for (int ch=0;ch<ADC_CHANS;++ch)
+				for (int ch=0;ch<ADC_CHANS;++ch) {
 					tot[ch] /= ADC_SAMPLES * NUMITER;
-
-					DebugLog("-----\nmux = %d lohi = %d\n", mux, lohi);
-					for (int ch=0;ch<ADC_CHANS;++ch) {
-						DebugLog("adc ch reads %d\n",tot[ch]);
-					}
-					DebugLog("-----\n");
+				}
+				DebugLog("-----\nmux = %d lohi = %d\n", mux, lohi);
+				for (int ch=0;ch<ADC_CHANS;++ch) {
+					DebugLog("adc ch reads %d\n",tot[ch]);
+				}
+				DebugLog("-----\n");
 				switch(mux) {
 				case 0:
 					for (int ch=0;ch<ADC_CHANS;++ch) {
