@@ -537,7 +537,8 @@ FingerRecord* readpattern(int fi) {
 	// in plinky.c midi note down: inc next voice index; set both override bits; set voice midi pitch and channel and velocity
 	// in plinky.c midi note up: clear pressure override bit
 	// in the synth - override pitch if bit is set
-u8 midi_pressure_override, midi_pitch_override;
+u8 midi_pressure_override = 0; // true if midi note is pressed
+u8 midi_pitch_override = 0; // true if midi note is sounded out, includes release phase
 u8 midi_notes[8];
 u8 midi_velocities[8];
 u8 midi_aftertouch[8];
@@ -600,7 +601,6 @@ void finger_synth_update(int fi) {
 	static u8 last_edited_step_global = 255;
 	static u8 last_edited_substep_global = 255;
 	static u8 last_edited_step[8] = {255, 255, 255, 255, 255, 255, 255, 255};
-	//static u8 last_edited_substep[8] = {255, 255, 255, 255, 255, 255, 255, 255};
 	static int record_to_substep;
 
 	int bit = 1 << fi;
@@ -608,7 +608,6 @@ void finger_synth_update(int fi) {
 	Finger* ui_finger = &fingers_ui_time[fi][ui_frame];
 	Finger* synth_finger = &fingers_synth_time[fi][finger_frame_synth];
 	int previous_pressure = fingers_ui_time[fi][(ui_frame - 2) & 7].pressure;
-	//int previous_position = fingers_ui_time[fi][(ui_frame - 2) & 7].pos;
 	int substep = calcseqsubstep(0, 8);
 	bool latchon = (rampreset.flags & FLAGS_LATCH);
 	int pressure = 0;
@@ -855,7 +854,6 @@ void finger_synth_update(int fi) {
 
 	static s16 prevpressure[8];
 	if (prevpressure[fi]<= 0 && synth_finger->pressure > 0) {
-		// the finger has just gone down! lets go fix a bunch of positions in the history
 		Finger* of = fingers_synth_time[fi];
 		int newp = synth_finger->pos;
 		for (int h = 0; h < 8; ++h, of++) if (h != finger_frame_synth) {
@@ -866,6 +864,7 @@ void finger_synth_update(int fi) {
 	}
 	prevpressure[fi] = synth_finger->pressure;
 
+	// sort fingers by pitch
 	sort8((int*)fingers_synth_sorted[fi], (int*)fingers_synth_time[fi]);
 }
 

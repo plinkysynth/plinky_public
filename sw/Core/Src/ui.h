@@ -529,9 +529,8 @@ void DrawVoices(void) {
 	static float touchLineHeight[8];
 	static float maxVolume[8];
 	static float volLineHeight[8];
-	//static bool stringWasTouched[8];
     u8 rightOffset = (rampreset.flags & FLAGS_LATCH) ? 38 : 14;
-
+	// all voices
     for (u8 i = 0; i < 8; i++) {
 		// string volume
 		if (maxVolume[i] != 0) {
@@ -555,9 +554,6 @@ void DrawVoices(void) {
 				touchLineHeight[i] -= moveSpeed;
 			if (touchLineHeight[i] < 0 )
 				touchLineHeight[i] = 0;
-			// // released this frame
-			// if (stringWasTouched[i])
-
 			// has the sound died out?
 			if (maxVolume[i] != 0 && volLineHeight[i] < 0.25) {
 				// disable volume line
@@ -572,8 +568,6 @@ void DrawVoices(void) {
 				vline(x - barWidth / 2 + dx, H - 1 - touchLineHeight[i], H - 1, 2);
 		}
 		hline(x - barWidth / 2, H - 1 - volLineHeight[i], x - barWidth / 2 + barWidth, 1);
-		// remember string touches
-		//stringWasTouched[i] = synthfingerdown_nogatelen & (1 << i);
     }
 }
 
