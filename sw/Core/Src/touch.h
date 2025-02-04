@@ -537,7 +537,8 @@ FingerRecord* readpattern(int fi) {
 	// in plinky.c midi note down: inc next voice index; set both override bits; set voice midi pitch and channel and velocity
 	// in plinky.c midi note up: clear pressure override bit
 	// in the synth - override pitch if bit is set
-u8 midi_pressure_override, midi_pitch_override;
+u8 midi_pressure_override = 0; // true if midi note is pressed
+u8 midi_pitch_override = 0; // true if midi note is sounded out, includes release phase
 u8 midi_notes[8];
 u8 midi_velocities[8];
 u8 midi_aftertouch[8];
@@ -648,8 +649,8 @@ void finger_synth_update(int fi) {
 			
 			pressure = ui_finger->pressure;
 			pressure_increasing = (pressure > previous_pressure);
-			if (pressure > 0) physical_touch_finger |= (1 << fi);
-			else physical_touch_finger &= ~(1 << fi);
+			if (pressure > 0) physical_touch_finger |= bit;
+			else physical_touch_finger &= ~bit;
 
 			// === LATCH SAVE === // 
 
@@ -666,10 +667,8 @@ void finger_synth_update(int fi) {
 						}
 					}
 					// save latch values
-					latch[fi].avgvel = clampi(pressure / 24, 0, 255);
-					latch[fi].minpos = clampi(position / 8, 0, 255);
-					if (latch[fi].avgvel == 255)
-						ShowMessage(F_32_BOLD, "Ltch max", 0);
+					latch[fi].avgvel = pres_compress(pressure);
+					latch[fi].minpos = pos_compress(position);
 					// RJ: I could not work out a way to work with average values that wasn't
 					// sluggish or gave undesired intermediate values - slides and in-between notes
 					// Current solution is just saving one value and randomizing when reading it out
@@ -709,8 +708,8 @@ void finger_synth_update(int fi) {
 			// We're recording into the loaded pattern
 			if (recording && rampattern_idx == cur_pattern) {
 				// holding clear sets the pressure to zero, which will effectively clear the sequencer at this point
-				int seq_pressure = shift_down == SB_CLEAR ? 0 : clampi(pressure / 24, 0, 255);
-				int seq_position = shift_down == SB_CLEAR ? 0 : clampi(position / 8, 0, 255);
+				int seq_pressure = shift_down == SB_CLEAR ? 0 : pres_compress(pressure);
+				int seq_position = shift_down == SB_CLEAR ? 0 : pos_compress(position);
 
 				// holding a note or clearing during playback
 				if (seq_pressure > 0 || shift_down == SB_CLEAR) {
@@ -779,11 +778,10 @@ void finger_synth_update(int fi) {
 		// === LATCH RECALL === // 
 
 		// latch pressure larger than touch pressure
-		int latchpres = latch[fi].avgvel * 24;
-		if (latchpres > 0 && latchpres > pressure) {
+		if (latch[fi].avgvel > 0 && latch[fi].avgvel * 24 > pressure) {
 			//recall latch values
-			pressure = maxi(randrange(latchpres - 6, latchpres + 6), 0);
-			position = randrange(latch[fi].minpos * 8 - 6,latch[fi].minpos * 8 + 6);
+			pressure = pres_decompress(latch[fi].avgvel);;
+			position = pos_decompress(latch[fi].minpos);
 			ignore_touch_for_synth = false;
 
 			// Averaging code for reference:
@@ -823,16 +821,13 @@ void finger_synth_update(int fi) {
 	if (isplaying() || seq_rhythm.did_a_retrig) {
 		FingerRecord *seq_record = readpattern(fi);
 		if (seq_record) {
-            int seq_pressure = seq_record->pressure[substep] * 24;
-            int seq_position = seq_record->pos[substep / 2];
 			int gatelen = param_eval_finger(P_GATE_LENGTH, fi, synth_finger) >> 8;
 			int small_substep = calcseqsubstep(0, 256);
 
-            seq_pressure = (seq_pressure && !seq_rhythm.supress && small_substep <= gatelen) ? maxi(randrange(seq_pressure - 6, seq_pressure + 6), 0) : 0;
-            if (seq_pressure > 0) {
+            if (seq_record->pressure[substep] && !seq_rhythm.supress && small_substep <= gatelen) {
 	            read_from_seq = true;
-                pressure = seq_pressure;
-                position = randrange(seq_position * 8, seq_position * 8 + 8);
+                pressure = pres_decompress(seq_record->pressure[substep]);
+                position = pos_decompress(seq_record->pos[substep / 2]);
 
 				// override touch and midi data
 				midi_pressure_override &= ~bit;
@@ -853,9 +848,9 @@ void finger_synth_update(int fi) {
 			synth_finger->pressure = 0;
 	}
 
+	// new finger touch, slightly randomize touch-values in history to avoid static touch values
 	static s16 prevpressure[8];
 	if (prevpressure[fi]<= 0 && synth_finger->pressure > 0) {
-		// the finger has just gone down! lets go fix a bunch of positions in the history
 		Finger* of = fingers_synth_time[fi];
 		int newp = synth_finger->pos;
 		for (int h = 0; h < 8; ++h, of++) if (h != finger_frame_synth) {
@@ -866,6 +861,7 @@ void finger_synth_update(int fi) {
 	}
 	prevpressure[fi] = synth_finger->pressure;
 
+	// sort fingers by pitch
 	sort8((int*)fingers_synth_sorted[fi], (int*)fingers_synth_time[fi]);
 }
 
