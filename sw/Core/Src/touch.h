@@ -713,7 +713,7 @@ void finger_synth_update(int fi) {
 				int seq_position = shift_down == SB_CLEAR ? 0 : clampi(position / 8, 0, 255);
 
 				// holding a note or clearing during playback
-				if (seq_pressure > 0 || shift_down == SB_CLEAR) {
+				if ((seq_pressure > 0 && pressure_increasing) || shift_down == SB_CLEAR) {
 					// step recording
 					if (!isplaying()) {
 						// editing a new step, and waited for substep to reset to zero
