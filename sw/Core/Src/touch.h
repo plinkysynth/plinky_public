@@ -539,6 +539,7 @@ FingerRecord* readpattern(int fi) {
 	// in the synth - override pitch if bit is set
 u8 midi_pressure_override = 0; // true if midi note is pressed
 u8 midi_pitch_override = 0; // true if midi note is sounded out, includes release phase
+int memory_position[8];
 u8 midi_notes[8];
 u8 midi_velocities[8];
 u8 midi_aftertouch[8];
@@ -642,6 +643,7 @@ void finger_synth_update(int fi) {
 	int pressure = 0;
 	int position = 0;
 	bool pressure_increasing;
+	bool position_updated = false;
 
 	// === TOUCH INPUT === //
 
@@ -650,7 +652,10 @@ void finger_synth_update(int fi) {
 		pressure = ui_finger->pressure;
 		position = ui_finger->pos;
 		pressure_increasing = (pressure > previous_pressure);
-		if (pressure > 0) physical_touch_finger |= bit;
+		if (pressure > 0) {
+			physical_touch_finger |= bit;
+			position_updated = true;
+		}
 		else physical_touch_finger &= ~bit;
 
 		// === LATCH WRITE === // 
@@ -779,6 +784,7 @@ void finger_synth_update(int fi) {
 		//recall latch values
 		pressure = pres_decompress(latch[fi].avgvel);;
 		position = pos_decompress(latch[fi].minpos);
+		position_updated = true;
 
 		// Averaging code for reference:
 		//
@@ -802,6 +808,7 @@ void finger_synth_update(int fi) {
 				read_from_seq = true;
 				pressure = pres_decompress(seq_record->pressure[substep]);
 				position = pos_decompress(seq_record->pos[substep / 2]);
+				position_updated = true;
 			}
 		}
 	}
@@ -822,6 +829,11 @@ void finger_synth_update(int fi) {
 			pressure = pressure = 1+(midi_velocities[fi] + maxi(midi_aftertouch[fi], midi_chan_aftertouch[midi_channels[fi]]))*16;
 			position = 8 * 256 - ((midi_notes[fi] % 12) * 256 * 7 / 11) - 1; // Map notes to pads
 		}
+	}
+
+	// manually save position for release phase
+	if (position_updated) {
+		memory_position[fi] = position;
 	}
 
 	// === CV GATE === //

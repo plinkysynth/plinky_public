@@ -2050,11 +2050,10 @@ void DoAudio(u32 *dst, u32 *audioin) {
 				int microtune = 64 + param_eval_finger(P_MICROTUNE, fi, synthf);  // really, micro-tune amount
 
 				Finger* f = fingers_synth_sorted[fi] + 2;
+				int position = f->pressure <= 0 ? memory_position[fi] : f->pos;
+				int ystep = 7 - (position >> 8);
+				int fine = 128 - (position & 255);
 				for (int i = 0; i < 4; ++i) {
-					//				if (ramsample.samplelen)
-					//					f = synthf; // XXX FORCE LATEST
-					int ystep = 7 - (f->pos >> 8);
-					int fine = 128 - (f->pos & 255);
 					int pitch = pitchbase + (lookupscale(scale, ystep + root)) + ((i & 1) ? interval : 0) + ((fine * microtune) >> 14);
 					totpitch += pitch;
 					voices[fi].theosc[i].pitch = pitch;
