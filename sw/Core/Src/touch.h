@@ -552,33 +552,62 @@ u8 find_midi_note(u8 chan, u8 note) {
 		return fi;
 	return 255;
 }
-u8 find_midi_free_channel(void) {
-	// "dumb" implementation: just find the lowest unused string
-	for (u8 i = 0; i < 8; i++)
-		if (!(synthfingerdown_nogatelen_internal & (1 << i)))
-			return i;
-	// no unused string found
-	return 255;
-
-	// RJ: I'm really not quite sure what this code was doing exactly. Keeping it here for reference
+u8 find_free_midi_string(u8 midi_pitch) {
+	// RJ: I would like to map incoming midi in a way where the difference between the midi pitch
+	// and the average pitch of the string it lands on is as small as possible. This way we try to
+	// keep midi notes on strings that would otherwise play pitches (by hand or sequencer) roughly in
+	// the same range. When touch- or sequencer-priority cuts off a midi note, this should lead to the
+	// least-jarring results. Note-glides would also make sense this way as we try to keep pitches close
 	//
-	// u8 numfingerdown = 0;
-	// for (int attempt = 0; attempt < 16; ++attempt) {
-	// 	u8 ch = (midi_next_finger++) & 7;
-	// 	bool fingerdown = touch_synth_getlatest(ch)->pressure > 0 && (midi_pressure_override&(1<<ch))==0; // synth_dst_finger>0, and midi_pressure_override bit is not set
-	// 	if (fingerdown) {
-	// 		if (attempt < 8) {
-	// 			numfingerdown++;
-	// 			if (numfingerdown == 8)
-	// 				return 255; // all fingers using channels! NO ROOM! TOUGH
-	// 		}
-	// 		continue;
-	// 	}
-	// 	if (attempt >=8 || midi_channels[ch] == 255)
-	// 		return ch;
-	// }
-	// // give up
-	// return (midi_next_finger++) & 7;
+	// Reverse-engineering the central pitch of a string from the calculations in DoAudio() is a little too 
+	// complex for me to figure out. Is there a simpler way to get those? For now I'm implemeting a very
+	// simple way of mapping midi notes over the strings from low to high.
+
+	const static u8 bottom_offset = 24; // plinky becomes barely audible below this
+	const static u8 range = 100 - bottom_offset; // max pitch on plinky, without octave offset, is 100
+
+	u8 desired_string = clampi((midi_pitch - bottom_offset) * 8 / range, 0, 7); // map pitches to strings
+	int string_option[8];
+	u8 num_string_options = 0;
+	u8 min_dist = 255;
+	float min_vol = __FLT_MAX__;
+	u8 min_string_id = 255;
+
+	// collect non-sounding strings
+	for (u8 string_id = 0; string_id < 8; string_id++) {
+		if (voices[string_id].vol < 0.001f) {
+			string_option[num_string_options] = string_id;
+			num_string_options++;
+		}
+	}
+	// find closest
+	for (uint8_t option_id = 0; option_id < num_string_options; option_id++) {
+		if (abs(string_option[option_id] - desired_string) < min_dist) {
+			min_dist = abs(string_option[option_id] - desired_string);
+			min_string_id = string_option[option_id];
+		}
+	}
+	// return closest, if found
+	if (min_dist != 255) {
+		return min_string_id;
+	}
+	// collect non-pressed strings
+	num_string_options = 0;
+	for (u8 string_id = 0; string_id < 8; string_id++) {
+		if (!(synthfingerdown_nogatelen_internal & (1 << string_id))) {
+			string_option[num_string_options] = string_id;
+			num_string_options++;
+		}
+	}
+	// find quietest
+	for (uint8_t option_id = 0; option_id < num_string_options; option_id++) {
+		if (voices[string_option[option_id]].vol < min_vol) {
+			min_vol = voices[string_option[option_id]].vol;
+			min_string_id = string_option[option_id];
+		}
+	}
+	// return quietest - this returns 255 if nothing was found
+	return min_string_id;
 }
 
 bool is_finger_an_edit_operation(int fi);

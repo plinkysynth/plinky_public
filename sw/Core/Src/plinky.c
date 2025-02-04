@@ -1571,7 +1571,7 @@ void processmidimsg(u8 msg, u8 d1, u8 d2) {
 	case 9: { // note down
 		u8 fi = find_midi_note(chan, d1);
 		if (fi == 255)
-			fi = find_midi_free_channel();
+			fi = find_free_midi_string(d1);
 		if (fi < 8) {
 			midi_notes[fi] = d1;
 			midi_channels[fi] = chan;
