@@ -1999,6 +1999,7 @@ void DoAudio(u32 *dst, u32 *audioin) {
 		cvpitch = (cvpitch + 256) & (~511);
 	}
 	for (int fi = 0; fi < 8; ++fi) {
+		u8 bit = 1 << fi;
 		Finger* synthf = touch_synth_getlatest(fi);
 		float vol = (synthf->pressure) * 1.f / 2048.f ; // sensitivity
 		{
@@ -2047,11 +2048,19 @@ void DoAudio(u32 *dst, u32 *audioin) {
 				int microtune = 64 + param_eval_finger(P_MICROTUNE, fi, synthf);  // really, micro-tune amount
 
 				Finger* f = fingers_synth_sorted[fi] + 2;
+				// not touching, flag set to play release from memory
+				bool playing_release_from_memory = (f->pressure <= 0) && (play_release_from_memory & bit);
+				// playing release from memory and volume has rung out?
+				if (playing_release_from_memory && (voices[fi].vol < 0.001f)) {
+					// stop playing from memory
+					play_release_from_memory &= ~bit;
+					playing_release_from_memory = false;
+				}
+				// take position from memory, or directly from touch
+				int position = playing_release_from_memory ? memory_position[fi] : f->pos;
+				int ystep = 7 - (position >> 8);
+				int fine = 128 - (position & 255);
 				for (int i = 0; i < 4; ++i) {
-					//				if (ramsample.samplelen)
-					//					f = synthf; // XXX FORCE LATEST
-					int ystep = 7 - (f->pos >> 8);
-					int fine = 128 - (f->pos & 255);
 					int pitch = pitchbase + (lookupscale(scale, ystep + root)) + ((i & 1) ? interval : 0) + ((fine * microtune) >> 14);
 					totpitch += pitch;
 					voices[fi].theosc[i].pitch = pitch;

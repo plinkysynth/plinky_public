@@ -538,6 +538,8 @@ FingerRecord* readpattern(int fi) {
 	// in plinky.c midi note up: clear pressure override bit
 	// in the synth - override pitch if bit is set
 u8 midi_pressure_override, midi_pitch_override;
+u8 play_release_from_memory = 0;
+int memory_position[8];
 u8 midi_notes[8];
 u8 midi_velocities[8];
 u8 midi_aftertouch[8];
@@ -596,6 +598,14 @@ int pos_decompress(int position) {
 	return maxi(randrange(8 * position - 4, 8 * position + 4), 0);
 }
 
+void enable_release_from_memory(u8 fi, int position) {
+	memory_position[fi] = position;
+	play_release_from_memory |= (1 << fi);
+}
+void disable_release_from_memory(u8 fi) {
+	play_release_from_memory &= ~(1 << fi);
+}
+
 void finger_synth_update(int fi) {
 	static u8 last_edited_step_global = 255;
 	static u8 last_edited_substep_global = 255;
@@ -648,8 +658,11 @@ void finger_synth_update(int fi) {
 			
 			pressure = ui_finger->pressure;
 			pressure_increasing = (pressure > previous_pressure);
-			if (pressure > 0) physical_touch_finger |= (1 << fi);
-			else physical_touch_finger &= ~(1 << fi);
+			if (pressure > 0) {
+				physical_touch_finger |= bit;
+				disable_release_from_memory(fi);
+			}
+			else physical_touch_finger &= ~bit;
 
 			// === LATCH SAVE === // 
 
@@ -785,6 +798,7 @@ void finger_synth_update(int fi) {
 			pressure = maxi(randrange(latchpres - 6, latchpres + 6), 0);
 			position = randrange(latch[fi].minpos * 8 - 6,latch[fi].minpos * 8 + 6);
 			ignore_touch_for_synth = false;
+			enable_release_from_memory(fi, position);
 
 			// Averaging code for reference:
 			//
@@ -833,6 +847,7 @@ void finger_synth_update(int fi) {
 	            read_from_seq = true;
                 pressure = seq_pressure;
                 position = randrange(seq_position * 8, seq_position * 8 + 8);
+           	 	enable_release_from_memory(fi, position);
 
 				// override touch and midi data
 				midi_pressure_override &= ~bit;
