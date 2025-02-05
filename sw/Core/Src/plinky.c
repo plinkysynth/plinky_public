@@ -2018,7 +2018,7 @@ void DoAudio(u32 *dst, u32 *audioin) {
 			int interval = (param_eval_finger(P_INTERVAL, fi, synthf) * 12) >> 7;
 			int totpitch = 0;
 			// sounding out a midi note
-			if (midi_pitch_override & bit) {
+			if ((midi_pitch_override & bit) && !(midi_suppress & bit)) {
 				Finger* f = fingers_synth_sorted[fi] + 2;
 				int midinote = ((midi_notes[fi]-12*2) << 9) + midi_chan_pitchbend[midi_channels[fi]]/8;
 				for (int i = 0; i < 4; ++i) {

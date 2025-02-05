@@ -539,6 +539,7 @@ FingerRecord* readpattern(int fi) {
 	// in the synth - override pitch if bit is set
 u8 midi_pressure_override = 0; // true if midi note is pressed
 u8 midi_pitch_override = 0; // true if midi note is sounded out, includes release phase
+u8 midi_suppress = 0; // true if midi is suppressed by touch / latch / sequencer note
 int memory_position[8];
 u8 midi_notes[8];
 u8 midi_velocities[8];
@@ -819,24 +820,19 @@ void finger_synth_update(int fi) {
 
 	// === MIDI INPUT === //
 
-	// a midi note is trying to play this string
-	if (midi_pressure_override & bit) {	
-		// is touch, latch or sequencer already playing this string?
-		if (pressure > 0) {
-			// cut off this midi note
-			midi_pressure_override &= ~bit;
-			midi_pitch_override &= ~bit;
-		}
-		// string is free to play midi on
-		else {
-			// take pressure and position from midi data
-			pressure = 
-				// velocity scales from 0 to max_midi_pressure
-				midi_velocities[fi] * midi_velocity_multiplier * 
-				// midi pressure multiplier is 1 plus (max_midi_pressure_multiplier - 1) times the midi pressure in range [0..1]
-				(maxi(midi_aftertouch[fi], midi_chan_aftertouch[midi_channels[fi]]) / 127.0f * (max_midi_pressure_multiplier - 1) + 1);			
-			position = 8 * 256 - ((midi_notes[fi] % 12) * 256 * 7 / 11) - 1; // Map notes to pads
-		}
+	// midi gets suppressed if touch, latch or sequencer generate pressure
+	if (pressure > 0) midi_suppress |= bit;
+	else midi_suppress &= ~bit;
+	// a midi note is playing this string
+	if ((midi_pressure_override & bit) && !(midi_suppress & bit)) {
+		// take pressure and position from midi data
+		pressure = 
+			// velocity scales from 0 to max_midi_pressure
+			midi_velocities[fi] * midi_velocity_multiplier * 
+			// midi pressure multiplier is 1 plus (max_midi_pressure_multiplier - 1) times the midi pressure in range [0..1]
+			(maxi(midi_aftertouch[fi], midi_chan_aftertouch[midi_channels[fi]]) / 127.0f * (max_midi_pressure_multiplier - 1) + 1);			
+		 // Map notes to pads, this makes leds light up according to the note played
+		 position = 8 * 256 - ((midi_notes[fi] % 12) * 256 * 7 / 11) - 1;
 	}
 
 	// manually save position for release phase
