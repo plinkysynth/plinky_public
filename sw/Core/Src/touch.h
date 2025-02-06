@@ -707,6 +707,7 @@ void finger_synth_update(int fi) {
 	static u8 last_edited_substep_global = 255;
 	static u8 last_edited_step[8] = {255, 255, 255, 255, 255, 255, 255, 255};
 	static int record_to_substep;
+	static bool suppress_latch = false;
 
 	int bit = 1 << fi;
 	int ui_frame = (finger_frame_ui - (finger_ui_done_this_frame & bit ? 0 : 1)) & 7;
@@ -747,11 +748,15 @@ void finger_synth_update(int fi) {
 						latch[i].minpos = 0;
 						latch[i].maxpos = 0;
 					}
+					// in step record mode, trying to start a new latch temporarily turns off latching
+					// trying to start a new latch outside of step record mode turns it on again
+					suppress_latch = recording && !isplaying();
 				}
 				// save latch values
-				latch[fi].avgvel = pres_compress(pressure);
-				latch[fi].minpos = pos_compress(position);
-
+				if (!suppress_latch) {
+					latch[fi].avgvel = pres_compress(pressure);
+					latch[fi].minpos = pos_compress(position);
+				}
 				// RJ: I could not work out a way to work with average values that wasn't
 				// sluggish or gave undesired intermediate values - slides and in-between notes
 				// Current solution is just saving one value and randomizing when reading it out
