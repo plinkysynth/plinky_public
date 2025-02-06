@@ -733,9 +733,10 @@ void finger_synth_update(int fi) {
 		}
 		else physical_touch_finger &= ~bit;
 
-		// === LATCH WRITE === // 
-
 		if (latchon) {
+
+			// === LATCH WRITE === // 
+
 			// finger touching and pressure increasing
 			if (pressure > 0 && pressure_increasing) {
 				// is this a new touch after no fingers where touching?
@@ -771,6 +772,25 @@ void finger_synth_update(int fi) {
 				// latch[fi].avgvel = maxpressure;
 				// latch[fi].minpos = minpos;
 				// latch[fi].maxpos = maxpos;
+			}
+
+			// === LATCH RECALL === // 
+
+			// latch pressure larger than touch pressure
+			if (latch[fi].avgvel > 0 && latch[fi].avgvel * 24 > pressure) {
+				//recall latch values
+				pressure = pres_decompress(latch[fi].avgvel);;
+				position = pos_decompress(latch[fi].minpos);
+				position_updated = true;
+
+				// Averaging code for reference:
+				//
+				// int minpos = latch[fi].minpos * 8 + 2;
+				// int maxpos = latch[fi].maxpos * 8 + 6;
+				// int avgpos = (minpos + maxpos) / 2;
+				// int range = (maxpos - minpos) / 4;
+				// pressure = latchpres ? randrange(latchpres - 12, latchpres) : -1024;
+				// position = randrange(avgpos-range,avgpos+range);
 			}
 		}
 
@@ -850,25 +870,6 @@ void finger_synth_update(int fi) {
 			// clear this for next recording
 			last_edited_step_global = 255;
 		}
-	}
-
-	// === LATCH RECALL === // 
-
-	// latch pressure larger than touch pressure
-	if (latch[fi].avgvel > 0 && latch[fi].avgvel * 24 > pressure) {
-		//recall latch values
-		pressure = pres_decompress(latch[fi].avgvel);;
-		position = pos_decompress(latch[fi].minpos);
-		position_updated = true;
-
-		// Averaging code for reference:
-		//
-		// int minpos = latch[fi].minpos * 8 + 2;
-		// int maxpos = latch[fi].maxpos * 8 + 6;
-		// int avgpos = (minpos + maxpos) / 2;
-		// int range = (maxpos - minpos) / 4;
-		// pressure = latchpres ? randrange(latchpres - 12, latchpres) : -1024;
-		// position = randrange(avgpos-range,avgpos+range);
 	}
 
 	// === SEQ PLAYING === //
