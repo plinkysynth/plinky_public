@@ -542,6 +542,7 @@ u8 midi_pitch_override = 0; // true if midi note is sounded out, includes releas
 u8 midi_suppress = 0; // true if midi is suppressed by touch / latch / sequencer note
 int memory_position[8];
 u8 midi_notes[8];
+int midi_positions[8];
 u8 midi_velocities[8];
 u8 midi_aftertouch[8];
 u8 midi_channels[8] = { 255,255,255,255,255,255,255,255 };
@@ -554,24 +555,87 @@ u8 find_midi_note(u8 chan, u8 note) {
 		return fi;
 	return 255;
 }
-u8 find_free_midi_string(u8 midi_pitch) {
-	// RJ: I would like to map incoming midi in a way where the difference between the midi pitch
-	// and the average pitch of the string it lands on is as small as possible. This way we try to
-	// keep midi notes on strings that would otherwise play pitches (by hand or sequencer) roughly in
-	// the same range. When touch- or sequencer-priority cuts off a midi note, this should lead to the
-	// least-jarring results. Note-glides would also make sense this way as we try to keep pitches close
-	//
-	// Reverse-engineering the central pitch of a string from the calculations in DoAudio() is a little too 
-	// complex for me to figure out. Is there a simpler way to get those? For now I'm implemeting a very
-	// simple way of mapping midi notes over the strings from low to high.
 
-	const static u8 bottom_offset = 24; // plinky becomes barely audible below this
-	const static u8 range = 100 - bottom_offset; // max pitch on plinky, without octave offset, is 100
+int string_pitch_at_pad(u8 fi, u8 pad) {
+	Finger* synthf = touch_synth_getlatest(fi);
+	u32 scale = param_eval_finger(P_SCALE, fi, synthf);
+	// pitch calculation:
+	return 
+		// calculate pitch offset, based on
+		lookupscale(
+			// the scale
+			scale, 
+			// the step-offset set by "degree"
+			param_eval_finger(P_ROTATE, fi, synthf) + 
+			// the step-offset of this string based on "column"
+			stride(scale, maxi(0, param_eval_finger(P_STRIDE, fi, synthf)), fi) + 
+			// the step-offset caused by the pad on the string
+			pad
+		) + 
+		// add this to the pitch of the bottom-left pad
+		12 * (
+			// octave offset
+			(param_eval_finger(P_OCT, fi, synthf) << 9) + 
+			// pitch offset
+			(param_eval_finger(P_PITCH, fi, synthf) >> 7)
+		);
+}
 
-	u8 desired_string = clampi((midi_pitch - bottom_offset) * 8 / range, 0, 7); // map pitches to strings
+int string_center_pitch(u8 fi) {
+	return (string_pitch_at_pad(fi, 0) + string_pitch_at_pad(fi, 7)) / 2;
+}
+
+// find the string whose center pitch is the closest to midi_pitch
+u8 find_string_for_midi_pitch (int midi_pitch) {
+	// pitch falls below bottom string center
+	if (midi_pitch < string_center_pitch(0))
+		return 0;
+	// pitch falls above top string center
+	if (midi_pitch >= string_center_pitch(7))
+		return 7;
+	// find the string with the closest center pitch
+	u8 desired_string = 0;
+	int min_dist = 2147483647; // int max
+	for (u8 i = 0; i < 8; i++) {
+		int pitch_dist = abs(string_center_pitch(i) - midi_pitch);
+		if (pitch_dist < min_dist) {
+			min_dist = pitch_dist;
+			desired_string = i;
+		}
+	}
+	return desired_string;
+}
+
+int find_string_position_for_midi_pitch(u8 fi, int midi_pitch) {
+	// note that string positions are ordered top-to-bottom
+	static const u16 pad_spacing = 256;
+	// return the position of the highest pad the midi pitch is higher than - or equal to
+	for (u8 pad = 7; pad > 0; pad--) {
+		if (midi_pitch >= string_pitch_at_pad(fi, pad)) {
+			return (7 - pad) * pad_spacing;
+		}
+	}
+	// if the pitch was lower than the pitch of pad 1, we return the bottom pad
+	return 7 * pad_spacing;
+}
+
+u8 find_free_midi_string(u8 midi_note_number, int *midi_note_position) {
+	Finger* synthf = touch_synth_getlatest(0);
+	int midi_pitch = 
+		// base pitch
+		12 * ((param_eval_finger(P_OCT, 0, synthf) << 9) + (param_eval_finger(P_PITCH, 0, synthf) >> 7)) +
+		// pitch
+		((midi_note_number - 24) << 9);
+
+	// find the best string for this midi note
+	u8 desired_string = find_string_for_midi_pitch(midi_pitch);
+
+	// try to find:
+	// 1. the non-sounding string closest to our desired string
+	// 2. the sounding string that is the quietest
 	int string_option[8];
 	u8 num_string_options = 0;
-	u8 min_dist = 255;
+	u8 min_string_dist = 255;
 	float min_vol = __FLT_MAX__;
 	u8 min_string_id = 255;
 
@@ -584,13 +648,15 @@ u8 find_free_midi_string(u8 midi_pitch) {
 	}
 	// find closest
 	for (uint8_t option_id = 0; option_id < num_string_options; option_id++) {
-		if (abs(string_option[option_id] - desired_string) < min_dist) {
-			min_dist = abs(string_option[option_id] - desired_string);
+		if (abs(string_option[option_id] - desired_string) < min_string_dist) {
+			min_string_dist = abs(string_option[option_id] - desired_string);
 			min_string_id = string_option[option_id];
 		}
 	}
 	// return closest, if found
-	if (min_dist != 255) {
+	if (min_string_dist != 255) {
+		// collect the position on the string before returning
+		*midi_note_position = find_string_position_for_midi_pitch(min_string_id, midi_pitch);
 		return min_string_id;
 	}
 	// collect non-pressed strings
@@ -607,6 +673,10 @@ u8 find_free_midi_string(u8 midi_pitch) {
 			min_vol = voices[string_option[option_id]].vol;
 			min_string_id = string_option[option_id];
 		}
+	}
+	// collect the position on the string before returning
+	if (min_string_id != 255) {
+		*midi_note_position = find_string_position_for_midi_pitch(min_string_id, midi_pitch);
 	}
 	// return quietest - this returns 255 if nothing was found
 	return min_string_id;
@@ -831,8 +901,8 @@ void finger_synth_update(int fi) {
 			midi_velocities[fi] * midi_velocity_multiplier * 
 			// midi pressure multiplier is 1 plus (max_midi_pressure_multiplier - 1) times the midi pressure in range [0..1]
 			(maxi(midi_aftertouch[fi], midi_chan_aftertouch[midi_channels[fi]]) / 127.0f * (max_midi_pressure_multiplier - 1) + 1);			
-		 // Map notes to pads, this makes leds light up according to the note played
-		 position = 8 * 256 - ((midi_notes[fi] % 12) * 256 * 7 / 11) - 1;
+		// for midi, position only defines where the leds light up on the string        
+		position = midi_positions[fi];
 	}
 
 	// manually save position for release phase

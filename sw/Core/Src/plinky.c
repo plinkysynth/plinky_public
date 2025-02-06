@@ -1560,18 +1560,24 @@ void processmidimsg(u8 msg, u8 d1, u8 d2) {
 		if (d1<32)
 			SetPreset(d1, false);
 		break;
-	case 8: { // note up 
-	   // find the voice for this note up
+	case 8: { // note off 
+		// find string with existing midi note
 		u8 fi = find_midi_note(chan, d1);
 		if (fi < 8) {
 			midi_pressure_override &= ~(1 << fi);
 		}
 	}
 	break;
-	case 9: { // note down
+	case 9: { // note on
+		int note_position;
+		// find string with existing midi note
 		u8 fi = find_midi_note(chan, d1);
-		if (fi == 255)
-			fi = find_free_midi_string(d1);
+		// none found - find empty string
+		if (fi == 255) {
+			fi = find_free_midi_string(d1, &note_position);
+			midi_positions[fi] = note_position;
+		}
+		// set midi values
 		if (fi < 8) {
 			midi_notes[fi] = d1;
 			midi_channels[fi] = chan;
