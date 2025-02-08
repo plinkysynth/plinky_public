@@ -401,16 +401,20 @@ const static u16 scaletab[S_LAST][16] = {
 
 
 
-
+// returns number of notes in scale
 static inline u8 scalelen(int scale) {
 	return scaletab[scale][0];
 }
+
+// returns pitch, step is relative to C1
 static inline int lookupscale(int scale, int step) {
-	u8 len=scaletab[scale][0];
-	int oct=step/len;
-	step-=oct*len;
-	if (step<0) { step+=len; oct--; }
-	return oct*(12*512) + scaletab[scale][step+1];
+	int oct = step / scalelen(scale);
+	step -= oct * scalelen(scale);
+	if (step < 0) {
+		step += scalelen(scale); 
+		oct--; 
+	}
+	return oct * (12 * 512) + scaletab[scale][step+1];
 }
 
 

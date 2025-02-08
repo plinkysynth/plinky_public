@@ -1560,18 +1560,24 @@ void processmidimsg(u8 msg, u8 d1, u8 d2) {
 		if (d1<32)
 			SetPreset(d1, false);
 		break;
-	case 8: { // note up 
-	   // find the voice for this note up
+	case 8: { // note off 
+		// find string with existing midi note
 		u8 fi = find_midi_note(chan, d1);
 		if (fi < 8) {
 			midi_pressure_override &= ~(1 << fi);
 		}
 	}
 	break;
-	case 9: { // note down
+	case 9: { // note on
+		int note_position;
+		// find string with existing midi note
 		u8 fi = find_midi_note(chan, d1);
-		if (fi == 255)
-			fi = find_midi_free_channel();
+		// none found - find empty string
+		if (fi == 255) {
+			fi = find_free_midi_string(d1, &note_position);
+			midi_positions[fi] = note_position;
+		}
+		// set midi values
 		if (fi < 8) {
 			midi_notes[fi] = d1;
 			midi_channels[fi] = chan;
@@ -1999,6 +2005,7 @@ void DoAudio(u32 *dst, u32 *audioin) {
 		cvpitch = (cvpitch + 256) & (~511);
 	}
 	for (int fi = 0; fi < 8; ++fi) {
+		u8 bit = 1 << fi;
 		Finger* synthf = touch_synth_getlatest(fi);
 		float vol = (synthf->pressure) * 1.f / 2048.f ; // sensitivity
 		{
@@ -2016,7 +2023,8 @@ void DoAudio(u32 *dst, u32 *audioin) {
 			int root = param_eval_finger(P_ROTATE, fi, synthf);
 			int interval = (param_eval_finger(P_INTERVAL, fi, synthf) * 12) >> 7;
 			int totpitch = 0;
-			if (midi_pitch_override & (1 << fi)) {
+			// sounding out a midi note
+			if ((midi_pitch_override & bit) && !(midi_suppress & bit)) {
 				Finger* f = fingers_synth_sorted[fi] + 2;
 				int midinote = ((midi_notes[fi]-12*2) << 9) + midi_chan_pitchbend[midi_channels[fi]]/8;
 				for (int i = 0; i < 4; ++i) {
@@ -2027,11 +2035,12 @@ void DoAudio(u32 *dst, u32 *audioin) {
 					++f;
 				}
 				// midi note is released and volume has rung out
-				if (!(midi_pressure_override & (1 << fi)) && (voices[fi].vol < 0.001f)) {
+				if (!(midi_pressure_override & bit) && (voices[fi].vol < 0.001f)) {
 					// disable pitch override, this truly turns off the note
-					midi_pitch_override &= ~(1 << fi);
+					midi_pitch_override &= ~bit;
 				}
 			}
+			// anything but a midi note
 			else {
 				u32 scale = param_eval_finger(P_SCALE, fi, synthf);
 				if (scale >= S_LAST) scale = 0;
@@ -2047,11 +2056,10 @@ void DoAudio(u32 *dst, u32 *audioin) {
 				int microtune = 64 + param_eval_finger(P_MICROTUNE, fi, synthf);  // really, micro-tune amount
 
 				Finger* f = fingers_synth_sorted[fi] + 2;
+				int position = f->pressure <= 0 ? memory_position[fi] : f->pos;
+				int ystep = 7 - (position >> 8);
+				int fine = 128 - (position & 255);
 				for (int i = 0; i < 4; ++i) {
-					//				if (ramsample.samplelen)
-					//					f = synthf; // XXX FORCE LATEST
-					int ystep = 7 - (f->pos >> 8);
-					int fine = 128 - (f->pos & 255);
 					int pitch = pitchbase + (lookupscale(scale, ystep + root)) + ((i & 1) ? interval : 0) + ((fine * microtune) >> 14);
 					totpitch += pitch;
 					voices[fi].theosc[i].pitch = pitch;
