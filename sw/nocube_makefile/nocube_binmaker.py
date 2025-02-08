@@ -42,7 +42,7 @@ def main():
         print("!!!!!!!!!!!!!!!! NO VERSION FOUND IN BIN FILE")
         exit(2)
     print(f"bootloader size {len(bl_content)}, app size {appsize}, version {ver1}{ver2}{ver3}")
-    fname = f"plink{ver1}{ver2}{ver3}.bin"
+    fname = f"../../plink{ver1}{ver2}{ver3}.bin"
     print(f'outputting {fname}...')
     try:
         with open(fname, "wb") as fo:
@@ -50,7 +50,7 @@ def main():
     except IOError as e:
         print(f"Failed to write file: {e}")
         exit(2)
-    fname = f"plink{ver1}{ver2}{ver3}.uf2"
+    fname = f"../../plink{ver1}{ver2}{ver3}.uf2"
     print(f'outputting {fname}...')
     # python ../../uf2conv.py -o ${ProjName}.uf2 -c -f STM32L4 ${ProjName}.hex
     class DotAccessibleObject:
@@ -72,7 +72,7 @@ def main():
     uf2args.output=f"tempbl.uf2"
     uf2conv.uf2conv(uf2args)
     # concatenate the two uf2 files tempbl.uf2 and fname
-    with open(f"BOOTLOAD.UF2", "wb") as f1:
+    with open(f"../../BOOTLOAD.UF2", "wb") as f1:
         with open("tempbl.uf2", "rb") as f2:
             f1.write(f2.read())
         with open(fname, "rb") as f2:
@@ -81,7 +81,7 @@ def main():
     import os
     os.remove("tempbl.bin")
     os.remove("tempbl.uf2")
-    print("wrote a combiled firmware and bootloader package to BOOTLOAD.UF2")
+    print("wrote a combiled firmware and bootloader package to ../../BOOTLOAD.UF2")
     checksum=0
     # interpret bl_content as a list of 32-bit words
     for i in range(0, len(bl_content), 4):
