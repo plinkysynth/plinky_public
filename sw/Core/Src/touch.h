@@ -556,6 +556,8 @@ u8 find_midi_note(u8 chan, u8 note) {
 	return 255;
 }
 
+int stride(u32 scale, int stride_semitones, int fingeridx);
+
 int string_pitch_at_pad(u8 fi, u8 pad) {
 	Finger* synthf = touch_synth_getlatest(fi);
 	u32 scale = param_eval_finger(P_SCALE, fi, synthf);

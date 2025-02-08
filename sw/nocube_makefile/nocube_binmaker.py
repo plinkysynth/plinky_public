@@ -87,6 +87,19 @@ def main():
     for i in range(0, len(bl_content), 4):
         checksum = (checksum * 23 + int.from_bytes(bl_content[i:i+4], 'little')) & 0xffffffff
     print(f"bootloader checksum: 0x{checksum:08x} - this should be copied to GOLDEN_CHECKSUM in config.h")
-
+    checksum_in_file = 0
+    print("at time of writing it is:")
+    # open ../../src/config.h and find the GOLDEN_CHECKSUM line
+    with open("../../sw/Core/Src/config.h", "r") as f:
+        for line in f:
+            if "GOLDEN_CHECKSUM" in line:
+                print(line)
+                # parse checksum from line
+                checksum_in_file = int(line.split()[-1], 16)
+                break
+    if checksum != checksum_in_file:
+        print(f"!!!!!!!!!!!!! WARNING: checksum in file is 0x{checksum_in_file:08x} - this is different from the calculated checksum. Please update the checksum in config.h")
+    else:
+        print("BOOTLOADER checksums match. Good job.")
 if __name__ == "__main__":
     main()

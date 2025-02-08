@@ -1858,6 +1858,8 @@ void midi_send_update(void) {
 	}
 }
 
+int stride(u32 scale, int stride_semitones, int fingeridx);
+
 int audiotime = 0;
 void DoAudio(u32 *dst, u32 *audioin) {
 	audiotime += BLOCK_SAMPLES;
