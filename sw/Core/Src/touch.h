@@ -497,8 +497,9 @@ int prev_total_ui_pressure = 0;
 int total_ui_pressure = 0;
 
 typedef struct FingerStorage {
-	u8 minpos, maxpos;
-	u8 avgvel;
+	u8 maxpres;
+	u8 minpos;
+	u8 maxpos;
 } FingerStorage;
 FingerStorage latch[8];
 void clearlatch(void) {
@@ -742,7 +743,7 @@ void finger_synth_update(int fi) {
 				if (previous_pressure <= 0 && physical_touch_finger == bit) {
 					// start a new latch, clear all previous latch values
 					for (uint8_t i = 0; i < 8; i++) {
-						latch[i].avgvel = 0;
+						latch[i].maxpres = 0;
 						latch[i].minpos = 0;
 						latch[i].maxpos = 0;
 					}
@@ -752,48 +753,35 @@ void finger_synth_update(int fi) {
 				}
 				// save latch values
 				if (!suppress_latch) {
-					latch[fi].avgvel = pres_compress(pressure);
-					latch[fi].minpos = pos_compress(position);
+					u8 maxpres = 0;
+					u8 minpos = 255;
+					u8 maxpos = 0;
+					Finger* f = fingers_synth_time[fi];
+					for (int j = 0; j < 8; ++j, ++f) {
+						u8 pres = pres_compress(f->pressure);
+						maxpres = maxi(maxpres, pres);
+						u8 pos = pos_compress(f->pos);
+						minpos = mini(pos, minpos);
+						maxpos = maxi(pos, maxpos);
+					}
+					latch[fi].maxpres = maxpres;
+					latch[fi].minpos = minpos;
+					latch[fi].maxpos = maxpos;
 				}
-				// RJ: I could not work out a way to work with average values that wasn't
-				// sluggish or gave undesired intermediate values - slides and in-between notes
-				// Current solution is just saving one value and randomizing when reading it out
-				// Result feels great, but good to reconsider when the exact contents of
-				// fingers_ui_time and fingers_synth_time are more clear
-
-				// Averaging code for reference:
-				//
-				// u8 maxpos = 0, minpos = 255, maxpressure = 0;
-				// Finger* f = fingers_synth_time[fi];
-				// for (int j = 0; j < 8; ++j, ++f) {
-				// 	u8 p = clampi((f->pos + 4) / 8, 0, 255);
-				// 	minpos = mini(p, minpos);
-				// 	maxpos = maxi(p, maxpos);
-				// 	u8 pr = clampi(f->pressure / 12, 0, 255);
-				// 	maxpressure = maxi(maxpressure, pr);
-				// }
-				// latch[fi].avgvel = maxpressure;
-				// latch[fi].minpos = minpos;
-				// latch[fi].maxpos = maxpos;
 			}
 
 			// === LATCH RECALL === // 
 
 			// latch pressure larger than touch pressure
-			if (latch[fi].avgvel > 0 && latch[fi].avgvel * 24 > pressure) {
+			if (latch[fi].maxpres > 0 && latch[fi].maxpres * 24 > pressure) {
 				//recall latch values
-				pressure = pres_decompress(latch[fi].avgvel);;
-				position = pos_decompress(latch[fi].minpos);
+				pressure = pres_decompress(latch[fi].maxpres);
+				int minpos = latch[fi].minpos * 8;
+				int maxpos = latch[fi].maxpos * 8;
+				int avgpos = (minpos + maxpos) / 2;
+				int range = (maxpos - minpos) / 4;
+				position = randrange(avgpos - range, avgpos + range);
 				position_updated = true;
-
-				// Averaging code for reference:
-				//
-				// int minpos = latch[fi].minpos * 8 + 2;
-				// int maxpos = latch[fi].maxpos * 8 + 6;
-				// int avgpos = (minpos + maxpos) / 2;
-				// int range = (maxpos - minpos) / 4;
-				// pressure = latchpres ? randrange(latchpres - 12, latchpres) : -1024;
-				// position = randrange(avgpos-range,avgpos+range);
 			}
 		}
 
