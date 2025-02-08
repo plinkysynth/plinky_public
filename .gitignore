@@ -1,7 +1,6 @@
 **/.DS_Store
 __pycache__/
 binmaker-debug.py
-.vscode/
 
 bootloader/Release
 bootloader/Debug

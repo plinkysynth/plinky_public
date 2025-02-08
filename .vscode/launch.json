@@ -1,0 +1,30 @@
+{
+    "version": "2.0.0",
+    "configurations": [
+        {
+            "name": "Plinky Debug",
+            "type": "cortex-debug",
+            "request": "launch",
+            "servertype": "openocd",
+            "cwd": "${workspaceFolder}/sw/nocube_makefile",
+            "executable": "${workspaceFolder}/sw/nocube_makefile/DEBUG/plinkyblack.elf",
+            "device": "STM32L476VGT6",
+            "configFiles": [
+                "interface/stlink.cfg",
+                "target/stm32l4x.cfg"
+            ],
+            "svdFile": "${workspaceFolder}/sw/nocube_makefile/STM32L476.svd",
+            "preLaunchTask": "Build Plinky Debug Build",
+            "runToMain": true,
+            "loadBinary": true,
+            "flashStartAddress": "0x08010000",
+            "postLaunchCommands": [
+                "monitor reset halt",
+                "load"
+            ],
+            "openOCDLaunchCommands": [
+                "adapter speed 5000"
+            ]
+        }
+    ]
+}

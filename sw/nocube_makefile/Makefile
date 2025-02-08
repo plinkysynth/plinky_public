@@ -3,7 +3,7 @@
 # if the arm-none-eabi-* is in your path, then you can leave TOOLCHAIN_LOCATION empty
 # you can also set this from the commandline like
 # make TOOLCHAIN_LOCATION=/path/to/toolchain
-TOOLCHAIN_LOCATION ?= # /Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.macos64_1.0.200.202406191456/tools/bin/
+TOOLCHAIN_LOCATION ?= /Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.macos64_1.0.200.202406191456/tools/bin/
 
 # set this to the location of the stm32 cube programmer cli app,
 # and then the 'program' pseudo target will flash your plinky
@@ -18,11 +18,17 @@ OBJDUMP = $(TOOLCHAIN_LOCATION)arm-none-eabi-objdump
 SIZE = $(TOOLCHAIN_LOCATION)arm-none-eabi-size
 
 # Output files
-TARGET = plinkyblack.elf
-BIN = plinkyblack.bin
-HEX = plinkyblack.hex
-LIST = plinkyblack.list
-MAP = plinkyblack.map
+# Set default build type if not specified
+BUILD_TYPE ?= RELEASE
+
+BUILD_DIR := $(BUILD_TYPE)
+$(shell mkdir -p $(BUILD_DIR))
+
+TARGET = $(BUILD_DIR)/plinkyblack.elf
+BIN = $(BUILD_DIR)/plinkyblack.bin
+HEX = $(BUILD_DIR)/plinkyblack.hex
+LIST = $(BUILD_DIR)/plinkyblack.list
+MAP = $(BUILD_DIR)/plinkyblack.map
 
 # Source files
 SRCS = \
@@ -69,11 +75,9 @@ SRCS = \
 	../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_uart_ex.c \
 	../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_usb.c
 
-OBJS := $(SRCS:../%.c=%.o)
+OBJS := $(SRCS:../%.c=$(BUILD_DIR)/%.o)
 DEPS := $(OBJS:.o=.d)
 
-# Set default build type if not specified
-BUILD_TYPE ?= RELEASE
 
 # Base CFLAGS and LDFLAGS
 CFLAGS_COMMON = -mcpu=cortex-m4 \
@@ -109,7 +113,7 @@ endif
 
 # Flags for debug build
 ifeq ($(BUILD_TYPE), DEBUG)
-CFLAGS = $(CFLAGS_COMMON) -Og -g3 -D_DEBUG -DDEBUG
+CFLAGS = $(CFLAGS_COMMON) -Og -g3 -D_DEBUG -DDEBUG -gdwarf-2
 LDFLAGS = $(LDFLAGS_COMMON)
 endif
 
@@ -126,21 +130,26 @@ INCLUDES = -I../Drivers/CMSIS/Include \
 all: $(TARGET) $(BIN) $(HEX) $(LIST) size
 
 # Special rule for startup assembly file
-Core/Startup/startup_stm32l476vgtx.o: ../Core/Startup/startup_stm32l476vgtx.s
+$(BUILD_DIR)/Core/Startup/startup_stm32l476vgtx.o: ../Core/Startup/startup_stm32l476vgtx.s
 	@echo "AS $<"
 	@mkdir -p $(dir $@)
 	@$(CC) -mcpu=cortex-m4 -c -x assembler-with-cpp -MMD -MP \
 	--specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o $@ $<
 
-$(OBJS): %.o: ../%.c
+$(BUILD_DIR)/%.o: ../%.c
 	@echo "CC $<"
 	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) $(INCLUDES) -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" -c $< -o $@
 
+# $(OBJS): %.o: ../%.c
+# 	@echo "CC $<"
+# 	@mkdir -p $(dir $@)
+# 	@$(CC) $(CFLAGS) $(INCLUDES) -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" -c $< -o $@
+
 # Linking
-$(TARGET): $(OBJS) Core/Startup/startup_stm32l476vgtx.o
+$(TARGET): $(OBJS) $(BUILD_DIR)/Core/Startup/startup_stm32l476vgtx.o
 	@echo "LD $@"
-	@$(CC) $(OBJS) Core/Startup/startup_stm32l476vgtx.o $(LDFLAGS) -o $@
+	@$(CC) $(OBJS) $(BUILD_DIR)/Core/Startup/startup_stm32l476vgtx.o $(LDFLAGS) -o $@
 
 # Post-build steps
 $(BIN): $(TARGET)
@@ -168,9 +177,7 @@ size: $(TARGET)
 	@$(SIZE) $<
 
 clean:
-	rm -rf Core 
-	rm -rf Drivers
-	rm -f $(TARGET) $(BIN) $(HEX) $(LIST) $(MAP)
+	rm -rf $(BUILD_DIR) 
 	
 toolchain-info:
 	@echo "Current toolchain location: $(TOOLCHAIN_LOCATION)"

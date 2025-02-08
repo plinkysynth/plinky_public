@@ -1,0 +1,83 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build Plinky Debug Build",
+            "type": "shell",
+            "command": "make -j BUILD_TYPE=DEBUG",
+            "options": {
+                "cwd": "${workspaceFolder}/sw/nocube_makefile"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            }
+        },
+        {
+            "label": "Build Plinky Release Build",
+            "type": "shell",
+            "command": "make -j BUILD_TYPE=RELEASE",
+            "options": {
+                "cwd": "${workspaceFolder}/sw/nocube_makefile"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            }
+        },
+        {
+            "label": "Clean Plinky Debug Build",
+            "type": "shell",
+            "command": "make clean BUILD_TYPE=DEBUG",
+            "options": {
+                "cwd": "${workspaceFolder}/sw/nocube_makefile"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Clean Plinky Release Build",
+            "type": "shell",
+            "command": "make clean BUILD_TYPE=RELEASE",
+            "options": {
+                "cwd": "${workspaceFolder}/sw/nocube_makefile"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Build and Flash Plinky Debug Build",
+            "type": "shell",
+            "command": "make -j BUILD_TYPE=DEBUG && make program",
+            "options": {
+                "cwd": "${workspaceFolder}/sw/nocube_makefile"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            }
+        },
+        {
+            "label": "Build and Flash Plinky Release Build",
+            "type": "shell",
+            "command": "make -j BUILD_TYPE=RELEASE && make program",
+            "options": {
+                "cwd": "${workspaceFolder}/sw/nocube_makefile"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}
