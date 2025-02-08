@@ -699,10 +699,6 @@ int pos_decompress(int position) {
 }
 
 void finger_synth_update(int fi) {
-	const static int max_midi_pressure = 1 << 12; // max midi velocity translates to this pressure value
-	const static u8 midi_velocity_multiplier = max_midi_pressure >> 7; 
-	const static float max_midi_pressure_multiplier = 1.5f; // midi pressure can multiply max_midi_pressure by max this value
- 
 	static u8 last_edited_step_global = 255;
 	static u8 last_edited_substep_global = 255;
 	static u8 last_edited_step[8] = {255, 255, 255, 255, 255, 255, 255, 255};
@@ -902,11 +898,7 @@ void finger_synth_update(int fi) {
 	// a midi note is playing this string
 	if ((midi_pressure_override & bit) && !(midi_suppress & bit)) {
 		// take pressure and position from midi data
-		pressure = 
-			// velocity scales from 0 to max_midi_pressure
-			midi_velocities[fi] * midi_velocity_multiplier * 
-			// midi pressure multiplier is 1 plus (max_midi_pressure_multiplier - 1) times the midi pressure in range [0..1]
-			(maxi(midi_aftertouch[fi], midi_chan_aftertouch[midi_channels[fi]]) / 127.0f * (max_midi_pressure_multiplier - 1) + 1);			
+		pressure = 1+(midi_velocities[fi] + maxi(midi_aftertouch[fi], midi_chan_aftertouch[midi_channels[fi]]))*16;		
 		// for midi, position only defines where the leds light up on the string        
 		position = midi_positions[fi];
 	}
