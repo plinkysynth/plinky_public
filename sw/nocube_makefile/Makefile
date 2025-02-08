@@ -72,32 +72,49 @@ SRCS = \
 OBJS := $(SRCS:../%.c=%.o)
 DEPS := $(OBJS:.o=.d)
 
-CFLAGS = -mcpu=cortex-m4 \
-	  -std=gnu11 \
-	  -DUSE_HAL_DRIVER \
-	  -DSTM32L476xx \
-	  -O3 \
-	  -ffunction-sections \
-	  -fdata-sections \
-	  -Wall \
-	  -fstack-usage \
-	  --specs=nano.specs \
-	  -mfpu=fpv4-sp-d16 \
-	  -mfloat-abi=hard \
-	  -mthumb
-#-fcyclomatic-complexity 
-	  
-LDFLAGS = -mcpu=cortex-m4 \
-	   -T"../STM32L476VGTX_FLASH.ld" \
-	   --specs=nosys.specs \
-	   -Wl,-Map="$(MAP)" \
-	   -Wl,--gc-sections \
-	   -static \
-	   --specs=nano.specs \
-	   -mfpu=fpv4-sp-d16 \
-	   -mfloat-abi=hard \
-	   -mthumb \
-	   -Wl,--start-group -lc -lm -Wl,--end-group
+# Set default build type if not specified
+BUILD_TYPE ?= RELEASE
+
+# Base CFLAGS and LDFLAGS
+CFLAGS_COMMON = -mcpu=cortex-m4 \
+    -std=gnu11 \
+    -DUSE_HAL_DRIVER \
+    -DSTM32L476xx \
+    -ffunction-sections \
+    -fdata-sections \
+    -Wall \
+    -fstack-usage \
+    --specs=nano.specs \
+    -mfpu=fpv4-sp-d16 \
+    -mfloat-abi=hard \
+    -mthumb
+
+LDFLAGS_COMMON = -mcpu=cortex-m4 \
+    -T"../STM32L476VGTX_FLASH.ld" \
+    --specs=nosys.specs \
+    -Wl,-Map="$(MAP)" \
+    -Wl,--gc-sections \
+    -static \
+    --specs=nano.specs \
+    -mfpu=fpv4-sp-d16 \
+    -mfloat-abi=hard \
+    -mthumb \
+    -Wl,--start-group -lc -lm -Wl,--end-group
+
+# Flags for release build
+ifeq ($(BUILD_TYPE), RELEASE)
+CFLAGS = $(CFLAGS_COMMON) -O3 -DNDEBUG
+LDFLAGS = $(LDFLAGS_COMMON)
+endif
+
+# Flags for debug build
+ifeq ($(BUILD_TYPE), DEBUG)
+CFLAGS = $(CFLAGS_COMMON) -Og -g3 -D_DEBUG -DDEBUG
+LDFLAGS = $(LDFLAGS_COMMON)
+endif
+
+# Print build type
+$(info Building in $(BUILD_TYPE) mode)
 
 INCLUDES = -I../Drivers/CMSIS/Include \
 	    -I../Core/Src/tinyusb/src \
