@@ -1,6 +1,15 @@
+
 # Toolchain location - update this for your system
 # if the arm-none-eabi-* is in your path, then you can leave TOOLCHAIN_LOCATION empty
-TOOLCHAIN_LOCATION = # /Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.macos64_1.0.200.202406191456/tools/bin/
+# you can also set this from the commandline like
+# make TOOLCHAIN_LOCATION=/path/to/toolchain
+TOOLCHAIN_LOCATION ?= # /Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.macos64_1.0.200.202406191456/tools/bin/
+
+# set this to the location of the stm32 cube programmer cli app,
+# and then the 'program' pseudo target will flash your plinky
+# you can also set this from the commandline like
+# make STM32_CUBE_PROGRAMMER=/path/to/STM32_Programmer_CLI
+STM32_CUBE_PROGRAMMER ?= /Applications/STMicroelectronics/STM32Cube/STM32CubeProgrammer/STM32CubeProgrammer.app/Contents/MacOs/bin/STM32_Programmer_CLI
 
 # Compiler and linker with full paths
 CC = $(TOOLCHAIN_LOCATION)arm-none-eabi-gcc
@@ -18,84 +27,84 @@ MAP = plinkyblack.map
 # Source files
 SRCS = \
 	   ../Core/Src/main.c \
-       ../Core/Src/gfx.c \
-       ../Core/Src/lis2dh12_reg.c \
-       ../Core/Src/plinky.c \
-       ../Core/Src/stm32l4xx_hal_msp.c \
-       ../Core/Src/stm32l4xx_it.c \
-       ../Core/Src/syscalls.c \
-       ../Core/Src/sysmem.c \
-       ../Core/Src/system_stm32l4xx.c \
-       ../Core/Src/tinyusb/src/tusb.c \
-       ../Core/Src/tinyusb/src/usb_descriptors.c \
-       ../Core/Src/tinyusb/src/usbmidi.c \
-       ../Core/Src/tinyusb/src/class/midi/midi_device.c \
-       ../Core/Src/tinyusb/src/class/vendor/vendor_device.c \
-       ../Core/Src/tinyusb/src/common/tusb_fifo.c \
-       ../Core/Src/tinyusb/src/device/usbd.c \
-       ../Core/Src/tinyusb/src/device/usbd_control.c \
-       ../Core/Src/tinyusb/src/portable/st/synopsys/dcd_synopsys.c \
-       ../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.c \
-       ../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_adc.c \
-       ../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_adc_ex.c \
-       ../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_cortex.c \
-       ../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_dac.c \
-       ../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_dma.c \
-       ../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_flash.c \
-       ../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_flash_ex.c \
-       ../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_gpio.c \
-       ../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_i2c.c \
-       ../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_i2c_ex.c \
-       ../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pcd.c \
-       ../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pcd_ex.c \
-       ../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pwr_ex.c \
-       ../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rcc.c \
-       ../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rcc_ex.c \
-       ../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_sai.c \
-       ../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_spi.c \
-       ../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_tim.c \
-       ../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_tim_ex.c \
-       ../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_tsc.c \
-       ../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_uart.c \
-       ../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_uart_ex.c \
-       ../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_usb.c
+	../Core/Src/gfx.c \
+	../Core/Src/lis2dh12_reg.c \
+	../Core/Src/plinky.c \
+	../Core/Src/stm32l4xx_hal_msp.c \
+	../Core/Src/stm32l4xx_it.c \
+	../Core/Src/syscalls.c \
+	../Core/Src/sysmem.c \
+	../Core/Src/system_stm32l4xx.c \
+	../Core/Src/tinyusb/src/tusb.c \
+	../Core/Src/tinyusb/src/usb_descriptors.c \
+	../Core/Src/tinyusb/src/usbmidi.c \
+	../Core/Src/tinyusb/src/class/midi/midi_device.c \
+	../Core/Src/tinyusb/src/class/vendor/vendor_device.c \
+	../Core/Src/tinyusb/src/common/tusb_fifo.c \
+	../Core/Src/tinyusb/src/device/usbd.c \
+	../Core/Src/tinyusb/src/device/usbd_control.c \
+	../Core/Src/tinyusb/src/portable/st/synopsys/dcd_synopsys.c \
+	../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.c \
+	../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_adc.c \
+	../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_adc_ex.c \
+	../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_cortex.c \
+	../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_dac.c \
+	../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_dma.c \
+	../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_flash.c \
+	../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_flash_ex.c \
+	../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_gpio.c \
+	../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_i2c.c \
+	../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_i2c_ex.c \
+	../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pcd.c \
+	../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pcd_ex.c \
+	../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pwr_ex.c \
+	../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rcc.c \
+	../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rcc_ex.c \
+	../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_sai.c \
+	../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_spi.c \
+	../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_tim.c \
+	../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_tim_ex.c \
+	../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_tsc.c \
+	../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_uart.c \
+	../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_uart_ex.c \
+	../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_usb.c
 
 OBJS := $(SRCS:../%.c=%.o)
 DEPS := $(OBJS:.o=.d)
 
 CFLAGS = -mcpu=cortex-m4 \
-         -std=gnu11 \
-         -DUSE_HAL_DRIVER \
-         -DSTM32L476xx \
-         -O3 \
-         -ffunction-sections \
-         -fdata-sections \
-         -Wall \
-         -fstack-usage \
-         --specs=nano.specs \
-         -mfpu=fpv4-sp-d16 \
-         -mfloat-abi=hard \
-         -mthumb
+	  -std=gnu11 \
+	  -DUSE_HAL_DRIVER \
+	  -DSTM32L476xx \
+	  -O3 \
+	  -ffunction-sections \
+	  -fdata-sections \
+	  -Wall \
+	  -fstack-usage \
+	  --specs=nano.specs \
+	  -mfpu=fpv4-sp-d16 \
+	  -mfloat-abi=hard \
+	  -mthumb
 #-fcyclomatic-complexity 
-         
+	  
 LDFLAGS = -mcpu=cortex-m4 \
-          -T"../STM32L476VGTX_FLASH.ld" \
-          --specs=nosys.specs \
-          -Wl,-Map="$(MAP)" \
-          -Wl,--gc-sections \
-          -static \
-          --specs=nano.specs \
-          -mfpu=fpv4-sp-d16 \
-          -mfloat-abi=hard \
-          -mthumb \
-          -Wl,--start-group -lc -lm -Wl,--end-group
+	   -T"../STM32L476VGTX_FLASH.ld" \
+	   --specs=nosys.specs \
+	   -Wl,-Map="$(MAP)" \
+	   -Wl,--gc-sections \
+	   -static \
+	   --specs=nano.specs \
+	   -mfpu=fpv4-sp-d16 \
+	   -mfloat-abi=hard \
+	   -mthumb \
+	   -Wl,--start-group -lc -lm -Wl,--end-group
 
 INCLUDES = -I../Drivers/CMSIS/Include \
-           -I../Core/Src/tinyusb/src \
-           -I../Core/Inc \
-           -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include \
-           -I../Drivers/STM32L4xx_HAL_Driver/Inc \
-           -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy
+	    -I../Core/Src/tinyusb/src \
+	    -I../Core/Inc \
+	    -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include \
+	    -I../Drivers/STM32L4xx_HAL_Driver/Inc \
+	    -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy
 
 all: $(TARGET) $(BIN) $(HEX) $(LIST) size
 
@@ -128,6 +137,14 @@ $(HEX): $(TARGET)
 $(LIST): $(TARGET)
 	@echo "Creating listing $@"
 	@$(OBJDUMP) -h -S $< > $@
+
+program: $(HEX)
+ifeq ($(STM32_CUBE_PROGRAMMER),)
+	$(error STM32_CUBE_PROGRAMMER is not set. Please set the path to STM32_Programmer_CLI)
+else
+	@echo "Flashing $<"
+	@$(STM32_CUBE_PROGRAMMER) -c port=SWD -w $< -v -rst
+endif
 
 size: $(TARGET)
 	@echo "Size of modules:"
