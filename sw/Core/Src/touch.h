@@ -777,7 +777,7 @@ void finger_synth_update(int fi) {
 				//recall latch values
 				pressure = pres_decompress(latch[fi].maxpres);
 				int minpos = latch[fi].minpos * 8;
-				int maxpos = latch[fi].maxpos * 8;
+				int maxpos = latch[fi].maxpos * 8 + 7;
 				int avgpos = (minpos + maxpos) / 2;
 				int range = (maxpos - minpos) / 4;
 				position = randrange(avgpos - range, avgpos + range);
