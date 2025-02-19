@@ -763,9 +763,7 @@ u8 AllocAndEraseFlashPage(void) {
 
 
 void ProgramPage(void* datasrc, u32 datasize, u8 index) {
-#ifndef DISABLE_AUTOSAVE
 #ifndef HALF_FLASH
-
 	updating_bank2 = 1;
 	HAL_FLASH_Unlock();
 	u8 page = AllocAndEraseFlashPage();
@@ -781,7 +779,6 @@ void ProgramPage(void* datasrc, u32 datasize, u8 index) {
 	HAL_FLASH_Lock();
 	latestpagesidx[index] = page;
 	updating_bank2 = 0;
-#endif
 #endif
 }
 void clearlatch(void);
@@ -874,11 +871,13 @@ bool NeedWrite(int gen, u32 now) {
 }
 
 void WritePattern(u32 now) {
+#ifndef DISABLE_AUTOSAVE
 	for (int i = 0; i < 4; ++i) if (NeedWrite(GEN_PAT0 + i, now)) {
 		flashtime[GEN_SYS] = ramtime[GEN_SYS];
 		flashtime[GEN_PAT0 + i] = ramtime[GEN_PAT0 + i];
 		ProgramPage(&rampattern[i], sizeof(PatternQuarter), FIRST_PATTERN_IDX + (rampattern_idx) * 4 + i);
 	}
+#endif
 }
 
 void WriteSample(u32 now) {
@@ -891,11 +890,13 @@ void WriteSample(u32 now) {
 }
 
 void WritePreset(u32 now) {
+#ifndef DISABLE_AUTOSAVE	
 	if (NeedWrite(GEN_PRESET, now) || NeedWrite(GEN_SYS, now)) {
 		flashtime[GEN_SYS] = ramtime[GEN_SYS];
 		flashtime[GEN_PRESET] = ramtime[GEN_PRESET];
 		ProgramPage(&rampreset, sizeof(Preset), rampreset_idx);
 	}
+#endif
 }
 
 
@@ -929,6 +930,8 @@ void PumpFlashWrites(void) {
 		else if (copyrequest<64) {
 			// copy!
 			if (copyrequest < 32) {
+
+#ifndef DISABLE_AUTOSAVE				
 				if (copyrequest == copyfrompreset) {
 					// toggle
 					WritePreset(now + 100000); // flush any writes
@@ -942,6 +945,8 @@ void PumpFlashWrites(void) {
 					// copy preset
 					ProgramPage(GetSavedPreset(copyfrompreset), sizeof(Preset), copyrequest);
 				}
+#endif
+
 				SetPreset(copyrequest, true);
 			} 
 			else if (copyrequest < 64 - 8) {
@@ -960,9 +965,11 @@ void PumpFlashWrites(void) {
 				}
 				else */
 				{
+#ifndef DISABLE_AUTOSAVE					
 					// copy pattern
 					for (int i = 0; i < 4; ++i)
 						ProgramPage(GetSavedPatternQuarter(srcpat * 4 + i), sizeof(PatternQuarter), 32 + dstpat * 4 + i);
+#endif
 				}
 				EditParamQuant(P_SEQPAT, M_BASE, dstpat);
 			}
