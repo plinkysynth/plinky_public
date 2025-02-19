@@ -79,6 +79,12 @@ void oled_flip(const u8* vram_with_offset) {
 	ssd1306_command(0); // Page start address (0 = reset)
 //	ssd1306_command(3); // Page end address - 32 pixels. 1=16 pixels
 
+#ifdef SSD1305
+	ssd1306_command(SSD1306_COLUMNADDR);
+	ssd1306_command(0 + 4);   // Column start address (0 = reset) // 0 + 4
+	ssd1306_command(W - 1 + 4); // Column end address (127 = reset) // W - 1 + 4
+#endif
+
 	HAL_StatusTypeDef r = 	HAL_I2C_Master_Transmit(&hi2c2, oled_i2caddr, (u8*)vram_with_offset, W * H / 8+1, 500);
 	if (r != HAL_OK)
 		DebugLog("error in ssd1306 data %d\r\n", (int) r);
@@ -108,8 +114,13 @@ void oled_init(void) {
 	ssd1306_command(0x00);                                  // 0x0 act like ks0108
 	ssd1306_command(SSD1306_SEGREMAP | 0x1);
 	ssd1306_command(SSD1306_COMSCANDEC);
+#ifdef SSD1305
+	ssd1306_command(SSD1306_SETCOMPINS);                    // 0xDA for 1305
+	ssd1306_command(0x12);                                  // 0x12
+#else
 	ssd1306_command(SSD1306_SETCOMPINS);                    // 0xDA
 	ssd1306_command(0x02);
+#endif	
 	ssd1306_command(SSD1306_SETCONTRAST);                   // 0x81
 	ssd1306_command(0x8F);
 
@@ -117,12 +128,16 @@ void oled_init(void) {
 	ssd1306_command(0xF1); // switchcap
 	ssd1306_command(SSD1306_SETVCOMDETECT);                 // 0xDB
 	ssd1306_command(0x40);
+#ifdef SSD1305
+	ssd1306_command(SSD1306_SETCOMPINS);                    // 0xDA for 1305
+	ssd1306_command(0x12);                                  // 0x12
+#endif
 	ssd1306_command(SSD1306_DISPLAYALLON_RESUME);           // 0xA4
 	ssd1306_command(SSD1306_NORMALDISPLAY);                 // 0xA6
 
 	ssd1306_command(SSD1306_DEACTIVATE_SCROLL);
 
-// put the plinky logo up before switching on the screen
+	// put the plinky logo up before switching on the screen
 	// prepare flip
 	ssd1306_command(SSD1306_COLUMNADDR);
 	ssd1306_command(0);   // Column start address (0 = reset)
