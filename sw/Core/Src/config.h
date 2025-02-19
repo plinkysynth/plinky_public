@@ -62,6 +62,10 @@
 // 0.B0 - MORE RJ MAGIC - https://github.com/plinkysynth/plinky_public/pull/40 - what a beast he is.
 #define VERSION2			  "v0.B0"
 
+// 0.X0 - experimental build (SSD1305)
+//#define SSD1305
+//#define VERSION2			  "v0.X0"
+
 // the bootloader is manually copied to the file golden_bootloader.bin
 // makebin.py uses it to make a UF2 file containing the bootloader + latest firmware together
 // it also checksums the firmware and prints out the value. it should match this value
