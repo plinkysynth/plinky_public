@@ -633,17 +633,19 @@ u8 find_free_midi_string(u8 midi_note_number, int *midi_note_position) {
 	u8 desired_string = find_string_for_midi_pitch(midi_pitch);
 
 	// try to find:
-	// 1. the non-sounding string closest to our desired string
-	// 2. the sounding string that is the quietest
+	// 1. the non-pressed, non-sounding string closest to our desired string
+	// 2. the non-pressed string that is the quietest
 	int string_option[8];
 	u8 num_string_options = 0;
 	u8 min_string_dist = 255;
 	float min_vol = __FLT_MAX__;
 	u8 min_string_id = 255;
 
-	// collect non-sounding strings
+	// collect non-pressed, non-sounding strings
 	for (u8 string_id = 0; string_id < 8; string_id++) {
-		if (voices[string_id].vol < 0.001f) {
+		if ((!(midi_pressure_override & (1 << string_id))) && 
+			(!(synthfingerdown_nogatelen_internal & (1 << string_id))) &&
+			voices[string_id].vol < 0.001f) {
 			string_option[num_string_options] = string_id;
 			num_string_options++;
 		}
@@ -664,7 +666,8 @@ u8 find_free_midi_string(u8 midi_note_number, int *midi_note_position) {
 	// collect non-pressed strings
 	num_string_options = 0;
 	for (u8 string_id = 0; string_id < 8; string_id++) {
-		if (!(synthfingerdown_nogatelen_internal & (1 << string_id))) {
+		if ((!(midi_pressure_override & (1 << string_id))) && 
+			!(synthfingerdown_nogatelen_internal & (1 << string_id))) {
 			string_option[num_string_options] = string_id;
 			num_string_options++;
 		}
