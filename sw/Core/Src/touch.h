@@ -515,6 +515,7 @@ static inline int randrange(int mn, int mx) {
 int param_eval_finger(u8 paramidx, int fingeridx, Finger* f);
 u8 synthfingerdown_nogatelen_internal;
 u8 physical_touch_finger = 0;
+u8 prev_physical_touch_finger = 0;
 bool read_from_seq = false;
 
 
