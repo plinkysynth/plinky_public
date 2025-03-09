@@ -12,7 +12,7 @@ sw/.settings/org.eclipse.cdt.core.prefs
 sw/.settings/com.st.stm32cube.ide.mcu.sfr.prefs
 sw/.settings/com.st.stm32cube.ide.mcu.sfrview.prefs
 sw/.DS_Store
-
+sw/.vscode
 sw/plinkyblack Debug.cfg
 sw/plinkyblack Debug.launch
 sw/plinkyblack Release.cfg
