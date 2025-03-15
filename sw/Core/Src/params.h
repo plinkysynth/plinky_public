@@ -265,7 +265,7 @@ const static u8 param_flags[P_LAST] = {
 	[P_R]=0,
 
 
-	[P_OCT]=4+FLAG_SIGNED,
+	[P_OCT]=3+FLAG_SIGNED,
 	[P_PITCH]=FLAG_SIGNED,
 	[P_GLIDE]=0,
 	[P_INTERVAL]=FLAG_SIGNED,
