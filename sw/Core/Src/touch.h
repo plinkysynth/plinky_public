@@ -914,7 +914,7 @@ void finger_synth_update(int fi) {
 	// === CV GATE === //
 
 	// scale pressure with cv gate input
-	pressure = (int)((pressure + 256) * adc_smooth[7].y2) - 256;
+	pressure = pressure * adc_smooth[7].y2;
 
 	// save input results to global variables to be used by other code
 	synth_finger->pressure = pressure;
