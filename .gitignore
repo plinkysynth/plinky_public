@@ -43,3 +43,4 @@ hw/plinky_front_osh/plinky_back_osh-backups/
 hw/plinky_front_osh/plinky_front_osh-backups/
 hw/testjig/testjig-backups/
 hw/testjig/*.svg
+*.lck
