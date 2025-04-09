@@ -489,7 +489,7 @@ int update_clock(void) { // returns 1 for clock, 2 for half clock, 0 for neither
 	} else 	if (playmode == PLAYING && seqdiv < 0 && getgatesense()) {
 		// gate cv controls step
 		static bool curgate_digital = true;
-		float curgate = GetADCSmoothed(ADC_GATE);
+		float curgate = GetADCCalibrated(ADC_GATE);
 		float thresh = curgate_digital ? 0.01f : 0.02f;
 		bool newgate_digital = curgate > thresh;
 		if (newgate_digital && !curgate_digital) {

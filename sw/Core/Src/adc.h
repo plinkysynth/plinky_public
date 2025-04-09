@@ -47,7 +47,7 @@ CVCalib cvcalib[10] = {
 	{42511.f, (26634-42511) * (1.f / (2048.f * 12.f * 2.f))},
 };
 
-static inline int GetADCSmoothedNoCalib(int chan) {
+static inline int GetADCNoCalib(int chan) {
 	u32 rv = 0;
 	u16* src = adcbuf + chan;
 	if (chan == ADC_GATE) { // get max not average, to respond to short gates better
@@ -64,8 +64,8 @@ static inline int GetADCSmoothedNoCalib(int chan) {
 	return rv / ADC_SAMPLES;
 }
 
-static inline float GetADCSmoothed(int chan) {
-	return (GetADCSmoothedNoCalib(chan) - cvcalib[chan].bias) * cvcalib[chan].scale;
+static inline float GetADCCalibrated(int chan) {
+	return (GetADCNoCalib(chan) - cvcalib[chan].bias) * cvcalib[chan].scale;
 }
 
 //volatile u32 adccounter;

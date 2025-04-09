@@ -407,12 +407,12 @@ void update_params(int fingertrig, int fingerdown) {
 	pressure16 = maxp * (65536 / 2048);
 	// update lfos on modulation sources
 
-	float aknob = clampf(GetADCSmoothed(ADC_AKNOB), -1.f, 1.f);
-	float bknob = clampf(GetADCSmoothed(ADC_BKNOB), -1.f, 1.f);
-	float acv = clampf(GetADCSmoothed(ADC_ACV) * IN_CV_SCALE, -1.f, 1.f);
-	float bcv = clampf(GetADCSmoothed(ADC_BCV) * IN_CV_SCALE, -1.f, 1.f);
-	float xcv = clampf(GetADCSmoothed(ADC_XCV) * IN_CV_SCALE, -1.f, 1.f);
-	float ycv = clampf(GetADCSmoothed(ADC_YCV) * IN_CV_SCALE, -1.f, 1.f);
+	float aknob = clampf(GetADCCalibrated(ADC_AKNOB), -1.f, 1.f);
+	float bknob = clampf(GetADCCalibrated(ADC_BKNOB), -1.f, 1.f);
+	float acv = clampf(GetADCCalibrated(ADC_ACV) * IN_CV_SCALE, -1.f, 1.f);
+	float bcv = clampf(GetADCCalibrated(ADC_BCV) * IN_CV_SCALE, -1.f, 1.f);
+	float xcv = clampf(GetADCCalibrated(ADC_XCV) * IN_CV_SCALE, -1.f, 1.f);
+	float ycv = clampf(GetADCCalibrated(ADC_YCV) * IN_CV_SCALE, -1.f, 1.f);
 
 	//	accelerometer
 	static int accel_counter;
@@ -438,8 +438,8 @@ void update_params(int fingertrig, int fingerdown) {
 
 	int gatesense = getgatesense();
 	int pitchsense = getpitchsense();
-	float pitchcv = pitchsense ? GetADCSmoothed(ADC_PITCH) : 0.f;
-	float gatecv = gatesense ? clampf(GetADCSmoothed(ADC_GATE)*1.15f-0.05f, 0.f, 1.f) : 1.f;
+	float pitchcv = pitchsense ? GetADCCalibrated(ADC_PITCH) : 0.f;
+	float gatecv = gatesense ? clampf(GetADCCalibrated(ADC_GATE)*1.15f-0.05f, 0.f, 1.f) : 1.f;
 	knobsmooth_update_cv(adc_smooth + 0, acv);
 	knobsmooth_update_cv(adc_smooth + 1, bcv);
 	knobsmooth_update_cv(adc_smooth + 2, xcv);
@@ -1669,7 +1669,7 @@ void processmidimsg(u8 msg, u8 d1, u8 d2) {
 
 void DoRecordModeAudio(u32* dst, u32* audioin) {
 	// recording or level testing
-	int newaudiorec_gain = 65535 - GetADCSmoothedNoCalib(ADC_AKNOB);
+	int newaudiorec_gain = 65535 - GetADCNoCalib(ADC_AKNOB);
 	if (abs(newaudiorec_gain - audiorec_gain_target) > 256) // hysteresis
 		audiorec_gain_target = newaudiorec_gain;
 	knobsmooth_update_knob(&recgain_smooth, audiorec_gain_target, 65536.f);
@@ -1915,6 +1915,7 @@ void DoAudio(u32 *dst, u32 *audioin) {
 	if (!whichhalf) {
 		total_ui_pressure = 0;
 		read_from_seq = false;
+		prev_physical_touch_finger = physical_touch_finger;
 	}
 	// update strings
 	for (int fi = whichhalf; fi < whichhalf + 4; ++fi) {
@@ -1923,7 +1924,7 @@ void DoAudio(u32 *dst, u32 *audioin) {
 	// end of a full update of all strings
 	if (whichhalf) {
 		// you've released your fingers, you're recording in step mode - let's advance!
-		if (total_ui_pressure<=0 && prev_total_ui_pressure <= 0 && prev_prev_total_ui_pressure > 0 && recording && !isplaying()) {
+		if (!physical_touch_finger && prev_physical_touch_finger && recording && !isplaying()) {
 			set_cur_step(cur_step + 1, false);
 		}
 		prev_prev_total_ui_pressure = prev_total_ui_pressure;
@@ -3287,11 +3288,11 @@ void EMSCRIPTEN_KEEPALIVE plinky_init(void) {
 		flash_writecalib(3);
 	}
 	HAL_Delay(80);
-	int knoba= GetADCSmoothedNoCalib(ADC_AKNOB);
-	int knobb= GetADCSmoothedNoCalib(ADC_BKNOB);
+	int knoba= GetADCNoCalib(ADC_AKNOB);
+	int knobb= GetADCNoCalib(ADC_BKNOB);
 	bootswish();
-	knoba=abs(knoba-(int)GetADCSmoothedNoCalib(ADC_AKNOB));
-	knobb=abs(knobb-(int)GetADCSmoothedNoCalib(ADC_BKNOB));
+	knoba=abs(knoba-(int)GetADCNoCalib(ADC_AKNOB));
+	knobb=abs(knobb-(int)GetADCNoCalib(ADC_BKNOB));
 	DebugLog("knob turned by %d,%d during boot\r\n", knoba,knobb);
 	//knoba = 10000; // DO NOT CHECK IN - FORCE CALIBRATION
 	//knobb = 10000; // DO NOT CHECK IN - FORCE CV CALIB
