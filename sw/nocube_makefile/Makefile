@@ -3,7 +3,7 @@
 # if the arm-none-eabi-* is in your path, then you can leave TOOLCHAIN_LOCATION empty
 # you can also set this from the commandline like
 # make TOOLCHAIN_LOCATION=/path/to/toolchain
-TOOLCHAIN_LOCATION ?= /Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.macos64_1.0.200.202406191456/tools/bin/
+TOOLCHAIN_LOCATION ?= /Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.macos64_1.1.0.202410301201/tools/bin/
 
 # set this to the location of the stm32 cube programmer cli app,
 # and then the 'program' pseudo target will flash your plinky

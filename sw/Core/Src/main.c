@@ -166,8 +166,11 @@ void EncoderTick(void) {
 	lastencstate=newstate;
 }
 
+extern volatile bool clkin_is_euro;
+
 void ClockIRQ(void){
 	gotclkin++;
+  clkin_is_euro = true;
 }
 
 int16_t accel_raw[3];

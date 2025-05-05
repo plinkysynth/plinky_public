@@ -457,8 +457,7 @@ void OnGotReset(void) {
 
 extern volatile u8 gotclkin;
 volatile u8 gotclkin=0;
-
-
+volatile bool clkin_is_euro = false;
 
 int update_clock(void) { // returns 1 for clock, 2 for half clock, 0 for neither
 	tick++;
@@ -470,8 +469,16 @@ int update_clock(void) { // returns 1 for clock, 2 for half clock, 0 for neither
 	if(newgotclk!=prevgotclk) {
 		prevgotclk=newgotclk;
 		gotclock=true;
-		external_clock_enable=true;
+		// when we're switching from internal clock to external clock and that switch is triggered
+		// by a eurorack clock, the sequencer resets and starts playing
+		if ((!external_clock_enable) && clkin_is_euro) {
+			u8 loopstart_step = (rampreset.loopstart_step_no_offset + step_offset) & 63;
+			set_cur_step(loopstart_step, true);
+			playmode = PLAYING;
+		}
+		external_clock_enable = true;
 	}
+	clkin_is_euro = false;
 
 	/*
 	for (int i = 0; i < ADC_SAMPLES * ADC_CHANS; i += ADC_CHANS) {
@@ -489,7 +496,7 @@ int update_clock(void) { // returns 1 for clock, 2 for half clock, 0 for neither
 	} else 	if (playmode == PLAYING && seqdiv < 0 && getgatesense()) {
 		// gate cv controls step
 		static bool curgate_digital = true;
-		float curgate = GetADCSmoothed(ADC_GATE);
+		float curgate = GetADCCalibrated(ADC_GATE);
 		float thresh = curgate_digital ? 0.01f : 0.02f;
 		bool newgate_digital = curgate > thresh;
 		if (newgate_digital && !curgate_digital) {
@@ -503,8 +510,12 @@ int update_clock(void) { // returns 1 for clock, 2 for half clock, 0 for neither
 #define ACCURATE_FS 31250
 
 	// revert to internal clock after not getting any external clock signal for a second
-	if (external_clock_enable && ticks_since_clock >= 500) // a tick is 2ms
+	if (external_clock_enable && ticks_since_clock >= 500) { // a tick is 2ms
 		external_clock_enable = false;
+		// we probably don't want to keep playing the sequencer through a clock source change
+		if ((playmode == PLAYING) || (playmode == PLAY_WAITING_FOR_CLOCK_START) || (playmode == PLAY_WAITING_FOR_CLOCK_STOP))
+			playmode = PLAY_STOPPED;
+	}
 
 	//////////////////////////////////////////// internal clock
 	if (!external_clock_enable) {
