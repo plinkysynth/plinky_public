@@ -100,7 +100,11 @@ void oled_init(void) {
 	// Init sequence
 	ssd1306_command(SSD1306_DISPLAYOFF);                    // 0xAE
 	ssd1306_command(SSD1306_SETDISPLAYCLOCKDIV);            // 0xD5
-	ssd1306_command(0x80);                                  // the suggested ratio 0x80
+#ifdef SSD1305
+	ssd1306_command(0xF4);                                  // best ratio for SSD1305 0xF4
+#else
+	ssd1306_command(0x80);                                  // the suggested ratio for SSD1306 0x80
+#endif
 
 	ssd1306_command(SSD1306_SETMULTIPLEX);                  // 0xA8
 	ssd1306_command(H - 1);
