@@ -517,7 +517,7 @@ void update_params(int fingertrig, int fingerdown) {
 		expander_out[i] = clampi(EXPANDER_ZERO - (int)(expander_val), 0, EXPANDER_MAX);
 
 
-		int scopey = (-(mod_cur[M_A + i] * 7 + (1<<16)) >> 17) + 4;
+		u8 scopey = clampi((-(mod_cur[M_A + i] * 7 + (1<<16)) >> 17) + 4, 0, 7);
 		if (scopey >= 0 && scopey < 8)
 			lfo_history[lfohp][i] |= 1 << scopey;
 		
