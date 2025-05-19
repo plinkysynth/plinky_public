@@ -504,20 +504,19 @@ static int frame = 0;
 void DrawLFOs(void) {
 	u8* vr = getvram();
 	vr += 128 - 16;
-	u8 lfohp = ((lfo_history_pos >> 4) + 1) & 15;
+	u8 draw_frame = (lfo_scope_frame + 1) & 15;
 	for (int x = 0; x < 16; ++x) {
-		vr[0] &= ~(lfo_history[lfohp][0] >> 1);
-		vr[128] &= ~(lfo_history[lfohp][1] >> 1);
-		vr[256] &= ~(lfo_history[lfohp][2] >> 1);
-		vr[384] &= ~(lfo_history[lfohp][3] >> 1);
+		vr[0] &= ~(lfo_history[draw_frame][0] >> 1);
+		vr[128] &= ~(lfo_history[draw_frame][1] >> 1);
+		vr[256] &= ~(lfo_history[draw_frame][2] >> 1);
+		vr[384] &= ~(lfo_history[draw_frame][3] >> 1);
 
-
-		vr[0] |= lfo_history[lfohp][0];
-		vr[128] |= lfo_history[lfohp][1];
-		vr[256] |= lfo_history[lfohp][2];
-		vr[384] |= lfo_history[lfohp][3];
+		vr[0] |= lfo_history[draw_frame][0];
+		vr[128] |= lfo_history[draw_frame][1];
+		vr[256] |= lfo_history[draw_frame][2];
+		vr[384] |= lfo_history[draw_frame][3];
 		vr++;
-		lfohp = (lfohp + 1) & 15;
+		draw_frame = (draw_frame + 1) & 15;
 	}
 }
 

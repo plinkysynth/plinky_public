@@ -323,6 +323,7 @@ extern int16_t accel_raw[3];
 extern float accel_lpf[2];
 extern float accel_smooth[2];
 s16 accel_sens=0;
+u8 lfo_scope_frame;
 
 //extern int debuga[4];
 //int debuga[4];
@@ -448,14 +449,16 @@ void update_params(int fingertrig, int fingerdown) {
 	knobsmooth_update_knob(adc_smooth + 5, bknob, 1.f);
 	knobsmooth_update_cv(adc_smooth + 6, pitchcv);
 	knobsmooth_update_cv(adc_smooth + 7, gatecv);
-	u8 prevlfohp = (lfo_history_pos >> 4) & 15;
-	lfo_history_pos++;
-	u8 lfohp = (lfo_history_pos >> 4) & 15;
-	if (lfohp != prevlfohp)
-		lfo_history[lfohp][0] =
-		lfo_history[lfohp][1] =
-		lfo_history[lfohp][2] =
-		lfo_history[lfohp][3] = 0;
+
+	// every 16 frames, lfo_scope_frame increments and data for that frame is cleared
+	bool new_scope_frame = (ticks() & 15) == 0;
+	if (new_scope_frame) {
+		lfo_scope_frame = (ticks() >> 4) & 15;
+		lfo_history[lfo_scope_frame][0] =
+		lfo_history[lfo_scope_frame][1] =
+		lfo_history[lfo_scope_frame][2] =
+		lfo_history[lfo_scope_frame][3] = 0;
+	}
 	//compute new mod_cur for each mod source
 	int phase0 = calcseqsubstep(0, 65536);
 	int phase1 = phase0 + (65536 / 8);
@@ -473,6 +476,7 @@ void update_params(int fingertrig, int fingerdown) {
 	s8* autoknob1 = rampattern[q1].autoknob[(cur_step & 15) * 8 + (phase0>>13)];
 	s8* autoknob2 = rampattern[q2].autoknob[(nextstep & 15) * 8 + (phase1>>13)];
 	float autoknobinterp = (phase0 & (65536 / 8 - 1)) * (1.f/(65536/8));
+	static s8 prev_scopey[4] = {0};
 	for (int i = 0; i < 4; ++i) {
 		float adc = adc_smooth[i].y2;
 		float adcknob = 0.f;
@@ -516,12 +520,20 @@ void update_params(int fingertrig, int fingerdown) {
 		float expander_val = mod_cur[M_A + i] * (EXPANDER_GAIN * EXPANDER_RANGE / 65536.f);
 		expander_out[i] = clampi(EXPANDER_ZERO - (int)(expander_val), 0, EXPANDER_MAX);
 
-
+		// save lfo positions for oled scope
+		u8 old_scopey = prev_scopey[i];
 		u8 scopey = clampi((-(mod_cur[M_A + i] * 7 + (1<<16)) >> 17) + 4, 0, 7);
-		if (scopey >= 0 && scopey < 8)
-			lfo_history[lfohp][i] |= 1 << scopey;
-		
-
+		bool moving_up = scopey > old_scopey;
+		// a new scope frame always needs to write at least one pixel
+		if (new_scope_frame && old_scopey == scopey)
+			lfo_history[lfo_scope_frame][i] |= 1 << scopey;
+		// draw line towards the new position
+		while (old_scopey != scopey) {
+			old_scopey += moving_up ? 1 : -1;
+			lfo_history[lfo_scope_frame][i] |= 1 << old_scopey;
+		}
+		// save position
+		prev_scopey[i] = scopey;
 	}
 
 
