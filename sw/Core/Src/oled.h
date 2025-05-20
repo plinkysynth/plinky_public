@@ -70,6 +70,7 @@ static inline void oled_wait(void) {
 
 bool update_accelerometer_raw(void);
 
+extern bool g_i_am_a_plinky_plus;
 
 void oled_flip(const u8* vram_with_offset) {
 //	  HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET);
@@ -79,11 +80,11 @@ void oled_flip(const u8* vram_with_offset) {
 	ssd1306_command(0); // Page start address (0 = reset)
 //	ssd1306_command(3); // Page end address - 32 pixels. 1=16 pixels
 
-#ifdef SSD1305
-	ssd1306_command(SSD1306_COLUMNADDR);
-	ssd1306_command(0 + 4);   // Column start address (0 = reset) // 0 + 4
-	ssd1306_command(W - 1 + 4); // Column end address (127 = reset) // W - 1 + 4
-#endif
+	if (g_i_am_a_plinky_plus) {
+		ssd1306_command(SSD1306_COLUMNADDR);
+		ssd1306_command(0 + 4);   // Column start address (0 = reset) // 0 + 4
+		ssd1306_command(W - 1 + 4); // Column end address (127 = reset) // W - 1 + 4
+	}
 
 	HAL_StatusTypeDef r = 	HAL_I2C_Master_Transmit(&hi2c2, oled_i2caddr, (u8*)vram_with_offset, W * H / 8+1, 500);
 	if (r != HAL_OK)
@@ -100,12 +101,11 @@ void oled_init(void) {
 	// Init sequence
 	ssd1306_command(SSD1306_DISPLAYOFF);                    // 0xAE
 	ssd1306_command(SSD1306_SETDISPLAYCLOCKDIV);            // 0xD5
-#ifdef SSD1305
-	ssd1306_command(0xF4);                                  // best ratio for SSD1305 0xF4
-#else
-	ssd1306_command(0x80);                                  // the suggested ratio for SSD1306 0x80
-#endif
-
+	if (g_i_am_a_plinky_plus) {
+		ssd1306_command(0xF4);                                  // best ratio for SSD1305 0xF4
+	} else {
+		ssd1306_command(0x80);                                  // the suggested ratio for SSD1306 0x80
+	}
 	ssd1306_command(SSD1306_SETMULTIPLEX);                  // 0xA8
 	ssd1306_command(H - 1);
 
@@ -118,13 +118,13 @@ void oled_init(void) {
 	ssd1306_command(0x00);                                  // 0x0 act like ks0108
 	ssd1306_command(SSD1306_SEGREMAP | 0x1);
 	ssd1306_command(SSD1306_COMSCANDEC);
-#ifdef SSD1305
-	ssd1306_command(SSD1306_SETCOMPINS);                    // 0xDA for 1305
-	ssd1306_command(0x12);                                  // 0x12
-#else
-	ssd1306_command(SSD1306_SETCOMPINS);                    // 0xDA
-	ssd1306_command(0x02);
-#endif	
+	if (g_i_am_a_plinky_plus) {
+		ssd1306_command(SSD1306_SETCOMPINS);                    // 0xDA for 1305
+		ssd1306_command(0x12);                                  // 0x12
+	} else {
+		ssd1306_command(SSD1306_SETCOMPINS);                    // 0xDA
+		ssd1306_command(0x02);
+	}
 	ssd1306_command(SSD1306_SETCONTRAST);                   // 0x81
 	ssd1306_command(0x8F);
 
@@ -132,10 +132,10 @@ void oled_init(void) {
 	ssd1306_command(0xF1); // switchcap
 	ssd1306_command(SSD1306_SETVCOMDETECT);                 // 0xDB
 	ssd1306_command(0x40);
-#ifdef SSD1305
-	ssd1306_command(SSD1306_SETCOMPINS);                    // 0xDA for 1305
-	ssd1306_command(0x12);                                  // 0x12
-#endif
+	if (g_i_am_a_plinky_plus) {
+		ssd1306_command(SSD1306_SETCOMPINS);                    // 0xDA for 1305
+		ssd1306_command(0x12);                                  // 0x12
+	}
 	ssd1306_command(SSD1306_DISPLAYALLON_RESUME);           // 0xA4
 	ssd1306_command(SSD1306_NORMALDISPLAY);                 // 0xA6
 
