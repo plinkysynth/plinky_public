@@ -48,6 +48,7 @@ u8 waitcounter;
 u8 finalwait;
 u8 fingerediting = 0; // finger is over some kind of non-musical edit control
 u8 prevfingerediting = 0;
+u8 last_edited_step_global = 255;
 
 typedef struct euclid_state {
 	int trigcount;
@@ -117,6 +118,7 @@ void set_cur_step(u8 newcurstep, bool triggerit) {
 	seq_rhythm.did_a_retrig = triggerit; // make the sound play out once
 	ticks_since_step = 0;
 	seq_divide_counter = 0;
+    last_edited_step_global = 255;
 }
 
 void OnLoop(void) {
@@ -705,7 +707,6 @@ int pos_decompress(int position) {
 }
 
 void finger_synth_update(int fi) {
-	static u8 last_edited_step_global = 255;
 	static u8 last_edited_substep_global = 255;
 	static u8 last_edited_step[8] = {255, 255, 255, 255, 255, 255, 255, 255};
 	static int record_to_substep;
@@ -837,19 +838,18 @@ void finger_synth_update(int fi) {
                 }
                 // editing a new substep
                 if (substep != last_edited_substep_global) {
-                    // are we in the step?
-                    if (record_to_substep < 8) {
-                        // move one substep forward
-                        record_to_substep++;
-                    }
+					// move one substep forward
+					record_to_substep++;
                     // are we at the end of the step?
-                    else {
+                    if (record_to_substep >= 8) {
                         // push all data one substep backward
                         for (u8 i = 0; i < 7; i++) {
                             seq_record->pressure[i] = seq_record->pressure[i + 1];
-                            if (!(substep & 1) && !(i & 1))
+                            if (record_to_substep == 8 && (i & 1) == 0)
                                 seq_record->pos[i / 2] = seq_record->pos[i / 2 + 1];
                         }
+						if (record_to_substep == 9)
+							record_to_substep -= 2;
                     }
                     last_edited_substep_global = substep;
                 }
