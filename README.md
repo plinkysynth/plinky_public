@@ -8,6 +8,8 @@ Plinky started life as a hobby project that spiralled out of control, was sold f
 
 You can see that the software has largely been stagnant since original release; however in early 2025, a hero by the name of **RJ** stepped up and contributed some incredible improvements, rewriting large parts of the Sequencer and MIDI implementation. Plinky as of version 0.B0 (to be released shortly at the time of writing) is going to be by far the best version of plinky Ever, by far. HUGE thanks to RJ for really pushing plinky closer to its full potential.
 
+Release Notes are available in the [Release Notes](release_notes.md) document for the newer firmware versions.
+
 If you want to get in on the action, join the Plinky Discord (see details at [plinkysynth.com](https://plinkysynth.com) and check out the `#beta-firwmare` channel) or check out the [sw/](/sw/) folder here. Special shout out to **@whocano** in that channel who beta-tested the new fixes from RJ. See, plinky is a team effort? It is truly a special community. Thankyou from the bottom of my heart. 
 
 ## OPENSOURCE HARDWARE CREDITS
