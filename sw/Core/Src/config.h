@@ -61,11 +61,8 @@
 // 0.A9 - Sequencer fixes, or more of a rewrite, from RJ-Eckie. absolutely incredible work. thankyou.
 // 0.B0 - MORE RJ MAGIC - https://github.com/plinkysynth/plinky_public/pull/40 - what a beast he is.
 // 0.B1 - More RJ - lfo drawing is nicer; adc is not so smoothed?
-#define VERSION2			  "v0.B1"
-
-// 0.X0 - experimental build (SSD1305)
-//#define SSD1305
-//#define VERSION2			  "v0.X0"
+// 0.B2 - Pin detection for Plinky+ - boot the alternate display code for SSD1305 display driver
+#define VERSION2			  "v0.B2"
 
 // the bootloader is manually copied to the file golden_bootloader.bin
 // makebin.py uses it to make a UF2 file containing the bootloader + latest firmware together

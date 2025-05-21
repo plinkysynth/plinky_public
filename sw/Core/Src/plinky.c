@@ -3209,6 +3209,8 @@ void serial_midi_update(void) {
 	old_pos = pos;
 }
 
+extern bool g_i_am_a_plinky_plus;
+bool g_i_am_a_plinky_plus = false; // assume original Plinky with 1306 display
 
 void EMSCRIPTEN_KEEPALIVE plinky_init(void) {
 	denormals_init();
@@ -3220,6 +3222,20 @@ void EMSCRIPTEN_KEEPALIVE plinky_init(void) {
 	emu_setadc(0.5f, 0.5f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, false, false, false);
 #endif
 	dac_init();
+
+	{
+		// see if we are a Plinky+ with 1305 display
+		// g_i_am_a_plinky_plus is used in oled.h
+		GPIO_InitTypeDef GPIO_InitStruct = {0};
+		GPIO_InitStruct.Pin = GPIO_PIN_1;
+		GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+		GPIO_InitStruct.Pull = GPIO_PULLDOWN;
+		HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+		HAL_Delay(1);
+		GPIO_PinState state = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_1);
+		g_i_am_a_plinky_plus = state == GPIO_PIN_SET;
+	}
+
 	HAL_Delay(100); // stablise power before bringing oled up
 	oled_init();
 	check_bootloader_flash();
@@ -3233,7 +3249,7 @@ void EMSCRIPTEN_KEEPALIVE plinky_init(void) {
 	EmuStartSound();
 #endif
 
-	// see if were in the testjig - it pulls PA8 (pin 67) down 'DEBUG'
+ 	// see if were in the testjig - it pulls PA8 (pin 67) down 'DEBUG'
 #ifndef EMU
 	if (!(GPIOA->IDR & (1<<8))) {
 		test_jig();
