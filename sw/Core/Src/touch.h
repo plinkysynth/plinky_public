@@ -1,3 +1,5 @@
+#define TOUCH_MIN_PRES -2048
+
 u16 finger_raw[36]; // raw value back from stm
 u16 finger_min[36]; // lowest value seen (zero point)
 u16 finger_max[36]; // highest value seen (zero point)
@@ -719,7 +721,7 @@ void finger_synth_update(int fi) {
 	int previous_pressure = fingers_ui_time[fi][(ui_frame - 2) & 7].pressure;
 	int substep = calcseqsubstep(0, 8);
 	bool latchon = (rampreset.flags & FLAGS_LATCH);
-	int pressure = 0;
+  	int pressure = TOUCH_MIN_PRES;
 	int position = 0;
 	bool pressure_increasing;
 	bool position_updated = false;
