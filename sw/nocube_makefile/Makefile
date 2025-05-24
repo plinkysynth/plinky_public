@@ -91,7 +91,8 @@ CFLAGS_COMMON = -mcpu=cortex-m4 \
     --specs=nano.specs \
     -mfpu=fpv4-sp-d16 \
     -mfloat-abi=hard \
-    -mthumb
+    -mthumb \
+    -Wno-rwx-segment
 
 LDFLAGS_COMMON = -mcpu=cortex-m4 \
     -T"../STM32L476VGTX_FLASH.ld" \
