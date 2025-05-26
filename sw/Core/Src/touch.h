@@ -728,7 +728,7 @@ void finger_synth_update(int fi) {
 
 	// === TOUCH INPUT === //
 
-	if (!is_finger_an_edit_operation(fi)) {
+	if (!is_finger_an_edit_operation(fi) || editmode == EM_SAMPLE) {
 		// read touch values from ui
 		pressure = ui_finger->pressure;
 		position = ui_finger->pos;
