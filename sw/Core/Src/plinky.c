@@ -2043,7 +2043,8 @@ void DoAudio(u32 *dst, u32 *audioin) {
 				Finger* f = fingers_synth_sorted[fi] + 2;
 				int midinote = ((midi_notes[fi]-12*2) << 9) + midi_chan_pitchbend[midi_channels[fi]]/8;
 				for (int i = 0; i < 4; ++i) {
-					int pitch = pitchbase + ((i & 1) ? interval : 0) + (i-2)*64 + midinote; //  (lookupscale(scale, ystep + root)) + +((fine * microtune) >> 14);
+					int fine_pitch = ((i-2)*64 * param_eval_finger(P_MICROTUNE, fi, synthf)) >> 16;
+					int pitch = pitchbase + ((i & 1) ? interval : 0) + fine_pitch + midinote; //  (lookupscale(scale, ystep + root)) + +((fine * microtune) >> 14);
 					totpitch += pitch;
 					voices[fi].theosc[i].pitch = pitch;
 					voices[fi].theosc[i].targetdphase = maxi(65536, (int)(table_interp(pitches, pitch + PITCH_BASE) * (65536.f * 128.f)));
