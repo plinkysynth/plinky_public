@@ -2603,6 +2603,9 @@ short *getrxbuf(void);
 
 
 void check_bootloader_flash(void) {
+	#ifdef WASM
+	return; // no bootloader on wasm
+	#endif
 	int count=0;
 	uint32_t *rb32=(uint32_t*)REVERB_BUF;
 	uint32_t magic=rb32[64];

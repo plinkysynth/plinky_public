@@ -94,10 +94,11 @@
         var pos0 = document.getElementById("pos0");
         var pressure0 = document.getElementById("pressure0");
         function render() {
-            if (calledRun) {
+            if (Module.calledRun) {
                 if (!inited) {
                     console.log("init plinky 123!");
                     _plinky_init();
+                    console.log("init plinky 345!");
                     inited = true;
                     console.log("init plinky done!");
                     const pointer = _getemubitmap();
