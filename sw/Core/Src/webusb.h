@@ -28,6 +28,7 @@ static inline uint32_t tud_vendor_write(void const *buffer, uint32_t bufsize) { 
 extern const short wavetable[17][1031];
 
 void flash_program_array(void *addr, void *srcbuf, int size_bytes) {
+  #ifndef WASM
   FLASH_EraseInitTypeDef EraseInitStruct;
   int page = (((size_t)addr) & 0xffffff) / 2048;
   if (page < 32 || page >= 512) // protect bootloader!
@@ -61,6 +62,7 @@ void flash_program_array(void *addr, void *srcbuf, int size_bytes) {
   __HAL_FLASH_INSTRUCTION_CACHE_ENABLE();
   __HAL_FLASH_DATA_CACHE_ENABLE();
   HAL_FLASH_Lock();
+  #endif
 }
 
 /* webusb wire format. 10 byte header, then data.

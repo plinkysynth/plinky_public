@@ -2504,6 +2504,13 @@ void OledFlipEmu(const u8 * vram) {
 	 return (uint8_t*)led_ram;
 }
 
+u8 emuleds[9][8];
+int16_t accel_raw[3];
+	float accel_lpf[2];
+	float accel_smooth[2];
+	bool web_serial_connected = false;
+	void tud_task(void) {}
+
 #endif
 
 void EMSCRIPTEN_KEEPALIVE uitick(u32 *dst, const u32 *src, int half) {
@@ -2665,6 +2672,7 @@ void check_bootloader_flash(void) {
 		drawstr(0,24,F_8,verbuf);
 
 		oled_flip(vrambuf);
+		#ifndef WASM
 	    HAL_FLASH_Unlock();
 	    FLASH_EraseInitTypeDef EraseInitStruct;
 	    	EraseInitStruct.TypeErase = FLASH_TYPEERASE_PAGES;
@@ -2701,6 +2709,7 @@ void check_bootloader_flash(void) {
 			drawstr(0,24,F_8,verbuf);
 			oled_flip(vrambuf);
 			HAL_Delay(3000);
+			#endif
 
 }
 
@@ -3005,6 +3014,8 @@ void SetExpanderDAC(int chan, int data) {
 
 #ifdef WASM
 
+
+
 bool send_midimsg(u8 status, u8 data1, u8 data2) {
 	return true;
 }
@@ -3226,6 +3237,7 @@ void EMSCRIPTEN_KEEPALIVE plinky_init(void) {
 	{
 		// see if we are a Plinky+ with 1305 display
 		// g_i_am_a_plinky_plus is used in oled.h
+		#ifndef WASM
 		GPIO_InitTypeDef GPIO_InitStruct = {0};
 		GPIO_InitStruct.Pin = GPIO_PIN_1;
 		GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
@@ -3234,6 +3246,7 @@ void EMSCRIPTEN_KEEPALIVE plinky_init(void) {
 		HAL_Delay(1);
 		GPIO_PinState state = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_1);
 		g_i_am_a_plinky_plus = state == GPIO_PIN_SET;
+		#endif
 	}
 
 	HAL_Delay(100); // stablise power before bringing oled up

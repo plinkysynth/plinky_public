@@ -34,9 +34,11 @@ typedef uint8_t u8;
 typedef uint16_t u16;
 typedef uint32_t u32;
 #ifndef __cplusplus
+#ifndef WASM
 typedef char bool;
 #define true 1
 #define false 0
+#endif
 #endif
 
 #define PI 3.141592653589793f
