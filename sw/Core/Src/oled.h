@@ -151,7 +151,7 @@ void oled_init(void) {
 	ssd1306_command(3); // Page end address - 32 pixels. 1=16 pixels
 	ssd1306_command(SSD1306_DISPLAYON);                 //--turn on oled panel
 
-	oled_flip(logobuf);
+	oled_flip(g_i_am_a_plinky_plus ? logoplusbuf : logobuf);
 	oled_wait();
 }
 #endif
