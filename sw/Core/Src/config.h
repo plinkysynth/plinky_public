@@ -62,7 +62,7 @@
 // 0.B0 - MORE RJ MAGIC - https://github.com/plinkysynth/plinky_public/pull/40 - what a beast he is.
 // 0.B1 - More RJ - lfo drawing is nicer; adc is not so smoothed?
 // 0.B2 - Pin detection for Plinky+ - boot the alternate display code for SSD1305 display driver
-// 0.B3 - slightly adjusted configuration to work better for Plinky+
+// 0.B3 - slightly adjusted calib for Plinky+. Bugfixes from RJ: String envelope fix, No audio in sample edit mode fix, Fix excessive oscillator pitch spread for Midi notes
 #define VERSION2			  "v0.B3"
 
 // the bootloader is manually copied to the file golden_bootloader.bin
