@@ -127,9 +127,6 @@ void flip(void) {
 		int y = frame - 255 + 32;
 		if (y < 32 - 12) y = 32 - 12;
 		textcol = 3;
-		extern bool g_i_am_a_plinky_plus;
-		if (g_i_am_a_plinky_plus)
-		    fdrawstr(32, y-12, F_12, "PLINKY+");
 
 		fdrawstr(32, y, F_12, VERSION2
 #ifdef DEBUG
