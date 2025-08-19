@@ -406,7 +406,7 @@ again:
 							snprintf(helptext, sizeof(helptext), "!pad %d lower not conn\ncheck soldering", si + 1);
 							errors |= (1 << si);
 						}
-						else if (abs(calibresults[si].pos[step] - calibresults[si].pos[7]) < 300) {
+						else if (abs(calibresults[si].pos[step] - calibresults[si].pos[7]) < 250) { // previously 300
 							snprintf(helptext, sizeof(helptext), "!pad %d shorted?\ncheck soldering", si + 1);
 							errors |= (1 << si);
 						}
