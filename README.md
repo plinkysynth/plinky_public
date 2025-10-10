@@ -2,7 +2,7 @@
 
 an 8 voice touch synth - https://plinkysynth.com
 
-Plinky started life as a hobby project that spiralled out of control, was sold for a while on Thonk as a kit, went out of stock during the post-covid chip shortage, and was then rescued by various wonderful people in the Plinky community. Alogn the way, it got open sourced - both hardware and software. You are in the right place for that!
+Plinky started life as a hobby project that spiralled out of control, was sold for a while on Thonk as a kit, went out of stock during the post-covid chip shortage, and was then rescued by various wonderful people in the Plinky community. Along the way, it got open sourced - both hardware and software. You are in the right place for that!
 
 ## OPENSOURCE SOFTWARE CREDITS
 
