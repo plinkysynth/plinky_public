@@ -811,6 +811,10 @@ int GetParam(u8 paramidx, u8 mod) {
 	return rampreset.params[paramidx][mod];
 }
 
+// Forward declaration for MIDI CC output
+extern void send_param_cc(u8 paramidx, s16 value);
+extern u8 midi_in_processing;
+
 void EditParamNoQuant(u8 paramidx, u8 mod, s16 data) {
 	if (paramidx >= P_LAST || mod >= M_LAST)
 		return;
@@ -821,6 +825,10 @@ void EditParamNoQuant(u8 paramidx, u8 mod, s16 data) {
 				return;
 			sysparams.headphonevol = data;
 			ramtime[GEN_SYS] = millis();
+			// Send MIDI CC for headphone change
+			if (!midi_in_processing) {
+				send_param_cc(paramidx, data * (FULL / 64) + 45 * (FULL / 64));
+			}
 		}
 		return;
 	}
@@ -834,6 +842,12 @@ void EditParamNoQuant(u8 paramidx, u8 mod, s16 data) {
 	//if (paramidx == P_SEQSTEP && mod == M_BASE)
 	//	return; // dont set dirty when you're just moving the current playhead pos.
 	ramtime[GEN_PRESET]=millis();
+
+	// Send MIDI CC for parameter changes (bidirectional sync)
+	// Only send for base value changes (mod == M_BASE), not modulation amounts
+	if (mod == M_BASE && !midi_in_processing) {
+		send_param_cc(paramidx, data);
+	}
 }
 
 void EditParamQuant(u8 paramidx, u8 mod, s16 data) {

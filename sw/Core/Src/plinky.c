@@ -1514,6 +1514,54 @@ const s8 midicctable[128] = {
 	/* 120 */		P_XSCALE,	P_YSCALE,	P_ACCEL_SENS,-1,		-1,			-1,			-1,			-1,
 };
 
+// Reverse lookup: parameter index -> CC number (-1 if no mapping)
+// Generated from midicctable for MIDI out functionality
+s8 param_to_cc[P_LAST];
+u8 midi_out_enabled = 1;  // Enable/disable MIDI CC output
+u8 midi_in_processing = 0;  // Flag to prevent feedback loops
+
+// Forward declaration for MIDI output
+bool send_midimsg(u8 status, u8 data1, u8 data2);
+
+// Initialize the reverse lookup table (call once at startup)
+void init_param_to_cc(void) {
+	// Initialize all to -1 (no CC mapping)
+	for (int i = 0; i < P_LAST; i++) {
+		param_to_cc[i] = -1;
+	}
+	// Build reverse lookup from midicctable
+	for (int cc = 0; cc < 128; cc++) {
+		s8 param = midicctable[cc];
+		if (param >= 0 && param < P_LAST) {
+			param_to_cc[param] = cc;
+		}
+	}
+}
+
+// Send MIDI CC for a parameter change (bidirectional sync)
+void send_param_cc(u8 paramidx, s16 value) {
+	if (!midi_out_enabled || midi_in_processing) return;
+	if (paramidx >= P_LAST) return;
+
+	s8 cc = param_to_cc[paramidx];
+	if (cc < 0) return;  // No CC mapping for this parameter
+
+	// Convert internal value to MIDI CC (0-127)
+	u8 flags = param_flags[paramidx];
+	int midi_val;
+
+	if (flags & FLAG_SIGNED) {
+		// Signed: -FULL to +FULL -> 0 to 127
+		midi_val = ((value + FULL) * 127) / (FULL * 2);
+	} else {
+		// Unsigned: 0 to FULL -> 0 to 127
+		midi_val = (value * 127) / FULL;
+	}
+
+	midi_val = clampi(midi_val, 0, 127);
+	send_midimsg(0xb0, cc, midi_val);
+}
+
 
 
 
@@ -1628,7 +1676,10 @@ void processmidimsg(u8 msg, u8 d1, u8 d2) {
 			val = (val * FULL) / (127 * 128 + 127);
 			if (param_flags[param] & FLAG_SIGNED)
 				val = val * 2 - FULL;
+			// Set flag to prevent MIDI echo (feedback loop)
+			midi_in_processing = 1;
 			EditParamNoQuant(param, M_BASE, val);
+			midi_in_processing = 0;
 
 			// Show screen feedback for MIDI CC parameter changes
 			// Skip if it's arp/latch (they have special handling below)
@@ -3237,6 +3288,9 @@ void EMSCRIPTEN_KEEPALIVE plinky_init(void) {
 	denormals_init();
 	touch_reset_calib();
 	tc_init();
+
+	// Initialize MIDI CC reverse lookup table for bidirectional sync
+	init_param_to_cc();
 
 	adc_init();
 #ifdef EMU
