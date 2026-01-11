@@ -1496,22 +1496,22 @@ void MONITORPEAK(float *mon, u32 stereoin) {
 u8 midi24ppqncounter;
 const s8 midicctable[128] = {
 	//					0			1			2			3			4			5			6			7
-	/*   0 */			-1,			-1,			P_NOISE,	P_SENS,		P_DRIVE,	P_GLIDE,	-1,			P_MIXSYNTH,
-	/*   8 */			P_MIXWETDRY,P_PITCH,	-1,			P_GATE_LENGTH,P_DLTIME,	P_PWM,		P_INTERVAL,	P_SMP_POS,
+	/*   0 */			-1,			-1,			P_NOISE,	P_SENS,		P_DRIVE,	P_GLIDE,	P_OCT,		P_MIXSYNTH,
+	/*   8 */			P_MIXWETDRY,P_PITCH,	P_SCALE,	P_GATE_LENGTH,P_DLTIME,	P_PWM,		P_INTERVAL,	P_SMP_POS,
 	/*  16 */			P_SMP_GRAINSIZE,P_SMP_RATE,P_SMP_TIME,P_ENV_LEVEL,P_A2,		P_D2,		P_S2,		P_R2,
-	/*  24 */			P_AFREQ,	P_ADEPTH,	P_AOFFSET,	P_BFREQ,	P_BDEPTH,	P_BOFFSET,	-1,			P_MIXHPF,
+	/*  24 */			P_AFREQ,	P_ADEPTH,	P_AOFFSET,	P_BFREQ,	P_BDEPTH,	P_BOFFSET,	P_TEMPO,	P_MIXHPF,
 	/*  32 */			-1,			-1,			-1,			-1,			-1,			-1,			-1,			-1,
 	/*  40 */			-1,			-1,			-1,			-1,			-1,			-1,			-1,			-1,
 	/*  48 */			-1,			-1,			-1,			-1,			-1,			-1,			-1,			-1,
 	/*  56 */			-1,			-1,			-1,			-1,			-1,			-1,			-1,			-1,
-	/*  64 */			-1,			-1,			-1,			-1,			-1,			-1,			-1,			P_MIXRESO,
+	/*  64 */			-1,			P_STRIDE,	P_MICROTUNE,P_ROTATE,	P_SWING,	P_HEADPHONE,P_MIX_WIDTH,P_MIXRESO,
 	/*  72 */			P_R,		P_A,		P_S,		P_D,		P_XFREQ,	P_XDEPTH,	P_XOFFSET,	P_YFREQ,
-	/*  80 */			P_YDEPTH,	P_YOFFSET,	P_SAMPLE,	P_SEQPAT,	-1,			P_SEQSTEP,	-1,			-1,
-	/*  88 */			-1,			P_MIXINPUT,	P_MIXINWETDRY,P_RVSEND,	P_RVTIME,	P_RVSHIM,	P_DLSEND,	P_DLFB,
-	/*  96 */			-1,			-1,			-1,			-1,			-1,			P_LATCHONOFF,			P_ARPONOFF,	P_ARPMODE,
+	/*  80 */			P_YDEPTH,	P_YOFFSET,	P_SAMPLE,	P_SEQPAT,	P_ASHAPE,	P_SEQSTEP,	P_BSHAPE,	P_XSHAPE,
+	/*  88 */			P_YSHAPE,	P_MIXINPUT,	P_MIXINWETDRY,P_RVSEND,	P_RVTIME,	P_RVSHIM,	P_DLSEND,	P_DLFB,
+	/*  96 */			P_AWARP,	P_BWARP,	P_XWARP,	P_YWARP,	P_ASCALE,	P_LATCHONOFF,P_ARPONOFF,	P_ARPMODE,
 	/* 104 */			P_ARPDIV,	P_ARPPROB,	P_ARPLEN,	P_ARPOCT,	P_SEQMODE,	P_SEQDIV,	P_SEQPROB,	P_SEQLEN,
-	/* 112 */			P_DLRATIO,	P_DLWOB,	P_RVWOB,	-1,			P_JIT_POS,	P_JIT_GRAINSIZE, P_JIT_RATE, P_JIT_PULSE,
-	/* 120 */		-1,			-1,			-1,			-1,			-1,			-1,			-1,			-1,
+	/* 112 */			P_DLRATIO,	P_DLWOB,	P_RVWOB,	P_BSCALE,	P_JIT_POS,	P_JIT_GRAINSIZE, P_JIT_RATE, P_JIT_PULSE,
+	/* 120 */		P_XSCALE,	P_YSCALE,	P_ACCEL_SENS,-1,		-1,			-1,			-1,			-1,
 };
 
 
