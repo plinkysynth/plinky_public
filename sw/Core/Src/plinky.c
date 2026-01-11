@@ -1630,6 +1630,12 @@ void processmidimsg(u8 msg, u8 d1, u8 d2) {
 				val = val * 2 - FULL;
 			EditParamNoQuant(param, M_BASE, val);
 
+			// Show screen feedback for MIDI CC parameter changes
+			// Skip if it's arp/latch (they have special handling below)
+			if (param != P_ARPONOFF && param != P_LATCHONOFF && paramnames[param] != 0) {
+				ShowMessage(F_20_BOLD, paramnames[param], "MIDI CC");
+			}
+
 			if (param == P_ARPONOFF){
 				if (val > 64){
 					rampreset.flags = rampreset.flags | FLAGS_ARP;
